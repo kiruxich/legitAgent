@@ -1,6 +1,6 @@
 import { accessSync, constants } from 'node:fs';
 import path from 'node:path';
-import { explainRule, listRules, scanProject } from '@legitagent/core';
+import { explainRule, listRules, scanProject } from '@legit-agent/core';
 
 function resolveRoot(root?: string): string {
   return path.resolve(root ?? process.cwd());

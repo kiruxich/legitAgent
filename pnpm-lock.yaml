@@ -10,7 +10,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@legitagent/core':
+      '@legit-agent/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -57,7 +57,7 @@ importers:
 
   packages/mcp:
     dependencies:
-      '@legitagent/core':
+      '@legit-agent/core':
         specifier: workspace:*
         version: link:../core
       '@modelcontextprotocol/sdk':

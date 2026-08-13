@@ -8,7 +8,7 @@
 
 ## Установка
 
-Пакеты публикуются в npm под организацией `@legitagent`. Для разработки из исходников:
+Пакеты публикуются в npm под организацией `@legit-agent`. Для разработки из исходников:
 
 ```bash
 git clone https://github.com/kiruxich/LegitAgent.git
@@ -28,7 +28,7 @@ pnpm build
   "mcpServers": {
     "legitagent": {
       "command": "npx",
-      "args": ["-y", "@legitagent/mcp"]
+      "args": ["-y", "@legit-agent/mcp"]
     }
   }
 }
@@ -39,8 +39,8 @@ pnpm build
 ## CLI
 
 ```bash
-npx @legitagent/cli scan
-npx @legitagent/cli scan ./my-site --json
+npx @legit-agent/cli scan
+npx @legit-agent/cli scan ./my-site --json
 ```
 
 v1 ищет три вещи: форму без согласия, метрику без согласия, отсутствие ссылки на политику. Остальные пункты чек-листа можно спросить у агента (`list_rules` / `explain_rule`).

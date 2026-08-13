@@ -1,5 +1,5 @@
 {
-  "name": "@legitagent/mcp",
+  "name": "@legit-agent/mcp",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@legitagent/core": "workspace:*",
+    "@legit-agent/core": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.12.1"
   },
   "devDependencies": {

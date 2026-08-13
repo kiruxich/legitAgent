@@ -1,5 +1,5 @@
 {
-  "name": "@legitagent/cli",
+  "name": "@legit-agent/cli",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@legitagent/core": "workspace:*"
+    "@legit-agent/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.13.0",

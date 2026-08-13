@@ -1,4 +1,4 @@
-import { DISCLAIMER_RU, type ScanResult } from '@legitagent/core';
+import { DISCLAIMER_RU, type ScanResult } from '@legit-agent/core';
 
 export function formatHuman(result: ScanResult): string {
   const lines: string[] = [];

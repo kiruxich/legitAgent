@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from 'node:path';
-import { scanProject } from '@legitagent/core';
+import { scanProject } from '@legit-agent/core';
 import { formatHuman } from './format.js';
 
 async function main() {
