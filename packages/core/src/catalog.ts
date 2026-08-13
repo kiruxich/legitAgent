@@ -5,7 +5,16 @@ import { defaultLegalDir, defaultRulesDir } from './paths.js';
 import type { Catalog, LegalExcerpt, Rule } from './types.js';
 
 function loadYamlFiles<T>(dir: string): T[] {
-  const files = readdirSync(dir).filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'));
+  let entries: string[];
+  try {
+    entries = readdirSync(dir);
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error(`Каталог не найден: ${dir}`);
+    }
+    throw err;
+  }
+  const files = entries.filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'));
   const items: T[] = [];
   for (const file of files) {
     const full = path.join(dir, file);

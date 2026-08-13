@@ -39,6 +39,15 @@ describe('loadCatalog', () => {
     expect(catalog.excerpts.art9.text).toContain('конкретным');
   });
 
+  it('throws a clear error when rules dir is missing', () => {
+    const dir = mkdtempSync(path.join(tmpdir(), 'legitagent-'));
+    mkdirSync(path.join(dir, 'legal'));
+    const missingRules = path.join(dir, 'rules');
+    expect(() => loadCatalog(missingRules, path.join(dir, 'legal'))).toThrow(
+      `Каталог не найден: ${missingRules}`,
+    );
+  });
+
   it('throws when excerptRef is missing from legal files', () => {
     const dir = tmpCatalog(
       `- id: X

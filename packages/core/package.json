@@ -14,7 +14,11 @@
   "files": ["dist", "rules", "legal"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm run build"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "fast-glob": "^3.3.3",

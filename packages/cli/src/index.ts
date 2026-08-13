@@ -20,4 +20,7 @@ async function main() {
   process.exit(high ? 1 : 0);
 }
 
-main();
+main().catch((err) => {
+  console.error((err as Error).message ?? err);
+  process.exit(1);
+});
