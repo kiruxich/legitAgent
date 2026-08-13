@@ -1,5 +1,6 @@
 export { DISCLAIMER_RU } from './disclaimer.js';
 export { defaultCatalog, loadCatalog } from './catalog.js';
+export { discoverSourceFiles } from './discover.js';
 export { defaultLegalDir, defaultRulesDir, packageRoot } from './paths.js';
 export type {
   Catalog,
