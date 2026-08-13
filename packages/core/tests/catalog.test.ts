@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { loadCatalog } from '../src/catalog.js';
+import { defaultCatalog, loadCatalog } from '../src/catalog.js';
 
 function tmpCatalog(ruleYaml: string, excerptYaml?: string) {
   const dir = mkdtempSync(path.join(tmpdir(), 'legitagent-'));
@@ -55,5 +55,28 @@ describe('loadCatalog', () => {
     expect(() => loadCatalog(path.join(dir, 'rules'), path.join(dir, 'legal'))).toThrow(
       /missing/,
     );
+  });
+});
+
+describe('defaultCatalog', () => {
+  it('includes three active detectors and planned rules', () => {
+    const catalog = defaultCatalog();
+    const ids = catalog.rules.map((r) => r.id);
+    expect(ids).toEqual(expect.arrayContaining([
+      'PDN.FORM.NO_CONSENT',
+      'PDN.TRACKER.NO_CONSENT',
+      'PDN.POLICY.NO_LINK',
+      'PDN.FORM.PRECHECKED_CONSENT',
+      'PDN.ORG.RKN_NOTICE',
+    ]));
+    const active = catalog.rules.filter((r) => r.status === 'active').map((r) => r.id);
+    expect(active.sort()).toEqual([
+      'PDN.FORM.NO_CONSENT',
+      'PDN.POLICY.NO_LINK',
+      'PDN.TRACKER.NO_CONSENT',
+    ]);
+    for (const rule of catalog.rules) {
+      expect(catalog.excerpts[rule.excerptRef], rule.id).toBeDefined();
+    }
   });
 });
