@@ -1,0 +1,24 @@
+- id: PDN.FORM.NO_CONSENT
+  law: 152-ФЗ ст. 9
+  severity: high
+  status: active
+  title: Форма собирает ПДн без согласия
+  message: Найдена форма с полями имени, email или телефона без чекбокса согласия на обработку ПДн.
+  fix: Добавьте незаполненный чекбокс и текст согласия со ссылкой на политику.
+  excerptRef: art9
+- id: PDN.FORM.PRECHECKED_CONSENT
+  law: 152-ФЗ ст. 9
+  severity: high
+  status: planned
+  title: Чекбокс согласия предзаполнен
+  message: Предзаполненная галочка не считается полученным согласием.
+  fix: Уберите defaultChecked / checked={true} у чекбокса согласия. Автопроверка — в следующей версии.
+  excerptRef: art9
+- id: PDN.FORM.NO_POLICY_LINK
+  law: 152-ФЗ ст. 9
+  severity: medium
+  status: planned
+  title: Согласие без ссылки на политику
+  message: Рядом с согласием должна быть кликабельная ссылка на политику обработки ПДн.
+  fix: Добавьте ссылку на политику в текст согласия. Автопроверка — в следующей версии.
+  excerptRef: art9

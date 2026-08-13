@@ -1,0 +1,32 @@
+- id: PDN.TRACKER.NO_CONSENT
+  law: 152-ФЗ ст. 6
+  severity: high
+  status: active
+  title: Метрика или пиксель без согласия
+  message: Аналитика или рекламный пиксель инициализируются сразу, без проверки согласия.
+  fix: Вызывайте ym/gtag/fbq только после opt-in в cookie-баннере.
+  excerptRef: art6
+- id: PDN.COOKIE.BEFORE_CONSENT
+  law: 152-ФЗ ст. 6
+  severity: high
+  status: planned
+  title: Cookie до согласия
+  message: Аналитические cookie не должны ставиться до opt-in. Нужна проверка живого сайта.
+  fix: Не загружайте трекеры до клика «Принять». Браузерный сканер — в следующей версии.
+  excerptRef: art6
+- id: PDN.COOKIE.NO_REJECT
+  law: 152-ФЗ ст. 9
+  severity: medium
+  status: planned
+  title: Баннер без отказа
+  message: У пользователя должна быть реальная возможность отклонить необязательные cookie.
+  fix: Добавьте кнопку отказа, не только «Принять». Автопроверка баннера — в следующей версии.
+  excerptRef: art9
+- id: PDN.TRANSFER.FOREIGN_TRACKER
+  law: 152-ФЗ ст. 6
+  severity: medium
+  status: planned
+  title: Иностранный трекер / трансграничная передача
+  message: Google Analytics, Meta Pixel и аналогичные сервисы могут означать трансграничную передачу ПДн.
+  fix: Задокументируйте передачу или замените на российский аналог. Автопроверка — в следующей версии.
+  excerptRef: art6
