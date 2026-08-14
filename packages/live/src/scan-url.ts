@@ -1,7 +1,9 @@
 import { chromium } from 'playwright';
 import {
   defaultCatalog,
+  dedupeFindings,
   findingFromRule,
+  scanSources,
   type Catalog,
   type Finding,
   type ScanResult,
@@ -75,6 +77,8 @@ export async function scanUrl(url: string, catalog: Catalog = defaultCatalog()):
     flagBeforeConsent(findings, catalog, url, await context.cookies());
 
     const html = await page.content();
+    findings.push(...scanSources([{ relativePath: url, source: html }], catalog));
+
     if (BANNER.test(html)) {
       const texts = await page.locator('button, a').allTextContents();
       const hasAccept = texts.some((t) => ACCEPT.test(t));
@@ -103,7 +107,7 @@ export async function scanUrl(url: string, catalog: Catalog = defaultCatalog()):
       flagBeforeConsent(findings, catalog, url, await context.cookies());
     }
 
-    return { findings, warnings: [], scannedFileCount: 1 };
+    return { findings: dedupeFindings(findings), warnings: [], scannedFileCount: 1 };
   } finally {
     await browser.close();
   }

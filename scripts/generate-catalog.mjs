@@ -86,7 +86,7 @@ const html = `<!DOCTYPE html>
 
     <section class="section">
       <h2>Активные детекторы</h2>
-      <p class="section-lead">Ищутся в HTML, JSX, TSX, Vue, Svelte и Astro при <code>scan</code>.</p>
+      <p class="section-lead">Ищутся в HTML, JSX, TSX, Vue, Svelte и Astro при <code>scan</code> и в DOM живой страницы при <code>scan-url</code>.</p>
       <div class="rules-list">
 ${active}
       </div>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>legitAgent — проверка сайта на 152-ФЗ</title>
-  <meta name="description" content="Сканер исходников React/Next на типичные риски 152-ФЗ. MCP для Cursor, Claude, Kimi и CLI для терминала." />
+  <title>legitAgent — проверка сайта на 152-ФЗ, 38-ФЗ и ЗоЗПП</title>
+  <meta name="description" content="Сканер HTML, JSX, Vue, Svelte и Astro на типичные риски 152-ФЗ, 38-ФЗ и ЗоЗПП. MCP, CLI, GitHub Action и живой scan-url." />
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,14 +31,14 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">152-ФЗ · MCP · CLI · GitHub Action · scan-url</p>
-      <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;деплоя</em></h1>
+      <p class="eyebrow">152-ФЗ · 38-ФЗ · ЗоЗПП · MCP · CLI · scan-url</p>
+      <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;и после деплоя</em></h1>
       <p class="lead">
         legitAgent читает HTML, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
         формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика,
         реклама без erid, витрина без оферты.
-        В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF и комментарием в PR;
-        живую страницу — командой <code>scan-url</code>. В корне проекта — опциональный <code>legitagent.config.json</code>.
+        Живой <code>scan-url</code> смотрит тот же каталог по DOM задеплоенной страницы, плюс cookie до согласия.
+        В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#start">Подключить</a>
@@ -52,6 +52,7 @@
       <span>Claude</span>
       <span>Kimi</span>
       <span>React / Next.js</span>
+      <span>Vue · Svelte · Astro</span>
       <span>npm</span>
       <span>MIT</span>
     </section>
@@ -107,22 +108,22 @@
 
     <section class="section catalog">
       <div class="catalog-text">
-        <h2>Полный чек-лист 152-ФЗ</h2>
+        <h2>Пятнадцать правил, один каталог</h2>
         <p>
-          В каталоге — 11 правил. Автопоиск в исходниках закрывает формы, политику, метрики, cookie-баннер
-          и иностранные трекеры; живой <code>scan-url</code> ждёт гидрацию SPA, нажимает «отказ», если кнопка есть,
+          Все детекторы активны: формы и согласие, политика, метрики, cookie, иностранные трекеры,
+          локализация и уведомление РКН (только если есть форма с ПДн, серьёзность <code>low</code>),
+          ERID, оферта / реквизиты / возврат.
+          <code>scan-url</code> прогоняет тот же набор по HTML живой страницы, ждёт гидрацию SPA
           и проверяет cookie до и после отказа.
-          Локализация баз и уведомление РКН агент объясняет через
-          <code>list_rules</code> и <code>explain_rule</code> — в коде сайта этого обычно не видно.
           Полный список: <a href="rules.html">каталог правил</a>
           и <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">сломанный демо-сайт</a>.
         </p>
       </div>
       <ul class="catalog-list">
         <li>Формы и согласие</li>
-        <li>Политика ПДн</li>
+        <li>Политика, РКН, локализация</li>
         <li>Метрики и cookie</li>
-        <li>Организационные меры</li>
+        <li>Реклама и витрина</li>
       </ul>
     </section>
 
@@ -140,14 +141,15 @@
     }
   }
 }</code></pre>
-          <p class="panel-note">Инструменты: <strong>scan</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong></p>
+          <p class="panel-note">Инструменты: <strong>scan</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong>, <strong>generate_policy</strong>, <strong>get_law</strong></p>
         </div>
         <div class="panel">
           <h3>CLI — для терминала и CI</h3>
           <p>Node.js 20+, без установки:</p>
-          <pre><code>npx @legit-agent/cli scan
-npx @legit-agent/cli scan ./my-site --json --sarif
-npx @legit-agent/cli scan-url https://example.com</code></pre>
+          <pre><code>npx @legit-agent/cli@0.5.0 scan
+npx @legit-agent/cli scan ./my-site --json --sarif --lang en
+npx @legit-agent/cli scan-url https://example.com
+npx @legit-agent/cli init-policy --operator "ООО Пример"</code></pre>
           <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong>. В CI — GitHub Action с SARIF и комментарием в PR. Опционально — <code>legitagent.config.json</code> в корне.</p>
         </div>
       </div>
@@ -156,7 +158,7 @@ npx @legit-agent/cli scan-url https://example.com</code></pre>
     <section class="section flow">
       <h2>Как это работает</h2>
       <ol class="steps">
-        <li><span>1</span> Сканер обходит <code>.html</code>, <code>.jsx</code>, <code>.tsx</code></li>
+        <li><span>1</span> Сканер обходит <code>.html</code>, <code>.jsx</code>, <code>.tsx</code>, <code>.vue</code>, <code>.svelte</code>, <code>.astro</code> — или открывает URL в Chromium</li>
         <li><span>2</span> Сверяет код с YAML-каталогом правил и выдержками статей</li>
         <li><span>3</span> Возвращает находки: файл, строка, норма, как исправить</li>
         <li><span>4</span> Агент или разработчик принимает решение</li>

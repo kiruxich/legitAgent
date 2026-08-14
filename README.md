@@ -12,7 +12,7 @@
 
 Сайт: [kiruxich.github.io/legitAgent](https://kiruxich.github.io/legitAgent/). Каталог правил: [docs/RULES.md](docs/RULES.md). Сломанный пример: [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo).
 
-Подключите MCP — агент сам просканирует HTML/JSX/TSX/Vue/Svelte/Astro, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI, GitHub Action с выгрузкой SARIF, либо `scan-url` для живой страницы в браузере.
+Подключите MCP — агент сам просканирует HTML/JSX/TSX/Vue/Svelte/Astro, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI, GitHub Action с выгрузкой SARIF, либо `scan-url` для живой страницы: тот же каталог по DOM плюс cookie до согласия.
 
 ```bash
 npx @legit-agent/cli scan
@@ -83,7 +83,7 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 
 `init-policy` печатает **черновик** политики обработки ПДн (не юридический документ). Корпус 152-ФЗ / 38-ФЗ / ЗоЗПП лежит в `packages/core/legal/corpus/`; обновить с pravo.gov.ru: `pnpm fetch-law`.
 
-`--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium: после загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого; также ищет cookie до согласия, баннер без отказа и иностранные трекеры.
+`--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium: ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, смотрит cookie до и после этого, и прогоняет тот же каталог правил по HTML страницы (формы, политика, ERID, витрина, трекеры).
 
 | Код выхода | Значение |
 |---|---|
@@ -91,7 +91,7 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 | `1` | Есть хотя бы одна находка `high` |
 | `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` |
 
-В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.4.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`.
+В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.5.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`.
 
 ---
 
@@ -104,7 +104,7 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 | Инструмент | Что делает |
 |---|---|
 | `scan` | Сканирует проект. Необязательные `root` и `lang` (`ru` / `en`). |
-| `scan_url` | Проверяет живой URL в браузере: cookie до согласия, баннер без отказа, иностранные трекеры; после загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого. |
+| `scan_url` | Проверяет живой URL: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры; ждёт гидрацию SPA и кликает «отказ», если кнопка есть. |
 | `list_rules` | Полный каталог правил. |
 | `explain_rule` | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`. |
 | `generate_policy` | Черновик политики обработки ПДн. Нужен `operator`. Не юридическое заключение. |
@@ -128,8 +128,8 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 | `PDN.TRACKER.NO_CONSENT` | Яндекс.Метрика, gtag, GA, Meta Pixel, VK.Retargeting без проверки согласия | 152-ФЗ ст. 6 |
 | `PDN.COOKIE.NO_REJECT` | Cookie-баннер без возможности отказа | 152-ФЗ ст. 9 |
 | `PDN.TRANSFER.FOREIGN_TRACKER` | Иностранный трекер / возможная трансграничная передача | 152-ФЗ ст. 6 |
-| `PDN.LOCALIZATION.UNCLEAR` | Иностранный трекер без указания локализации баз в РФ | 152-ФЗ ст. 18 |
-| `PDN.ORG.RKN_NOTICE` | Обработка ПДн без следов уведомления РКН | 152-ФЗ ст. 22 |
+| `PDN.LOCALIZATION.UNCLEAR` | Форма с ПДн и иностранный трекер без указания локализации баз в РФ (`low`) | 152-ФЗ ст. 18 |
+| `PDN.ORG.RKN_NOTICE` | Форма с ПДн без следов уведомления РКН (`low`) | 152-ФЗ ст. 22 |
 | `ADV.ERID.MISSING` | Пометка «Реклама» без erid | 38-ФЗ ст. 5 |
 | `CONSUMER.OFFER.MISSING` | Витрина без оферты | ЗоЗПП ст. 8 |
 | `CONSUMER.REQUISITES.MISSING` | Витрина без ИНН/ОГРН | ЗоЗПП ст. 7 |
@@ -145,7 +145,7 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 
 **Метрики и cookie** — трекер без opt-in (`PDN.TRACKER.NO_CONSENT`), cookie до согласия (`PDN.COOKIE.BEFORE_CONSENT`, живой `scan-url`), баннер без отказа (`PDN.COOKIE.NO_REJECT`), иностранный трекер / трансграничная передача (`PDN.TRANSFER.FOREIGN_TRACKER`).
 
-**Организация** — локализация баз в РФ (`PDN.LOCALIZATION.UNCLEAR`), уведомление Роскомнадзора (`PDN.ORG.RKN_NOTICE`).
+**Организация** — локализация баз в РФ (`PDN.LOCALIZATION.UNCLEAR`) и уведомление Роскомнадзора (`PDN.ORG.RKN_NOTICE`): только если есть форма с ПДн, серьёзность `low`. CMP вроде Cookiebot не считается «метрикой без согласия».
 
 **Реклама** — пометка «Реклама» без идентификатора (`ADV.ERID.MISSING`).
 

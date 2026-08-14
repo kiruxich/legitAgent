@@ -1,13 +1,8 @@
 import { findingFromRule, type DetectorArgs } from './helpers.js';
+import { CONSENT, hasPiiForm } from './pdn.js';
 import type { Finding } from '../types.js';
 
-const PII = /(email|e-mail|phone|tel|name|fio|имя|телефон|почта)/i;
-const CONSENT = /(персональн|согласи|consent|обработк)/i;
 const INPUT_TAG = /<input\b[^>]*>/gi;
-
-function hasPiiForm(source: string): boolean {
-  return /<form[\s>]/i.test(source) && /<input\b/i.test(source) && PII.test(source);
-}
 
 function consentContext(source: string, tagStart: number, tag: string): string {
   const before = source.slice(0, tagStart);

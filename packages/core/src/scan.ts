@@ -18,9 +18,50 @@ import { detectPolicyNoLink } from './detectors/policy-no-link.js';
 import { detectTrackerNoConsent } from './detectors/tracker-no-consent.js';
 import type { Catalog, ExplainResult, Finding, Lang, Rule, ScanOptions, ScanResult, ScanWarning } from './types.js';
 
+export interface SourceFile {
+  relativePath: string;
+  source: string;
+  filePath?: string;
+}
+
 function looksBroken(filePath: string, source: string): boolean {
   if (/\.(vue|svelte|astro)$/i.test(filePath)) return false;
   return (source.match(/{/g) ?? []).length !== (source.match(/}/g) ?? []).length;
+}
+
+export function scanSources(files: SourceFile[], catalog: Catalog = defaultCatalog()): Finding[] {
+  const findings: Finding[] = [];
+  for (const file of files) {
+    const filePath = file.filePath ?? file.relativePath;
+    const args = { filePath, relativePath: file.relativePath, source: file.source, catalog };
+    findings.push(
+      ...detectFormNoConsent(args),
+      ...detectFormPrecheckedConsent(args),
+      ...detectFormNoPolicyLink(args),
+      ...detectTrackerNoConsent(args),
+      ...detectForeignTracker(args),
+      ...detectCookieNoReject(args),
+      ...detectEridMissing(args),
+    );
+  }
+  if (files.length > 0) {
+    findings.push(...detectPolicyNoLink({ catalog, files }));
+    findings.push(...detectPolicyIncomplete({ catalog, files }));
+    findings.push(...detectLocalizationUnclear({ catalog, files }));
+    findings.push(...detectRknNotice({ catalog, files }));
+    findings.push(...detectConsumerShop({ catalog, files }));
+  }
+  return findings;
+}
+
+export function dedupeFindings(findings: Finding[]): Finding[] {
+  const seen = new Set<string>();
+  return findings.filter((f) => {
+    const key = `${f.ruleId}\0${f.file}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 export async function scanProject(
@@ -44,8 +85,7 @@ export async function scanProject(
   }
 
   const files = await discoverSourceFiles(root, config.ignore);
-  const loaded: { relativePath: string; source: string }[] = [];
-  const findings: Finding[] = [];
+  const loaded: SourceFile[] = [];
 
   for (const filePath of files) {
     const relativePath = path.relative(root, filePath) || path.basename(filePath);
@@ -60,27 +100,12 @@ export async function scanProject(
       warnings.push({ file: relativePath, message: 'Файл пропущен: похоже на синтаксическую ошибку' });
       continue;
     }
-    loaded.push({ relativePath, source });
-    findings.push(
-      ...detectFormNoConsent({ filePath, relativePath, source, catalog }),
-      ...detectFormPrecheckedConsent({ filePath, relativePath, source, catalog }),
-      ...detectFormNoPolicyLink({ filePath, relativePath, source, catalog }),
-      ...detectTrackerNoConsent({ filePath, relativePath, source, catalog }),
-      ...detectForeignTracker({ filePath, relativePath, source, catalog }),
-      ...detectCookieNoReject({ filePath, relativePath, source, catalog }),
-      ...detectEridMissing({ filePath, relativePath, source, catalog }),
-    );
+    loaded.push({ relativePath, source, filePath });
   }
 
-  if (loaded.length > 0) {
-    findings.push(...detectPolicyNoLink({ catalog, files: loaded }));
-    findings.push(...detectPolicyIncomplete({ catalog, files: loaded }));
-    findings.push(...detectLocalizationUnclear({ catalog, files: loaded }));
-    findings.push(...detectRknNotice({ catalog, files: loaded }));
-    findings.push(...detectConsumerShop({ catalog, files: loaded }));
-  }
-
-  const filtered = findings.filter((f) => !config.disabled.includes(f.ruleId)).map((f) => localizeFinding(catalog, f, lang));
+  const filtered = dedupeFindings(scanSources(loaded, catalog))
+    .filter((f) => !config.disabled.includes(f.ruleId))
+    .map((f) => localizeFinding(catalog, f, lang));
   for (const finding of filtered) {
     const override = config.severity[finding.ruleId];
     if (override) finding.severity = override;

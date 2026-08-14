@@ -9,5 +9,6 @@ export function detectPolicyNoLink(args: {
 }): Finding[] {
   const hit = args.files.find((f) => POLICY_HREF.test(f.source) || /политик[аи] конфиденциальности/i.test(f.source));
   if (hit) return [];
-  return [findingFromRule(args.catalog, 'PDN.POLICY.NO_LINK', '.', null)];
+  const file = args.files.length === 1 ? (args.files[0]?.relativePath ?? '.') : '.';
+  return [findingFromRule(args.catalog, 'PDN.POLICY.NO_LINK', file, null)];
 }

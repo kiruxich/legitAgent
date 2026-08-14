@@ -11,7 +11,7 @@ import {
   handleScanUrl,
 } from './server.js';
 
-const server = new Server({ name: 'legitagent', version: '0.4.0' }, { capabilities: { tools: {} } });
+const server = new Server({ name: 'legitagent', version: '0.5.0' }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
@@ -46,7 +46,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'scan_url',
       description:
-        'Проверить живой сайт в браузере: cookie до согласия, баннер без отказа, иностранные трекеры. После загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого.',
+        'Проверить живой сайт в браузере: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры. После загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого.',
       inputSchema: {
         type: 'object',
         properties: { url: { type: 'string', description: 'URL сайта' } },

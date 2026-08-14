@@ -100,4 +100,30 @@ describe('scanUrl', () => {
     expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.BEFORE_CONSENT')).toBe(false);
     expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.NO_REJECT')).toBe(false);
   });
+
+  it('flags a live form without a consent checkbox', async () => {
+    const url = `${origin}/form-no-consent.html`;
+    const result = await scanUrl(url);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(true);
+    expect(result.findings.find((f) => f.ruleId === 'PDN.FORM.NO_CONSENT')?.file).toBe(url);
+  });
+
+  it('flags visible ads without erid', async () => {
+    const url = `${origin}/ad-no-erid.html`;
+    const result = await scanUrl(url);
+    expect(result.findings.some((f) => f.ruleId === 'ADV.ERID.MISSING')).toBe(true);
+  });
+
+  it('flags a live shop without an offer', async () => {
+    const url = `${origin}/shop-no-offer.html`;
+    const result = await scanUrl(url);
+    expect(result.findings.some((f) => f.ruleId === 'CONSUMER.OFFER.MISSING')).toBe(true);
+  });
+
+  it('flags a live page without a privacy policy link', async () => {
+    const url = `${origin}/no-policy.html`;
+    const result = await scanUrl(url);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.POLICY.NO_LINK')).toBe(true);
+    expect(result.findings.find((f) => f.ruleId === 'PDN.POLICY.NO_LINK')?.file).toBe(url);
+  });
 });
