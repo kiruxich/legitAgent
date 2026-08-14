@@ -9,6 +9,14 @@ inputs:
     description: Fail the job when the CLI reports a high finding (exit 1)
     required: false
     default: 'true'
+  comment-on-pr:
+    description: Post or update a PR comment with scan results
+    required: false
+    default: 'true'
+  create-issue-on-high:
+    description: Create or update an issue when high findings are detected on non-PR events
+    required: false
+    default: 'true'
 runs:
   using: composite
   steps:
@@ -30,6 +38,87 @@ runs:
       continue-on-error: true
       with:
         sarif_file: legitagent.sarif
+    - name: Comment on PR
+      if: github.event_name == 'pull_request' && inputs.comment-on-pr == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          if (!fs.existsSync('legitagent.sarif')) return;
+          const sarif = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8'));
+          const { formatReport } = await import(path.join(process.env.GITHUB_ACTION_PATH, 'format-report.mjs'));
+          const body = formatReport(sarif);
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          const existing = comments.find((c) => c.body && c.body.includes('<!-- legitagent-scan -->'));
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body,
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+          }
+    - name: Create or update issue on high
+      if: github.event_name != 'pull_request' && inputs.create-issue-on-high == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          if (!fs.existsSync('legitagent.sarif')) return;
+          const sarif = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8'));
+          const { formatReport, countHigh } = await import(path.join(process.env.GITHUB_ACTION_PATH, 'format-report.mjs'));
+          if (countHigh(sarif) === 0) return;
+          const body = formatReport(sarif);
+          const title = 'legitAgent: находки high';
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'legitagent',
+          });
+          const existing = issues.find((i) => i.title === title);
+          if (existing) {
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: existing.number,
+              body,
+            });
+          } else {
+            try {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['legitagent'],
+              });
+            } catch (e) {
+              if (e.status === 422) {
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title,
+                  body,
+                });
+              } else {
+                throw e;
+              }
+            }
+          }
     - name: Fail on high findings
       if: ${{ steps.scan.outputs.exit_code != '0' && (inputs.fail-on-high == 'true' || steps.scan.outputs.exit_code != '1') }}
       shell: bash
