@@ -1,6 +1,7 @@
 <p align="center"><img src="assets/logo.png" width="280" alt="legitAgent" /></p>
 
 <p align="center">
+  <a href="https://github.com/kiruxich/legitAgent/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/kiruxich/legitAgent/actions/workflows/ci.yml/badge.svg" /></a>
   <a href="https://www.npmjs.com/package/@legit-agent/cli"><img alt="npm" src="https://img.shields.io/npm/v/@legit-agent/cli?label=@legit-agent/cli" /></a>
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
 </p>
@@ -8,6 +9,8 @@
 # legitAgent
 
 Проверка сайта на типичные риски **152-ФЗ** прямо в Cursor, Claude, Kimi и в терминале.
+
+Сайт: [kiruxich.github.io/legitAgent](https://kiruxich.github.io/legitAgent/). Каталог правил: [docs/RULES.md](docs/RULES.md). Сломанный пример: [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo).
 
 Подключите MCP — агент сам просканирует HTML/JSX/TSX, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI:
 
@@ -67,6 +70,8 @@ npx @legit-agent/cli scan ./my-site --json
 
 В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна.
 
+Готовый workflow: [`examples/github-scan.yml`](examples/github-scan.yml). Скопируйте в `.github/workflows/legitagent.yml` своего сайта.
+
 ---
 
 ## Возможности
@@ -109,6 +114,10 @@ npx @legit-agent/cli scan ./my-site --json
 
 У каждого правила в репозитории есть короткая выдержка статьи. Без выдержки правило в каталог не попадает.
 
+Полный каталог с выдержками закона: [docs/RULES.md](docs/RULES.md). На сайте — [страница правил](https://kiruxich.github.io/legitAgent/rules.html).
+
+Проверить, что сканер вообще что-то находит: клонируйте [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo) (форма без согласия, метрика без opt-in, нет политики) и выполните `npx @legit-agent/cli scan`.
+
 ---
 
 ## Разработка
@@ -127,7 +136,7 @@ pnpm build
 - `packages/cli` — команда `legitagent scan`
 - `packages/mcp` — stdio-сервер для агентов
 
-Правила: `packages/core/rules/*.yaml`. Закон: `packages/core/legal/*.yaml`.
+Правила: `packages/core/rules/*.yaml`. Закон: `packages/core/legal/*.yaml`. Каталог для людей: `pnpm catalog` → `docs/RULES.md` и `website/rules.html`.
 
 ---
 
