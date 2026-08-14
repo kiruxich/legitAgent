@@ -39,6 +39,13 @@ export interface Finding {
   excerpt: string;
 }
 
+export type Verdict = 'confirm' | 'reject' | 'ask_human';
+
+export interface ReviewedFinding extends Finding {
+  verdict: Verdict;
+  reason: string;
+}
+
 export interface ScanWarning {
   file: string;
   message: string;

@@ -59,3 +59,11 @@ describe('handleGetLaw', () => {
     expect(handleGetLaw('152-fz', '9')).toMatch(/Статья\s+9/);
   });
 });
+
+describe('handleReview', () => {
+  it('reviews a project and returns verdicts', async () => {
+    const { handleReview } = await import('../src/server.js');
+    const result = await handleReview(badForm);
+    expect(result.reviewed.some((f) => f.ruleId === 'PDN.FORM.NO_CONSENT' && f.verdict)).toBe(true);
+  });
+});

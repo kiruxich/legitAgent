@@ -1,4 +1,4 @@
-import { accessSync, constants } from 'node:fs';
+import { accessSync, constants, existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   explainRule,
@@ -7,7 +7,9 @@ import {
   listCorpus,
   listRules,
   readCorpus,
+  reviewFindings,
   scanProject,
+  snippetAround,
   type Lang,
 } from '@legit-agent/core';
 
@@ -31,6 +33,27 @@ export async function handleScan(root?: string, lang?: string) {
   const resolved = resolveRoot(root);
   assertReadableRoot(resolved);
   return scanProject(resolved, undefined, { lang: parseLang(lang) });
+}
+
+export async function handleReview(root?: string, lang?: string) {
+  const resolved = resolveRoot(root);
+  assertReadableRoot(resolved);
+  const scanResult = await scanProject(resolved, undefined, { lang: parseLang(lang) });
+
+  const snippets: Record<string, string> = {};
+  for (const finding of scanResult.findings) {
+    const filePath = path.join(resolved, finding.file);
+    if (!existsSync(filePath)) continue;
+    try {
+      const source = readFileSync(filePath, 'utf8');
+      snippets[finding.file] = snippetAround(source, finding.line);
+    } catch {
+      // skip unreadable files
+    }
+  }
+
+  const reviewed = await reviewFindings(scanResult.findings, snippets);
+  return { ...scanResult, reviewed };
 }
 
 export function handleListRules() {

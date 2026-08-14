@@ -7,6 +7,7 @@ import {
   handleGeneratePolicy,
   handleGetLaw,
   handleListRules,
+  handleReview,
   handleScan,
   handleScanUrl,
 } from './server.js';
@@ -18,6 +19,17 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'scan',
       description: 'Проверить проект на риски 152-ФЗ, 38-ФЗ и ЗоЗПП по HTML/JSX/TSX/Vue/Svelte/Astro',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          root: { type: 'string', description: 'Корень проекта' },
+          lang: { type: 'string', description: 'ru или en' },
+        },
+      },
+    },
+    {
+      name: 'review',
+      description: 'Второй проход по находкам scan: confirm, reject или ask_human. Не юридическое заключение.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -90,6 +102,10 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
   try {
     if (name === 'scan') {
       const data = await handleScan(args.root, args.lang);
+      return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
+    }
+    if (name === 'review') {
+      const data = await handleReview(args.root, args.lang);
       return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
     }
     if (name === 'list_rules') {

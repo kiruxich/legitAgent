@@ -9,6 +9,14 @@ export { discoverSourceFiles } from './discover.js';
 export { findingFromRule, localizeFinding, localizedRule } from './detectors/helpers.js';
 export { explainRule, listRules, scanProject, scanSources, dedupeFindings } from './scan.js';
 export type { SourceFile } from './scan.js';
+export {
+  createLlmComplete,
+  forEvidencePack,
+  reviewFindings,
+  snippetAround,
+  SOFT_RULE_IDS,
+} from './review.js';
+export type { LlmComplete } from './review.js';
 export { defaultLegalDir, defaultRulesDir, packageRoot } from './paths.js';
 export type {
   Catalog,
@@ -16,6 +24,7 @@ export type {
   Finding,
   Lang,
   LegalExcerpt,
+  ReviewedFinding,
   Rule,
   RuleStatus,
   ScanOptions,
@@ -23,4 +32,5 @@ export type {
   ScanWarning,
   ScanConfig,
   Severity,
+  Verdict,
 } from './types.js';
