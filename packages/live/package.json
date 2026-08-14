@@ -1,14 +1,21 @@
 {
-  "name": "@legit-agent/mcp",
+  "name": "@legit-agent/live",
   "version": "0.1.1",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiruxich/legitAgent.git",
-    "directory": "packages/mcp"
+    "directory": "packages/live"
   },
-  "bin": "./dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "files": ["dist"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -20,12 +27,10 @@
   },
   "dependencies": {
     "@legit-agent/core": "workspace:*",
-    "@legit-agent/live": "workspace:*",
-    "@modelcontextprotocol/sdk": "^1.12.1"
+    "playwright": "^1.50.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.0",
-    "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
   }

@@ -2,7 +2,7 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
-import { handleExplainRule, handleListRules, handleScan } from './server.js';
+import { handleExplainRule, handleListRules, handleScan, handleScanUrl } from './server.js';
 
 const server = new Server({ name: 'legitagent', version: '0.1.1' }, { capabilities: { tools: {} } });
 
@@ -30,6 +30,15 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ['ruleId'],
       },
     },
+    {
+      name: 'scan_url',
+      description: 'Проверить живой сайт в браузере: cookie до согласия, баннер без отказа, иностранные трекеры',
+      inputSchema: {
+        type: 'object',
+        properties: { url: { type: 'string', description: 'URL сайта' } },
+        required: ['url'],
+      },
+    },
   ],
 }));
 
@@ -46,6 +55,10 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
     }
     if (name === 'explain_rule') {
       return { content: [{ type: 'text', text: JSON.stringify(handleExplainRule(args.ruleId), null, 2) }] };
+    }
+    if (name === 'scan_url') {
+      const data = await handleScanUrl(args.url);
+      return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
     }
     throw new Error(`Неизвестный инструмент: ${name}`);
   } catch (err) {

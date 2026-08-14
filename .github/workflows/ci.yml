@@ -25,4 +25,6 @@ jobs:
       - run: node scripts/generate-catalog.mjs
       - name: Catalog docs match the YAML source
         run: git diff --exit-code docs/RULES.md website/rules.html
+      - name: Install Playwright Chromium
+        run: pnpm --filter @legit-agent/live exec playwright install --with-deps chromium
       - run: pnpm -r test

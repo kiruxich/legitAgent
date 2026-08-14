@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { handleExplainRule, handleListRules, handleScan } from '../src/server.js';
+import { handleExplainRule, handleListRules, handleScan, handleScanUrl } from '../src/server.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const badForm = path.resolve(here, '../../core/tests/fixtures/bad-form');
@@ -29,5 +29,11 @@ describe('handleListRules', () => {
 describe('handleExplainRule', () => {
   it('throws for unknown rule id', () => {
     expect(() => handleExplainRule('nope')).toThrow();
+  });
+});
+
+describe('handleScanUrl', () => {
+  it('throws when url is missing', async () => {
+    await expect(handleScanUrl()).rejects.toThrow('Укажите URL сайта');
   });
 });

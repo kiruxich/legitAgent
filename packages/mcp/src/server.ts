@@ -27,3 +27,9 @@ export function handleListRules() {
 export function handleExplainRule(ruleId: string) {
   return explainRule(ruleId);
 }
+
+export async function handleScanUrl(url?: string) {
+  if (!url?.trim()) throw new Error('Укажите URL сайта');
+  const { scanUrl } = await import('@legit-agent/live');
+  return scanUrl(url);
+}
