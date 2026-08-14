@@ -28,14 +28,14 @@ npx @legit-agent/cli scan
 
 ### MCP (Cursor, Claude, Kimi и другие)
 
-Один и тот же сервер:
+Один и тот же сервер. `@latest` и `--prefer-online`: при каждом запуске Cursor, Claude, Kimi и других IDE npx берёт текущий релиз с npm, а не кэш. Уже открытый чат сам не обновится — нужен перезапуск окна / MCP.
 
 ```json
 {
   "mcpServers": {
     "legitagent": {
       "command": "npx",
-      "args": ["-y", "@legit-agent/mcp"]
+      "args": ["-y", "--prefer-online", "@legit-agent/mcp@latest"]
     }
   }
 }
@@ -44,10 +44,10 @@ npx @legit-agent/cli scan
 | Клиент | Куда вставить |
 |---|---|
 | **Cursor** | Плагин Marketplace / `~/.cursor/plugins/local` (скиллы `/check` …) или `.cursor/mcp.json` |
-| **Claude Code** | `claude mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` |
+| **Claude Code** | `claude mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` |
 | **Claude Desktop** | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект». |
 | **Kimi Code** | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json` |
-| **Kimi CLI** | `kimi mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` или `~/.kimi/mcp.json` |
+| **Kimi CLI** | `kimi mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` или `~/.kimi/mcp.json` |
 | **Windsurf, Cline, Continue, Copilot** | тот же `mcpServers`; если спрашивают транспорт — `stdio` |
 
 После подключения: «проверь этот репозиторий на 152-ФЗ», «покажи каталог правил», «объясни PDN.FORM.NO_CONSENT».

@@ -2,7 +2,7 @@
   "mcpServers": {
     "legitagent": {
       "command": "npx",
-      "args": ["-y", "@legit-agent/mcp"]
+      "args": ["-y", "--prefer-online", "@legit-agent/mcp@latest"]
     }
   }
 }
