@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -32,5 +34,15 @@ describe('discoverSourceFiles', () => {
     const files = await discoverSourceFiles(root, ['vendor/**']);
     expect(files.some((f) => f.includes('vendor'))).toBe(false);
     expect(files.some((f) => f.endsWith('Form.tsx'))).toBe(true);
+  });
+
+  it('skips .Trash even when it contains html', async () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-trash-'));
+    fs.mkdirSync(path.join(dir, '.Trash'));
+    fs.writeFileSync(path.join(dir, '.Trash', 'old.html'), '<form><input name="email" /></form>');
+    fs.writeFileSync(path.join(dir, 'ok.tsx'), 'export const x = 1;\n');
+    const files = await discoverSourceFiles(dir);
+    expect(files.some((f) => f.includes('.Trash'))).toBe(false);
+    expect(files.some((f) => f.endsWith('ok.tsx'))).toBe(true);
   });
 });

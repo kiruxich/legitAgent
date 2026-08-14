@@ -19,6 +19,11 @@ describe('handleScan', () => {
     expect(result.findings.some((f) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(true);
   });
 
+  it('refuses the home directory', async () => {
+    const os = await import('node:os');
+    await expect(handleScan(os.homedir())).rejects.toThrow(/домашний каталог|корень диска/);
+  });
+
   it('throws when root is missing or unreadable', async () => {
     await expect(handleScan('/nonexistent/path/legitagent-mcp-test')).rejects.toThrow(
       'Укажите корень проекта',

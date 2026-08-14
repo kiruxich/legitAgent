@@ -31,14 +31,14 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">v0.7.0 · MIT · бесплатно · без облака</p>
+      <p class="eyebrow">v0.7.1 · MIT · бесплатно · без облака</p>
       <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;и после деплоя</em></h1>
       <p class="lead">
         legitAgent читает HTML, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
         формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика,
         реклама без erid, витрина без оферты.
         Живой <code>scan-url</code> смотрит тот же каталог по DOM, плюс cookie до согласия;
-        v0.7.0 добавляет evidence pack (скрины, PDF, SARIF) и LLM-review (<code>confirm</code> / <code>reject</code> / <code>ask_human</code>).
+        v0.7.1 добавляет evidence pack (скрины, PDF, SARIF) и LLM-review (<code>confirm</code> / <code>reject</code> / <code>ask_human</code>).
         В Cursor — MCP и <code>/check</code>; в Claude и Kimi — те же tools; в CI — GitHub Action.
         Платного тарифа нет. При каждом запуске IDE подтягивается актуальный пакет с npm.
       </p>
@@ -152,7 +152,7 @@
 npx @legit-agent/cli@latest scan ./my-site --json --sarif --lang en
 npx @legit-agent/cli@latest scan-url https://example.com
 npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code></pre>
-          <p class="panel-note">В CI лучше пин <code>@0.7.0</code>. Код выхода <strong>1</strong> при находках <strong>high</strong>. GitHub Action: <code>legitagent-scan@v0.7.0</code>.</p>
+          <p class="panel-note">В CI лучше пин <code>@0.7.1</code>. Код выхода <strong>1</strong> при находках <strong>high</strong>. GitHub Action: <code>legitagent-scan@v0.7.1</code>.</p>
         </div>
       </div>
     </section>

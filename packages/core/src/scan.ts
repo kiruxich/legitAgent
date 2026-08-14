@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { defaultCatalog } from './catalog.js';
-import { loadScanConfig } from './config.js';
+import { ConfigError, loadScanConfig } from './config.js';
 import { disclaimer } from './disclaimer.js';
 import { discoverSourceFiles } from './discover.js';
 import { localizeFinding } from './detectors/helpers.js';
@@ -64,11 +65,24 @@ export function dedupeFindings(findings: Finding[]): Finding[] {
   });
 }
 
+export const UNSAFE_ROOT_MESSAGE =
+  'Не сканирую домашний каталог или корень диска. Укажите папку проекта.';
+
+export function isUnsafeScanRoot(root: string, home = os.homedir()): boolean {
+  const resolved = path.resolve(root);
+  return resolved === path.parse(resolved).root || resolved === path.resolve(home);
+}
+
+export function assertSafeScanRoot(root: string, home = os.homedir()): void {
+  if (isUnsafeScanRoot(root, home)) throw new ConfigError(UNSAFE_ROOT_MESSAGE);
+}
+
 export async function scanProject(
   root: string,
   catalog = defaultCatalog(),
   options: ScanOptions = {},
 ): Promise<ScanResult> {
+  assertSafeScanRoot(root);
   const lang: Lang = options.lang === 'en' ? 'en' : 'ru';
   const { config, warnings: configWarnings } = loadScanConfig(root);
   const warnings: ScanWarning[] = [...configWarnings];

@@ -46,14 +46,14 @@ runs:
             NOTIFY="--notify-telegram"
           fi
           npx --yes playwright install --with-deps chromium
-          npx --yes @legit-agent/cli@0.7.0 scan-url "${{ inputs.url }}" \
+          npx --yes @legit-agent/cli@0.7.1 scan-url "${{ inputs.url }}" \
             --evidence "${{ inputs.evidence-dir }}" \
             --review \
             --sarif legitagent.sarif \
             $NOTIFY
           code=$?
         else
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx --yes @legit-agent/cli@0.7.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx --yes @legit-agent/cli@0.7.1 scan "${{ inputs.root }}" --sarif legitagent.sarif
           code=$?
         fi
         echo "exit_code=$code" >> "$GITHUB_OUTPUT"

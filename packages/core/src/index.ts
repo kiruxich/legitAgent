@@ -7,7 +7,7 @@ export { generatePolicyMarkdown } from './policy.js';
 export type { PolicyInput } from './policy.js';
 export { discoverSourceFiles } from './discover.js';
 export { findingFromRule, localizeFinding, localizedRule } from './detectors/helpers.js';
-export { explainRule, listRules, scanProject, scanSources, dedupeFindings } from './scan.js';
+export { explainRule, listRules, scanProject, scanSources, dedupeFindings, assertSafeScanRoot } from './scan.js';
 export type { SourceFile } from './scan.js';
 export {
   createLlmComplete,

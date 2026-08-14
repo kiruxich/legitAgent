@@ -1,12 +1,19 @@
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { ConfigError } from '../src/config.js';
 import { DISCLAIMER_RU } from '../src/disclaimer.js';
 import { explainRule, listRules, scanProject } from '../src/scan.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
 describe('scanProject', () => {
+  it('refuses the home directory and filesystem root', async () => {
+    await expect(scanProject(os.homedir())).rejects.toThrow(ConfigError);
+    await expect(scanProject('/')).rejects.toThrow(/домашний каталог|корень диска/);
+  });
+
   it('finds a bad form', async () => {
     const result = await scanProject(path.join(here, 'fixtures/bad-form'));
     expect(result.findings.some((f) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(true);

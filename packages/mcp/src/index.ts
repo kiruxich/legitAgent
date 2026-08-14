@@ -12,17 +12,18 @@ import {
   handleScanUrl,
 } from './server.js';
 
-const server = new Server({ name: 'legitagent', version: '0.7.0' }, { capabilities: { tools: {} } });
+const server = new Server({ name: 'legitagent', version: '0.7.1' }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     {
       name: 'scan',
-      description: 'Проверить проект на риски 152-ФЗ, 38-ФЗ и ЗоЗПП по HTML/JSX/TSX/Vue/Svelte/Astro',
+      description:
+        'Проверить папку проекта на риски 152-ФЗ, 38-ФЗ и ЗоЗПП. Всегда передай абсолютный root workspace. Без root процесс может оказаться в домашнем каталоге — его сканер отклонит.',
       inputSchema: {
         type: 'object',
         properties: {
-          root: { type: 'string', description: 'Корень проекта' },
+          root: { type: 'string', description: 'Абсолютный корень открытого проекта' },
           lang: { type: 'string', description: 'ru или en' },
         },
       },
@@ -33,7 +34,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       inputSchema: {
         type: 'object',
         properties: {
-          root: { type: 'string', description: 'Корень проекта' },
+          root: { type: 'string', description: 'Абсолютный корень открытого проекта, тот же что у scan' },
           lang: { type: 'string', description: 'ru или en' },
         },
       },
