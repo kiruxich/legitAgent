@@ -30,14 +30,13 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-          package-manager-cache: false
 
       - name: Use npm with OIDC support
         run: npm install -g npm@latest
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -r test
       - run: pnpm -r build
+      - run: pnpm -r test
 
       - name: Pack workspace packages
         run: |
