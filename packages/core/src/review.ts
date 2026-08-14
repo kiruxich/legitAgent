@@ -35,7 +35,11 @@ export function createLlmComplete(env?: NodeJS.ProcessEnv): LlmComplete | undefi
   const key = e.LEGITAGENT_LLM_API_KEY?.trim();
   if (!key) return undefined;
 
-  const base = (e.LEGITAGENT_LLM_API_BASE ?? 'https://api.openai.com/v1').replace(/\/$/, '');
+  const base = (
+    e.LEGITAGENT_LLM_BASE_URL ??
+    e.LEGITAGENT_LLM_API_BASE ??
+    'https://api.openai.com/v1'
+  ).replace(/\/$/, '');
   const model = e.LEGITAGENT_LLM_MODEL ?? 'gpt-4o-mini';
 
   return async (prompt: string) => {

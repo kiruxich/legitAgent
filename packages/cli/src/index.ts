@@ -17,7 +17,7 @@ import { toSarif } from './sarif.js';
 
 function usage(command?: string): string {
   if (command === 'scan-url') {
-    return 'Использование: legitagent scan-url <url> [--json] [--lang ru|en] [--review] [--evidence [dir]] [--notify-telegram]';
+    return 'Использование: legitagent scan-url <url> [--json] [--lang ru|en] [--review] [--evidence [dir]] [--sarif [файл]] [--notify-telegram]';
   }
   if (command === 'scan') {
     return 'Использование: legitagent scan [путь] [--json] [--sarif [файл]] [--lang ru|en] [--review]';
@@ -25,7 +25,7 @@ function usage(command?: string): string {
   if (command === 'init-policy') {
     return 'Использование: legitagent init-policy --operator <имя> [--inn] [--ogrn] [--email] [--site] [--address] [--out файл]';
   }
-  return 'Использование: legitagent scan [путь] [--json] [--sarif [файл]] [--lang ru|en] [--review]\n             legitagent scan-url <url> [--json] [--lang ru|en] [--review] [--evidence [dir]] [--notify-telegram]\n             legitagent init-policy --operator <имя> [--out файл]';
+  return 'Использование: legitagent scan [путь] [--json] [--sarif [файл]] [--lang ru|en] [--review]\n             legitagent scan-url <url> [--json] [--lang ru|en] [--review] [--evidence [dir]] [--sarif [файл]] [--notify-telegram]\n             legitagent init-policy --operator <имя> [--out файл]';
 }
 
 function parseArgs(argv: string[]) {
@@ -56,7 +56,7 @@ function parseArgs(argv: string[]) {
         evidenceDir = next;
         i += 1;
       } else {
-        evidenceDir = 'evidence';
+        evidenceDir = 'legitagent-evidence';
       }
       continue;
     }
@@ -82,24 +82,37 @@ function buildLiveSnippets(
     cookiesBefore: { name: string }[];
     cookiesAfterReject: { name: string }[];
     findings: { file: string; message: string }[];
+    html?: string;
   },
 ): Record<string, string> {
   const cookieJson = JSON.stringify({
     cookiesBefore: live.cookiesBefore,
     cookiesAfterReject: live.cookiesAfterReject,
   });
+  const htmlSnippet = live.html ? live.html.slice(0, 8000) : '';
   const snippets: Record<string, string> = {};
   for (const finding of live.findings) {
-    snippets[finding.file] = `${cookieJson}\n${finding.message}`;
+    const parts = [cookieJson, finding.message];
+    if (htmlSnippet) parts.push(htmlSnippet);
+    snippets[finding.file] = parts.join('\n');
   }
   return snippets;
 }
 
-function formatNotifySummary(live: { url: string; findings: { severity: string }[] }, reviewed: { verdict: string }[]): string {
-  const high = live.findings.filter((f) => f.severity === 'high').length;
+function formatNotifySummary(
+  live: { url: string; capturedAt: string; findings: { severity: string }[] },
+  reviewed: { verdict: string }[],
+): string {
+  const rawHigh = live.findings.some((f) => f.severity === 'high');
   const confirm = reviewed.filter((f) => f.verdict === 'confirm').length;
   const askHuman = reviewed.filter((f) => f.verdict === 'ask_human').length;
-  return `legitAgent scan-url: ${live.url}\nhigh (сырые): ${high}\nconfirm: ${confirm}\nask_human: ${askHuman}`;
+  return [
+    `legitAgent scan-url: ${live.url}`,
+    `capturedAt: ${live.capturedAt}`,
+    `confirm: ${confirm}`,
+    `ask_human: ${askHuman}`,
+    `raw high: ${rawHigh ? 'yes' : 'no'}`,
+  ].join('\n');
 }
 
 async function main() {
@@ -142,10 +155,17 @@ async function main() {
         disclaimer: disclaimer(lang),
       });
     }
+    if (sarifPath) {
+      fs.writeFileSync(sarifPath, JSON.stringify(toSarif(result), null, 2) + '\n');
+    }
     const output = reviewed ? { ...result, reviewed } : result;
     if (json) process.stdout.write(JSON.stringify(output, null, 2) + '\n');
     else process.stdout.write(formatHuman(result, lang) + '\n');
-    if (notifyTelegramFlag && reviewed) {
+    if (notifyTelegramFlag) {
+      if (!reviewed) {
+        const complete = createLlmComplete(process.env);
+        reviewed = await reviewFindings(result.findings, buildLiveSnippets(result), complete);
+      }
       const summary = formatNotifySummary(result, reviewed);
       await notifyTelegram(summary, packPaths?.pdf);
     }

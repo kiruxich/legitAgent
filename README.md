@@ -47,7 +47,7 @@ npx @legit-agent/cli scan
 |---|---|
 | **Cursor** | **User** (все проекты): `~/.cursor/mcp.json` — туда же пишет [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19). **Проект** (только этот репозиторий): `.cursor/mcp.json`. Скиллы `/check` … — Marketplace или `~/.cursor/plugins/local` |
 | **Claude Code** | `claude mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` |
-| **Claude Desktop** | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект». |
+| **Claude Desktop** | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `review`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект». |
 | **Kimi Code** | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json` |
 | **Kimi CLI** | `kimi mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` или `~/.kimi/mcp.json` |
 | **Windsurf, Cline, Continue, Copilot** | тот же `mcpServers`; если спрашивают транспорт — `stdio` |
@@ -80,8 +80,9 @@ npx @legit-agent/cli scan ./my-site --sarif findings.sarif
 npx @legit-agent/cli scan ./my-site --lang en
 npx @legit-agent/cli scan ./my-site --review --json
 npx @legit-agent/cli scan-url https://example.com --json
-npx @legit-agent/cli scan-url https://example.com --review --evidence evidence
+npx @legit-agent/cli scan-url https://example.com --review --evidence legitagent-evidence
 npx @legit-agent/cli scan-url https://example.com --review --evidence --notify-telegram
+npx @legit-agent/cli scan-url https://example.com --sarif legitagent.sarif
 npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --email privacy@site.ru --out privacy.md
 ```
 
@@ -89,9 +90,9 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 
 `scan-url --evidence [dir]` пишет evidence pack: скриншоты, имена cookie, `evidence.json`, `evidence.sarif`, `evidence.pdf`. В пачку попадают только `confirm` и `ask_human`.
 
-Telegram (опционально): `LEGITAGENT_TELEGRAM_BOT_TOKEN`, `LEGITAGENT_TELEGRAM_CHAT_ID` + флаг `--notify-telegram`.
+Telegram (опционально): `LEGITAGENT_TELEGRAM_BOT_TOKEN`, `LEGITAGENT_TELEGRAM_CHAT_ID` + флаг `--notify-telegram`. Без credentials — код выхода `2`.
 
-LLM для `--review`: `LEGITAGENT_LLM_API_KEY` (опционально; без ключа — эвристический fallback).
+LLM для `--review`: `LEGITAGENT_LLM_API_KEY` (опционально; без ключа — эвристический fallback). Базовый URL API: `LEGITAGENT_LLM_BASE_URL` (fallback: `LEGITAGENT_LLM_API_BASE`).
 
 User rule для Cursor always-on: скопируйте текст из [`docs/cursor-user-rule.md`](docs/cursor-user-rule.md) в User rules.
 
@@ -119,9 +120,9 @@ User rule для Cursor always-on: скопируйте текст из [`docs/c
 |---|---|
 | `0` | Нет серьёзных находок (в том числе нечего сканировать) |
 | `1` | Есть хотя бы одна находка `high` |
-| `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` |
+| `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` / `--notify-telegram` без credentials |
 
-В CI достаточно `npx @legit-agent/cli@0.7.0 scan --json`: ненулевой код — стоп пайплайна. Source-scan **не вызывает LLM**. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.7.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`. Для мониторинга живого сайта после деплоя — [`examples/github-watch.yml`](examples/github-watch.yml) (`scan-url --review --evidence`, опционально Telegram).
+В CI достаточно `npx @legit-agent/cli@0.7.0 scan --json`: ненулевой код — стоп пайплайна. Source-scan **не вызывает LLM**. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.7.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`. Для мониторинга живого сайта после деплоя — [`examples/github-watch.yml`](examples/github-watch.yml) (`scan-url --review --evidence`, опционально Telegram). В URL/watch-режиме issues и `fail-on-high` используют **сырой** SARIF (`--sarif legitagent.sarif`); evidence pack остаётся отфильтрованным (`confirm` + `ask_human`).
 
 ---
 

@@ -12,7 +12,7 @@ inputs:
   evidence-dir:
     description: Directory for evidence pack when url is set
     required: false
-    default: 'evidence'
+    default: 'legitagent-evidence'
   fail-on-high:
     description: Fail the job when the CLI reports a high finding (exit 1)
     required: false
@@ -49,11 +49,9 @@ runs:
           npx --yes @legit-agent/cli@0.7.0 scan-url "${{ inputs.url }}" \
             --evidence "${{ inputs.evidence-dir }}" \
             --review \
+            --sarif legitagent.sarif \
             $NOTIFY
           code=$?
-          if [ -f "${{ inputs.evidence-dir }}/evidence.sarif" ]; then
-            cp "${{ inputs.evidence-dir }}/evidence.sarif" legitagent.sarif
-          fi
         else
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx --yes @legit-agent/cli@0.7.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
           code=$?

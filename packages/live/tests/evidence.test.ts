@@ -98,8 +98,15 @@ describe('evidence pack', () => {
     expect(fs.existsSync(paths.sarif)).toBe(true);
     expect(fs.existsSync(paths.pdf)).toBe(true);
 
-    const json = JSON.parse(fs.readFileSync(paths.json, 'utf8')) as { findings: unknown[] };
+    const json = JSON.parse(fs.readFileSync(paths.json, 'utf8')) as {
+      findings: unknown[];
+      reviewed: unknown[];
+      capturedAt: string;
+      timestamp: string;
+    };
     expect(json.findings).toHaveLength(1);
+    expect(json.reviewed).toHaveLength(1);
+    expect(json.timestamp).toBe(json.capturedAt);
     expect(json.findings[0]).toMatchObject({ ruleId: 'PDN.COOKIE.NO_REJECT', verdict: 'confirm' });
 
     const sarif = JSON.parse(fs.readFileSync(paths.sarif, 'utf8')) as { version: string };

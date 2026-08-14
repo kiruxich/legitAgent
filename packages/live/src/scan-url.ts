@@ -152,6 +152,7 @@ export async function scanUrl(
       cookiesBefore,
       cookiesAfterReject,
       screenshots,
+      html,
       ...(evidenceDir ? { evidenceDir } : {}),
     };
   } finally {

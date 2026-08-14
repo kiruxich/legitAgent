@@ -33,6 +33,7 @@ export interface LiveScanResult extends ScanResult {
   cookiesAfterReject: CookieName[];
   screenshots: EvidenceShot[];
   evidenceDir?: string;
+  html?: string;
 }
 
 const LEVEL: Record<Severity, 'error' | 'warning' | 'note'> = {
@@ -135,11 +136,13 @@ export async function writeEvidencePack(args: {
   const evidence = {
     url: live.url,
     capturedAt: live.capturedAt,
+    timestamp: live.capturedAt,
     cookiesBefore: live.cookiesBefore,
     cookiesAfterReject: live.cookiesAfterReject,
     screenshots: live.screenshots,
     disclaimer: disclaimerText,
     findings: packFindings,
+    reviewed: packFindings,
   };
 
   fs.writeFileSync(jsonPath, JSON.stringify(evidence, null, 2) + '\n');

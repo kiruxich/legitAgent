@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { Finding } from '../src/types.js';
-import { forEvidencePack, reviewFindings, SOFT_RULE_IDS } from '../src/review.js';
+import { forEvidencePack, reviewFindings, SOFT_RULE_IDS, createLlmComplete } from '../src/review.js';
 
 const form: Finding = {
   ruleId: 'PDN.FORM.NO_CONSENT',
@@ -45,5 +45,31 @@ describe('reviewFindings', () => {
   it('marks unparsed LLM rows as ask_human', async () => {
     const reviewed = await reviewFindings([form], {}, async () => 'not json');
     expect(reviewed[0].verdict).toBe('ask_human');
+  });
+
+  it('reads LEGITAGENT_LLM_BASE_URL for the API base', async () => {
+    const prev = process.env.LEGITAGENT_LLM_BASE_URL;
+    const prevLegacy = process.env.LEGITAGENT_LLM_API_BASE;
+    delete process.env.LEGITAGENT_LLM_API_BASE;
+    process.env.LEGITAGENT_LLM_BASE_URL = 'https://llm.example/v1';
+    process.env.LEGITAGENT_LLM_API_KEY = 'test-key';
+    try {
+      const complete = createLlmComplete(process.env);
+      expect(complete).toBeDefined();
+      const fetchMock = vi.fn(async () => new Response(JSON.stringify({ choices: [{ message: { content: '[]' } }] }), { status: 200 }));
+      vi.stubGlobal('fetch', fetchMock);
+      await complete!('prompt');
+      expect(fetchMock).toHaveBeenCalledWith(
+        'https://llm.example/v1/chat/completions',
+        expect.objectContaining({ method: 'POST' }),
+      );
+    } finally {
+      vi.unstubAllGlobals();
+      if (prev === undefined) delete process.env.LEGITAGENT_LLM_BASE_URL;
+      else process.env.LEGITAGENT_LLM_BASE_URL = prev;
+      if (prevLegacy === undefined) delete process.env.LEGITAGENT_LLM_API_BASE;
+      else process.env.LEGITAGENT_LLM_API_BASE = prevLegacy;
+      delete process.env.LEGITAGENT_LLM_API_KEY;
+    }
   });
 });

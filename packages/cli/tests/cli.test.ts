@@ -11,6 +11,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const cli = path.resolve(here, '../src/index.ts');
 const fixture = path.resolve(here, '../../core/tests/fixtures/bad-form');
 const cleanLive = path.resolve(here, '../../live/tests/fixtures/clean.html');
+const formNoConsentLive = path.resolve(here, '../../live/tests/fixtures/form-no-consent.html');
 
 function runCli(args: string[], cwd?: string) {
   return spawnSync('npx', ['tsx', cli, ...args], { encoding: 'utf8', cwd });
@@ -130,6 +131,67 @@ describe('cli', () => {
       });
     }
   }, 60_000);
+
+  it('exits 2 when --notify-telegram is set without credentials', async () => {
+    const html = fs.readFileSync(cleanLive);
+    const server = http.createServer((_req, res) => {
+      res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+      res.end(html);
+    });
+    const port = await new Promise<number>((resolve) => {
+      server.listen(0, '127.0.0.1', () => {
+        resolve((server.address() as AddressInfo).port);
+      });
+    });
+    try {
+      const result = await runCliAsync([
+        'scan-url',
+        `http://127.0.0.1:${port}/clean.html`,
+        '--notify-telegram',
+      ]);
+      expect(result.status).toBe(2);
+      expect(result.stderr).toContain('LEGITAGENT_TELEGRAM_BOT_TOKEN');
+    } finally {
+      await new Promise<void>((resolve, reject) => {
+        server.close((err) => (err ? reject(err) : resolve()));
+      });
+    }
+  }, 30_000);
+
+  it('scan-url --sarif writes raw high findings', async () => {
+    const html = fs.readFileSync(formNoConsentLive);
+    const server = http.createServer((_req, res) => {
+      res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+      res.end(html);
+    });
+    const port = await new Promise<number>((resolve) => {
+      server.listen(0, '127.0.0.1', () => {
+        resolve((server.address() as AddressInfo).port);
+      });
+    });
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-sarif-url-'));
+    const out = path.join(dir, 'raw.sarif');
+    try {
+      const result = await runCliAsync([
+        'scan-url',
+        `http://127.0.0.1:${port}/form-no-consent.html`,
+        '--review',
+        '--sarif',
+        out,
+      ]);
+      expect(result.status).toBe(1);
+      const sarif = JSON.parse(fs.readFileSync(out, 'utf8'));
+      expect(
+        sarif.runs[0].results.some(
+          (r: { ruleId: string; level: string }) => r.ruleId === 'PDN.FORM.NO_CONSENT' && r.level === 'error',
+        ),
+      ).toBe(true);
+    } finally {
+      await new Promise<void>((resolve, reject) => {
+        server.close((err) => (err ? reject(err) : resolve()));
+      });
+    }
+  }, 30_000);
 
   it('prints json for scan-url against a local fixture', async () => {
     const html = fs.readFileSync(cleanLive);

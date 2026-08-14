@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { ConfigError } from '@legit-agent/core';
 
 export async function notifyTelegram(
   text: string,
@@ -9,7 +10,7 @@ export async function notifyTelegram(
   const token = env.LEGITAGENT_TELEGRAM_BOT_TOKEN?.trim();
   const chatId = env.LEGITAGENT_TELEGRAM_CHAT_ID?.trim();
   if (!token || !chatId) {
-    throw new Error('Укажите LEGITAGENT_TELEGRAM_BOT_TOKEN и LEGITAGENT_TELEGRAM_CHAT_ID');
+    throw new ConfigError('Укажите LEGITAGENT_TELEGRAM_BOT_TOKEN и LEGITAGENT_TELEGRAM_CHAT_ID');
   }
 
   const base = `https://api.telegram.org/bot${token}`;
