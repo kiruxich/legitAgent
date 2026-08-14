@@ -154,7 +154,7 @@ pnpm build
 
 Пакеты живут на [npmjs.com/org/legit-agent](https://www.npmjs.com/org/legit-agent), не в GitHub Packages.
 
-Новая версия: одинаковый `version` в `packages/*/package.json` (core, cli, live, mcp), коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. GitHub Actions публикует core → cli → mcp и открывает GitHub Release.
+Новая версия: одинаковый `version` в `packages/*/package.json` (core, cli, live, mcp), коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. GitHub Actions публикует core → live → cli → mcp и открывает GitHub Release.
 
 ---
 

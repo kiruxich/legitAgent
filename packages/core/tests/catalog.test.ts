@@ -82,6 +82,7 @@ describe('defaultCatalog', () => {
     ]));
     const active = catalog.rules.filter((r) => r.status === 'active').map((r) => r.id);
     expect(active.sort()).toEqual([
+      'PDN.COOKIE.BEFORE_CONSENT',
       'PDN.COOKIE.NO_REJECT',
       'PDN.FORM.NO_CONSENT',
       'PDN.FORM.NO_POLICY_LINK',

@@ -37,12 +37,28 @@ describe('detectPolicyIncomplete', () => {
     expect(findings).toEqual([]);
   });
 
-  it('treats a file as policy when the text matches политика обработки', () => {
-    const source = '<p>Политика конфиденциальности сайта. Только общие слова.</p>';
+  it('does not treat a footer or nav link as a policy document', () => {
+    const files = [
+      {
+        relativePath: 'layout.tsx',
+        source: `<footer><a href="/privacy">Политика конфиденциальности</a></footer>`,
+      },
+      {
+        relativePath: 'Header.tsx',
+        source: `<nav><a href="/privacy">Политика конфиденциальности</a></nav>`,
+      },
+    ];
+    expect(detectPolicyIncomplete({ catalog, files })).toEqual([]);
+  });
+
+  it('flags a substantial policy page that is not named like a policy file', () => {
+    const body = 'Текст о том, как сайт использует сведения посетителей. '.repeat(20);
+    const source = `<html><body><h1>Политика</h1><p>${body}</p></body></html>`;
     const findings = detectPolicyIncomplete({
       catalog,
-      files: [{ relativePath: 'page.tsx', source }],
+      files: [{ relativePath: 'pages/legal.tsx', source }],
     });
     expect(findings.map((f) => f.ruleId)).toContain('PDN.POLICY.INCOMPLETE');
+    expect(findings[0]?.file).toBe('pages/legal.tsx');
   });
 });

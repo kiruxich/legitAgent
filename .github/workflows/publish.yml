@@ -1,4 +1,4 @@
-# Publishes @legit-agent/{core,cli,mcp} via npm Trusted Publishing (OIDC).
+# Publishes @legit-agent/{core,live,cli,mcp} via npm Trusted Publishing (OIDC).
 # No NPM_TOKEN. Trigger: git tag v* after bumping package versions.
 name: Publish to npm
 
@@ -36,17 +36,21 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm -r build
+      - name: Install Playwright Chromium
+        run: pnpm --filter @legit-agent/live exec playwright install --with-deps chromium
       - run: pnpm -r test
 
       - name: Pack workspace packages
         run: |
           pnpm -C packages/core pack --pack-destination "$RUNNER_TEMP"
+          pnpm -C packages/live pack --pack-destination "$RUNNER_TEMP"
           pnpm -C packages/cli pack --pack-destination "$RUNNER_TEMP"
           pnpm -C packages/mcp pack --pack-destination "$RUNNER_TEMP"
 
       - name: Publish to npm
         run: |
           npm publish "$RUNNER_TEMP"/legit-agent-core-*.tgz --access public
+          npm publish "$RUNNER_TEMP"/legit-agent-live-*.tgz --access public
           npm publish "$RUNNER_TEMP"/legit-agent-cli-*.tgz --access public
           npm publish "$RUNNER_TEMP"/legit-agent-mcp-*.tgz --access public
 

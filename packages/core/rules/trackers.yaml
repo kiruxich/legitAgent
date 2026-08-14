@@ -9,10 +9,10 @@
 - id: PDN.COOKIE.BEFORE_CONSENT
   law: 152-ФЗ ст. 6
   severity: high
-  status: planned
+  status: active
   title: Cookie до согласия
   message: Аналитические cookie не должны ставиться до opt-in. Нужна проверка живого сайта.
-  fix: Не загружайте трекеры до клика «Принять». Браузерный сканер — в следующей версии.
+  fix: Не загружайте трекеры до клика «Принять». Проверьте живой сайт командой scan-url.
   excerptRef: art6
 - id: PDN.COOKIE.NO_REJECT
   law: 152-ФЗ ст. 9

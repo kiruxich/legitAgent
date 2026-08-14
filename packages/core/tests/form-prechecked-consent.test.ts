@@ -57,4 +57,32 @@ describe('detectFormPrecheckedConsent', () => {
       detect('x.tsx', '<form><input name="email" /><input type="checkbox" defaultChecked /></form>'),
     ).toEqual([]);
   });
+
+  it('does not flag a prechecked newsletter when the PDN checkbox is unchecked', () => {
+    const source = `<form>
+      <input name="email" type="email" />
+      <label><input type="checkbox" name="newsletter" defaultChecked /> Подписка на рассылку</label>
+      <label><input type="checkbox" name="pdnConsent" /> Я согласен на обработку персональных данных</label>
+    </form>`;
+    expect(detect('Contact.tsx', source)).toEqual([]);
+  });
+
+  it('still flags a prechecked PDN checkbox next to a newsletter checkbox', () => {
+    const source = `<form>
+      <input name="email" type="email" />
+      <label><input type="checkbox" name="newsletter" defaultChecked /> Подписка на рассылку</label>
+      <label><input type="checkbox" name="pdnConsent" defaultChecked /> Я согласен на обработку персональных данных</label>
+    </form>`;
+    expect(detect('Contact.tsx', source).map((f) => f.ruleId)).toContain('PDN.FORM.PRECHECKED_CONSENT');
+  });
+
+  it('does not flag defaultChecked={false} or checked={false}', () => {
+    const sources = [
+      `<form><input name="email" /><input type="checkbox" defaultChecked={false} /> согласие на обработку персональных данных</form>`,
+      `<form><input name="email" /><input type="checkbox" checked={false} /> согласие на обработку персональных данных</form>`,
+    ];
+    for (const source of sources) {
+      expect(detect('Contact.tsx', source), source).toEqual([]);
+    }
+  });
 });
