@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cookie on reject</title>
+  </head>
+  <body>
+    <div id="cookie-banner">
+      <p>Мы используем куки</p>
+      <button id="accept">Принять</button>
+      <button id="reject">Отклонить</button>
+    </div>
+    <script>
+      document.getElementById('reject').addEventListener('click', () => {
+        document.cookie = '_ga=GA1.2.999.888; path=/';
+      });
+    </script>
+  </body>
+</html>

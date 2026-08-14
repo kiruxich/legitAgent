@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Delayed cookie</title>
+  </head>
+  <body>
+    <p>SPA hydration demo</p>
+    <script>
+      setTimeout(() => {
+        document.cookie = '_ga=GA1.2.1.1; path=/';
+      }, 1800);
+    </script>
+  </body>
+</html>

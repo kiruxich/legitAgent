@@ -83,4 +83,21 @@ describe('scanUrl', () => {
     await expect(scanUrl('')).rejects.toThrow('Укажите URL сайта');
     await expect(scanUrl('not-a-url')).rejects.toThrow('Укажите URL сайта');
   });
+
+  it('flags analytics cookies set after SPA delay', async () => {
+    const result = await scanUrl(`${origin}/delayed-cookie.html`);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.BEFORE_CONSENT')).toBe(true);
+  });
+
+  it('flags analytics cookies set when the user clicks reject', async () => {
+    const result = await scanUrl(`${origin}/cookie-on-reject.html`);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.BEFORE_CONSENT')).toBe(true);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.NO_REJECT')).toBe(false);
+  });
+
+  it('does not flag a banner that has a reject button and sets no cookies', async () => {
+    const result = await scanUrl(`${origin}/banner-with-reject.html`);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.BEFORE_CONSENT')).toBe(false);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.NO_REJECT')).toBe(false);
+  });
 });
