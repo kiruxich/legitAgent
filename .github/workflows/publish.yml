@@ -40,9 +40,9 @@ jobs:
 
       - name: Pack workspace packages
         run: |
-          pnpm --filter @legit-agent/core pack --pack-destination "$RUNNER_TEMP"
-          pnpm --filter @legit-agent/cli pack --pack-destination "$RUNNER_TEMP"
-          pnpm --filter @legit-agent/mcp pack --pack-destination "$RUNNER_TEMP"
+          pnpm -C packages/core pack --pack-destination "$RUNNER_TEMP"
+          pnpm -C packages/cli pack --pack-destination "$RUNNER_TEMP"
+          pnpm -C packages/mcp pack --pack-destination "$RUNNER_TEMP"
 
       - name: Publish to npm
         run: |
