@@ -1,8 +1,10 @@
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { defaultCatalog, loadCatalog } from '../src/catalog.js';
+import { DISCLAIMER_RU } from '../src/disclaimer.js';
+import { defaultCatalog, loadCatalog, renderCatalogMarkdown } from '../src/catalog.js';
+import { packageRoot } from '../src/paths.js';
 
 function tmpCatalog(ruleYaml: string, excerptYaml?: string) {
   const dir = mkdtempSync(path.join(tmpdir(), 'legitagent-'));
@@ -87,5 +89,33 @@ describe('defaultCatalog', () => {
     for (const rule of catalog.rules) {
       expect(catalog.excerpts[rule.excerptRef], rule.id).toBeDefined();
     }
+  });
+});
+
+describe('renderCatalogMarkdown', () => {
+  it('lists every rule with status, excerpt, and disclaimer', () => {
+    const catalog = defaultCatalog();
+    const md = renderCatalogMarkdown(catalog);
+    expect(md).toContain('# Каталог правил legitAgent');
+    expect(md).toContain(DISCLAIMER_RU);
+    expect(md).toContain('Активные детекторы');
+    expect(md).toContain('Запланированные правила');
+    for (const rule of catalog.rules) {
+      expect(md, rule.id).toContain(`\`${rule.id}\``);
+      expect(md, rule.id).toContain(rule.title);
+      expect(md, rule.id).toContain(rule.message);
+      expect(md, rule.id).toContain(rule.fix);
+      expect(md, rule.id).toContain(rule.law);
+      const excerpt = catalog.excerpts[rule.excerptRef];
+      expect(md, rule.id).toContain(excerpt.text);
+    }
+  });
+
+  it('matches the committed docs/RULES.md', () => {
+    const committed = readFileSync(
+      path.join(packageRoot(), '..', '..', 'docs', 'RULES.md'),
+      'utf8',
+    );
+    expect(committed).toBe(renderCatalogMarkdown(defaultCatalog()));
   });
 });

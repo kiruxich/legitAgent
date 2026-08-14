@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Каталог правил — legitAgent</title>
+  <meta name="description" content="Полный каталог правил 152-ФЗ: активные детекторы и запланированные проверки legitAgent." />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <img src="logo.png" width="36" height="36" alt="" />
+      <span><span class="brand-light">Legit</span><span class="brand-bold">Agent</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#features">Возможности</a>
+      <a href="rules.html">Правила</a>
+      <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">Демо</a>
+      <a href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-sm" href="https://www.npmjs.com/package/@legit-agent/cli" target="_blank" rel="noopener">npm</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">каталог · YAML · 152-ФЗ</p>
+      <h1>Все правила в одном месте</h1>
+      <p class="lead">
+        Это эвристическая проверка кода, а не юридическое заключение.
+        Источник истины — YAML в репозитории; эта страница генерируется командой <code>pnpm catalog</code>.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Активные детекторы</h2>
+      <p class="section-lead">Ищутся в HTML, JSX и TSX при <code>scan</code>.</p>
+      <div class="rules-list">
+<article class="rule">
+  <h3><code>PDN.FORM.NO_CONSENT</code> — Форма собирает ПДн без согласия</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-high">high · 152-ФЗ ст. 9</span>
+  </div>
+  <p>Найдена форма с полями имени, email или телефона без чекбокса согласия на обработку ПДн.</p>
+  <p><strong>Как исправить:</strong> Добавьте незаполненный чекбокс и текст согласия со ссылкой на политику.</p>
+  <p class="excerpt">Согласие субъекта персональных данных должно быть конкретным, предметным, информированным, сознательным и однозначным. Согласие может быть дано в любой позволяющей подтвердить его получение форме. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 9</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.POLICY.NO_LINK</code> — Нет ссылки на политику обработки ПДн</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-high">high · 152-ФЗ ст. 18.1</span>
+  </div>
+  <p>В проекте не найдена ссылка на политику обработки персональных данных.</p>
+  <p><strong>Как исправить:</strong> Добавьте в футер или шапку ссылку на HTML-страницу политики (например /privacy).</p>
+  <p class="excerpt">Оператор обязан опубликовать или иным образом обеспечить неограниченный доступ к документу, определяющему его политику в отношении обработки персональных данных, к сведениям о реализуемых требованиях к защите персональных данных. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 18.1</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.TRACKER.NO_CONSENT</code> — Метрика или пиксель без согласия</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-high">high · 152-ФЗ ст. 6</span>
+  </div>
+  <p>Аналитика или рекламный пиксель инициализируются сразу, без проверки согласия.</p>
+  <p><strong>Как исправить:</strong> Вызывайте ym/gtag/fbq только после opt-in в cookie-баннере.</p>
+  <p class="excerpt">Обработка персональных данных допускается при наличии правового основания, в том числе согласия субъекта персональных данных. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 6</a></p>
+</article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Запланированные правила</h2>
+      <p class="section-lead">Агент объясняет их через <code>explain_rule</code>. Автопоиск — в следующих версиях.</p>
+      <div class="rules-list">
+<article class="rule">
+  <h3><code>PDN.FORM.PRECHECKED_CONSENT</code> — Чекбокс согласия предзаполнен</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-high">high · 152-ФЗ ст. 9</span>
+  </div>
+  <p>Предзаполненная галочка не считается полученным согласием.</p>
+  <p><strong>Как исправить:</strong> Уберите defaultChecked / checked={true} у чекбокса согласия. Автопроверка — в следующей версии.</p>
+  <p class="excerpt">Согласие субъекта персональных данных должно быть конкретным, предметным, информированным, сознательным и однозначным. Согласие может быть дано в любой позволяющей подтвердить его получение форме. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 9</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.FORM.NO_POLICY_LINK</code> — Согласие без ссылки на политику</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 9</span>
+  </div>
+  <p>Рядом с согласием должна быть кликабельная ссылка на политику обработки ПДн.</p>
+  <p><strong>Как исправить:</strong> Добавьте ссылку на политику в текст согласия. Автопроверка — в следующей версии.</p>
+  <p class="excerpt">Согласие субъекта персональных данных должно быть конкретным, предметным, информированным, сознательным и однозначным. Согласие может быть дано в любой позволяющей подтвердить его получение форме. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 9</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.LOCALIZATION.UNCLEAR</code> — Локализация баз ПДн</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 18</span>
+  </div>
+  <p>Запись и хранение ПДн граждан РФ должны идти через базы на территории РФ. По исходникам сайта это обычно не видно.</p>
+  <p><strong>Как исправить:</strong> Проверьте хостинг и процессоров. Автопроверка инфраструктуры — в следующей версии.</p>
+  <p class="excerpt">При сборе персональных данных, в том числе через информационно-телекоммуникационную сеть Интернет, запись, систематизация, накопление, хранение, уточнение, извлечение персональных данных граждан РФ должны осуществляться с использованием баз данных, находящихся на территории РФ. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 18</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.ORG.RKN_NOTICE</code> — Уведомление Роскомнадзора</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 22</span>
+  </div>
+  <p>Оператор, как правило, уведомляет РКН до начала обработки ПДн. В коде сайта это не отражается.</p>
+  <p><strong>Как исправить:</strong> Проверьте реестр операторов pd.rkn.gov.ru. Это организационная мера, не код.</p>
+  <p class="excerpt">Оператор до начала обработки персональных данных обязан уведомить уполномоченный орган по защите прав субъектов персональных данных о своем намерении осуществлять обработку персональных данных, кроме установленных законом исключений. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 22</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.POLICY.INCOMPLETE</code> — Политика без обязательных сведений</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 18.1</span>
+  </div>
+  <p>Политика должна называть оператора, цели, состав данных, сроки и порядок отзыва согласия.</p>
+  <p><strong>Как исправить:</strong> Дополните политику обязательными сведениями ст. 18.1. Автопроверка текста — в следующей версии.</p>
+  <p class="excerpt">Оператор обязан опубликовать или иным образом обеспечить неограниченный доступ к документу, определяющему его политику в отношении обработки персональных данных, к сведениям о реализуемых требованиях к защите персональных данных. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 18.1</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.COOKIE.BEFORE_CONSENT</code> — Cookie до согласия</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-high">high · 152-ФЗ ст. 6</span>
+  </div>
+  <p>Аналитические cookie не должны ставиться до opt-in. Нужна проверка живого сайта.</p>
+  <p><strong>Как исправить:</strong> Не загружайте трекеры до клика «Принять». Браузерный сканер — в следующей версии.</p>
+  <p class="excerpt">Обработка персональных данных допускается при наличии правового основания, в том числе согласия субъекта персональных данных. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 6</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.COOKIE.NO_REJECT</code> — Баннер без отказа</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 9</span>
+  </div>
+  <p>У пользователя должна быть реальная возможность отклонить необязательные cookie.</p>
+  <p><strong>Как исправить:</strong> Добавьте кнопку отказа, не только «Принять». Автопроверка баннера — в следующей версии.</p>
+  <p class="excerpt">Согласие субъекта персональных данных должно быть конкретным, предметным, информированным, сознательным и однозначным. Согласие может быть дано в любой позволяющей подтвердить его получение форме. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 9</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.TRANSFER.FOREIGN_TRACKER</code> — Иностранный трекер / трансграничная передача</h3>
+  <div class="rule-meta">
+    <span class="tag tag-planned">planned</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 6</span>
+  </div>
+  <p>Google Analytics, Meta Pixel и аналогичные сервисы могут означать трансграничную передачу ПДн.</p>
+  <p><strong>Как исправить:</strong> Задокументируйте передачу или замените на российский аналог. Автопроверка — в следующей версии.</p>
+  <p class="excerpt">Обработка персональных данных допускается при наличии правового основания, в том числе согласия субъекта персональных данных. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 6</a></p>
+</article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="logo.png" width="48" height="48" alt="legitAgent" />
+    <p>
+      <a href="index.html">Лендинг</a>
+      ·
+      <a href="https://github.com/kiruxich/legitAgent/blob/main/docs/RULES.md" target="_blank" rel="noopener">docs/RULES.md</a>
+      · MIT
+    </p>
+  </footer>
+</body>
+</html>

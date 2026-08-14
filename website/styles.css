@@ -298,6 +298,79 @@ main,
   color: #fca5a5;
 }
 
+.tag-medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fcd34d;
+}
+
+.tag-low {
+  background: rgba(148, 163, 184, 0.12);
+  color: #cbd5e1;
+}
+
+.tag-active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.tag-planned {
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.rules-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.rule {
+  padding: 1.35rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.rule h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.rule h3 code {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.rule-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.rule p {
+  margin: 0.35rem 0;
+  color: var(--muted);
+  font-size: 0.925rem;
+}
+
+.rule .excerpt {
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-left: 2px solid var(--accent);
+  background: #050505;
+  font-size: 0.85rem;
+  color: #d4d4d4;
+}
+
+.rule .excerpt a {
+  color: var(--accent);
+}
+
+.catalog-text a {
+  color: var(--accent);
+}
+
 .catalog {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;

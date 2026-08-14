@@ -1,8 +1,9 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import yaml from 'js-yaml';
+import { DISCLAIMER_RU } from './disclaimer.js';
 import { defaultLegalDir, defaultRulesDir } from './paths.js';
-import type { Catalog, LegalExcerpt, Rule } from './types.js';
+import type { Catalog, LegalExcerpt, Rule, RuleStatus } from './types.js';
 
 function loadYamlFiles<T>(dir: string): T[] {
   let entries: string[];
@@ -48,4 +49,46 @@ export function loadCatalog(rulesDir: string, legalDir: string): Catalog {
 
 export function defaultCatalog(): Catalog {
   return loadCatalog(defaultRulesDir(), defaultLegalDir());
+}
+
+const STATUS_RU: Record<RuleStatus, string> = {
+  active: 'активно — ищется в коде',
+  planned: 'в каталоге — автопоиск в следующей версии',
+};
+
+export function renderCatalogMarkdown(catalog = defaultCatalog()): string {
+  const lines: string[] = [
+    '# Каталог правил legitAgent',
+    '',
+    `> ${DISCLAIMER_RU}`,
+    '',
+    'Источник истины: `packages/core/rules/*.yaml` и `packages/core/legal/*.yaml`.',
+    'Файл генерируется командой `pnpm catalog`. Не редактируйте вручную.',
+    '',
+  ];
+
+  const groups: { title: string; status: RuleStatus }[] = [
+    { title: 'Активные детекторы', status: 'active' },
+    { title: 'Запланированные правила', status: 'planned' },
+  ];
+
+  for (const group of groups) {
+    lines.push(`## ${group.title}`, '');
+    for (const rule of catalog.rules.filter((r) => r.status === group.status)) {
+      const excerpt = catalog.excerpts[rule.excerptRef];
+      lines.push(`### \`${rule.id}\` — ${rule.title}`, '');
+      lines.push(`- **Статус:** ${STATUS_RU[rule.status]}`);
+      lines.push(`- **Серьёзность:** ${rule.severity}`);
+      lines.push(`- **Норма:** ${rule.law}`);
+      lines.push(`- **Что находит:** ${rule.message}`);
+      lines.push(`- **Как исправить:** ${rule.fix}`);
+      if (excerpt) {
+        lines.push(`- **Выдержка (${excerpt.article}):** ${excerpt.text}`);
+        lines.push(`- **Источник:** ${excerpt.sourceUrl}`);
+      }
+      lines.push('');
+    }
+  }
+
+  return lines.join('\n');
 }

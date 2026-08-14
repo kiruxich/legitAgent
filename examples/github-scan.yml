@@ -1,0 +1,18 @@
+# Скопируйте в .github/workflows/legitagent.yml своего сайта.
+# Код выхода 1 — есть находка high, PR не сойдётся.
+name: legitAgent
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npx --yes @legit-agent/cli scan --json
