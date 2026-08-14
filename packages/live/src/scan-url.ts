@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { chromium } from 'playwright';
 import {
   defaultCatalog,
@@ -6,8 +8,8 @@ import {
   scanSources,
   type Catalog,
   type Finding,
-  type ScanResult,
 } from '@legit-agent/core';
+import type { CookieName, EvidenceShot, LiveScanResult } from './evidence.js';
 
 const ANALYTICS_COOKIE = /^(_ga|_gid|_gat|_fbp|_ym_|tmr_)/;
 const ANALYTICS_COOKIE_EXACT = new Set(['_ym_uid', '_fbp']);
@@ -35,6 +37,10 @@ function isAnalyticsCookie(name: string): boolean {
   return ANALYTICS_COOKIE.test(name) || ANALYTICS_COOKIE_EXACT.has(name);
 }
 
+function cookieNames(cookies: { name: string }[]): CookieName[] {
+  return cookies.map((c) => ({ name: c.name }));
+}
+
 function flagBeforeConsent(
   findings: Finding[],
   catalog: Catalog,
@@ -48,8 +54,21 @@ function flagBeforeConsent(
   }
 }
 
-export async function scanUrl(url: string, catalog: Catalog = defaultCatalog()): Promise<ScanResult> {
+export async function scanUrl(
+  url: string,
+  options?: { evidenceDir?: string; catalog?: Catalog },
+): Promise<LiveScanResult> {
+  const catalog = options?.catalog ?? defaultCatalog();
+  const evidenceDir = options?.evidenceDir;
   assertUrl(url);
+
+  const capturedAt = new Date().toISOString();
+  const screenshots: EvidenceShot[] = [];
+
+  if (evidenceDir) {
+    fs.mkdirSync(evidenceDir, { recursive: true });
+  }
+
   const browser = await chromium.launch({ headless: true });
   try {
     const context = await browser.newContext();
@@ -73,6 +92,21 @@ export async function scanUrl(url: string, catalog: Catalog = defaultCatalog()):
 
     await new Promise((r) => setTimeout(r, 2000));
 
+    const cookiesBefore = cookieNames(await context.cookies());
+
+    if (evidenceDir) {
+      const pagePath = path.join(evidenceDir, 'page.png');
+      await page.screenshot({ path: pagePath, fullPage: true });
+      screenshots.push({ id: 'page', file: 'page.png' });
+
+      const bannerLocator = page.locator('button, a').filter({ hasText: COOKIE_CONTROL }).first();
+      if ((await bannerLocator.count()) > 0) {
+        const bannerPath = path.join(evidenceDir, 'banner.png');
+        await bannerLocator.screenshot({ path: bannerPath });
+        screenshots.push({ id: 'banner', file: 'banner.png' });
+      }
+    }
+
     const findings: Finding[] = [];
     flagBeforeConsent(findings, catalog, url, await context.cookies());
 
@@ -92,6 +126,7 @@ export async function scanUrl(url: string, catalog: Catalog = defaultCatalog()):
       findings.push(findingFromRule(catalog, 'PDN.TRANSFER.FOREIGN_TRACKER', url, null));
     }
 
+    let cookiesAfterReject = cookieNames(await context.cookies());
     const texts = await page.locator('button, a').allTextContents();
     if (texts.some((t) => REJECT.test(t))) {
       try {
@@ -104,10 +139,21 @@ export async function scanUrl(url: string, catalog: Catalog = defaultCatalog()):
       } catch {
         // swallow click errors
       }
+      cookiesAfterReject = cookieNames(await context.cookies());
       flagBeforeConsent(findings, catalog, url, await context.cookies());
     }
 
-    return { findings: dedupeFindings(findings), warnings: [], scannedFileCount: 1 };
+    return {
+      findings: dedupeFindings(findings),
+      warnings: [],
+      scannedFileCount: 1,
+      url,
+      capturedAt,
+      cookiesBefore,
+      cookiesAfterReject,
+      screenshots,
+      ...(evidenceDir ? { evidenceDir } : {}),
+    };
   } finally {
     await browser.close();
   }

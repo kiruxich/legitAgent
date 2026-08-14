@@ -64,6 +64,8 @@ describe('scanUrl', () => {
     const result = await scanUrl(url);
     expect(result.findings.some((f) => f.ruleId === 'PDN.COOKIE.NO_REJECT')).toBe(true);
     expect(result.findings.find((f) => f.ruleId === 'PDN.COOKIE.NO_REJECT')?.file).toBe(url);
+    expect(result.capturedAt).toMatch(/^\d{4}-/);
+    expect(Array.isArray(result.cookiesBefore)).toBe(true);
   });
 
   it('flags foreign tracker requests', async () => {
