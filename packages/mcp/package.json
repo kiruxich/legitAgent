@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiruxich/legitAgent.git",
+    "directory": "packages/mcp"
+  },
   "bin": "./dist/index.js",
   "files": ["dist"],
   "scripts": {
