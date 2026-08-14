@@ -12,7 +12,7 @@ import {
   handleScanUrl,
 } from './server.js';
 
-const server = new Server({ name: 'legitagent', version: '0.6.0' }, { capabilities: { tools: {} } });
+const server = new Server({ name: 'legitagent', version: '0.7.0' }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
@@ -61,7 +61,10 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         'Проверить живой сайт в браузере: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры. После загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого.',
       inputSchema: {
         type: 'object',
-        properties: { url: { type: 'string', description: 'URL сайта' } },
+        properties: {
+          url: { type: 'string', description: 'URL сайта' },
+          evidenceDir: { type: 'string', description: 'Каталог для скриншотов и evidence pack' },
+        },
         required: ['url'],
       },
     },
@@ -115,7 +118,7 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
       return { content: [{ type: 'text', text: JSON.stringify(handleExplainRule(args.ruleId, args.lang), null, 2) }] };
     }
     if (name === 'scan_url') {
-      const data = await handleScanUrl(args.url);
+      const data = await handleScanUrl(args.url, args.evidenceDir);
       return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
     }
     if (name === 'generate_policy') {

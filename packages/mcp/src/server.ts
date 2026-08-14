@@ -64,10 +64,10 @@ export function handleExplainRule(ruleId: string, lang?: string) {
   return explainRule(ruleId, undefined, parseLang(lang));
 }
 
-export async function handleScanUrl(url?: string) {
+export async function handleScanUrl(url?: string, evidenceDir?: string) {
   if (!url?.trim()) throw new Error('Укажите URL сайта');
   const { scanUrl } = await import('@legit-agent/live');
-  return scanUrl(url);
+  return scanUrl(url, evidenceDir?.trim() ? { evidenceDir: evidenceDir.trim() } : undefined);
 }
 
 export function handleGeneratePolicy(args: {

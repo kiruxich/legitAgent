@@ -88,6 +88,49 @@ describe('cli', () => {
     expect(result.stderr).toContain('Некорректный legitagent.config.json');
   });
 
+  it('includes reviewed in scan --review --json and exits 1 on raw high', () => {
+    const result = runCli(['scan', fixture, '--json', '--review']);
+    expect(result.status).toBe(1);
+    const parsed = JSON.parse(result.stdout);
+    expect(parsed.reviewed).toBeDefined();
+    expect(parsed.reviewed.some((f: { ruleId: string; verdict: string }) => f.ruleId === 'PDN.FORM.NO_CONSENT' && f.verdict)).toBe(true);
+    expect(parsed.findings.some((f: { severity: string }) => f.severity === 'high')).toBe(true);
+  });
+
+  it('scan-url --review --evidence writes evidence pack', async () => {
+    const html = fs.readFileSync(cleanLive);
+    const server = http.createServer((_req, res) => {
+      res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+      res.end(html);
+    });
+    const port = await new Promise<number>((resolve) => {
+      server.listen(0, '127.0.0.1', () => {
+        resolve((server.address() as AddressInfo).port);
+      });
+    });
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-ev-'));
+    try {
+      const result = await runCliAsync([
+        'scan-url',
+        `http://127.0.0.1:${port}/clean.html`,
+        '--json',
+        '--review',
+        '--evidence',
+        dir,
+      ]);
+      expect(result.status).toBe(0);
+      const parsed = JSON.parse(result.stdout);
+      expect(parsed.reviewed).toBeDefined();
+      expect(fs.existsSync(path.join(dir, 'evidence.json'))).toBe(true);
+      expect(fs.existsSync(path.join(dir, 'evidence.sarif'))).toBe(true);
+      expect(fs.existsSync(path.join(dir, 'evidence.pdf'))).toBe(true);
+    } finally {
+      await new Promise<void>((resolve, reject) => {
+        server.close((err) => (err ? reject(err) : resolve()));
+      });
+    }
+  }, 60_000);
+
   it('prints json for scan-url against a local fixture', async () => {
     const html = fs.readFileSync(cleanLive);
     const server = http.createServer((_req, res) => {

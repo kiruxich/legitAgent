@@ -5,6 +5,14 @@ inputs:
     description: Project root to scan
     required: false
     default: '.'
+  url:
+    description: Live URL to scan instead of source (scan-url mode)
+    required: false
+    default: ''
+  evidence-dir:
+    description: Directory for evidence pack when url is set
+    required: false
+    default: 'evidence'
   fail-on-high:
     description: Fail the job when the CLI reports a high finding (exit 1)
     required: false
@@ -28,10 +36,28 @@ runs:
       shell: bash
       env:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+        LEGITAGENT_TELEGRAM_BOT_TOKEN: ${{ env.LEGITAGENT_TELEGRAM_BOT_TOKEN }}
+        LEGITAGENT_TELEGRAM_CHAT_ID: ${{ env.LEGITAGENT_TELEGRAM_CHAT_ID }}
+        LEGITAGENT_LLM_API_KEY: ${{ env.LEGITAGENT_LLM_API_KEY }}
       run: |
         set +e
-        npx --yes @legit-agent/cli@0.6.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
-        code=$?
+        if [ -n "${{ inputs.url }}" ]; then
+          NOTIFY=""
+          if [ -n "$LEGITAGENT_TELEGRAM_BOT_TOKEN" ] && [ -n "$LEGITAGENT_TELEGRAM_CHAT_ID" ]; then
+            NOTIFY="--notify-telegram"
+          fi
+          npx --yes @legit-agent/cli@0.7.0 scan-url "${{ inputs.url }}" \
+            --evidence "${{ inputs.evidence-dir }}" \
+            --review \
+            $NOTIFY
+          code=$?
+          if [ -f "${{ inputs.evidence-dir }}/evidence.sarif" ]; then
+            cp "${{ inputs.evidence-dir }}/evidence.sarif" legitagent.sarif
+          fi
+        else
+          npx --yes @legit-agent/cli@0.7.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
+          code=$?
+        fi
         echo "exit_code=$code" >> "$GITHUB_OUTPUT"
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v3

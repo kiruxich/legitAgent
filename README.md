@@ -58,7 +58,8 @@ npx @legit-agent/cli scan
 
 | Команда | MCP |
 |---|---|
-| `/check` | `scan` текущего проекта |
+| `/check` | `scan` + `review` текущего проекта |
+| `/fix` | `scan` + `review`, исправление `confirm`, перескан |
 | `/scan` | `scan` |
 | `/scan-url https://example.com` | `scan_url` |
 | `/list-rules` | `list_rules` |
@@ -77,9 +78,22 @@ npx @legit-agent/cli scan ./my-site --json
 npx @legit-agent/cli scan ./my-site --sarif
 npx @legit-agent/cli scan ./my-site --sarif findings.sarif
 npx @legit-agent/cli scan ./my-site --lang en
+npx @legit-agent/cli scan ./my-site --review --json
 npx @legit-agent/cli scan-url https://example.com --json
+npx @legit-agent/cli scan-url https://example.com --review --evidence evidence
+npx @legit-agent/cli scan-url https://example.com --review --evidence --notify-telegram
 npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --email privacy@site.ru --out privacy.md
 ```
+
+`--review` добавляет второй проход LLM (`confirm` / `reject` / `ask_human`). Код выхода и SARIF по-прежнему считаются по **сырым** findings — CI остаётся детерминированным без LLM.
+
+`scan-url --evidence [dir]` пишет evidence pack: скриншоты, имена cookie, `evidence.json`, `evidence.sarif`, `evidence.pdf`. В пачку попадают только `confirm` и `ask_human`.
+
+Telegram (опционально): `LEGITAGENT_TELEGRAM_BOT_TOKEN`, `LEGITAGENT_TELEGRAM_CHAT_ID` + флаг `--notify-telegram`.
+
+LLM для `--review`: `LEGITAGENT_LLM_API_KEY` (опционально; без ключа — эвристический fallback).
+
+User rule для Cursor always-on: скопируйте текст из [`docs/cursor-user-rule.md`](docs/cursor-user-rule.md) в User rules.
 
 ### Конфиг
 
@@ -107,7 +121,7 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 | `1` | Есть хотя бы одна находка `high` |
 | `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` |
 
-В CI достаточно `npx @legit-agent/cli@0.6.0 scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.6.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`.
+В CI достаточно `npx @legit-agent/cli@0.7.0 scan --json`: ненулевой код — стоп пайплайна. Source-scan **не вызывает LLM**. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.7.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`. Для мониторинга живого сайта после деплоя — [`examples/github-watch.yml`](examples/github-watch.yml) (`scan-url --review --evidence`, опционально Telegram).
 
 ---
 
@@ -120,7 +134,8 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 | Инструмент | Что делает |
 |---|---|
 | `scan` | Сканирует проект. Необязательные `root` и `lang` (`ru` / `en`). |
-| `scan_url` | Проверяет живой URL: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры; ждёт гидрацию SPA и кликает «отказ», если кнопка есть. |
+| `review` | Второй проход по findings: `confirm`, `reject`, `ask_human`. Необязательные `root` и `lang`. |
+| `scan_url` | Проверяет живой URL: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры; ждёт гидрацию SPA и кликает «отказ», если кнопка есть. Опционально `evidenceDir`. |
 | `list_rules` | Полный каталог правил. |
 | `explain_rule` | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`. |
 | `generate_policy` | Черновик политики обработки ПДн. Нужен `operator`. Не юридическое заключение. |
