@@ -36,8 +36,8 @@
       <p class="lead">
         legitAgent читает HTML, JSX и TSX вашего React/Next-проекта и находит типичные дыры:
         формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика.
-        В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF;
-        живую страницу — командой <code>scan-url</code>.
+        В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF и комментарием в PR;
+        живую страницу — командой <code>scan-url</code>. В корне проекта — опциональный <code>legitagent.config.json</code>.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#start">Подключить</a>
@@ -109,7 +109,8 @@
         <h2>Полный чек-лист 152-ФЗ</h2>
         <p>
           В каталоге — 11 правил. Автопоиск в исходниках закрывает формы, политику, метрики, cookie-баннер
-          и иностранные трекеры; живой <code>scan-url</code> проверяет cookie до согласия.
+          и иностранные трекеры; живой <code>scan-url</code> ждёт гидрацию SPA, нажимает «отказ», если кнопка есть,
+          и проверяет cookie до и после отказа.
           Локализация баз и уведомление РКН агент объясняет через
           <code>list_rules</code> и <code>explain_rule</code> — в коде сайта этого обычно не видно.
           Полный список: <a href="rules.html">каталог правил</a>
@@ -146,7 +147,7 @@
           <pre><code>npx @legit-agent/cli scan
 npx @legit-agent/cli scan ./my-site --json --sarif
 npx @legit-agent/cli scan-url https://example.com</code></pre>
-          <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong>. В CI — GitHub Action с выгрузкой SARIF.</p>
+          <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong>. В CI — GitHub Action с SARIF и комментарием в PR. Опционально — <code>legitagent.config.json</code> в корне.</p>
         </div>
       </div>
     </section>

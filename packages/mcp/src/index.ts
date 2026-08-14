@@ -4,7 +4,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { handleExplainRule, handleListRules, handleScan, handleScanUrl } from './server.js';
 
-const server = new Server({ name: 'legitagent', version: '0.2.0' }, { capabilities: { tools: {} } });
+const server = new Server({ name: 'legitagent', version: '0.3.0' }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
@@ -32,7 +32,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: 'scan_url',
-      description: 'Проверить живой сайт в браузере: cookie до согласия, баннер без отказа, иностранные трекеры',
+      description:
+        'Проверить живой сайт в браузере: cookie до согласия, баннер без отказа, иностранные трекеры. После загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого.',
       inputSchema: {
         type: 'object',
         properties: { url: { type: 'string', description: 'URL сайта' } },

@@ -63,17 +63,31 @@ npx @legit-agent/cli scan ./my-site --sarif findings.sarif
 npx @legit-agent/cli scan-url https://example.com --json
 ```
 
+### Конфиг
+
+В корне проекта можно положить `legitagent.config.json`:
+
+```json
+{
+  "ignore": ["**/vendor/**"],
+  "disabled": ["PDN.COOKIE.NO_REJECT"],
+  "severity": { "PDN.TRANSFER.FOREIGN_TRACKER": "low" }
+}
+```
+
+Нет файла — как раньше. Невалидный JSON: код выхода `2`.
+
 Вывод по-русски: файл, строка, что не так, как исправить, цитата нормы.
 
-`--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium и ищет cookie до согласия, баннер без отказа и иностранные трекеры.
+`--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium: после загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого; также ищет cookie до согласия, баннер без отказа и иностранные трекеры.
 
 | Код выхода | Значение |
 |---|---|
 | `0` | Нет серьёзных находок (в том числе нечего сканировать) |
 | `1` | Есть хотя бы одна находка `high` |
-| `2` | Нет команды `scan` / `scan-url` без URL |
+| `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` |
 
-В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml): пишет SARIF и загружает его в GitHub.
+В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.3.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`.
 
 ---
 
@@ -86,7 +100,7 @@ npx @legit-agent/cli scan-url https://example.com --json
 | Инструмент | Что делает |
 |---|---|
 | `scan` | Сканирует проект. Необязательный `root` — путь к репозиторию (по умолчанию текущая папка). |
-| `scan_url` | Проверяет живой URL в браузере: cookie до согласия, баннер без отказа, иностранные трекеры. |
+| `scan_url` | Проверяет живой URL в браузере: cookie до согласия, баннер без отказа, иностранные трекеры; после загрузки ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, и смотрит cookie после этого. |
 | `list_rules` | Полный каталог правил 152-ФЗ для сайта. |
 | `explain_rule` | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`. |
 

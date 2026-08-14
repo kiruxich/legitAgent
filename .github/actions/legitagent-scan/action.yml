@@ -30,7 +30,7 @@ runs:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
       run: |
         set +e
-        npx --yes @legit-agent/cli scan "${{ inputs.root }}" --sarif legitagent.sarif
+        npx --yes @legit-agent/cli@0.3.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
         code=$?
         echo "exit_code=$code" >> "$GITHUB_OUTPUT"
     - name: Upload SARIF
