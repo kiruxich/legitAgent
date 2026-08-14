@@ -63,7 +63,10 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         type: 'object',
         properties: {
           url: { type: 'string', description: 'URL сайта' },
-          evidenceDir: { type: 'string', description: 'Каталог для скриншотов и evidence pack' },
+          evidenceDir: {
+            type: 'string',
+            description: 'Каталог для скриншотов (page.png, banner.png). JSON/SARIF/PDF — только CLI scan-url --evidence',
+          },
         },
         required: ['url'],
       },

@@ -35,7 +35,6 @@ runs:
       id: scan
       shell: bash
       env:
-        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
         LEGITAGENT_TELEGRAM_BOT_TOKEN: ${{ env.LEGITAGENT_TELEGRAM_BOT_TOKEN }}
         LEGITAGENT_TELEGRAM_CHAT_ID: ${{ env.LEGITAGENT_TELEGRAM_CHAT_ID }}
         LEGITAGENT_LLM_API_KEY: ${{ env.LEGITAGENT_LLM_API_KEY }}
@@ -46,6 +45,7 @@ runs:
           if [ -n "$LEGITAGENT_TELEGRAM_BOT_TOKEN" ] && [ -n "$LEGITAGENT_TELEGRAM_CHAT_ID" ]; then
             NOTIFY="--notify-telegram"
           fi
+          npx --yes playwright install --with-deps chromium
           npx --yes @legit-agent/cli@0.7.0 scan-url "${{ inputs.url }}" \
             --evidence "${{ inputs.evidence-dir }}" \
             --review \
@@ -55,7 +55,7 @@ runs:
             cp "${{ inputs.evidence-dir }}/evidence.sarif" legitagent.sarif
           fi
         else
-          npx --yes @legit-agent/cli@0.7.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx --yes @legit-agent/cli@0.7.0 scan "${{ inputs.root }}" --sarif legitagent.sarif
           code=$?
         fi
         echo "exit_code=$code" >> "$GITHUB_OUTPUT"
