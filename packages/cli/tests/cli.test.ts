@@ -64,6 +64,14 @@ describe('cli', () => {
     expect(result.stderr).toContain('scan-url');
   });
 
+  it('exits 2 on invalid legitagent.config.json', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-cfg-'));
+    fs.writeFileSync(path.join(dir, 'legitagent.config.json'), '{not json');
+    const result = runCli(['scan', dir, '--json']);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain('Некорректный legitagent.config.json');
+  });
+
   it('prints json for scan-url against a local fixture', async () => {
     const html = fs.readFileSync(cleanLive);
     const server = http.createServer((_req, res) => {

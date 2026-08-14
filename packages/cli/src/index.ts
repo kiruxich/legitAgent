@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { scanProject } from '@legit-agent/core';
+import { ConfigError, scanProject } from '@legit-agent/core';
 import { formatHuman } from './format.js';
 import { toSarif } from './sarif.js';
 
@@ -66,5 +66,5 @@ async function main() {
 
 main().catch((err) => {
   console.error((err as Error).message ?? err);
-  process.exit(1);
+  process.exit(err instanceof ConfigError ? 2 : 1);
 });
