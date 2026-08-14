@@ -73,8 +73,10 @@ export function renderCatalogMarkdown(catalog = defaultCatalog()): string {
   ];
 
   for (const group of groups) {
+    const rules = catalog.rules.filter((r) => r.status === group.status);
+    if (rules.length === 0) continue;
     lines.push(`## ${group.title}`, '');
-    for (const rule of catalog.rules.filter((r) => r.status === group.status)) {
+    for (const rule of rules) {
       const excerpt = catalog.excerpts[rule.excerptRef];
       lines.push(`### \`${rule.id}\` — ${rule.title}`, '');
       lines.push(`- **Статус:** ${STATUS_RU[rule.status]}`);

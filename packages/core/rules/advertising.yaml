@@ -1,0 +1,11 @@
+- id: ADV.ERID.MISSING
+  law: 38-ФЗ ст. 5
+  severity: medium
+  status: active
+  title: Реклама без идентификатора
+  titleEn: Ad without an identifier
+  message: Есть пометка «Реклама», но нет erid / data-erid. Для интернет-рекламы обычно нужен идентификатор ОРД.
+  messageEn: There is an “Ad” label but no erid / data-erid. Internet ads usually need an ORD identifier.
+  fix: Добавьте пометку «Реклама», erid и данные рекламодателя либо уберите рекламный блок.
+  fixEn: Add an Ad label, erid, and advertiser details, or remove the ad block.
+  excerptRef: adv5

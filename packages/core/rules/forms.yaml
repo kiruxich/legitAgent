@@ -3,22 +3,31 @@
   severity: high
   status: active
   title: Форма собирает ПДн без согласия
+  titleEn: Form collects personal data without consent
   message: Найдена форма с полями имени, email или телефона без чекбокса согласия на обработку ПДн.
+  messageEn: A form with name, email, or phone fields has no personal-data consent checkbox.
   fix: Добавьте незаполненный чекбокс и текст согласия со ссылкой на политику.
+  fixEn: Add an unchecked checkbox and consent copy with a link to the privacy policy.
   excerptRef: art9
 - id: PDN.FORM.PRECHECKED_CONSENT
   law: 152-ФЗ ст. 9
   severity: high
   status: active
   title: Чекбокс согласия предзаполнен
+  titleEn: Consent checkbox is pre-checked
   message: Предзаполненная галочка не считается полученным согласием.
+  messageEn: A pre-checked box is not valid consent.
   fix: Уберите defaultChecked / checked={true} у чекбокса согласия.
+  fixEn: Remove defaultChecked / checked={true} from the consent checkbox.
   excerptRef: art9
 - id: PDN.FORM.NO_POLICY_LINK
   law: 152-ФЗ ст. 9
   severity: medium
   status: active
   title: Согласие без ссылки на политику
+  titleEn: Consent without a policy link
   message: Рядом с согласием должна быть кликабельная ссылка на политику обработки ПДн.
+  messageEn: Consent copy must include a clickable link to the personal-data policy.
   fix: Добавьте ссылку на политику в текст согласия.
+  fixEn: Add a policy link in the consent text.
   excerptRef: art9

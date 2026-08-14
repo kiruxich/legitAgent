@@ -1,0 +1,33 @@
+- id: CONSUMER.OFFER.MISSING
+  law: ЗоЗПП ст. 8
+  severity: medium
+  status: active
+  title: Витрина без оферты
+  titleEn: Storefront without an offer
+  message: Есть признаки интернет-магазина, но нет публичной оферты или договора.
+  messageEn: The project looks like a web shop but has no public offer or contract.
+  fix: Опубликуйте оферту и ссылку на неё из корзины или подвала.
+  fixEn: Publish an offer and link it from the cart or footer.
+  excerptRef: zozpp8
+- id: CONSUMER.REQUISITES.MISSING
+  law: ЗоЗПП ст. 7
+  severity: medium
+  status: active
+  title: Нет реквизитов продавца
+  titleEn: Seller details missing
+  message: Для витрины не найдены ИНН или ОГРН продавца.
+  messageEn: The storefront has no seller INN or OGRN.
+  fix: Укажите наименование, адрес, ИНН и ОГРН в подвале или на странице контактов.
+  fixEn: Put the legal name, address, INN and OGRN in the footer or a contacts page.
+  excerptRef: zozpp7
+- id: CONSUMER.RETURN.MISSING
+  law: ЗоЗПП ст. 18
+  severity: medium
+  status: active
+  title: Нет условий возврата
+  titleEn: No return terms
+  message: Витрина не объясняет, как вернуть или обменять товар.
+  messageEn: The storefront does not explain how to return or exchange goods.
+  fix: Добавьте страницу возврата и ссылку на неё.
+  fixEn: Add a returns page and a link to it.
+  excerptRef: zozpp18

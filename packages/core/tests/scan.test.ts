@@ -76,9 +76,8 @@ describe('scanProject', () => {
 });
 
 describe('listRules / explainRule', () => {
-  it('lists planned and active rules', () => {
+  it('lists active rules', () => {
     const rules = listRules();
-    expect(rules.some((r) => r.status === 'planned')).toBe(true);
     expect(rules.some((r) => r.status === 'active')).toBe(true);
   });
 

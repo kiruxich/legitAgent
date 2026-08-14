@@ -5,6 +5,7 @@
   "scripts": {
     "build": "pnpm -r build",
     "test": "pnpm -r test",
-    "catalog": "pnpm --filter @legit-agent/core build && node scripts/generate-catalog.mjs"
+    "catalog": "pnpm --filter @legit-agent/core build && node scripts/generate-catalog.mjs",
+    "fetch-law": "node scripts/fetch-pravo.mjs"
   }
 }

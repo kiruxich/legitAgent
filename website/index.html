@@ -34,8 +34,9 @@
       <p class="eyebrow">152-ФЗ · MCP · CLI · GitHub Action · scan-url</p>
       <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;деплоя</em></h1>
       <p class="lead">
-        legitAgent читает HTML, JSX и TSX вашего React/Next-проекта и находит типичные дыры:
-        формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика.
+        legitAgent читает HTML, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
+        формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика,
+        реклама без erid, витрина без оферты.
         В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF и комментарием в PR;
         живую страницу — командой <code>scan-url</code>. В корне проекта — опциональный <code>legitagent.config.json</code>.
       </p>
@@ -57,7 +58,7 @@
 
     <section id="features" class="section">
       <h2>Автопоиск в исходниках</h2>
-      <p class="section-lead">Восемь детекторов по коду. Каждая находка — с id правила, статьёй закона и подсказкой, как исправить.</p>
+      <p class="section-lead">Пятнадцать детекторов по коду. Каждая находка — с id правила, статьёй закона и подсказкой, как исправить.</p>
       <div class="cards">
         <article class="card">
           <div class="card-icon" aria-hidden="true">📝</div>

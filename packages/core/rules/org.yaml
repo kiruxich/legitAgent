@@ -1,16 +1,22 @@
 - id: PDN.LOCALIZATION.UNCLEAR
   law: 152-ФЗ ст. 18
   severity: medium
-  status: planned
+  status: active
   title: Локализация баз ПДн
-  message: Запись и хранение ПДн граждан РФ должны идти через базы на территории РФ. По исходникам сайта это обычно не видно.
-  fix: Проверьте хостинг и процессоров. Автопроверка инфраструктуры — в следующей версии.
+  titleEn: Personal-data localization
+  message: Есть иностранный трекер, но в проекте не видно, что запись ПДн граждан РФ идёт через базы на территории РФ.
+  messageEn: A foreign tracker is present, but the project does not show that RF citizens' personal data is recorded in databases in Russia.
+  fix: Укажите в политике место хранения (РФ) или уберите иностранный трекер. Это эвристика, не проверка дата-центра.
+  fixEn: State in the policy that storage is in Russia, or remove the foreign tracker. This is a heuristic, not a datacenter check.
   excerptRef: art18
 - id: PDN.ORG.RKN_NOTICE
   law: 152-ФЗ ст. 22
   severity: medium
-  status: planned
+  status: active
   title: Уведомление Роскомнадзора
-  message: Оператор, как правило, уведомляет РКН до начала обработки ПДн. В коде сайта это не отражается.
-  fix: Проверьте реестр операторов pd.rkn.gov.ru. Это организационная мера, не код.
+  titleEn: Roskomnadzor notification
+  message: Сайт, похоже, обрабатывает ПДн, но в исходниках нет следов уведомления РКН. Проверьте организационно.
+  messageEn: The site appears to process personal data, but the source has no trace of a Roskomnadzor notice. Check this as an org measure.
+  fix: Проверьте реестр операторов pd.rkn.gov.ru и при необходимости подайте уведомление. Это не доказательство нарушения.
+  fixEn: Check the operator register at pd.rkn.gov.ru and file a notice if needed. This is not proof of a violation.
   excerptRef: art22

@@ -3,14 +3,20 @@
   severity: high
   status: active
   title: Нет ссылки на политику обработки ПДн
+  titleEn: No personal-data policy link
   message: В проекте не найдена ссылка на политику обработки персональных данных.
+  messageEn: The project has no link to a personal-data processing policy.
   fix: Добавьте в футер или шапку ссылку на HTML-страницу политики (например /privacy).
+  fixEn: Add a footer or header link to a policy page (for example /privacy).
   excerptRef: art18-1
 - id: PDN.POLICY.INCOMPLETE
   law: 152-ФЗ ст. 18.1
   severity: medium
   status: active
   title: Политика без обязательных сведений
+  titleEn: Policy is missing required details
   message: Политика должна называть оператора, цели, состав данных, сроки и порядок отзыва согласия.
+  messageEn: The policy must name the operator, purposes, data categories, retention, and how to withdraw consent.
   fix: Дополните политику обязательными сведениями ст. 18.1.
+  fixEn: Add the details required by article 18.1.
   excerptRef: art18-1

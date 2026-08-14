@@ -82,11 +82,17 @@ describe('defaultCatalog', () => {
     ]));
     const active = catalog.rules.filter((r) => r.status === 'active').map((r) => r.id);
     expect(active.sort()).toEqual([
+      'ADV.ERID.MISSING',
+      'CONSUMER.OFFER.MISSING',
+      'CONSUMER.REQUISITES.MISSING',
+      'CONSUMER.RETURN.MISSING',
       'PDN.COOKIE.BEFORE_CONSENT',
       'PDN.COOKIE.NO_REJECT',
       'PDN.FORM.NO_CONSENT',
       'PDN.FORM.NO_POLICY_LINK',
       'PDN.FORM.PRECHECKED_CONSENT',
+      'PDN.LOCALIZATION.UNCLEAR',
+      'PDN.ORG.RKN_NOTICE',
       'PDN.POLICY.INCOMPLETE',
       'PDN.POLICY.NO_LINK',
       'PDN.TRACKER.NO_CONSENT',
@@ -105,7 +111,9 @@ describe('renderCatalogMarkdown', () => {
     expect(md).toContain('# Каталог правил legitAgent');
     expect(md).toContain(DISCLAIMER_RU);
     expect(md).toContain('Активные детекторы');
-    expect(md).toContain('Запланированные правила');
+    if (catalog.rules.some((r) => r.status === 'planned')) {
+      expect(md).toContain('Запланированные правила');
+    }
     for (const rule of catalog.rules) {
       expect(md, rule.id).toContain(`\`${rule.id}\``);
       expect(md, rule.id).toContain(rule.title);

@@ -64,6 +64,22 @@ describe('cli', () => {
     expect(result.stderr).toContain('scan-url');
   });
 
+  it('prints English findings with --lang en', () => {
+    const result = runCli(['scan', fixture, '--json', '--lang', 'en']);
+    expect(result.status).toBe(1);
+    const parsed = JSON.parse(result.stdout);
+    const hit = parsed.findings.find((f: { ruleId: string }) => f.ruleId === 'PDN.FORM.NO_CONSENT');
+    expect(hit.message).toMatch(/consent checkbox/i);
+  });
+
+  it('writes a policy draft', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-pol-'));
+    const out = path.join(dir, 'policy.md');
+    const result = runCli(['init-policy', '--operator', 'ООО Ромашка', '--out', out]);
+    expect(result.status).toBe(0);
+    expect(fs.readFileSync(out, 'utf8')).toContain('ООО Ромашка');
+  });
+
   it('exits 2 on invalid legitagent.config.json', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-cfg-'));
     fs.writeFileSync(path.join(dir, 'legitagent.config.json'), '{not json');

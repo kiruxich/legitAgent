@@ -86,19 +86,20 @@ const html = `<!DOCTYPE html>
 
     <section class="section">
       <h2>Активные детекторы</h2>
-      <p class="section-lead">Ищутся в HTML, JSX и TSX при <code>scan</code>.</p>
+      <p class="section-lead">Ищутся в HTML, JSX, TSX, Vue, Svelte и Astro при <code>scan</code>.</p>
       <div class="rules-list">
 ${active}
       </div>
     </section>
-
-    <section class="section">
+${planned
+    ? `    <section class="section">
       <h2>Запланированные правила</h2>
-      <p class="section-lead">Агент объясняет их через <code>explain_rule</code>. Автопоиск — в следующих версиях.</p>
+      <p class="section-lead">Агент объясняет их через <code>explain_rule</code>.</p>
       <div class="rules-list">
 ${planned}
       </div>
-    </section>
+    </section>`
+    : ''}
   </main>
 
   <footer class="footer">

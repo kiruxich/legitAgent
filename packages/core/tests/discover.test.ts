@@ -18,6 +18,15 @@ describe('discoverSourceFiles', () => {
     expect(files.some((f) => f.includes('node_modules'))).toBe(false);
   });
 
+  it('finds vue, svelte and astro files', async () => {
+    const vue = await discoverSourceFiles(path.join(here, 'fixtures/vue-form'));
+    const svelte = await discoverSourceFiles(path.join(here, 'fixtures/svelte-form'));
+    const astro = await discoverSourceFiles(path.join(here, 'fixtures/astro-shop'));
+    expect(vue.some((f) => f.endsWith('.vue'))).toBe(true);
+    expect(svelte.some((f) => f.endsWith('.svelte'))).toBe(true);
+    expect(astro.some((f) => f.endsWith('.astro'))).toBe(true);
+  });
+
   it('applies extra ignore globs', async () => {
     const root = path.join(here, 'fixtures/config-ignore');
     const files = await discoverSourceFiles(root, ['vendor/**']);

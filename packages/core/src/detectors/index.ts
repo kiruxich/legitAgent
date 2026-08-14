@@ -6,4 +6,7 @@ export { detectPolicyIncomplete } from './policy-incomplete.js';
 export { detectTrackerNoConsent } from './tracker-no-consent.js';
 export { detectForeignTracker } from './foreign-tracker.js';
 export { detectCookieNoReject } from './cookie-no-reject.js';
+export { detectConsumerShop } from './consumer-shop.js';
+export { detectEridMissing } from './erid-missing.js';
+export { detectLocalizationUnclear, detectRknNotice } from './org-checklist.js';
 export type { Detector, DetectorArgs } from './helpers.js';

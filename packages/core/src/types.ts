@@ -1,5 +1,6 @@
 export type Severity = 'high' | 'medium' | 'low';
 export type RuleStatus = 'active' | 'planned';
+export type Lang = 'ru' | 'en';
 
 export interface Rule {
   id: string;
@@ -7,8 +8,11 @@ export interface Rule {
   severity: Severity;
   status: RuleStatus;
   title: string;
+  titleEn?: string;
   message: string;
+  messageEn?: string;
   fix: string;
+  fixEn?: string;
   excerptRef: string;
 }
 
@@ -50,6 +54,10 @@ export interface ScanResult {
   findings: Finding[];
   warnings: ScanWarning[];
   scannedFileCount: number;
+}
+
+export interface ScanOptions {
+  lang?: Lang;
 }
 
 export interface ExplainResult {

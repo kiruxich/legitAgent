@@ -41,8 +41,48 @@
 
     <section class="section">
       <h2>Активные детекторы</h2>
-      <p class="section-lead">Ищутся в HTML, JSX и TSX при <code>scan</code>.</p>
+      <p class="section-lead">Ищутся в HTML, JSX, TSX, Vue, Svelte и Astro при <code>scan</code>.</p>
       <div class="rules-list">
+<article class="rule">
+  <h3><code>ADV.ERID.MISSING</code> — Реклама без идентификатора</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-medium">medium · 38-ФЗ ст. 5</span>
+  </div>
+  <p>Есть пометка «Реклама», но нет erid / data-erid. Для интернет-рекламы обычно нужен идентификатор ОРД.</p>
+  <p><strong>Как исправить:</strong> Добавьте пометку «Реклама», erid и данные рекламодателя либо уберите рекламный блок.</p>
+  <p class="excerpt">Реклама должна быть добросовестной и достоверной. Недобросовестная реклама и недостоверная реклама не допускаются. <a href="http://pravo.gov.ru/proxy/ips/?doc_itself=&amp;nd=102105292&amp;page=1&amp;rdk=0" target="_blank" rel="noopener">ст. 5</a></p>
+</article>
+<article class="rule">
+  <h3><code>CONSUMER.OFFER.MISSING</code> — Витрина без оферты</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-medium">medium · ЗоЗПП ст. 8</span>
+  </div>
+  <p>Есть признаки интернет-магазина, но нет публичной оферты или договора.</p>
+  <p><strong>Как исправить:</strong> Опубликуйте оферту и ссылку на неё из корзины или подвала.</p>
+  <p class="excerpt">Изготовитель (исполнитель, продавец) обязан своевременно предоставлять потребителю необходимую и достоверную информацию о товарах (работах, услугах), обеспечивающую возможность их компетентного выбора. Информация в обязательном порядке должна содержать цену и условия приобретения. <a href="http://pravo.gov.ru/proxy/ips/?doc_itself=&amp;nd=102014512&amp;page=1&amp;rdk=0" target="_blank" rel="noopener">ст. 8</a></p>
+</article>
+<article class="rule">
+  <h3><code>CONSUMER.REQUISITES.MISSING</code> — Нет реквизитов продавца</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-medium">medium · ЗоЗПП ст. 7</span>
+  </div>
+  <p>Для витрины не найдены ИНН или ОГРН продавца.</p>
+  <p><strong>Как исправить:</strong> Укажите наименование, адрес, ИНН и ОГРН в подвале или на странице контактов.</p>
+  <p class="excerpt">Изготовитель обязан довести до сведения потребителя наименование своего предприятия и его местонахождение. Торговые предприятия обязаны иметь вывеску с указанием фирменного наименования и юридический адрес. <a href="http://pravo.gov.ru/proxy/ips/?doc_itself=&amp;nd=102014512&amp;page=1&amp;rdk=0" target="_blank" rel="noopener">ст. 7</a></p>
+</article>
+<article class="rule">
+  <h3><code>CONSUMER.RETURN.MISSING</code> — Нет условий возврата</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-medium">medium · ЗоЗПП ст. 18</span>
+  </div>
+  <p>Витрина не объясняет, как вернуть или обменять товар.</p>
+  <p><strong>Как исправить:</strong> Добавьте страницу возврата и ссылку на неё.</p>
+  <p class="excerpt">Потребитель вправе предъявить требования, установленные законом, если недостатки товара были обнаружены в течение гарантийного срока. Продавец, изготовитель обязаны принять товар у потребителя и удовлетворить его требования, если не докажут иное. <a href="http://pravo.gov.ru/proxy/ips/?doc_itself=&amp;nd=102014512&amp;page=1&amp;rdk=0" target="_blank" rel="noopener">ст. 18</a></p>
+</article>
 <article class="rule">
   <h3><code>PDN.FORM.NO_CONSENT</code> — Форма собирает ПДн без согласия</h3>
   <div class="rule-meta">
@@ -72,6 +112,26 @@
   <p>Рядом с согласием должна быть кликабельная ссылка на политику обработки ПДн.</p>
   <p><strong>Как исправить:</strong> Добавьте ссылку на политику в текст согласия.</p>
   <p class="excerpt">Согласие субъекта персональных данных должно быть конкретным, предметным, информированным, сознательным и однозначным. Согласие может быть дано в любой позволяющей подтвердить его получение форме. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 9</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.LOCALIZATION.UNCLEAR</code> — Локализация баз ПДн</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 18</span>
+  </div>
+  <p>Есть иностранный трекер, но в проекте не видно, что запись ПДн граждан РФ идёт через базы на территории РФ.</p>
+  <p><strong>Как исправить:</strong> Укажите в политике место хранения (РФ) или уберите иностранный трекер. Это эвристика, не проверка дата-центра.</p>
+  <p class="excerpt">При сборе персональных данных, в том числе через информационно-телекоммуникационную сеть Интернет, запись, систематизация, накопление, хранение, уточнение, извлечение персональных данных граждан РФ должны осуществляться с использованием баз данных, находящихся на территории РФ. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 18</a></p>
+</article>
+<article class="rule">
+  <h3><code>PDN.ORG.RKN_NOTICE</code> — Уведомление Роскомнадзора</h3>
+  <div class="rule-meta">
+    <span class="tag tag-active">активно</span>
+    <span class="tag tag-medium">medium · 152-ФЗ ст. 22</span>
+  </div>
+  <p>Сайт, похоже, обрабатывает ПДн, но в исходниках нет следов уведомления РКН. Проверьте организационно.</p>
+  <p><strong>Как исправить:</strong> Проверьте реестр операторов pd.rkn.gov.ru и при необходимости подайте уведомление. Это не доказательство нарушения.</p>
+  <p class="excerpt">Оператор до начала обработки персональных данных обязан уведомить уполномоченный орган по защите прав субъектов персональных данных о своем намерении осуществлять обработку персональных данных, кроме установленных законом исключений. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 22</a></p>
 </article>
 <article class="rule">
   <h3><code>PDN.POLICY.NO_LINK</code> — Нет ссылки на политику обработки ПДн</h3>
@@ -136,32 +196,6 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>Запланированные правила</h2>
-      <p class="section-lead">Агент объясняет их через <code>explain_rule</code>. Автопоиск — в следующих версиях.</p>
-      <div class="rules-list">
-<article class="rule">
-  <h3><code>PDN.LOCALIZATION.UNCLEAR</code> — Локализация баз ПДн</h3>
-  <div class="rule-meta">
-    <span class="tag tag-planned">planned</span>
-    <span class="tag tag-medium">medium · 152-ФЗ ст. 18</span>
-  </div>
-  <p>Запись и хранение ПДн граждан РФ должны идти через базы на территории РФ. По исходникам сайта это обычно не видно.</p>
-  <p><strong>Как исправить:</strong> Проверьте хостинг и процессоров. Автопроверка инфраструктуры — в следующей версии.</p>
-  <p class="excerpt">При сборе персональных данных, в том числе через информационно-телекоммуникационную сеть Интернет, запись, систематизация, накопление, хранение, уточнение, извлечение персональных данных граждан РФ должны осуществляться с использованием баз данных, находящихся на территории РФ. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 18</a></p>
-</article>
-<article class="rule">
-  <h3><code>PDN.ORG.RKN_NOTICE</code> — Уведомление Роскомнадзора</h3>
-  <div class="rule-meta">
-    <span class="tag tag-planned">planned</span>
-    <span class="tag tag-medium">medium · 152-ФЗ ст. 22</span>
-  </div>
-  <p>Оператор, как правило, уведомляет РКН до начала обработки ПДн. В коде сайта это не отражается.</p>
-  <p><strong>Как исправить:</strong> Проверьте реестр операторов pd.rkn.gov.ru. Это организационная мера, не код.</p>
-  <p class="excerpt">Оператор до начала обработки персональных данных обязан уведомить уполномоченный орган по защите прав субъектов персональных данных о своем намерении осуществлять обработку персональных данных, кроме установленных законом исключений. <a href="https://pravo.gov.ru/" target="_blank" rel="noopener">ст. 22</a></p>
-</article>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
