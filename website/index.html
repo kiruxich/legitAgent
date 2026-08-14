@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>legitAgent — проверка сайта на 152-ФЗ</title>
+  <meta name="description" content="Сканер исходников React/Next на типичные риски 152-ФЗ. MCP для Cursor, Claude, Kimi и CLI для терминала." />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="/">
+      <img src="/logo.png" width="36" height="36" alt="" />
+      <span><span class="brand-light">Legit</span><span class="brand-bold">Agent</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#features">Возможности</a>
+      <a href="#start">Старт</a>
+      <a href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-sm" href="https://www.npmjs.com/package/@legit-agent/cli" target="_blank" rel="noopener">npm</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">152-ФЗ · MCP · CLI · zero-config</p>
+      <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;деплоя</em></h1>
+      <p class="lead">
+        legitAgent читает HTML, JSX и TSX вашего React/Next-проекта и находит типичные дыры:
+        форма без согласия, метрика без opt-in, нет ссылки на политику.
+        В Cursor, Claude, Kimi — через MCP; в терминале и CI — одной командой.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#start">Подключить</a>
+        <a class="btn btn-ghost" href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">Исходники</a>
+      </div>
+      <p class="disclaimer-inline">Эвристическая проверка кода, не юридическое заключение.</p>
+    </section>
+
+    <section class="pills" aria-label="Стек">
+      <span>Cursor</span>
+      <span>Claude</span>
+      <span>Kimi</span>
+      <span>React / Next.js</span>
+      <span>npm</span>
+      <span>MIT</span>
+    </section>
+
+    <section id="features" class="section">
+      <h2>Три детектора в v1</h2>
+      <p class="section-lead">Каждая находка — с id правила, статьёй закона и подсказкой, как исправить.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">📝</div>
+          <h3>Форма без согласия</h3>
+          <code>PDN.FORM.NO_CONSENT</code>
+          <p>Email, телефон или имя в форме — но нет чекбокса согласия на обработку ПДн.</p>
+          <span class="tag tag-high">high · ст. 9</span>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">📊</div>
+          <h3>Метрика без opt-in</h3>
+          <code>PDN.TRACKER.NO_CONSENT</code>
+          <p>Метрика, gtag, GA, Meta Pixel или VK.Retargeting стартуют сразу, без проверки согласия.</p>
+          <span class="tag tag-high">high · ст. 6</span>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🔗</div>
+          <h3>Нет политики</h3>
+          <code>PDN.POLICY.NO_LINK</code>
+          <p>В проекте не найдена ссылка на политику обработки персональных данных.</p>
+          <span class="tag tag-high">high · ст. 18.1</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section catalog">
+      <div class="catalog-text">
+        <h2>Полный чек-лист 152-ФЗ</h2>
+        <p>
+          В каталоге — 11 правил: cookie-баннер, предзаполненный чекбокс, трансграничная передача,
+          локализация, уведомление РКН и другие. Агент объясняет каждый пункт через
+          <code>list_rules</code> и <code>explain_rule</code>, даже если автопоиск ещё не реализован.
+        </p>
+      </div>
+      <ul class="catalog-list">
+        <li>Формы и согласие</li>
+        <li>Политика ПДн</li>
+        <li>Метрики и cookie</li>
+        <li>Организационные меры</li>
+      </ul>
+    </section>
+
+    <section id="start" class="section start">
+      <h2>Быстрый старт</h2>
+      <div class="start-grid">
+        <div class="panel">
+          <h3>MCP — для агентов</h3>
+          <p>Cursor, Claude Code, Kimi Code и другие клиенты с MCP:</p>
+          <pre><code>{
+  "mcpServers": {
+    "legitagent": {
+      "command": "npx",
+      "args": ["-y", "@legit-agent/mcp"]
+    }
+  }
+}</code></pre>
+          <p class="panel-note">Инструменты: <strong>scan</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong></p>
+        </div>
+        <div class="panel">
+          <h3>CLI — для терминала и CI</h3>
+          <p>Node.js 20+, без установки:</p>
+          <pre><code>npx @legit-agent/cli scan
+npx @legit-agent/cli scan ./my-site --json</code></pre>
+          <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section flow">
+      <h2>Как это работает</h2>
+      <ol class="steps">
+        <li><span>1</span> Сканер обходит <code>.html</code>, <code>.jsx</code>, <code>.tsx</code></li>
+        <li><span>2</span> Сверяет код с YAML-каталогом правил и выдержками статей</li>
+        <li><span>3</span> Возвращает находки: файл, строка, норма, как исправить</li>
+        <li><span>4</span> Агент или разработчик принимает решение</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="/logo.png" width="48" height="48" alt="legitAgent" />
+    <p>
+      <a href="https://www.npmjs.com/org/legit-agent" target="_blank" rel="noopener">@legit-agent</a>
+      ·
+      <a href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">GitHub</a>
+      · MIT
+    </p>
+    <p class="footer-disclaimer">
+      legitAgent не заменяет юриста. Это эвристическая проверка исходников, а не заключение о соответствии закону.
+    </p>
+  </footer>
+</body>
+</html>
