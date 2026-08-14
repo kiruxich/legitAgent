@@ -12,7 +12,7 @@
 
 Сайт: [kiruxich.github.io/legitAgent](https://kiruxich.github.io/legitAgent/). Каталог правил: [docs/RULES.md](docs/RULES.md). Сломанный пример: [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo).
 
-Подключите MCP — агент сам просканирует HTML/JSX/TSX/Vue/Svelte/Astro, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI, GitHub Action с выгрузкой SARIF, либо `scan-url` для живой страницы: тот же каталог по DOM плюс cookie до согласия.
+Подключите MCP — агент сам просканирует HTML/JSX/TSX/Vue/Svelte/Astro, покажет находки со статьёй закона и подскажет, как исправить. В Cursor после установки плагина те же действия доступны через `/check`, `/scan`, `/scan-url`. Либо одна команда в CI, GitHub Action с выгрузкой SARIF, либо `scan-url` для живой страницы: тот же каталог по DOM плюс cookie до согласия.
 
 ```bash
 npx @legit-agent/cli scan
@@ -43,14 +43,28 @@ npx @legit-agent/cli scan
 
 | Клиент | Куда вставить |
 |---|---|
-| **Cursor** | `.cursor/mcp.json` в корне проекта |
-| **Claude Code** | `.mcp.json` в корне проекта, либо `claude mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` |
-| **Claude Desktop** | `~/Library/Application Support/Claude/claude_desktop_config.json` (после правки перезапустить Claude) |
+| **Cursor** | Плагин Marketplace / `~/.cursor/plugins/local` (скиллы `/check` …) или `.cursor/mcp.json` |
+| **Claude Code** | `claude mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` |
+| **Claude Desktop** | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект». |
 | **Kimi Code** | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json` |
 | **Kimi CLI** | `kimi mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` или `~/.kimi/mcp.json` |
 | **Windsurf, Cline, Continue, Copilot** | тот же `mcpServers`; если спрашивают транспорт — `stdio` |
 
 После подключения: «проверь этот репозиторий на 152-ФЗ», «покажи каталог правил», «объясни PDN.FORM.NO_CONSENT».
+
+В Cursor те же действия вызываются через `/` (скиллы плагина, карточка при наведении берётся из `description`). Локально: `~/.cursor/plugins/local/legitagent`. В каталоге у всех — после публикации на Marketplace. В ChatGPT и Kimi слэша Cursor нет: там работают MCP-инструменты, не `/check`.
+
+| Команда | MCP |
+|---|---|
+| `/check` | `scan` текущего проекта |
+| `/scan` | `scan` |
+| `/scan-url https://example.com` | `scan_url` |
+| `/list-rules` | `list_rules` |
+| `/explain-rule PDN.FORM.NO_CONSENT` | `explain_rule` |
+| `/generate-policy ООО Пример` | `generate_policy` |
+| `/get-law 152-fz 9` | `get_law` |
+
+Slash-команда не заменяет MCP: она говорит агенту вызвать инструмент. Без включённого сервера `legitagent` скана не будет.
 
 ### CLI
 

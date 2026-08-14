@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "legitagent": {
+      "command": "npx",
+      "args": ["-y", "@legit-agent/mcp"]
+    }
+  }
+}

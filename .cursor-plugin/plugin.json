@@ -1,0 +1,13 @@
+{
+  "name": "legitagent",
+  "version": "0.5.0",
+  "description": "Проверка сайта на типичные риски 152-ФЗ, 38-ФЗ и ЗоЗПП. Эвристики, не юридическое заключение.",
+  "author": {
+    "name": "Кирилл Склёмин"
+  },
+  "homepage": "https://kiruxich.github.io/legitAgent/",
+  "repository": "https://github.com/kiruxich/legitAgent",
+  "license": "MIT",
+  "keywords": ["152-fz", "privacy", "mcp", "compliance", "pdn"],
+  "logo": "assets/logo.svg"
+}
