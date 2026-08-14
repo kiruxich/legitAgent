@@ -49,10 +49,23 @@ jobs:
 
       - name: Publish to npm
         run: |
-          npm publish "$RUNNER_TEMP"/legit-agent-core-*.tgz --access public
-          npm publish "$RUNNER_TEMP"/legit-agent-live-*.tgz --access public
-          npm publish "$RUNNER_TEMP"/legit-agent-cli-*.tgz --access public
-          npm publish "$RUNNER_TEMP"/legit-agent-mcp-*.tgz --access public
+          publish_tgz() {
+            local tgz="$1"
+            if npm publish "$tgz" --access public; then
+              return 0
+            fi
+            local spec
+            spec="$(tar -xOf "$tgz" package/package.json | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const p=JSON.parse(d);console.log(p.name+'@'+p.version)})")"
+            if npm view "$spec" version >/dev/null 2>&1; then
+              echo "Already on npm, skipping $spec"
+              return 0
+            fi
+            return 1
+          }
+          publish_tgz "$RUNNER_TEMP"/legit-agent-core-*.tgz
+          publish_tgz "$RUNNER_TEMP"/legit-agent-live-*.tgz
+          publish_tgz "$RUNNER_TEMP"/legit-agent-cli-*.tgz
+          publish_tgz "$RUNNER_TEMP"/legit-agent-mcp-*.tgz
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
