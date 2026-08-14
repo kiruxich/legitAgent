@@ -44,10 +44,9 @@ runs:
       with:
         script: |
           const fs = require('fs');
-          const path = require('path');
           if (!fs.existsSync('legitagent.sarif')) return;
           const sarif = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8'));
-          const { formatReport } = await import(path.join(process.env.GITHUB_ACTION_PATH, 'format-report.mjs'));
+          const { formatReport } = await import('${{ github.action_path }}/format-report.mjs');
           const body = formatReport(sarif);
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner,
@@ -76,20 +75,16 @@ runs:
       with:
         script: |
           const fs = require('fs');
-          const path = require('path');
           if (!fs.existsSync('legitagent.sarif')) return;
           const sarif = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8'));
-          const { formatReport, countHigh } = await import(path.join(process.env.GITHUB_ACTION_PATH, 'format-report.mjs'));
+          const { formatReport, countHigh } = await import('${{ github.action_path }}/format-report.mjs');
           if (countHigh(sarif) === 0) return;
           const body = formatReport(sarif);
           const title = 'legitAgent: находки high';
-          const { data: issues } = await github.rest.issues.listForRepo({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            state: 'open',
-            labels: 'legitagent',
+          const { data: searchResult } = await github.rest.search.issuesAndPullRequests({
+            q: `repo:${context.repo.owner}/${context.repo.repo} is:issue is:open in:title "${title}"`,
           });
-          const existing = issues.find((i) => i.title === title);
+          const existing = searchResult.items.find((i) => i.title === title);
           if (existing) {
             await github.rest.issues.update({
               owner: context.repo.owner,
