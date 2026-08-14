@@ -31,18 +31,19 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">152-ФЗ · 38-ФЗ · ЗоЗПП · MCP · CLI · scan-url</p>
+      <p class="eyebrow">v0.6.0 · MIT · бесплатно · без облака</p>
       <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;и после деплоя</em></h1>
       <p class="lead">
         legitAgent читает HTML, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
         формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика,
         реклама без erid, витрина без оферты.
-        Живой <code>scan-url</code> смотрит тот же каталог по DOM задеплоенной страницы, плюс cookie до согласия.
-        В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF.
+        Живой <code>scan-url</code> смотрит тот же каталог по DOM, плюс cookie до согласия.
+        В Cursor — MCP и <code>/check</code>; в Claude и Kimi — те же tools; в CI — GitHub Action.
+        Платного тарифа нет. При каждом запуске IDE подтягивается актуальный пакет с npm.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#start">Подключить</a>
-        <a class="btn btn-ghost" href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">Исходники</a>
+        <a class="btn btn-primary" href="cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&amp;config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19">Add to Cursor</a>
+        <a class="btn btn-ghost" href="#start">JSON для Claude / Kimi</a>
       </div>
       <p class="disclaimer-inline">Эвристическая проверка кода, не юридическое заключение.</p>
     </section>
@@ -132,7 +133,7 @@
       <div class="start-grid">
         <div class="panel">
           <h3>MCP — для агентов</h3>
-          <p>Cursor, Claude Code, Kimi Code и другие клиенты с MCP:</p>
+          <p>Cursor, Claude Code, Kimi и другие клиенты с MCP. В Cursor ещё скиллы <code>/check</code>, <code>/scan</code>, <code>/scan-url</code>.</p>
           <pre><code>{
   "mcpServers": {
     "legitagent": {
@@ -141,16 +142,16 @@
     }
   }
 }</code></pre>
-          <p class="panel-note">При каждом запуске IDE — актуальный пакет с npm (<code>@latest</code>). Инструменты: <strong>scan</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong>, <strong>generate_policy</strong>, <strong>get_law</strong></p>
+          <p class="panel-note">В Cursor кнопка Add to Cursor пишет в <code>~/.cursor/mcp.json</code> (User, все проекты). Файл <code>.cursor/mcp.json</code> в репозитории — только этот проект. При каждом запуске IDE — актуальный пакет с npm (<code>@latest</code>). Инструменты: <strong>scan</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong>, <strong>generate_policy</strong>, <strong>get_law</strong></p>
         </div>
         <div class="panel">
           <h3>CLI — для терминала и CI</h3>
           <p>Node.js 20+, без установки:</p>
-          <pre><code>npx @legit-agent/cli@0.5.0 scan
-npx @legit-agent/cli scan ./my-site --json --sarif --lang en
-npx @legit-agent/cli scan-url https://example.com
-npx @legit-agent/cli init-policy --operator "ООО Пример"</code></pre>
-          <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong>. В CI — GitHub Action с SARIF и комментарием в PR. Опционально — <code>legitagent.config.json</code> в корне.</p>
+          <pre><code>npx @legit-agent/cli@latest scan
+npx @legit-agent/cli@latest scan ./my-site --json --sarif --lang en
+npx @legit-agent/cli@latest scan-url https://example.com
+npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code></pre>
+          <p class="panel-note">В CI лучше пин <code>@0.6.0</code>. Код выхода <strong>1</strong> при находках <strong>high</strong>. GitHub Action: <code>legitagent-scan@v0.6.0</code>.</p>
         </div>
       </div>
     </section>
@@ -172,7 +173,7 @@ npx @legit-agent/cli init-policy --operator "ООО Пример"</code></pre>
       <a href="https://www.npmjs.com/org/legit-agent" target="_blank" rel="noopener">@legit-agent</a>
       ·
       <a href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">GitHub</a>
-      · MIT
+      · MIT, без облака и без платного тарифа
     </p>
     <p class="footer-disclaimer">
       legitAgent не заменяет юриста. Это эвристическая проверка исходников, а не заключение о соответствии закону.

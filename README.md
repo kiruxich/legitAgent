@@ -30,6 +30,8 @@ npx @legit-agent/cli scan
 
 Один и тот же сервер. `@latest` и `--prefer-online`: при каждом запуске Cursor, Claude, Kimi и других IDE npx берёт текущий релиз с npm, а не кэш. Уже открытый чат сам не обновится — нужен перезапуск окна / MCP.
 
+В Cursor одной кнопкой: [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19).
+
 ```json
 {
   "mcpServers": {
@@ -43,7 +45,7 @@ npx @legit-agent/cli scan
 
 | Клиент | Куда вставить |
 |---|---|
-| **Cursor** | Плагин Marketplace / `~/.cursor/plugins/local` (скиллы `/check` …) или `.cursor/mcp.json` |
+| **Cursor** | **User** (все проекты): `~/.cursor/mcp.json` — туда же пишет [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19). **Проект** (только этот репозиторий): `.cursor/mcp.json`. Скиллы `/check` … — Marketplace или `~/.cursor/plugins/local` |
 | **Claude Code** | `claude mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` |
 | **Claude Desktop** | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект». |
 | **Kimi Code** | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json` |
@@ -105,7 +107,7 @@ npx @legit-agent/cli init-policy --operator "ООО Ромашка" --inn 123 --
 | `1` | Есть хотя бы одна находка `high` |
 | `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` |
 
-В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.5.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`.
+В CI достаточно `npx @legit-agent/cli@0.6.0 scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.6.0`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`.
 
 ---
 

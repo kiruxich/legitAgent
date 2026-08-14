@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.5.0
+      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.6.0
         with:
           root: .
           fail-on-high: true
