@@ -16,7 +16,7 @@ function isPrechecked(tag: string): boolean {
   if (/\bdefaultChecked\b/.test(tag)) return true;
   if (/checked\s*=\s*\{\s*true\s*\}/.test(tag)) return true;
   if (/checked\s*=\s*["'](?:checked|true)["']/i.test(tag)) return true;
-  if (/(?:^|\s)checked(?:\s|\/|$)/.test(tag)) return true;
+  if (/(?:^|\s)checked(?:[\s/>]|$)/.test(tag)) return true;
   return false;
 }
 

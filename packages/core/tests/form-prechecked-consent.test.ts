@@ -30,6 +30,12 @@ describe('detectFormPrecheckedConsent', () => {
     expect(findings).toEqual([]);
   });
 
+  it('flags a HTML boolean checked> consent checkbox', () => {
+    const filePath = path.join(here, 'fixtures/bad-prechecked/contact.html');
+    const findings = detect('contact.html', readFileSync(filePath, 'utf8'));
+    expect(findings.map((f) => f.ruleId)).toContain('PDN.FORM.PRECHECKED_CONSENT');
+  });
+
   it('flags checked={true}, checked="checked", checked="true", and bare checked', () => {
     const variants = [
       '<input type="checkbox" checked={true} />',
