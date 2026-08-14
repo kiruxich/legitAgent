@@ -28,6 +28,28 @@ describe('scanProject', () => {
     const result = await scanProject(path.join(here, 'fixtures/broken-jsx'));
     expect(result.warnings.length).toBeGreaterThan(0);
   });
+
+  it('finds all five phase-A rules in a bad project', async () => {
+    const result = await scanProject(path.join(here, 'fixtures/bad-v2-source'));
+    const ids = result.findings.map((f) => f.ruleId);
+    expect(ids).toEqual(expect.arrayContaining([
+      'PDN.FORM.PRECHECKED_CONSENT',
+      'PDN.FORM.NO_POLICY_LINK',
+      'PDN.POLICY.INCOMPLETE',
+      'PDN.TRANSFER.FOREIGN_TRACKER',
+      'PDN.COOKIE.NO_REJECT',
+    ]));
+  });
+
+  it('does not flag the five phase-A rules in a good project', async () => {
+    const result = await scanProject(path.join(here, 'fixtures/good-v2-source'));
+    const ids = new Set(result.findings.map((f) => f.ruleId));
+    expect(ids.has('PDN.FORM.PRECHECKED_CONSENT')).toBe(false);
+    expect(ids.has('PDN.FORM.NO_POLICY_LINK')).toBe(false);
+    expect(ids.has('PDN.POLICY.INCOMPLETE')).toBe(false);
+    expect(ids.has('PDN.TRANSFER.FOREIGN_TRACKER')).toBe(false);
+    expect(ids.has('PDN.COOKIE.NO_REJECT')).toBe(false);
+  });
 });
 
 describe('listRules / explainRule', () => {

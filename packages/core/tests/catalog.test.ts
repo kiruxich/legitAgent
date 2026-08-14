@@ -70,7 +70,7 @@ describe('loadCatalog', () => {
 });
 
 describe('defaultCatalog', () => {
-  it('includes three active detectors and planned rules', () => {
+  it('includes active detectors and planned rules', () => {
     const catalog = defaultCatalog();
     const ids = catalog.rules.map((r) => r.id);
     expect(ids).toEqual(expect.arrayContaining([
@@ -82,9 +82,14 @@ describe('defaultCatalog', () => {
     ]));
     const active = catalog.rules.filter((r) => r.status === 'active').map((r) => r.id);
     expect(active.sort()).toEqual([
+      'PDN.COOKIE.NO_REJECT',
       'PDN.FORM.NO_CONSENT',
+      'PDN.FORM.NO_POLICY_LINK',
+      'PDN.FORM.PRECHECKED_CONSENT',
+      'PDN.POLICY.INCOMPLETE',
       'PDN.POLICY.NO_LINK',
       'PDN.TRACKER.NO_CONSENT',
+      'PDN.TRANSFER.FOREIGN_TRACKER',
     ]);
     for (const rule of catalog.rules) {
       expect(catalog.excerpts[rule.excerptRef], rule.id).toBeDefined();

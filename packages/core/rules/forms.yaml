@@ -9,16 +9,16 @@
 - id: PDN.FORM.PRECHECKED_CONSENT
   law: 152-ФЗ ст. 9
   severity: high
-  status: planned
+  status: active
   title: Чекбокс согласия предзаполнен
   message: Предзаполненная галочка не считается полученным согласием.
-  fix: Уберите defaultChecked / checked={true} у чекбокса согласия. Автопроверка — в следующей версии.
+  fix: Уберите defaultChecked / checked={true} у чекбокса согласия.
   excerptRef: art9
 - id: PDN.FORM.NO_POLICY_LINK
   law: 152-ФЗ ст. 9
   severity: medium
-  status: planned
+  status: active
   title: Согласие без ссылки на политику
   message: Рядом с согласием должна быть кликабельная ссылка на политику обработки ПДн.
-  fix: Добавьте ссылку на политику в текст согласия. Автопроверка — в следующей версии.
+  fix: Добавьте ссылку на политику в текст согласия.
   excerptRef: art9

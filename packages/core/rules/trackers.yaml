@@ -17,16 +17,16 @@
 - id: PDN.COOKIE.NO_REJECT
   law: 152-ФЗ ст. 9
   severity: medium
-  status: planned
+  status: active
   title: Баннер без отказа
   message: У пользователя должна быть реальная возможность отклонить необязательные cookie.
-  fix: Добавьте кнопку отказа, не только «Принять». Автопроверка баннера — в следующей версии.
+  fix: Добавьте кнопку отказа, не только «Принять».
   excerptRef: art9
 - id: PDN.TRANSFER.FOREIGN_TRACKER
   law: 152-ФЗ ст. 6
   severity: medium
-  status: planned
+  status: active
   title: Иностранный трекер / трансграничная передача
   message: Google Analytics, Meta Pixel и аналогичные сервисы могут означать трансграничную передачу ПДн.
-  fix: Задокументируйте передачу или замените на российский аналог. Автопроверка — в следующей версии.
+  fix: Задокументируйте передачу или замените на российский аналог.
   excerptRef: art6

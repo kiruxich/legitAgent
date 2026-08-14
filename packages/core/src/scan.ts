@@ -3,7 +3,12 @@ import path from 'node:path';
 import { defaultCatalog } from './catalog.js';
 import { DISCLAIMER_RU } from './disclaimer.js';
 import { discoverSourceFiles } from './discover.js';
+import { detectCookieNoReject } from './detectors/cookie-no-reject.js';
 import { detectFormNoConsent } from './detectors/form-no-consent.js';
+import { detectFormNoPolicyLink } from './detectors/form-no-policy-link.js';
+import { detectFormPrecheckedConsent } from './detectors/form-prechecked-consent.js';
+import { detectForeignTracker } from './detectors/foreign-tracker.js';
+import { detectPolicyIncomplete } from './detectors/policy-incomplete.js';
 import { detectPolicyNoLink } from './detectors/policy-no-link.js';
 import { detectTrackerNoConsent } from './detectors/tracker-no-consent.js';
 import type { Catalog, ExplainResult, Finding, Rule, ScanResult, ScanWarning } from './types.js';
@@ -34,12 +39,17 @@ export async function scanProject(root: string, catalog = defaultCatalog()): Pro
     loaded.push({ relativePath, source });
     findings.push(
       ...detectFormNoConsent({ filePath, relativePath, source, catalog }),
+      ...detectFormPrecheckedConsent({ filePath, relativePath, source, catalog }),
+      ...detectFormNoPolicyLink({ filePath, relativePath, source, catalog }),
       ...detectTrackerNoConsent({ filePath, relativePath, source, catalog }),
+      ...detectForeignTracker({ filePath, relativePath, source, catalog }),
+      ...detectCookieNoReject({ filePath, relativePath, source, catalog }),
     );
   }
 
   if (loaded.length > 0) {
     findings.push(...detectPolicyNoLink({ catalog, files: loaded }));
+    findings.push(...detectPolicyIncomplete({ catalog, files: loaded }));
   }
 
   return { findings, warnings, scannedFileCount: loaded.length };
