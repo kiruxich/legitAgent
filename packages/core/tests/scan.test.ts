@@ -50,6 +50,29 @@ describe('scanProject', () => {
     expect(ids.has('PDN.TRANSFER.FOREIGN_TRACKER')).toBe(false);
     expect(ids.has('PDN.COOKIE.NO_REJECT')).toBe(false);
   });
+
+  it('honors ignore globs from legitagent.config.json', async () => {
+    const result = await scanProject(path.join(here, 'fixtures/config-ignore'));
+    expect(result.findings.some((f) => f.file.includes('vendor'))).toBe(false);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(true);
+  });
+
+  it('drops disabled rule findings', async () => {
+    const result = await scanProject(path.join(here, 'fixtures/config-disabled'));
+    expect(result.findings.some((f) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(false);
+  });
+
+  it('overrides severity from config', async () => {
+    const result = await scanProject(path.join(here, 'fixtures/config-severity'));
+    const hit = result.findings.find((f) => f.ruleId === 'PDN.TRANSFER.FOREIGN_TRACKER');
+    expect(hit?.severity).toBe('low');
+  });
+
+  it('throws ConfigError for invalid JSON', async () => {
+    await expect(scanProject(path.join(here, 'fixtures/config-invalid'))).rejects.toThrow(
+      'Некорректный legitagent.config.json',
+    );
+  });
 });
 
 describe('listRules / explainRule', () => {

@@ -40,6 +40,12 @@ export interface ScanWarning {
   message: string;
 }
 
+export interface ScanConfig {
+  ignore: string[];
+  disabled: string[];
+  severity: Record<string, Severity>;
+}
+
 export interface ScanResult {
   findings: Finding[];
   warnings: ScanWarning[];

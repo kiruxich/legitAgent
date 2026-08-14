@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { defaultCatalog } from './catalog.js';
+import { loadScanConfig } from './config.js';
 import { DISCLAIMER_RU } from './disclaimer.js';
 import { discoverSourceFiles } from './discover.js';
 import { detectCookieNoReject } from './detectors/cookie-no-reject.js';
@@ -18,8 +19,21 @@ function looksBroken(source: string): boolean {
 }
 
 export async function scanProject(root: string, catalog = defaultCatalog()): Promise<ScanResult> {
-  const files = await discoverSourceFiles(root);
-  const warnings: ScanWarning[] = [];
+  const { config, warnings: configWarnings } = loadScanConfig(root);
+  const warnings: ScanWarning[] = [...configWarnings];
+
+  for (const id of config.disabled) {
+    if (!catalog.rules.some((r) => r.id === id)) {
+      warnings.push({ file: 'legitagent.config.json', message: `Неизвестное правило: ${id}` });
+    }
+  }
+  for (const id of Object.keys(config.severity)) {
+    if (!catalog.rules.some((r) => r.id === id)) {
+      warnings.push({ file: 'legitagent.config.json', message: `Неизвестное правило: ${id}` });
+    }
+  }
+
+  const files = await discoverSourceFiles(root, config.ignore);
   const loaded: { relativePath: string; source: string }[] = [];
   const findings: Finding[] = [];
 
@@ -52,7 +66,13 @@ export async function scanProject(root: string, catalog = defaultCatalog()): Pro
     findings.push(...detectPolicyIncomplete({ catalog, files: loaded }));
   }
 
-  return { findings, warnings, scannedFileCount: loaded.length };
+  const filtered = findings.filter((f) => !config.disabled.includes(f.ruleId));
+  for (const finding of filtered) {
+    const override = config.severity[finding.ruleId];
+    if (override) finding.severity = override;
+  }
+
+  return { findings: filtered, warnings, scannedFileCount: loaded.length };
 }
 
 export function listRules(catalog = defaultCatalog()): Rule[] {

@@ -17,4 +17,11 @@ describe('discoverSourceFiles', () => {
     expect(files.some((f) => f.endsWith('Contact.tsx'))).toBe(true);
     expect(files.some((f) => f.includes('node_modules'))).toBe(false);
   });
+
+  it('applies extra ignore globs', async () => {
+    const root = path.join(here, 'fixtures/config-ignore');
+    const files = await discoverSourceFiles(root, ['vendor/**']);
+    expect(files.some((f) => f.includes('vendor'))).toBe(false);
+    expect(files.some((f) => f.endsWith('Form.tsx'))).toBe(true);
+  });
 });
