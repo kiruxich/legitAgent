@@ -1,66 +1,31 @@
 <p align="center"><img src="assets/logo.png" width="280" alt="legitAgent" /></p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@legit-agent/cli"><img alt="npm" src="https://img.shields.io/npm/v/@legit-agent/cli?label=@legit-agent/cli" /></a>
+  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
+</p>
+
 # legitAgent
 
-Проверка исходников сайта на типичные риски [152-ФЗ](https://pravo.gov.ru/) — в Cursor, Claude, Kimi и любом другом MCP-клиенте, либо в терминале.
+Проверка сайта на типичные риски **152-ФЗ** прямо в Cursor, Claude, Kimi и в терминале.
 
-Сканер читает `.html`, `.jsx` и `.tsx` (React / Next.js) и ищет грубые дыры по персональным данным: форма без согласия, метрика без opt-in, нет ссылки на политику. Остальные пункты чек-листа агент умеет **объяснить**, даже если ещё не умеет найти их в коде.
+Подключите MCP — агент сам просканирует HTML/JSX/TSX, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI:
 
-**Это эвристическая проверка кода, а не юридическое заключение.** legitAgent не заменяет юриста и не гарантирует соответствие закону. Решение о том, нарушаете вы требования или нет, принимает человек.
+```bash
+npx @legit-agent/cli scan
+```
 
-Пакеты: [`@legit-agent/core`](https://www.npmjs.com/package/@legit-agent/core) · [`@legit-agent/cli`](https://www.npmjs.com/package/@legit-agent/cli) · [`@legit-agent/mcp`](https://www.npmjs.com/package/@legit-agent/mcp)  
-Репозиторий: [github.com/kiruxich/legitAgent](https://github.com/kiruxich/legitAgent)
-
----
-
-## Что умеет
-
-Один движок (`@legit-agent/core`), две оболочки: MCP и CLI.
-
-| Возможность | MCP | CLI |
-|---|---|---|
-| Просканировать проект | инструмент `scan` | `npx @legit-agent/cli scan [путь]` |
-| Каталог всех правил, включая ещё не реализованные | `list_rules` | нет (смотрите YAML / спросите агента) |
-| Объяснить правило: статья, цитата, как чинить | `explain_rule` | нет |
-| JSON для скриптов и CI | ответ `scan` | `--json` |
-| Код выхода `1` при находке `high` | — | да |
-
-MCP **не пишет патчи**. Агент (Cursor, Claude, Kimi) сам предлагает правку, получив список находок.
-
-### Что ищет сканер сейчас (`active`)
-
-Сканируются только `.html` / `.jsx` / `.tsx`. Игнорируются `node_modules`, `.next`, `dist`, `build`, `coverage`, `.git`. Сломанный синтаксис не роняет скан: файл пропускается с предупреждением. Пустой проект — не ошибка.
-
-| id | Суть | Статья |
-|---|---|---|
-| `PDN.FORM.NO_CONSENT` | Форма с именем / email / телефоном без чекбокса согласия | 152-ФЗ ст. 9 |
-| `PDN.TRACKER.NO_CONSENT` | `ym` / `gtag` / `ga` / `fbq` / `VK.Retargeting` вызываются сразу, без проверки согласия | 152-ФЗ ст. 6 |
-| `PDN.POLICY.NO_LINK` | В проекте нет ссылки на политику (`privacy`, `политик`, `/pdn` и похожие) | 152-ФЗ ст. 18.1 |
-
-### Что есть в каталоге, но ещё не ищется в коде (`planned`)
-
-Эти правила видны в `list_rules` и `explain_rule`. Автодетектор появится позже (часть — только с живым браузером).
-
-| id | Суть |
-|---|---|
-| `PDN.FORM.PRECHECKED_CONSENT` | Чекбокс согласия предзаполнен (`checked` / `defaultChecked`) |
-| `PDN.FORM.NO_POLICY_LINK` | Рядом с согласием нет ссылки на политику |
-| `PDN.POLICY.INCOMPLETE` | В тексте политики нет оператора, целей, сроков, отзыва |
-| `PDN.COOKIE.BEFORE_CONSENT` | Аналитические cookie до opt-in (нужен живой сайт) |
-| `PDN.COOKIE.NO_REJECT` | В баннере нет отказа, только «Принять» |
-| `PDN.TRANSFER.FOREIGN_TRACKER` | Иностранный трекер / трансграничная передача |
-| `PDN.LOCALIZATION.UNCLEAR` | Локализация баз ПДн в РФ (по исходникам обычно не видно) |
-| `PDN.ORG.RKN_NOTICE` | Уведомление Роскомнадзора (оргмера, не код) |
-
-### Чего нет и не будет в этой версии
-
-Живой обход сайта (Playwright), GitHub Action-сканер в PR, Vue/Svelte, полный корпус законов, генерация текста политики, конфиг-файл проекта. Список отложенного: [бэклог](docs/superpowers/specs/2026-08-13-legitagent-backlog.md).
+**Это эвристическая проверка кода, а не юридическое заключение.** legitAgent не заменяет юриста и не гарантирует соответствие закону. Решение принимает человек.
 
 ---
 
-## MCP: общий фрагмент
+## Быстрый старт
 
-Сервер — stdio, без ключей и без своего конфига:
+Нужен Node.js 20+. Пакеты ставить не обязательно — достаточно `npx`.
+
+### MCP (Cursor, Claude, Kimi и другие)
+
+Один и тот же сервер:
 
 ```json
 {
@@ -73,51 +38,18 @@ MCP **не пишет патчи**. Агент (Cursor, Claude, Kimi) сам п�
 }
 ```
 
-Нужны Node.js 20+ и сеть в первый раз (скачать пакет). Инструменты:
+| Клиент | Куда вставить |
+|---|---|
+| **Cursor** | `.cursor/mcp.json` в корне проекта |
+| **Claude Code** | `.mcp.json` в корне проекта, либо `claude mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` |
+| **Claude Desktop** | `~/Library/Application Support/Claude/claude_desktop_config.json` (после правки перезапустить Claude) |
+| **Kimi Code** | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json` |
+| **Kimi CLI** | `kimi mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp` или `~/.kimi/mcp.json` |
+| **Windsurf, Cline, Continue, Copilot** | тот же `mcpServers`; если спрашивают транспорт — `stdio` |
 
-- **`scan`** — необязательный аргумент `root` (путь к проекту; по умолчанию текущая папка). Возвращает `findings`, `warnings`, `scannedFileCount`.
-- **`list_rules`** — весь каталог (`active` + `planned`).
-- **`explain_rule`** — обязательный `ruleId`, например `PDN.FORM.NO_CONSENT`. В ответе правило, выдержка статьи и дисклеймер.
+После подключения: «проверь этот репозиторий на 152-ФЗ», «покажи каталог правил», «объясни PDN.FORM.NO_CONSENT».
 
-Если `root` нечитаем, `scan` отвечает: `Укажите корень проекта`.
-
----
-
-### Cursor
-
-Файл `.cursor/mcp.json` в корне проекта (или глобальные MCP-настройки Cursor). Вставьте фрагмент выше, перезапустите MCP / окно агента.
-
-Примеры запросов агенту: «проверь этот репозиторий на 152-ФЗ», «покажи все правила», «объясни PDN.TRACKER.NO_CONSENT».
-
-### Claude (Claude Code и Claude Desktop)
-
-Claude Code — в корне проверяемого проекта файл `.mcp.json` с тем же фрагментом, либо:
-
-```bash
-claude mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp
-```
-
-Claude Desktop (macOS) — `~/Library/Application Support/Claude/claude_desktop_config.json`, тот же объект `mcpServers`. После правки перезапустите Claude.
-
-### Kimi (Kimi Code и Kimi CLI)
-
-Kimi Code: пользовательский `~/.kimi-code/mcp.json` или проектный `.kimi-code/mcp.json` — тот же фрагмент `mcpServers`.
-
-Kimi CLI:
-
-```bash
-kimi mcp add --transport stdio legitagent -- npx -y @legit-agent/mcp
-```
-
-Либо положите JSON в `~/.kimi/mcp.json`.
-
-### Другие клиенты (Windsurf, Cline, Continue, Copilot, …)
-
-Почти везде тот же ключ `mcpServers` и команда `npx -y @legit-agent/mcp`. Если клиент просит `type` / `transport`, укажите `stdio`.
-
----
-
-## CLI
+### CLI
 
 ```bash
 npx @legit-agent/cli scan
@@ -125,21 +57,61 @@ npx @legit-agent/cli scan ./my-site
 npx @legit-agent/cli scan ./my-site --json
 ```
 
-Человеческий вывод — по-русски: файл, строка, сообщение, как исправить, цитата нормы, дисклеймер.
+Вывод по-русски: файл, строка, что не так, как исправить, цитата нормы.
 
-Коды выхода:
-
-| Код | Когда |
+| Код выхода | Значение |
 |---|---|
-| `0` | Нет находок `high` (в том числе пустой проект) |
-| `1` | Есть хотя бы одна находка с `severity: high` |
+| `0` | Нет серьёзных находок (в том числе нечего сканировать) |
+| `1` | Есть хотя бы одна находка `high` |
 | `2` | Нет команды `scan` |
 
-Для CI: `npx @legit-agent/cli scan --json`; ненулевой код можно использовать как fail-on-high.
+В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна.
 
 ---
 
-## Разработка из исходников
+## Возможности
+
+Один движок [`@legit-agent/core`](https://www.npmjs.com/package/@legit-agent/core), две оболочки: [`@legit-agent/mcp`](https://www.npmjs.com/package/@legit-agent/mcp) и [`@legit-agent/cli`](https://www.npmjs.com/package/@legit-agent/cli).
+
+### Инструменты MCP
+
+| Инструмент | Что делает |
+|---|---|
+| `scan` | Сканирует проект. Необязательный `root` — путь к репозиторию (по умолчанию текущая папка). |
+| `list_rules` | Полный каталог правил 152-ФЗ для сайта. |
+| `explain_rule` | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`. |
+
+Агент сам предлагает патч по находкам — MCP только проверяет и объясняет.
+
+Ответ `scan`: список `findings` (правило, файл, строка, severity, сообщение, фикс, цитата), `warnings` по битым файлам, `scannedFileCount`. Если путь нечитаем: `Укажите корень проекта`.
+
+### Что проверяется в коде
+
+Сканер читает `.html`, `.jsx`, `.tsx` (React / Next.js). Пропускает `node_modules`, `.next`, `dist`, `build`, `coverage`, `.git`. Синтаксически сломанный файл не роняет проверку — он уходит в предупреждение. Пустой проект — валидный результат, не ошибка.
+
+| id | Что находит | Норма |
+|---|---|---|
+| `PDN.FORM.NO_CONSENT` | Форма с именем, email или телефоном без чекбокса согласия | 152-ФЗ ст. 9 |
+| `PDN.TRACKER.NO_CONSENT` | Яндекс.Метрика, gtag, GA, Meta Pixel, VK.Retargeting без проверки согласия | 152-ФЗ ст. 6 |
+| `PDN.POLICY.NO_LINK` | В проекте нет ссылки на политику обработки ПДн | 152-ФЗ ст. 18.1 |
+
+### Полный чек-лист
+
+Помимо автопоиска агент знает весь каталог и по `explain_rule` разбирает каждый пункт: зачем правило, какая статья, что сделать.
+
+**Формы и согласие** — `PDN.FORM.NO_CONSENT`, предзаполненный чекбокс (`PDN.FORM.PRECHECKED_CONSENT`), ссылка на политику рядом с согласием (`PDN.FORM.NO_POLICY_LINK`).
+
+**Политика ПДн** — ссылка в проекте (`PDN.POLICY.NO_LINK`), состав документа: оператор, цели, сроки, отзыв (`PDN.POLICY.INCOMPLETE`).
+
+**Метрики и cookie** — трекер без opt-in (`PDN.TRACKER.NO_CONSENT`), cookie до согласия (`PDN.COOKIE.BEFORE_CONSENT`), баннер без отказа (`PDN.COOKIE.NO_REJECT`), иностранный трекер / трансграничная передача (`PDN.TRANSFER.FOREIGN_TRACKER`).
+
+**Организация** — локализация баз в РФ (`PDN.LOCALIZATION.UNCLEAR`), уведомление Роскомнадзора (`PDN.ORG.RKN_NOTICE`).
+
+У каждого правила в репозитории есть короткая выдержка статьи. Без выдержки правило в каталог не попадает.
+
+---
+
+## Разработка
 
 ```bash
 git clone https://github.com/kiruxich/legitAgent.git
@@ -149,30 +121,21 @@ pnpm test
 pnpm build
 ```
 
-Монорепозиторий pnpm: `packages/core` (каталог YAML + детекторы + `scanProject`), `packages/cli`, `packages/mcp`. Правила — `packages/core/rules/*.yaml`, выдержки статей — `packages/core/legal/*.yaml`. У каждого правила обязателен `excerptRef`.
+Монорепозиторий pnpm:
 
-Спецификация v1: [docs/superpowers/specs/2026-08-13-legitagent-design.md](docs/superpowers/specs/2026-08-13-legitagent-design.md).
+- `packages/core` — каталог YAML, выдержки закона, парсеры, детекторы, `scanProject`
+- `packages/cli` — команда `legitagent scan`
+- `packages/mcp` — stdio-сервер для агентов
+
+Правила: `packages/core/rules/*.yaml`. Закон: `packages/core/legal/*.yaml`.
 
 ---
 
-## Как выпустить новую версию
+## Релиз
 
-Пуш в `main` **сам ничего не публикует**: ни npm, ни GitHub Releases. Сайдбар GitHub «Packages» — это GitHub Packages (`npm.pkg.github.com`), не [npmjs.com](https://www.npmjs.com/org/legit-agent). Мы публикуем на npmjs, поэтому этот блок на GitHub намеренно пустой.
+Пакеты живут на [npmjs.com/org/legit-agent](https://www.npmjs.com/org/legit-agent), не в GitHub Packages.
 
-Релиз:
-
-1. Поднять `version` в `packages/core`, `packages/cli`, `packages/mcp` (одинаково).
-2. Закоммитить в `main`.
-3. Поставить тег и запушить его:
-
-```bash
-git tag v0.1.1
-git push origin v0.1.1
-```
-
-4. Workflow [`.github/workflows/publish.yml`](.github/workflows/publish.yml) прогонит тесты и выложит три пакета на npm через Trusted Publisher (OIDC, без `NPM_TOKEN`). На теге также создаётся GitHub Release.
-
-Уже опубликованную версию (сейчас `0.1.0`) повторно выкладывать нельзя.
+Новая версия: одинаковый `version` в трёх `packages/*/package.json`, коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. GitHub Actions публикует core → cli → mcp и открывает GitHub Release.
 
 ---
 
