@@ -31,12 +31,13 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">152-ФЗ · MCP · CLI · zero-config</p>
+      <p class="eyebrow">152-ФЗ · MCP · CLI · GitHub Action · scan-url</p>
       <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;деплоя</em></h1>
       <p class="lead">
         legitAgent читает HTML, JSX и TSX вашего React/Next-проекта и находит типичные дыры:
-        форма без согласия, метрика без opt-in, нет ссылки на политику.
-        В Cursor, Claude, Kimi — через MCP; в терминале и CI — одной командой.
+        формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика.
+        В Cursor, Claude, Kimi — через MCP; в терминале — CLI; в CI — GitHub Action с SARIF;
+        живую страницу — командой <code>scan-url</code>.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#start">Подключить</a>
@@ -55,8 +56,8 @@
     </section>
 
     <section id="features" class="section">
-      <h2>Три детектора в v1</h2>
-      <p class="section-lead">Каждая находка — с id правила, статьёй закона и подсказкой, как исправить.</p>
+      <h2>Автопоиск в исходниках</h2>
+      <p class="section-lead">Восемь детекторов по коду. Каждая находка — с id правила, статьёй закона и подсказкой, как исправить.</p>
       <div class="cards">
         <article class="card">
           <div class="card-icon" aria-hidden="true">📝</div>
@@ -79,6 +80,27 @@
           <p>В проекте не найдена ссылка на политику обработки персональных данных.</p>
           <span class="tag tag-high">high · ст. 18.1</span>
         </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">☑️</div>
+          <h3>Предзаполненный чекбокс</h3>
+          <code>PDN.FORM.PRECHECKED_CONSENT</code>
+          <p>Галочка согласия уже стоит — такое «согласие» не считается полученным.</p>
+          <span class="tag tag-high">high · ст. 9</span>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🚫</div>
+          <h3>Баннер без отказа</h3>
+          <code>PDN.COOKIE.NO_REJECT</code>
+          <p>Cookie-баннер предлагает только «Принять», без реальной кнопки отказа.</p>
+          <span class="tag tag-medium">medium · ст. 9</span>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🌍</div>
+          <h3>Иностранный трекер</h3>
+          <code>PDN.TRANSFER.FOREIGN_TRACKER</code>
+          <p>GA, Meta Pixel и аналоги могут означать трансграничную передачу ПДн.</p>
+          <span class="tag tag-medium">medium · ст. 6</span>
+        </article>
       </div>
     </section>
 
@@ -86,9 +108,10 @@
       <div class="catalog-text">
         <h2>Полный чек-лист 152-ФЗ</h2>
         <p>
-          В каталоге — 11 правил: cookie-баннер, предзаполненный чекбокс, трансграничная передача,
-          локализация, уведомление РКН и другие. Агент объясняет каждый пункт через
-          <code>list_rules</code> и <code>explain_rule</code>, даже если автопоиск ещё не реализован.
+          В каталоге — 11 правил. Автопоиск в исходниках закрывает формы, политику, метрики, cookie-баннер
+          и иностранные трекеры; живой <code>scan-url</code> проверяет cookie до согласия.
+          Локализация баз и уведомление РКН агент объясняет через
+          <code>list_rules</code> и <code>explain_rule</code> — в коде сайта этого обычно не видно.
           Полный список: <a href="rules.html">каталог правил</a>
           и <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">сломанный демо-сайт</a>.
         </p>
@@ -115,14 +138,15 @@
     }
   }
 }</code></pre>
-          <p class="panel-note">Инструменты: <strong>scan</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong></p>
+          <p class="panel-note">Инструменты: <strong>scan</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong></p>
         </div>
         <div class="panel">
           <h3>CLI — для терминала и CI</h3>
           <p>Node.js 20+, без установки:</p>
           <pre><code>npx @legit-agent/cli scan
-npx @legit-agent/cli scan ./my-site --json</code></pre>
-          <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong></p>
+npx @legit-agent/cli scan ./my-site --json --sarif
+npx @legit-agent/cli scan-url https://example.com</code></pre>
+          <p class="panel-note">Код выхода <strong>1</strong> при находках <strong>high</strong>. В CI — GitHub Action с выгрузкой SARIF.</p>
         </div>
       </div>
     </section>

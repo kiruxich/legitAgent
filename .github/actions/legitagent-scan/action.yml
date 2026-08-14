@@ -1,0 +1,34 @@
+name: legitAgent scan
+description: Scan the repository for typical 152-FZ risks, write SARIF, and upload it to GitHub code scanning
+inputs:
+  root:
+    description: Project root to scan
+    required: false
+    default: '.'
+  fail-on-high:
+    description: Fail the job when the CLI reports a high finding (exit 1)
+    required: false
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Scan
+      id: scan
+      shell: bash
+      run: |
+        set +e
+        npx --yes @legit-agent/cli scan "${{ inputs.root }}" --sarif legitagent.sarif
+        code=$?
+        echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+    - name: Upload SARIF
+      uses: github/codeql-action/upload-sarif@v3
+      continue-on-error: true
+      with:
+        sarif_file: legitagent.sarif
+    - name: Fail on high findings
+      if: ${{ steps.scan.outputs.exit_code != '0' && (inputs.fail-on-high == 'true' || steps.scan.outputs.exit_code != '1') }}
+      shell: bash
+      run: exit ${{ steps.scan.outputs.exit_code }}

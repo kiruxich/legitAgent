@@ -1,6 +1,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import http from 'node:http';
+import os from 'node:os';
 import type { AddressInfo } from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,8 +12,8 @@ const cli = path.resolve(here, '../src/index.ts');
 const fixture = path.resolve(here, '../../core/tests/fixtures/bad-form');
 const cleanLive = path.resolve(here, '../../live/tests/fixtures/clean.html');
 
-function runCli(args: string[]) {
-  return spawnSync('npx', ['tsx', cli, ...args], { encoding: 'utf8' });
+function runCli(args: string[], cwd?: string) {
+  return spawnSync('npx', ['tsx', cli, ...args], { encoding: 'utf8', cwd });
 }
 
 function runCliAsync(args: string[]): Promise<{ status: number | null; stdout: string; stderr: string }> {
@@ -37,6 +38,24 @@ describe('cli', () => {
     expect(result.status).toBe(1);
     const parsed = JSON.parse(result.stdout);
     expect(parsed.findings.some((f: { ruleId: string }) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(true);
+  });
+
+  it('writes SARIF to the given --sarif path and still exits 1 on high', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-sarif-'));
+    const out = path.join(dir, 'out.sarif');
+    const result = runCli(['scan', fixture, '--sarif', out]);
+    expect(result.status).toBe(1);
+    const sarif = JSON.parse(fs.readFileSync(out, 'utf8'));
+    expect(sarif.version).toBe('2.1.0');
+    expect(sarif.runs[0].results.some((r: { ruleId: string; level: string }) => r.ruleId === 'PDN.FORM.NO_CONSENT' && r.level === 'error')).toBe(true);
+  });
+
+  it('defaults --sarif without a path to legitagent.sarif', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-sarif-'));
+    const result = runCli(['scan', fixture, '--sarif'], dir);
+    expect(result.status).toBe(1);
+    const sarif = JSON.parse(fs.readFileSync(path.join(dir, 'legitagent.sarif'), 'utf8'));
+    expect(sarif.runs[0].tool.driver.name).toBe('legitAgent');
   });
 
   it('exits 2 when scan-url is missing a URL', () => {

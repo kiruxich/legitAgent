@@ -12,7 +12,7 @@
 
 Сайт: [kiruxich.github.io/legitAgent](https://kiruxich.github.io/legitAgent/). Каталог правил: [docs/RULES.md](docs/RULES.md). Сломанный пример: [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo).
 
-Подключите MCP — агент сам просканирует HTML/JSX/TSX, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI:
+Подключите MCP — агент сам просканирует HTML/JSX/TSX, покажет находки со статьёй закона и подскажет, как исправить. Либо одна команда в CI, GitHub Action с выгрузкой SARIF, либо `scan-url` для живой страницы в браузере.
 
 ```bash
 npx @legit-agent/cli scan
@@ -58,31 +58,35 @@ npx @legit-agent/cli scan
 npx @legit-agent/cli scan
 npx @legit-agent/cli scan ./my-site
 npx @legit-agent/cli scan ./my-site --json
+npx @legit-agent/cli scan ./my-site --sarif
+npx @legit-agent/cli scan ./my-site --sarif findings.sarif
+npx @legit-agent/cli scan-url https://example.com --json
 ```
 
 Вывод по-русски: файл, строка, что не так, как исправить, цитата нормы.
+
+`--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium и ищет cookie до согласия, баннер без отказа и иностранные трекеры.
 
 | Код выхода | Значение |
 |---|---|
 | `0` | Нет серьёзных находок (в том числе нечего сканировать) |
 | `1` | Есть хотя бы одна находка `high` |
-| `2` | Нет команды `scan` |
+| `2` | Нет команды `scan` / `scan-url` без URL |
 
-В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна.
-
-Готовый workflow: [`examples/github-scan.yml`](examples/github-scan.yml). Скопируйте в `.github/workflows/legitagent.yml` своего сайта.
+В CI достаточно `npx @legit-agent/cli scan --json`: ненулевой код — стоп пайплайна. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml): пишет SARIF и загружает его в GitHub.
 
 ---
 
 ## Возможности
 
-Один движок [`@legit-agent/core`](https://www.npmjs.com/package/@legit-agent/core), две оболочки: [`@legit-agent/mcp`](https://www.npmjs.com/package/@legit-agent/mcp) и [`@legit-agent/cli`](https://www.npmjs.com/package/@legit-agent/cli).
+Один движок [`@legit-agent/core`](https://www.npmjs.com/package/@legit-agent/core), живой сканер [`@legit-agent/live`](https://www.npmjs.com/package/@legit-agent/live), оболочки [`@legit-agent/mcp`](https://www.npmjs.com/package/@legit-agent/mcp) и [`@legit-agent/cli`](https://www.npmjs.com/package/@legit-agent/cli).
 
 ### Инструменты MCP
 
 | Инструмент | Что делает |
 |---|---|
 | `scan` | Сканирует проект. Необязательный `root` — путь к репозиторию (по умолчанию текущая папка). |
+| `scan_url` | Проверяет живой URL в браузере: cookie до согласия, баннер без отказа, иностранные трекеры. |
 | `list_rules` | Полный каталог правил 152-ФЗ для сайта. |
 | `explain_rule` | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`. |
 
@@ -97,8 +101,13 @@ npx @legit-agent/cli scan ./my-site --json
 | id | Что находит | Норма |
 |---|---|---|
 | `PDN.FORM.NO_CONSENT` | Форма с именем, email или телефоном без чекбокса согласия | 152-ФЗ ст. 9 |
-| `PDN.TRACKER.NO_CONSENT` | Яндекс.Метрика, gtag, GA, Meta Pixel, VK.Retargeting без проверки согласия | 152-ФЗ ст. 6 |
+| `PDN.FORM.PRECHECKED_CONSENT` | Предзаполненный чекбокс согласия | 152-ФЗ ст. 9 |
+| `PDN.FORM.NO_POLICY_LINK` | Согласие без ссылки на политику | 152-ФЗ ст. 9 |
 | `PDN.POLICY.NO_LINK` | В проекте нет ссылки на политику обработки ПДн | 152-ФЗ ст. 18.1 |
+| `PDN.POLICY.INCOMPLETE` | Политика без оператора, целей, сроков или порядка отзыва | 152-ФЗ ст. 18.1 |
+| `PDN.TRACKER.NO_CONSENT` | Яндекс.Метрика, gtag, GA, Meta Pixel, VK.Retargeting без проверки согласия | 152-ФЗ ст. 6 |
+| `PDN.COOKIE.NO_REJECT` | Cookie-баннер без возможности отказа | 152-ФЗ ст. 9 |
+| `PDN.TRANSFER.FOREIGN_TRACKER` | Иностранный трекер / возможная трансграничная передача | 152-ФЗ ст. 6 |
 
 ### Полный чек-лист
 
@@ -108,7 +117,7 @@ npx @legit-agent/cli scan ./my-site --json
 
 **Политика ПДн** — ссылка в проекте (`PDN.POLICY.NO_LINK`), состав документа: оператор, цели, сроки, отзыв (`PDN.POLICY.INCOMPLETE`).
 
-**Метрики и cookie** — трекер без opt-in (`PDN.TRACKER.NO_CONSENT`), cookie до согласия (`PDN.COOKIE.BEFORE_CONSENT`), баннер без отказа (`PDN.COOKIE.NO_REJECT`), иностранный трекер / трансграничная передача (`PDN.TRANSFER.FOREIGN_TRACKER`).
+**Метрики и cookie** — трекер без opt-in (`PDN.TRACKER.NO_CONSENT`), cookie до согласия (`PDN.COOKIE.BEFORE_CONSENT`, живой `scan-url`), баннер без отказа (`PDN.COOKIE.NO_REJECT`), иностранный трекер / трансграничная передача (`PDN.TRANSFER.FOREIGN_TRACKER`).
 
 **Организация** — локализация баз в РФ (`PDN.LOCALIZATION.UNCLEAR`), уведомление Роскомнадзора (`PDN.ORG.RKN_NOTICE`).
 
@@ -133,7 +142,8 @@ pnpm build
 Монорепозиторий pnpm:
 
 - `packages/core` — каталог YAML, выдержки закона, парсеры, детекторы, `scanProject`
-- `packages/cli` — команда `legitagent scan`
+- `packages/cli` — команды `legitagent scan` и `scan-url`, вывод `--json` / `--sarif`
+- `packages/live` — Playwright-сканер живой страницы
 - `packages/mcp` — stdio-сервер для агентов
 
 Правила: `packages/core/rules/*.yaml`. Закон: `packages/core/legal/*.yaml`. Каталог для людей: `pnpm catalog` → `docs/RULES.md` и `website/rules.html`.
@@ -144,7 +154,7 @@ pnpm build
 
 Пакеты живут на [npmjs.com/org/legit-agent](https://www.npmjs.com/org/legit-agent), не в GitHub Packages.
 
-Новая версия: одинаковый `version` в трёх `packages/*/package.json`, коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. GitHub Actions публикует core → cli → mcp и открывает GitHub Release.
+Новая версия: одинаковый `version` в `packages/*/package.json` (core, cli, live, mcp), коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. GitHub Actions публикует core → cli → mcp и открывает GitHub Release.
 
 ---
 
