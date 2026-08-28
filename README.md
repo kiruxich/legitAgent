@@ -1,10 +1,6 @@
-<p align="center"><img src="assets/logo.png" width="280" alt="legitAgent" /></p>
+![legitAgent](assets/logo.png)
 
-<p align="center">
-  <a href="https://github.com/kiruxich/legitAgent/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/kiruxich/legitAgent/actions/workflows/ci.yml/badge.svg" /></a>
-  <a href="https://www.npmjs.com/package/@legit-agent/cli"><img alt="npm" src="https://img.shields.io/npm/v/@legit-agent/cli?label=@legit-agent/cli" /></a>
-  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-green" /></a>
-</p>
+![CI](https://github.com/kiruxich/legitAgent/actions/workflows/ci.yml/badge.svg)![npm](https://img.shields.io/npm/v/@legit-agent/cli?label=@legit-agent/cli)![MIT](https://img.shields.io/badge/license-MIT-green)
 
 # legitAgent
 
@@ -21,6 +17,12 @@ npx @legit-agent/cli scan
 **Это эвристическая проверка кода, а не юридическое заключение.** legitAgent не заменяет юриста и не гарантирует соответствие закону. Решение принимает человек.
 
 ---
+
+🛡 **Нужен Enterprise-аудит?** Разрабатываем кастомные высоконагруженные системы и проводим юридический и технический аудит кода. Получите бесплатный отчет по нагрузке и соответствию 152-ФЗ для вашей инфраструктуры: Свяжитесь со мной в Telegram: [@kirillsklemin](https://t.me/kirillsklemin)
+
+---
+
+
 
 ## Быстрый старт
 
@@ -43,29 +45,33 @@ npx @legit-agent/cli scan
 }
 ```
 
-| Клиент | Куда вставить |
-|---|---|
-| **Cursor** | **User** (все проекты): `~/.cursor/mcp.json` — туда же пишет [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19). **Проект** (только этот репозиторий): `.cursor/mcp.json`. Скиллы `/check` … — Marketplace или `~/.cursor/plugins/local` |
-| **Claude Code** | `claude mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` |
-| **Claude Desktop** | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `review`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект». |
-| **Kimi Code** | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json` |
-| **Kimi CLI** | `kimi mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` или `~/.kimi/mcp.json` |
-| **Windsurf, Cline, Continue, Copilot** | тот же `mcpServers`; если спрашивают транспорт — `stdio` |
+
+| Клиент                                 | Куда вставить                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Cursor**                             | **User** (все проекты): `~/.cursor/mcp.json` — туда же пишет [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19). **Проект** (только этот репозиторий): `.cursor/mcp.json`. Скиллы `/check` … — Marketplace или `~/.cursor/plugins/local` |
+| **Claude Code**                        | `claude mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest`                                                                                                                                                                                                                                                                                   |
+| **Claude Desktop**                     | тот же JSON в `claude_desktop_config.json`. Инструменты: `scan`, `review`, `scan_url`, `list_rules`, `explain_rule`, `generate_policy`, `get_law`. Слэша `/check` нет — пишете «проверь проект».                                                                                                                                                                                  |
+| **Kimi Code**                          | `~/.kimi-code/mcp.json` или `.kimi-code/mcp.json`                                                                                                                                                                                                                                                                                                                                 |
+| **Kimi CLI**                           | `kimi mcp add --transport stdio legitagent -- npx -y --prefer-online @legit-agent/mcp@latest` или `~/.kimi/mcp.json`                                                                                                                                                                                                                                                              |
+| **Windsurf, Cline, Continue, Copilot** | тот же `mcpServers`; если спрашивают транспорт — `stdio`                                                                                                                                                                                                                                                                                                                          |
+
 
 После подключения: «проверь этот репозиторий на 152-ФЗ», «покажи каталог правил», «объясни PDN.FORM.NO_CONSENT».
 
 В Cursor те же действия вызываются через `/` (скиллы плагина, карточка при наведении берётся из `description`). Локально: `~/.cursor/plugins/local/legitagent`. В каталоге у всех — после публикации на Marketplace. В ChatGPT и Kimi слэша Cursor нет: там работают MCP-инструменты, не `/check`.
 
-| Команда | MCP |
-|---|---|
-| `/check` | `scan` + `review` текущего проекта |
-| `/fix` | `scan` + `review`, исправление `confirm`, перескан |
-| `/scan` | `scan` |
-| `/scan-url https://example.com` | `scan_url` |
-| `/list-rules` | `list_rules` |
-| `/explain-rule PDN.FORM.NO_CONSENT` | `explain_rule` |
-| `/generate-policy ООО Пример` | `generate_policy` |
-| `/get-law 152-fz 9` | `get_law` |
+
+| Команда                             | MCP                                                |
+| ----------------------------------- | -------------------------------------------------- |
+| `/check`                            | `scan` + `review` текущего проекта                 |
+| `/fix`                              | `scan` + `review`, исправление `confirm`, перескан |
+| `/scan`                             | `scan`                                             |
+| `/scan-url https://example.com`     | `scan_url`                                         |
+| `/list-rules`                       | `list_rules`                                       |
+| `/explain-rule PDN.FORM.NO_CONSENT` | `explain_rule`                                     |
+| `/generate-policy ООО Пример`       | `generate_policy`                                  |
+| `/get-law 152-fz 9`                 | `get_law`                                          |
+
 
 Slash-команда не заменяет MCP: она говорит агенту вызвать инструмент. Без включённого сервера `legitagent` скана не будет.
 
@@ -94,7 +100,7 @@ Telegram (опционально): `LEGITAGENT_TELEGRAM_BOT_TOKEN`, `LEGITAGENT_
 
 LLM для `--review`: `LEGITAGENT_LLM_API_KEY` (опционально; без ключа — эвристический fallback). Базовый URL API: `LEGITAGENT_LLM_BASE_URL` (fallback: `LEGITAGENT_LLM_API_BASE`).
 
-User rule для Cursor always-on: скопируйте текст из [`docs/cursor-user-rule.md`](docs/cursor-user-rule.md) в User rules.
+User rule для Cursor always-on: скопируйте текст из `[docs/cursor-user-rule.md](docs/cursor-user-rule.md)` в User rules.
 
 ### Конфиг
 
@@ -116,31 +122,37 @@ User rule для Cursor always-on: скопируйте текст из [`docs/c
 
 `--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium: ждёт гидрацию SPA, нажимает «отказ», если кнопка есть, смотрит cookie до и после этого, и прогоняет тот же каталог правил по HTML страницы (формы, политика, ERID, витрина, трекеры).
 
-| Код выхода | Значение |
-|---|---|
-| `0` | Нет серьёзных находок (в том числе нечего сканировать) |
-| `1` | Есть хотя бы одна находка `high` |
-| `2` | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` / `--notify-telegram` без credentials |
 
-В CI достаточно `npx @legit-agent/cli@0.7.1 scan --json`: ненулевой код — стоп пайплайна. Source-scan **не вызывает LLM**. Для code scanning скопируйте [`examples/github-scan.yml`](examples/github-scan.yml) в `.github/workflows/legitagent.yml` — он вызывает композитное действие [`.github/actions/legitagent-scan`](.github/actions/legitagent-scan/action.yml) с пином `@v0.7.1`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`. Для мониторинга живого сайта после деплоя — [`examples/github-watch.yml`](examples/github-watch.yml) (`scan-url --review --evidence`, опционально Telegram). В URL/watch-режиме issues и `fail-on-high` используют **сырой** SARIF (`--sarif legitagent.sarif`); evidence pack остаётся отфильтрованным (`confirm` + `ask_human`).
+| Код выхода | Значение                                                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------------ |
+| `0`        | Нет серьёзных находок (в том числе нечего сканировать)                                                       |
+| `1`        | Есть хотя бы одна находка `high`                                                                             |
+| `2`        | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` / `--notify-telegram` без credentials |
+
+
+В CI достаточно `npx @legit-agent/cli@0.7.1 scan --json`: ненулевой код — стоп пайплайна. Source-scan **не вызывает LLM**. Для code scanning скопируйте `[examples/github-scan.yml](examples/github-scan.yml)` в `.github/workflows/legitagent.yml` — он вызывает композитное действие `[.github/actions/legitagent-scan](.github/actions/legitagent-scan/action.yml)` с пином `@v0.7.1`: пишет SARIF, загружает его в GitHub, комментирует PR с результатами и при push в `main` создаёт или обновляет issue при находках `high`. Для мониторинга живого сайта после деплоя — `[examples/github-watch.yml](examples/github-watch.yml)` (`scan-url --review --evidence`, опционально Telegram). В URL/watch-режиме issues и `fail-on-high` используют **сырой** SARIF (`--sarif legitagent.sarif`); evidence pack остаётся отфильтрованным (`confirm` + `ask_human`).
 
 ---
 
+
+
 ## Возможности
 
-Один движок [`@legit-agent/core`](https://www.npmjs.com/package/@legit-agent/core), живой сканер [`@legit-agent/live`](https://www.npmjs.com/package/@legit-agent/live), оболочки [`@legit-agent/mcp`](https://www.npmjs.com/package/@legit-agent/mcp) и [`@legit-agent/cli`](https://www.npmjs.com/package/@legit-agent/cli).
+Один движок `[@legit-agent/core](https://www.npmjs.com/package/@legit-agent/core)`, живой сканер `[@legit-agent/live](https://www.npmjs.com/package/@legit-agent/live)`, оболочки `[@legit-agent/mcp](https://www.npmjs.com/package/@legit-agent/mcp)` и `[@legit-agent/cli](https://www.npmjs.com/package/@legit-agent/cli)`.
 
 ### Инструменты MCP
 
-| Инструмент | Что делает |
-|---|---|
-| `scan` | Сканирует проект. Необязательные `root` и `lang` (`ru` / `en`). |
-| `review` | Второй проход по findings: `confirm`, `reject`, `ask_human`. Необязательные `root` и `lang`. |
-| `scan_url` | Проверяет живой URL: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры; ждёт гидрацию SPA и кликает «отказ», если кнопка есть. Опционально `evidenceDir`. |
-| `list_rules` | Полный каталог правил. |
-| `explain_rule` | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`. |
-| `generate_policy` | Черновик политики обработки ПДн. Нужен `operator`. Не юридическое заключение. |
-| `get_law` | Текст из корпуса (`152-fz`, `38-fz`, `zozpp`), опционально номер статьи. |
+
+| Инструмент        | Что делает                                                                                                                                                                  |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scan`            | Сканирует проект. Необязательные `root` и `lang` (`ru` / `en`).                                                                                                             |
+| `review`          | Второй проход по findings: `confirm`, `reject`, `ask_human`. Необязательные `root` и `lang`.                                                                                |
+| `scan_url`        | Проверяет живой URL: cookie, баннер, формы, политика, ERID, витрина, иностранные трекеры; ждёт гидрацию SPA и кликает «отказ», если кнопка есть. Опционально `evidenceDir`. |
+| `list_rules`      | Полный каталог правил.                                                                                                                                                      |
+| `explain_rule`    | Правило, выдержка статьи, как исправить, дисклеймер. Нужен `ruleId`.                                                                                                        |
+| `generate_policy` | Черновик политики обработки ПДн. Нужен `operator`. Не юридическое заключение.                                                                                               |
+| `get_law`         | Текст из корпуса (`152-fz`, `38-fz`, `zozpp`), опционально номер статьи.                                                                                                    |
+
 
 Агент сам предлагает патч по находкам — MCP только проверяет и объясняет.
 
@@ -150,22 +162,26 @@ User rule для Cursor always-on: скопируйте текст из [`docs/c
 
 Сканер читает `.html`, `.jsx`, `.tsx`, `.vue`, `.svelte`, `.astro`. Пропускает `node_modules`, `.next`, `dist`, `build`, `coverage`, `.git`. Синтаксически сломанный файл не роняет проверку — он уходит в предупреждение. Пустой проект — валидный результат, не ошибка.
 
-| id | Что находит | Норма |
-|---|---|---|
-| `PDN.FORM.NO_CONSENT` | Форма с именем, email или телефоном без чекбокса согласия | 152-ФЗ ст. 9 |
-| `PDN.FORM.PRECHECKED_CONSENT` | Предзаполненный чекбокс согласия | 152-ФЗ ст. 9 |
-| `PDN.FORM.NO_POLICY_LINK` | Согласие без ссылки на политику | 152-ФЗ ст. 9 |
-| `PDN.POLICY.NO_LINK` | В проекте нет ссылки на политику обработки ПДн | 152-ФЗ ст. 18.1 |
-| `PDN.POLICY.INCOMPLETE` | Политика без оператора, целей, сроков или порядка отзыва | 152-ФЗ ст. 18.1 |
-| `PDN.TRACKER.NO_CONSENT` | Яндекс.Метрика, gtag, GA, Meta Pixel, VK.Retargeting без проверки согласия | 152-ФЗ ст. 6 |
-| `PDN.COOKIE.NO_REJECT` | Cookie-баннер без возможности отказа | 152-ФЗ ст. 9 |
-| `PDN.TRANSFER.FOREIGN_TRACKER` | Иностранный трекер / возможная трансграничная передача | 152-ФЗ ст. 6 |
-| `PDN.LOCALIZATION.UNCLEAR` | Форма с ПДн и иностранный трекер без указания локализации баз в РФ (`low`) | 152-ФЗ ст. 18 |
-| `PDN.ORG.RKN_NOTICE` | Форма с ПДн без следов уведомления РКН (`low`) | 152-ФЗ ст. 22 |
-| `ADV.ERID.MISSING` | Пометка «Реклама» без erid | 38-ФЗ ст. 5 |
-| `CONSUMER.OFFER.MISSING` | Витрина без оферты | ЗоЗПП ст. 8 |
-| `CONSUMER.REQUISITES.MISSING` | Витрина без ИНН/ОГРН | ЗоЗПП ст. 7 |
-| `CONSUMER.RETURN.MISSING` | Витрина без условий возврата | ЗоЗПП ст. 18 |
+
+| id                             | Что находит                                                                | Норма           |
+| ------------------------------ | -------------------------------------------------------------------------- | --------------- |
+| `PDN.FORM.NO_CONSENT`          | Форма с именем, email или телефоном без чекбокса согласия                  | 152-ФЗ ст. 9    |
+| `PDN.FORM.PRECHECKED_CONSENT`  | Предзаполненный чекбокс согласия                                           | 152-ФЗ ст. 9    |
+| `PDN.FORM.NO_POLICY_LINK`      | Согласие без ссылки на политику                                            | 152-ФЗ ст. 9    |
+| `PDN.POLICY.NO_LINK`           | В проекте нет ссылки на политику обработки ПДн                             | 152-ФЗ ст. 18.1 |
+| `PDN.POLICY.INCOMPLETE`        | Политика без оператора, целей, сроков или порядка отзыва                   | 152-ФЗ ст. 18.1 |
+| `PDN.TRACKER.NO_CONSENT`       | Яндекс.Метрика, gtag, GA, Meta Pixel, VK.Retargeting без проверки согласия | 152-ФЗ ст. 6    |
+| `PDN.COOKIE.NO_REJECT`         | Cookie-баннер без возможности отказа                                       | 152-ФЗ ст. 9    |
+| `PDN.TRANSFER.FOREIGN_TRACKER` | Иностранный трекер / возможная трансграничная передача                     | 152-ФЗ ст. 6    |
+| `PDN.LOCALIZATION.UNCLEAR`     | Форма с ПДн и иностранный трекер без указания локализации баз в РФ (`low`) | 152-ФЗ ст. 18   |
+| `PDN.ORG.RKN_NOTICE`           | Форма с ПДн без следов уведомления РКН (`low`)                             | 152-ФЗ ст. 22   |
+| `ADV.ERID.MISSING`             | Пометка «Реклама» без erid                                                 | 38-ФЗ ст. 5     |
+| `CONSUMER.OFFER.MISSING`       | Витрина без оферты                                                         | ЗоЗПП ст. 8     |
+| `CONSUMER.REQUISITES.MISSING`  | Витрина без ИНН/ОГРН                                                       | ЗоЗПП ст. 7     |
+| `CONSUMER.RETURN.MISSING`      | Витрина без условий возврата                                               | ЗоЗПП ст. 18    |
+
+
+
 
 ### Полный чек-лист
 
@@ -181,7 +197,7 @@ User rule для Cursor always-on: скопируйте текст из [`docs/c
 
 **Реклама** — пометка «Реклама» без идентификатора (`ADV.ERID.MISSING`).
 
-**Витрина** — оферта, реквизиты, возврат (`CONSUMER.*`).
+**Витрина** — оферта, реквизиты, возврат (`CONSUMER.`*).
 
 У каждого правила в репозитории есть короткая выдержка статьи. Без выдержки правило в каталог не попадает.
 
@@ -190,6 +206,8 @@ User rule для Cursor always-on: скопируйте текст из [`docs/c
 Проверить, что сканер вообще что-то находит: клонируйте [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo) (форма без согласия, метрика без opt-in, нет политики) и выполните `npx @legit-agent/cli scan`.
 
 ---
+
+
 
 ## Разработка
 
@@ -212,6 +230,8 @@ pnpm build
 
 ---
 
+
+
 ## Релиз
 
 Пакеты живут на [npmjs.com/org/legit-agent](https://www.npmjs.com/org/legit-agent), не в GitHub Packages.
@@ -219,6 +239,8 @@ pnpm build
 Новая версия: одинаковый `version` в `packages/*/package.json` (core, cli, live, mcp), коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. GitHub Actions публикует core → live → cli → mcp и открывает GitHub Release.
 
 ---
+
+
 
 ## Лицензия
 
