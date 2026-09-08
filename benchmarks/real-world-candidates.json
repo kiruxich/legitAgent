@@ -1,0 +1,844 @@
+{
+  "schemaVersion": 1,
+  "researchedAt": "2026-09-08",
+  "purpose": "Imported source inventory for the executable static benchmark. Labels describe scoped technical facts, not legal verdicts about the original projects.",
+  "validation": {
+    "sourceReview": "Pinned public source, license declarations and fixture transformations reviewed.",
+    "staticProbes": "Original pre-import observations remain in probe fields; current behavior is verified by pnpm benchmark.",
+    "liveRuntime": "Not exercised; SDK and production consent lifecycles remain outside the static labels.",
+    "importedFixtures": 12,
+    "releaseGateContribution": 12,
+    "benchmarkSeedCases": 52,
+    "benchmarkExpandedCases": 260
+  },
+  "labelPolicy": "Expected fields describe scoped technical facts only. A positive PDN rule label requires separate manual justification; omitted rules must not be scored. Current detector output must not define expected labels.",
+  "independencePolicy": "One provisional source group per independently developed repository. Check shared implementation ancestry before import. Translations, generated output, state variants and multiple apps in one monorepo do not create new independent sources.",
+  "candidates": [
+    {
+      "id": "vas3k-join",
+      "repository": "vas3k/vas3k.club",
+      "commit": "86126cdc4db7566bf0f9bab44e3657c34ddaed93",
+      "framework": "Django HTML",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "frontend/html/auth/join.html",
+          "startLine": 15,
+          "endLine": 33,
+          "url": "https://github.com/vas3k/vas3k.club/blob/86126cdc4db7566bf0f9bab44e3657c34ddaed93/frontend/html/auth/join.html#L15-L33"
+        }
+      ],
+      "observations": [
+        "Email field and an unchecked required consent checkbox are inside the form.",
+        "The consent label contains a privacy-policy link expressed through a Django URL tag."
+      ],
+      "targets": [
+        "PDN.FORM.NO_CONSENT",
+        "PDN.FORM.PRECHECKED_CONSENT",
+        "PDN.FORM.NO_POLICY_LINK"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "noConsentFinding": false,
+        "precheckedConsentFinding": false,
+        "policyLink": "present in template; rendered href needs template context"
+      },
+      "probe": {
+        "input": "raw template only",
+        "hasPii": true,
+        "hasConsent": true,
+        "hasPolicyLink": false,
+        "notes": "Current analyzer misses the dynamic policy link. Project-wide findings from the isolated component are not scored.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Include the URL resolver/rendered template pair; do not replace the link with a literal href and call it the original case.",
+      "independenceGroup": "vas3k/vas3k.club",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/vas3k/vas3k.club/blob/86126cdc4db7566bf0f9bab44e3657c34ddaed93/LICENSE",
+      "import": {
+        "corpusId": "vas3k-join",
+        "fixturePath": "benchmarks/real-world/vas3k-join",
+        "provenancePath": "benchmarks/real-world/vas3k-join/provenance.json",
+        "rules": {
+          "PDN.FORM.NO_CONSENT": false,
+          "PDN.FORM.PRECHECKED_CONSENT": false,
+          "PDN.FORM.NO_POLICY_LINK": false
+        },
+        "checks": [
+          {
+            "file": "join.html",
+            "forms": [
+              {
+                "hasPii": true,
+                "hasConsent": true,
+                "hasPolicyLink": true,
+                "hasPrecheckedConsent": false
+              }
+            ]
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "memos-search",
+      "repository": "usememos/memos",
+      "commit": "d3d0b35231d557feac5d32a018f153405e496564",
+      "framework": "React / TSX",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "web/src/components/AppSidebar/QuickFindDialog.tsx",
+          "startLine": 113,
+          "endLine": 225,
+          "url": "https://github.com/usememos/memos/blob/d3d0b35231d557feac5d32a018f153405e496564/web/src/components/AppSidebar/QuickFindDialog.tsx#L113-L225"
+        },
+        {
+          "path": "web/src/components/ui/input.tsx",
+          "startLine": 4,
+          "endLine": 14,
+          "url": "https://github.com/usememos/memos/blob/d3d0b35231d557feac5d32a018f153405e496564/web/src/components/ui/input.tsx#L4-L14"
+        }
+      ],
+      "observations": [
+        "Form submission updates search filters/navigation.",
+        "The Input wrapper renders a native input; fields represent a note search query rather than named contact fields."
+      ],
+      "targets": [
+        "PDN.FORM.NO_CONSENT",
+        "PDN.FORM.PRECHECKED_CONSENT",
+        "PDN.FORM.NO_POLICY_LINK"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "formFinding": false
+      },
+      "probe": {
+        "input": "QuickFindDialog.tsx only",
+        "hasPii": false,
+        "formFindings": 0,
+        "notes": "A project-wide missing-policy finding is outside this case's scope.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Keep the local Input/Textarea implementations and relevant props. Do not infer global policy status from one component.",
+      "independenceGroup": "usememos/memos",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/usememos/memos/blob/d3d0b35231d557feac5d32a018f153405e496564/LICENSE",
+      "import": {
+        "corpusId": "memos-search",
+        "fixturePath": "benchmarks/real-world/memos-search",
+        "provenancePath": "benchmarks/real-world/memos-search/provenance.json",
+        "rules": {
+          "PDN.FORM.NO_CONSENT": false,
+          "PDN.FORM.NO_POLICY_LINK": false
+        },
+        "checks": [
+          {
+            "file": "QuickFindDialog.tsx",
+            "forms": [
+              {
+                "hasPii": false,
+                "hasConsent": false
+              }
+            ]
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "immich-admin-registration",
+      "repository": "immich-app/immich",
+      "commit": "4f503c4b6b7d35ad8c620c6a5ee734eeed357732",
+      "framework": "Svelte",
+      "license": "AGPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "web/src/routes/auth/register/+page.svelte",
+          "startLine": 28,
+          "endLine": 80,
+          "url": "https://github.com/immich-app/immich/blob/4f503c4b6b7d35ad8c620c6a5ee734eeed357732/web/src/routes/auth/register/+page.svelte#L28-L80"
+        },
+        {
+          "path": "web/package.json",
+          "startLine": 1,
+          "endLine": 12,
+          "url": "https://github.com/immich-app/immich/blob/4f503c4b6b7d35ad8c620c6a5ee734eeed357732/web/package.json#L1-L12"
+        }
+      ],
+      "observations": [
+        "Admin registration submits email, password and name to signUpAdmin.",
+        "Email/name controls use @immich/ui Input components; there is no consent control inside this form."
+      ],
+      "targets": [
+        "form-field recognition",
+        "consent-control recognition"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "emailField": true,
+        "nameField": true,
+        "consentControlInForm": false,
+        "legalStatus": "not_assessed"
+      },
+      "probe": {
+        "input": "registration Svelte component only",
+        "hasPii": true,
+        "hasConsent": false,
+        "notes": "Current scanner reports NO_CONSENT. This is not a ground-truth legal violation label.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Pin @immich/ui for DOM-level evaluation; determine processing basis separately before any legal label.",
+      "independenceGroup": "immich-app/immich",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/immich-app/immich/blob/4f503c4b6b7d35ad8c620c6a5ee734eeed357732/LICENSE",
+      "import": {
+        "corpusId": "immich-admin-registration",
+        "fixturePath": "benchmarks/real-world/immich-admin-registration",
+        "provenancePath": "benchmarks/real-world/immich-admin-registration/provenance.json",
+        "rules": {
+          "PDN.FORM.PRECHECKED_CONSENT": false
+        },
+        "checks": [
+          {
+            "file": "Register.svelte",
+            "forms": [
+              {
+                "hasPii": true,
+                "hasConsent": false,
+                "hasPrecheckedConsent": false
+              }
+            ]
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "hoppscotch-email-login",
+      "repository": "hoppscotch/hoppscotch",
+      "commit": "ac145e7f758151b41fd46d3e5f513886ce9068ba",
+      "framework": "Vue",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "packages/hoppscotch-common/src/components/firebase/Login.vue",
+          "startLine": 44,
+          "endLine": 118,
+          "url": "https://github.com/hoppscotch/hoppscotch/blob/ac145e7f758151b41fd46d3e5f513886ce9068ba/packages/hoppscotch-common/src/components/firebase/Login.vue#L44-L118"
+        },
+        {
+          "path": "packages/hoppscotch-common/src/components/firebase/Login.vue",
+          "startLine": 340,
+          "endLine": 355,
+          "url": "https://github.com/hoppscotch/hoppscotch/blob/ac145e7f758151b41fd46d3e5f513886ce9068ba/packages/hoppscotch-common/src/components/firebase/Login.vue#L340-L355"
+        }
+      ],
+      "observations": [
+        "Email login uses HoppSmartInput with type=email.",
+        "A conditional privacy link uses a dynamic :to binding in the sign-in-mode footer, outside the email-mode form; its URL is configured by environment."
+      ],
+      "targets": [
+        "component-backed form fields",
+        "dynamic policy link"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "emailField": true,
+        "privacyLink": "conditional",
+        "legalStatus": "not_assessed"
+      },
+      "context": "Pin @hoppscotch/ui 0.2.6 and capture the relevant environment/mode; do not label a missing checkbox as a legal violation.",
+      "independenceGroup": "hoppscotch/hoppscotch",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/hoppscotch/hoppscotch/blob/ac145e7f758151b41fd46d3e5f513886ce9068ba/LICENSE",
+      "import": {
+        "corpusId": "hoppscotch-email-login",
+        "fixturePath": "benchmarks/real-world/hoppscotch-email-login",
+        "provenancePath": "benchmarks/real-world/hoppscotch-email-login/provenance.json",
+        "rules": {
+          "PDN.FORM.PRECHECKED_CONSENT": false
+        },
+        "checks": [
+          {
+            "file": "Login.vue",
+            "forms": [
+              {
+                "hasPii": true,
+                "hasConsent": false,
+                "hasPrecheckedConsent": false
+              }
+            ]
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "nextcloud-invite-search",
+      "repository": "nextcloud/contacts",
+      "commit": "986f82595218b375d12a5236282c8b15aa78b97d",
+      "framework": "Vue",
+      "license": "AGPL-3.0-or-later",
+      "licensePath": "COPYING",
+      "files": [
+        {
+          "path": "src/components/Ocm/OcmInvitesList.vue",
+          "startLine": 1,
+          "endLine": 22,
+          "url": "https://github.com/nextcloud/contacts/blob/986f82595218b375d12a5236282c8b15aa78b97d/src/components/Ocm/OcmInvitesList.vue#L1-L22"
+        },
+        {
+          "path": "src/components/Ocm/OcmInvitesList.vue",
+          "startLine": 132,
+          "endLine": 136,
+          "url": "https://github.com/nextcloud/contacts/blob/986f82595218b375d12a5236282c8b15aa78b97d/src/components/Ocm/OcmInvitesList.vue#L132-L136"
+        }
+      ],
+      "observations": [
+        "A native text input binds to query outside a form.",
+        "The query filters an existing invitation list locally."
+      ],
+      "targets": [
+        "PDN.FORM.NO_CONSENT",
+        "PDN.FORM.PRECHECKED_CONSENT",
+        "PDN.FORM.NO_POLICY_LINK"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "formFinding": false
+      },
+      "context": "Scope the label to this search component; do not score the entire app's privacy policy or personal-data processing.",
+      "independenceGroup": "nextcloud/contacts",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/nextcloud/contacts/blob/986f82595218b375d12a5236282c8b15aa78b97d/COPYING",
+      "import": {
+        "corpusId": "nextcloud-invite-search",
+        "fixturePath": "benchmarks/real-world/nextcloud-invite-search",
+        "provenancePath": "benchmarks/real-world/nextcloud-invite-search/provenance.json",
+        "rules": {
+          "PDN.FORM.NO_CONSENT": false,
+          "PDN.FORM.NO_POLICY_LINK": false
+        },
+        "checks": [
+          {
+            "file": "OcmInvitesList.vue",
+            "forms": []
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "opentdf-consent-config",
+      "repository": "opentdf/docs",
+      "commit": "af7de4e687326328330935470932d05074778e38",
+      "framework": "Docusaurus / TypeScript + generated HTML",
+      "license": "CC-BY-4.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "docusaurus.config.ts",
+          "startLine": 47,
+          "endLine": 72,
+          "url": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/docusaurus.config.ts#L47-L72"
+        },
+        {
+          "path": "src/theme/OsanoLoader.js",
+          "startLine": 1,
+          "endLine": 32,
+          "url": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/src/theme/OsanoLoader.js#L1-L32"
+        },
+        {
+          "path": "README.md",
+          "startLine": 1,
+          "endLine": 10,
+          "url": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/README.md#L1-L10"
+        }
+      ],
+      "observations": [
+        "Consent defaults deny analytics and ad storage before GTM injection.",
+        "Script bodies are strings in headTags/innerHTML.",
+        "Osano loads only on production hostnames and supplies preferences UI."
+      ],
+      "targets": [
+        "embedded script extraction",
+        "consent command vs tracker launch",
+        "production-only CMP"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "consentDefaults": "denied for analytics/ad storage",
+        "legalStatus": "not_assessed"
+      },
+      "probe": {
+        "input": "config plus Osano loader",
+        "trackerNoConsentFindings": 0,
+        "foreignTrackerFindings": 1,
+        "notes": "Static TypeScript parsing does not enter the injected script strings; compare with generated HTML in a separate view of the same case.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Root license declares CC-BY-4.0; footer also references a separate platform-code license. Preserve source-level provenance and resolve applicable scope when importing. Stub CMP/network and production host checks locally.",
+      "independenceGroup": "opentdf/docs",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/LICENSE",
+      "import": {
+        "corpusId": "opentdf-consent-config",
+        "fixturePath": "benchmarks/real-world/opentdf-consent-config",
+        "provenancePath": "benchmarks/real-world/opentdf-consent-config/provenance.json",
+        "rules": {
+          "PDN.TRANSFER.FOREIGN_TRACKER": true
+        },
+        "checks": [
+          {
+            "file": "consent-default.js",
+            "forms": [],
+            "trackers": [],
+            "rules": {
+              "PDN.TRACKER.NO_CONSENT": false
+            }
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "keto-regional-consent",
+      "repository": "martinus/keto-calculator",
+      "commit": "fa035a5778744f226b96f770cd383703aef02ef2",
+      "framework": "HTML / JavaScript",
+      "license": "CC-BY-SA-3.0",
+      "licensePath": "LICENSE.txt",
+      "files": [
+        {
+          "path": "index.html",
+          "startLine": 13,
+          "endLine": 42,
+          "url": "https://github.com/martinus/keto-calculator/blob/fa035a5778744f226b96f770cd383703aef02ef2/index.html#L13-L42"
+        },
+        {
+          "path": "index.html",
+          "startLine": 62,
+          "endLine": 71,
+          "url": "https://github.com/martinus/keto-calculator/blob/fa035a5778744f226b96f770cd383703aef02ef2/index.html#L62-L71"
+        },
+        {
+          "path": "README.md",
+          "startLine": 1,
+          "endLine": 38,
+          "url": "https://github.com/martinus/keto-calculator/blob/fa035a5778744f226b96f770cd383703aef02ef2/README.md#L1-L38"
+        }
+      ],
+      "observations": [
+        "Two gtag consent defaults configure a worldwide granted state followed by a region-specific denied state.",
+        "The initial HTML loads gtag and a separate consent-message provider."
+      ],
+      "targets": [
+        "consent configuration commands",
+        "region-dependent defaults",
+        "external CMP context"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "regionalConsentConfiguration": true,
+        "legalStatus": "not_assessed"
+      },
+      "probe": {
+        "input": "index.html only",
+        "trackerNoConsentFindings": 8,
+        "notes": "Findings include consent/default and set commands; evaluate those separately from actual tracker launch or storage effects.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Replace identifiers, intercept external scripts, and model each region without visiting the live site. Generated embed/localized copies are the same independence group, not extra real-world cases.",
+      "independenceGroup": "martinus/keto-calculator",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/martinus/keto-calculator/blob/fa035a5778744f226b96f770cd383703aef02ef2/LICENSE.txt",
+      "import": {
+        "corpusId": "keto-regional-consent",
+        "fixturePath": "benchmarks/real-world/keto-regional-consent",
+        "provenancePath": "benchmarks/real-world/keto-regional-consent/provenance.json",
+        "rules": {
+          "PDN.TRANSFER.FOREIGN_TRACKER": true
+        },
+        "checks": [
+          {
+            "file": "analytics.html",
+            "forms": [],
+            "trackers": [
+              {
+                "name": "gtag",
+                "snippetIncludes": "gtag('config'"
+              }
+            ]
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "payload-consent-actions",
+      "repository": "payloadcms/website",
+      "commit": "b1aaaaf76e7ec52984ef39a6075771c9067d866f",
+      "framework": "React / Next.js",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/components/PrivacyBanner/index.tsx",
+          "url": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/components/PrivacyBanner/index.tsx"
+        },
+        {
+          "path": "src/providers/Privacy/index.tsx",
+          "url": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/providers/Privacy/index.tsx"
+        },
+        {
+          "path": "src/components/Analytics/GoogleAnalytics/index.tsx",
+          "url": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/components/Analytics/GoogleAnalytics/index.tsx"
+        },
+        {
+          "path": "src/components/Analytics/GoogleTagManager/index.tsx",
+          "url": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/components/Analytics/GoogleTagManager/index.tsx"
+        },
+        {
+          "path": "src/app/(frontend)/(pages)/cookie/client_page.tsx",
+          "url": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/app/%28frontend%29/%28pages%29/cookie/client_page.tsx"
+        },
+        {
+          "path": "src/app/(frontend)/layout.tsx",
+          "url": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/app/%28frontend%29/layout.tsx"
+        }
+      ],
+      "observations": [
+        "Dismiss writes false and Accept writes true through updateCookieConsent.",
+        "The privacy provider restores local storage and checks a region endpoint; outside the configured region it accepts automatically.",
+        "Analytics components depend on consent and configured measurement IDs; a separate page can change preferences."
+      ],
+      "targets": [
+        "semantic reject-action recognition",
+        "consent persistence and revocation",
+        "region and configuration context"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "dismissAction": "rejects consent",
+        "legalStatus": "not_assessed"
+      },
+      "probe": {
+        "input": "PrivacyBanner component only",
+        "notes": "No cookie finding in this isolated static probe. Project-policy findings are outside the intended scope; the consent state machine was not exercised.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Include providers, analytics components and the preferences page. Mock the region endpoint, set test measurement IDs and verify both enabled and disabled states.",
+      "independenceGroup": "payloadcms/website",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/LICENSE",
+      "import": {
+        "corpusId": "payload-consent-actions",
+        "fixturePath": "benchmarks/real-world/payload-consent-actions",
+        "provenancePath": "benchmarks/real-world/payload-consent-actions/provenance.json",
+        "rules": {
+          "PDN.COOKIE.NO_REJECT": false
+        },
+        "checks": [],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "supabase-consent-categories",
+      "repository": "supabase/supabase",
+      "commit": "45199443c8e927f623f758399bdf52796adc6615",
+      "framework": "React / Next.js",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "packages/ui-patterns/src/ConsentToast/index.tsx",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/ui-patterns/src/ConsentToast/index.tsx"
+        },
+        {
+          "path": "packages/ui-patterns/src/consent.tsx",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/ui-patterns/src/consent.tsx"
+        },
+        {
+          "path": "packages/ui-patterns/src/PrivacySettings/index.tsx",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/ui-patterns/src/PrivacySettings/index.tsx"
+        },
+        {
+          "path": "packages/common/consent-state.ts",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/common/consent-state.ts"
+        },
+        {
+          "path": "packages/common/telemetry.tsx",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/common/telemetry.tsx"
+        },
+        {
+          "path": "apps/www/app/providers.tsx",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/apps/www/app/providers.tsx"
+        },
+        {
+          "path": "apps/www/data/Footer.ts",
+          "url": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/apps/www/data/Footer.ts"
+        }
+      ],
+      "observations": [
+        "The UI offers Accept, Opt out and Privacy settings; preferences have separate categories and Cancel/Confirm actions.",
+        "The Usercentrics adapter restores or migrates prior decisions.",
+        "Local development and staging accept consent by default; telemetry also depends on platform and environment configuration."
+      ],
+      "targets": [
+        "reject vs close/cancel",
+        "category-specific decisions",
+        "saved consent migration",
+        "production-only behavior"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "rejectAction": "Opt out",
+        "legalStatus": "not_assessed"
+      },
+      "context": "Mock the pinned Usercentrics SDK and use production-equivalent configuration with test IDs. A local build with no requests is not proof of correct gating. All monorepo apps belong to one source group.",
+      "independenceGroup": "supabase/supabase",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/LICENSE",
+      "import": {
+        "corpusId": "supabase-consent-categories",
+        "fixturePath": "benchmarks/real-world/supabase-consent-categories",
+        "provenancePath": "benchmarks/real-world/supabase-consent-categories/provenance.json",
+        "rules": {
+          "PDN.COOKIE.NO_REJECT": false
+        },
+        "checks": [],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "gta-inert-analytics",
+      "repository": "smtchahal/gta-snap-to-jpg",
+      "commit": "585d9642d851bebbb2026cb398308f0adb5c2365",
+      "framework": "React / Vite + HTML",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "index.html",
+          "startLine": 11,
+          "endLine": 17,
+          "url": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/index.html#L11-L17"
+        },
+        {
+          "path": "src/components/CookieConsent.tsx",
+          "url": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/src/components/CookieConsent.tsx"
+        },
+        {
+          "path": "src/components/App.tsx",
+          "startLine": 85,
+          "endLine": 89,
+          "url": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/src/components/App.tsx#L85-L89"
+        },
+        {
+          "path": "src/helpers/analytics.ts",
+          "url": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/src/helpers/analytics.ts"
+        }
+      ],
+      "observations": [
+        "Analytics scripts use type=text/plain and data-category=analytics.",
+        "The mounted vanilla-cookieconsent configuration offers Accept all, Reject all and preferences, with a required necessary category.",
+        "Application analytics helpers check for window.gtag."
+      ],
+      "targets": [
+        "inert script vs executable script",
+        "CMP-managed script activation",
+        "reject and preferences actions"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "initialScriptType": "text/plain",
+        "initialHtmlScriptExecution": false,
+        "legalStatus": "not_assessed"
+      },
+      "probe": {
+        "input": "index.html only",
+        "trackerNoConsentFindings": 2,
+        "notes": "NO_CONSENT at lines 15 and 16 comes from a text/plain script. Initial HTML parsing and subsequent CMP activation must be scored separately; runtime was not measured.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Keep the CMP dependency and data-category attributes. Test initial state, accept, reject, restored choice and revocation with intercepted network. A disabled script alone does not establish the behavior of the mounted application.",
+      "independenceGroup": "smtchahal/gta-snap-to-jpg",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/LICENSE",
+      "import": {
+        "corpusId": "gta-inert-analytics",
+        "fixturePath": "benchmarks/real-world/gta-inert-analytics",
+        "provenancePath": "benchmarks/real-world/gta-inert-analytics/provenance.json",
+        "rules": {
+          "PDN.TRACKER.NO_CONSENT": false,
+          "PDN.COOKIE.NO_REJECT": false
+        },
+        "checks": [
+          {
+            "file": "analytics.html",
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "freefeed-unrelated-checkboxes",
+      "repository": "FreeFeed/freefeed-react-client",
+      "commit": "ce74224c64c20eb90be3685d6344758b7e54e8c3",
+      "framework": "React / JSX",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/components/signup-form.jsx",
+          "startLine": 17,
+          "endLine": 29,
+          "url": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/signup-form.jsx#L17-L29"
+        },
+        {
+          "path": "src/components/signup-form.jsx",
+          "startLine": 261,
+          "endLine": 273,
+          "url": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/signup-form.jsx#L261-L273"
+        },
+        {
+          "path": "src/components/signup-by-invitation.jsx",
+          "url": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/signup-by-invitation.jsx"
+        },
+        {
+          "path": "src/components/cookies-warning.jsx",
+          "url": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/cookies-warning.jsx"
+        }
+      ],
+      "observations": [
+        "The signup form defaults a checkbox for following recommended users/groups to true; that control is not privacy consent.",
+        "Invitation text has a Russian-language version.",
+        "The cookies warning explains that browser cookies are disabled; it is not a consent banner."
+      ],
+      "targets": [
+        "PDN.FORM.PRECHECKED_CONSENT",
+        "cookie banner recognition"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "subscriptionCheckboxIsPrivacyConsent": false,
+        "cookiesWarningIsConsentBanner": false,
+        "legalStatus": "not_assessed"
+      },
+      "probe": {
+        "input": "cookies-warning.jsx only",
+        "notes": "No cookie finding; the isolated component's project-wide policy finding is not scored. Signup behavior was inspected but not probed.",
+        "phase": "historical pre-import baseline, before the real-world parser fixes"
+      },
+      "context": "Preserve the subscription label and state initialization, and include the invitation parent. Score only control/banner classification; do not infer a legal basis for account creation.",
+      "independenceGroup": "freefeed/freefeed-react-client",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/LICENSE",
+      "import": {
+        "corpusId": "freefeed-unrelated-checkboxes",
+        "fixturePath": "benchmarks/real-world/freefeed-unrelated-checkboxes",
+        "provenancePath": "benchmarks/real-world/freefeed-unrelated-checkboxes/provenance.json",
+        "rules": {
+          "PDN.FORM.PRECHECKED_CONSENT": false,
+          "PDN.COOKIE.NO_REJECT": false
+        },
+        "checks": [
+          {
+            "file": "signup-form.jsx",
+            "forms": [
+              {
+                "hasPii": true,
+                "hasConsent": false,
+                "hasPrecheckedConsent": false
+              }
+            ]
+          },
+          {
+            "file": "cookies-warning.jsx",
+            "forms": []
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "pretix-checkout-confirmations",
+      "repository": "pretix/pretix",
+      "commit": "edb4069e18d34eb80f290c00cd6eb74bbd499728",
+      "framework": "Django HTML / JavaScript",
+      "license": "AGPL-3.0 with additional terms; mixed-license repository",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/pretix/presale/templates/pretixpresale/event/checkout_confirm.html",
+          "url": "https://github.com/pretix/pretix/blob/edb4069e18d34eb80f290c00cd6eb74bbd499728/src/pretix/presale/templates/pretixpresale/event/checkout_confirm.html"
+        },
+        {
+          "path": "src/pretix/presale/templates/pretixpresale/event/checkout_questions.html",
+          "url": "https://github.com/pretix/pretix/blob/edb4069e18d34eb80f290c00cd6eb74bbd499728/src/pretix/presale/templates/pretixpresale/event/checkout_questions.html"
+        },
+        {
+          "path": "src/pretix/static/pretixpresale/js/ui/cookieconsent.js",
+          "url": "https://github.com/pretix/pretix/blob/edb4069e18d34eb80f290c00cd6eb74bbd499728/src/pretix/static/pretixpresale/js/ui/cookieconsent.js"
+        }
+      ],
+      "observations": [
+        "Checkout templates combine generated forms, order confirmations and previously submitted answers.",
+        "A checked disabled checkbox at checkout_confirm.html:152 displays a prior boolean answer."
+      ],
+      "targets": [
+        "read-only answer vs fresh consent",
+        "generated form context",
+        "checkout-specific classification"
+      ],
+      "labelStatus": "reviewed-static-source",
+      "expected": {
+        "readOnlyAnswerIsFreshConsent": false,
+        "legalStatus": "not_assessed"
+      },
+      "context": "Imported the pinned development-source checkout template under the preserved upstream LICENSE, scoring only read-only answer versus prechecked consent. This is not evidence of a deployed release; runtime form construction and jurisdiction-specific labels remain out of scope.",
+      "independenceGroup": "pretix/pretix",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/pretix/pretix/blob/edb4069e18d34eb80f290c00cd6eb74bbd499728/LICENSE",
+      "import": {
+        "corpusId": "pretix-checkout-confirmations",
+        "fixturePath": "benchmarks/real-world/pretix-checkout-confirmations",
+        "provenancePath": "benchmarks/real-world/pretix-checkout-confirmations/provenance.json",
+        "rules": {
+          "PDN.FORM.PRECHECKED_CONSENT": false
+        },
+        "checks": [
+          {
+            "file": "checkout_confirm.html",
+            "forms": [
+              {
+                "hasPii": false,
+                "hasPrecheckedConsent": false
+              }
+            ]
+          }
+        ],
+        "scope": "Static source only; see provenance review rationale for limits."
+      }
+    }
+  ]
+}

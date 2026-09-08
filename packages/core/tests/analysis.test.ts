@@ -83,7 +83,7 @@ describe('adoption controls', () => {
     fs.mkdirSync(path.join(root, '.legitagent'));
     fs.writeFileSync(path.join(root, '.legitagent/cache-v1.json'), JSON.stringify({
       version: 1,
-      analyzerVersion: 'consent-flow-v3',
+      analyzerVersion: 'consent-flow-v4',
       entries: { 'Form.tsx': { hash: 'forged', analysis: { forms: null, trackers: null } } },
     }));
     const result = await scanProject(root, undefined, { cache: true });

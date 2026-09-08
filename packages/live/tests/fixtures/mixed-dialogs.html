@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div role="dialog">
+      <h1>Confirm order</h1>
+      <p>Cookies remember your last order.</p>
+      <button onclick="fetch('/unexpected-accept')">Accept order</button>
+      <button onclick="fetch('/unexpected-reject')">Reject order</button>
+    </div>
+    <div role="dialog">
+      <p>Choose your cookie preferences</p>
+      <button onclick="document.cookie = '_ga_cookie_accept=allowed; path=/'">
+        Accept   selected cookies
+      </button>
+      <button onclick="document.cookie = 'cookie_reject=declined; path=/'">Отклонить все куки</button>
+    </div>
+    <a href="/privacy">Privacy policy</a>
+  </body>
+</html>

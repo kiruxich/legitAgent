@@ -1,12 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { scanSources } from '../packages/core/dist/index.js';
+import { analyzeSource, scanSources } from '../packages/core/dist/index.js';
+import { evaluateEvidenceChecks, validateRealWorldCases } from './benchmark-corpus.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'benchmarks/corpus.json'), 'utf8'));
+const independentCases = validateRealWorldCases(root, manifest);
+const strictFailures = [];
 const metrics = new Map();
 const frameworkMetrics = new Map();
+const seedMetrics = new Map();
+const seedFrameworkMetrics = new Map();
 const supported = /\.(?:html|jsx|tsx|js|ts|mjs|cjs|vue|svelte|astro)$/i;
 
 function readSources(dir) {
@@ -49,16 +54,31 @@ function updateMetric(target, ruleId, expected, found) {
 for (const testCase of manifest.cases) {
   const seeds = readSources(path.join(root, testCase.path));
   for (let variant = 0; variant < manifest.mutationCount; variant += 1) {
-    const sources = seeds.map((file) => ({ ...file, source: mutate(file.source, variant) }));
-    const actual = new Set(scanSources(sources).map((finding) => finding.ruleId));
+    const sources = seeds.map((file) => {
+      const source = mutate(file.source, variant);
+      return { ...file, source, analysis: analyzeSource(file.filePath, source) };
+    });
+    const findings = scanSources(sources);
+    const actual = new Set(findings.map((finding) => finding.ruleId));
+    strictFailures.push(...evaluateEvidenceChecks(testCase.checks, sources, findings)
+      .map((failure) => ({ case: testCase.name, variant, ...failure })));
     const frameworks = [...new Set(sources.map((file) => framework(file.relativePath)))];
     for (const [ruleId, expected] of Object.entries(testCase.rules)) {
       const found = actual.has(ruleId);
+      if (testCase.strict && expected !== found) {
+        strictFailures.push({ case: testCase.name, variant, field: ruleId, expected, actual: found });
+      }
       updateMetric(metrics, ruleId, expected, found);
+      if (variant === 0) updateMetric(seedMetrics, ruleId, expected, found);
       for (const name of frameworks) {
         const target = frameworkMetrics.get(name) ?? new Map();
         updateMetric(target, ruleId, expected, found);
         frameworkMetrics.set(name, target);
+        if (variant === 0) {
+          const seedTarget = seedFrameworkMetrics.get(name) ?? new Map();
+          updateMetric(seedTarget, ruleId, expected, found);
+          seedFrameworkMetrics.set(name, seedTarget);
+        }
       }
     }
   }
@@ -75,22 +95,30 @@ function rows(source) {
 }
 
 const report = rows(metrics);
+const seedReport = rows(seedMetrics);
 const expandedCases = manifest.cases.length * manifest.mutationCount;
-const independentCases = manifest.cases.filter((testCase) => testCase.provenance === 'independent-real-world').length;
 const output = {
   corpusVersion: manifest.version,
   seedCases: manifest.cases.length,
   independentCases,
+  strictFailures,
   v1MinimumIndependentCases: manifest.v1MinimumIndependentCases,
   expandedCases,
   thresholds: manifest.thresholds,
+  seedRules: seedReport,
+  seedFrameworks: Object.fromEntries([...seedFrameworkMetrics.entries()].map(([name, value]) => [name, rows(value)])),
   rules: report,
   frameworks: Object.fromEntries([...frameworkMetrics.entries()].map(([name, value]) => [name, rows(value)])),
 };
 
 process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
 if (
+  strictFailures.length > 0 ||
   expandedCases < manifest.thresholds.minimumExpandedCases ||
+  seedReport.some((row) =>
+    row.tp + row.fn < manifest.thresholds.minimumPositiveSeedsPerRule ||
+    row.tn + row.fp < manifest.thresholds.minimumNegativeSeedsPerRule,
+  ) ||
   report.some((row) =>
     row.precision < manifest.thresholds.precision ||
     row.recall < manifest.thresholds.recall ||

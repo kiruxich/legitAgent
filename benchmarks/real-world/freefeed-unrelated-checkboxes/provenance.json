@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "freefeed-unrelated-checkboxes",
+  "repository": "FreeFeed/freefeed-react-client",
+  "commit": "ce74224c64c20eb90be3685d6344758b7e54e8c3",
+  "independenceGroup": "freefeed/freefeed-react-client",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "1c6cfe66cf896b278c86ad93cbb79458f6aa52682352864991b6cfb96241b8fc",
+  "files": [
+    {
+      "filename": "signup-form.jsx",
+      "sourcePath": "src/components/signup-form.jsx",
+      "sourceUrl": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/signup-form.jsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "c69e22b9c6e53715e3a122383efc9a9e6c2aef6da0bc86d91b344e52409cfd36",
+      "sha256": "c69e22b9c6e53715e3a122383efc9a9e6c2aef6da0bc86d91b344e52409cfd36"
+    },
+    {
+      "filename": "signup-by-invitation.jsx",
+      "sourcePath": "src/components/signup-by-invitation.jsx",
+      "sourceUrl": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/signup-by-invitation.jsx",
+      "extractedLines": null,
+      "changes": [
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "50cdc800e861678a65e65e136b9d39643db2b7708be18fbd383f2820df714bad",
+      "sha256": "f99e69d6d54aed98998e92fb541a46a07e93634672a1d83ff1e2888ec3577b19"
+    },
+    {
+      "filename": "cookies-warning.jsx",
+      "sourcePath": "src/components/cookies-warning.jsx",
+      "sourceUrl": "https://github.com/FreeFeed/freefeed-react-client/blob/ce74224c64c20eb90be3685d6344758b7e54e8c3/src/components/cookies-warning.jsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "c606b7417062146a41bbaa2fb2c5979918ee1e30c72fba3219e01cb2ee2d8e9d",
+      "sha256": "c606b7417062146a41bbaa2fb2c5979918ee1e30c72fba3219e01cb2ee2d8e9d"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The checked default subscribes to recommended users/groups, not data-processing consent. The cookie warning describes disabled browser cookies, not a consent banner. The signup/invitation context is kept; no legal basis for registration is inferred.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.FORM.PRECHECKED_CONSENT": false,
+      "PDN.COOKIE.NO_REJECT": false
+    },
+    "checks": [
+      {
+        "file": "signup-form.jsx",
+        "forms": [
+          {
+            "hasPii": true,
+            "hasConsent": false,
+            "hasPrecheckedConsent": false
+          }
+        ]
+      },
+      {
+        "file": "cookies-warning.jsx",
+        "forms": []
+      }
+    ]
+  }
+}

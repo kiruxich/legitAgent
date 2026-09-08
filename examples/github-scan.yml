@@ -24,8 +24,11 @@ jobs:
         id: changed
         if: github.event_name == 'pull_request'
         shell: bash
+        env:
+          LEGITAGENT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          LEGITAGENT_HEAD_SHA: ${{ github.sha }}
         run: |
-          files="$(git diff --name-only --diff-filter=ACMR "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" | grep -E '\.(html|js|jsx|ts|tsx|mjs|cjs|vue|svelte|astro)$' | paste -sd, - || true)"
+          files="$(git diff --name-only --diff-filter=ACMR "$LEGITAGENT_BASE_SHA" "$LEGITAGENT_HEAD_SHA" | grep -E '\.(html|js|jsx|ts|tsx|mjs|cjs|vue|svelte|astro)$' | paste -sd, - || true)"
           echo "files=$files" >> "$GITHUB_OUTPUT"
       - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.8.0
         with:

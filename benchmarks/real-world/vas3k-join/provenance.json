@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "vas3k-join",
+  "repository": "vas3k/vas3k.club",
+  "commit": "86126cdc4db7566bf0f9bab44e3657c34ddaed93",
+  "independenceGroup": "vas3k/vas3k.club",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/vas3k/vas3k.club/blob/86126cdc4db7566bf0f9bab44e3657c34ddaed93/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "a7d2ac3f3e8b205ac02f7436ee4f35e0d89afdb37254e007117c672021df0b27",
+  "files": [
+    {
+      "filename": "join.html",
+      "sourcePath": "frontend/html/auth/join.html",
+      "sourceUrl": "https://github.com/vas3k/vas3k.club/blob/86126cdc4db7566bf0f9bab44e3657c34ddaed93/frontend/html/auth/join.html",
+      "extractedLines": [
+        15,
+        33
+      ],
+      "changes": [
+        "Extracted original lines 15-33; unrelated page sections omitted.",
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "8bb3a2b272a8c4ea6e0de368b28a93e29c3e122fa934ac8e6fe8d1666cb6cfd1",
+      "sha256": "20c5ee2920a58f781dd07ab5f36b459ea66fa07c9b109cdff3514e36457bed26"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The extracted form has an email control, an unchecked required consent checkbox and a Django URL tag explicitly naming privacy_policy. Only these form rules are scored; includes and URL resolution are not executed.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.FORM.NO_CONSENT": false,
+      "PDN.FORM.PRECHECKED_CONSENT": false,
+      "PDN.FORM.NO_POLICY_LINK": false
+    },
+    "checks": [
+      {
+        "file": "join.html",
+        "forms": [
+          {
+            "hasPii": true,
+            "hasConsent": true,
+            "hasPolicyLink": true,
+            "hasPrecheckedConsent": false
+          }
+        ]
+      }
+    ]
+  }
+}

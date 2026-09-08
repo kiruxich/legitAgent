@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "gta-inert-analytics",
+  "repository": "smtchahal/gta-snap-to-jpg",
+  "commit": "585d9642d851bebbb2026cb398308f0adb5c2365",
+  "independenceGroup": "smtchahal/gta-snap-to-jpg",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "67fc8e0d36b2383e23cccf29358d5cbc2f02ec558384574bd18c483af5e53f81",
+  "files": [
+    {
+      "filename": "analytics.html",
+      "sourcePath": "index.html",
+      "sourceUrl": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/index.html",
+      "extractedLines": [
+        11,
+        17
+      ],
+      "changes": [
+        "Extracted original lines 11-17; unrelated page sections omitted.",
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "e91f2883b617bb6f4d691382fbd2b280b266767b8402c482963f1b61fdfdbf0a",
+      "sha256": "8a021926a90c7ad28d60b9df30411387ae5512b30eef07a486af158dabf72f92"
+    },
+    {
+      "filename": "CookieConsent.tsx",
+      "sourcePath": "src/components/CookieConsent.tsx",
+      "sourceUrl": "https://github.com/smtchahal/gta-snap-to-jpg/blob/585d9642d851bebbb2026cb398308f0adb5c2365/src/components/CookieConsent.tsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "de30de0c1b88ab554c1a56b763b65b0697181d2d91419ebc645d8980049a0382",
+      "sha256": "de30de0c1b88ab554c1a56b763b65b0697181d2d91419ebc645d8980049a0382"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "Both analytics blocks are text/plain, so their inline commands are not executable in initial HTML. The included CMP configuration offers Reject all. Labels apply to static initial markup and available controls only, not subsequent CMP activation or revocation.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.TRACKER.NO_CONSENT": false,
+      "PDN.COOKIE.NO_REJECT": false
+    },
+    "checks": [
+      {
+        "file": "analytics.html",
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

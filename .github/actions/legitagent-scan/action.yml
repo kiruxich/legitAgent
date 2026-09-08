@@ -47,39 +47,48 @@ runs:
       id: scan
       shell: bash
       env:
+        LEGITAGENT_ROOT: ${{ inputs.root }}
+        LEGITAGENT_URL: ${{ inputs.url }}
+        LEGITAGENT_EVIDENCE_DIR: ${{ inputs.evidence-dir }}
+        LEGITAGENT_BASELINE: ${{ inputs.baseline }}
+        LEGITAGENT_CHANGED_FILES: ${{ inputs.changed-files }}
+        LEGITAGENT_FAIL_ON_CONFIDENCE: ${{ inputs.fail-on-confidence }}
         LEGITAGENT_TELEGRAM_BOT_TOKEN: ${{ env.LEGITAGENT_TELEGRAM_BOT_TOKEN }}
         LEGITAGENT_TELEGRAM_CHAT_ID: ${{ env.LEGITAGENT_TELEGRAM_CHAT_ID }}
-        LEGITAGENT_REVIEW_MODE: ${{ env.LEGITAGENT_REVIEW_MODE }}
         LEGITAGENT_OPENROUTER_API_KEY: ${{ env.LEGITAGENT_OPENROUTER_API_KEY }}
         LEGITAGENT_LLM_MODEL: ${{ env.LEGITAGENT_LLM_MODEL }}
       run: |
         set +e
-        if [ -n "${{ inputs.url }}" ]; then
-          NOTIFY=""
+        rm -f legitagent.sarif || exit 3
+        if [ -n "$LEGITAGENT_URL" ]; then
+          NOTIFY_ARGS=()
           if [ -n "$LEGITAGENT_TELEGRAM_BOT_TOKEN" ] && [ -n "$LEGITAGENT_TELEGRAM_CHAT_ID" ]; then
-            NOTIFY="--notify-telegram"
+            NOTIFY_ARGS+=(--notify-telegram)
           fi
-          npx --yes playwright@1.62.1 install --with-deps chromium
-          npx --yes @legit-agent/cli@0.8.0 scan-url "${{ inputs.url }}" \
-            --evidence "${{ inputs.evidence-dir }}" \
+          npx --yes playwright@1.62.1 install --with-deps chromium || exit 3
+          npx --yes @legit-agent/cli@0.8.0 scan-url "$LEGITAGENT_URL" \
+            --evidence "$LEGITAGENT_EVIDENCE_DIR" \
             --review \
             --sarif legitagent.sarif \
-            --fail-on-confidence "${{ inputs.fail-on-confidence }}" \
-            $NOTIFY
+            --fail-on-confidence "$LEGITAGENT_FAIL_ON_CONFIDENCE" \
+            "${NOTIFY_ARGS[@]}"
           code=$?
         else
           EXTRA_ARGS=()
-          if [ -n "${{ inputs.baseline }}" ]; then
-            EXTRA_ARGS+=(--baseline "${{ inputs.baseline }}")
+          if [ -n "$LEGITAGENT_BASELINE" ]; then
+            EXTRA_ARGS+=(--baseline "$LEGITAGENT_BASELINE")
           fi
-          if [ -n "${{ inputs.changed-files }}" ]; then
-            EXTRA_ARGS+=(--changed-files "${{ inputs.changed-files }}")
+          if [ -n "$LEGITAGENT_CHANGED_FILES" ]; then
+            EXTRA_ARGS+=(--changed-files "$LEGITAGENT_CHANGED_FILES")
           fi
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx --yes @legit-agent/cli@0.8.0 scan "${{ inputs.root }}" \
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx --yes @legit-agent/cli@0.8.0 scan "$LEGITAGENT_ROOT" \
             --sarif legitagent.sarif \
-            --fail-on-confidence "${{ inputs.fail-on-confidence }}" \
+            --fail-on-confidence "$LEGITAGENT_FAIL_ON_CONFIDENCE" \
             "${EXTRA_ARGS[@]}"
           code=$?
+        fi
+        if [ "$code" -eq 0 ] || [ "$code" -eq 1 ]; then
+          node -e "const fs = require('node:fs'); const report = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8')); if (report.version !== '2.1.0' || !Array.isArray(report.runs?.[0]?.results)) process.exit(1);" || code=3
         fi
         echo "exit_code=$code" >> "$GITHUB_OUTPUT"
     - name: Upload SARIF
@@ -90,12 +99,15 @@ runs:
     - name: Comment on PR
       if: github.event_name == 'pull_request' && inputs.comment-on-pr == 'true'
       uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+      env:
+        LEGITAGENT_ACTION_PATH: ${{ github.action_path }}
       with:
         script: |
           const fs = require('fs');
           if (!fs.existsSync('legitagent.sarif')) return;
           const sarif = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8'));
-          const { formatReport } = await import('${{ github.action_path }}/format-report.mjs');
+          const { pathToFileURL } = require('node:url');
+          const { formatReport } = await import(pathToFileURL(require('node:path').join(process.env.LEGITAGENT_ACTION_PATH, 'format-report.mjs')).href);
           const body = formatReport(sarif);
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner,
@@ -121,13 +133,17 @@ runs:
     - name: Create or update issue on high
       if: github.event_name != 'pull_request' && inputs.create-issue-on-high == 'true'
       uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+      env:
+        LEGITAGENT_ACTION_PATH: ${{ github.action_path }}
+        LEGITAGENT_FAIL_ON_CONFIDENCE: ${{ inputs.fail-on-confidence }}
       with:
         script: |
           const fs = require('fs');
           if (!fs.existsSync('legitagent.sarif')) return;
           const sarif = JSON.parse(fs.readFileSync('legitagent.sarif', 'utf8'));
-          const { formatReport, countHigh } = await import('${{ github.action_path }}/format-report.mjs');
-          if (countHigh(sarif, '${{ inputs.fail-on-confidence }}') === 0) return;
+          const { pathToFileURL } = require('node:url');
+          const { formatReport, countHigh } = await import(pathToFileURL(require('node:path').join(process.env.LEGITAGENT_ACTION_PATH, 'format-report.mjs')).href);
+          if (countHigh(sarif, process.env.LEGITAGENT_FAIL_ON_CONFIDENCE) === 0) return;
           const body = formatReport(sarif);
           const title = 'legitAgent: находки high';
           const { data: searchResult } = await github.rest.search.issuesAndPullRequests({
@@ -163,7 +179,17 @@ runs:
               }
             }
           }
-    - name: Fail on high findings
-      if: ${{ steps.scan.outputs.exit_code != '0' && (inputs.fail-on-high == 'true' || steps.scan.outputs.exit_code != '1') }}
+    - name: Enforce scan result
+      if: always() && steps.scan.outcome == 'success'
       shell: bash
-      run: exit ${{ steps.scan.outputs.exit_code }}
+      env:
+        LEGITAGENT_EXIT_CODE: ${{ steps.scan.outputs.exit_code }}
+        LEGITAGENT_FAIL_ON_HIGH: ${{ inputs.fail-on-high }}
+      run: |
+        if [ "$LEGITAGENT_EXIT_CODE" = '0' ]; then
+          exit 0
+        fi
+        if [ "$LEGITAGENT_EXIT_CODE" = '1' ] && [ "$LEGITAGENT_FAIL_ON_HIGH" = 'false' ]; then
+          exit 0
+        fi
+        exit "${LEGITAGENT_EXIT_CODE:-3}"

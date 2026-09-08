@@ -17,3 +17,13 @@ export function tryParseJsx(filePath: string, source: string): JsxParseResult {
     return { ok: false, error: (err as Error).message };
   }
 }
+
+export function sourceSyntaxError(filePath: string, source: string): string | undefined {
+  if (!/\.[cm]?[jt]sx?$/i.test(filePath)) return undefined;
+  const parsed = tryParseJsx(filePath, source);
+  if (!parsed.ok) return parsed.error;
+  const diagnostic = project.getProgram().compilerObject.getSyntacticDiagnostics(parsed.sourceFile.compilerNode)[0];
+  if (!diagnostic) return undefined;
+  const message = diagnostic.messageText;
+  return typeof message === 'string' ? message : message.messageText;
+}

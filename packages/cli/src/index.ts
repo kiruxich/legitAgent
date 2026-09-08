@@ -212,13 +212,14 @@ async function main() {
     });
     if (flags.out) fs.writeFileSync(flags.out, md);
     else process.stdout.write(md);
-    process.exit(0);
+    return;
   }
   if (cmd === 'scan-url') {
     const url = rest[1];
     if (!url) {
       console.error(usage('scan-url'));
-      process.exit(2);
+      process.exitCode = 2;
+      return;
     }
     const { scanUrl, writeEvidencePack } = await import('@legit-agent/live');
     const result = await scanUrl(url, { ...(evidenceDir ? { evidenceDir } : {}), allowPrivateNetwork });
@@ -251,11 +252,13 @@ async function main() {
       await notifyTelegram(summary, packPaths?.pdf);
     }
     const high = countBlockingFindings(result.findings, failOnConfidence) > 0;
-    process.exit(high ? 1 : 0);
+    process.exitCode = high ? 1 : 0;
+    return;
   }
   if (cmd !== 'scan' && cmd !== 'fix') {
     console.error(usage());
-    process.exit(2);
+    process.exitCode = 2;
+    return;
   }
   const root = path.resolve(rest[1] ?? process.cwd());
   const loadedBaseline = baselinePath ? loadBaseline(root, baselinePath) : undefined;
@@ -270,7 +273,7 @@ async function main() {
       for (const change of fixes.changes) process.stdout.write(`[${change.safety}] ${change.ruleId} ${change.file}:${change.line ?? 1} — ${change.description}\n`);
       process.stdout.write(writeFixes ? `Изменено файлов: ${fixes.changedFiles.length}\n` : 'Dry run: добавьте --write для безопасных механических исправлений.\n');
     }
-    process.exit(0);
+    return;
   }
   if (writeBaselinePath) {
     const outputPath = path.resolve(root, writeBaselinePath);
@@ -302,10 +305,10 @@ async function main() {
   if (json) process.stdout.write(JSON.stringify(output, null, 2) + '\n');
   else process.stdout.write(formatHuman(result, lang) + '\n');
   const high = countBlockingFindings(result.findings, failOnConfidence) > 0;
-  process.exit(high ? 1 : 0);
+  process.exitCode = high ? 1 : 0;
 }
 
 main().catch((err) => {
   console.error((err as Error).message ?? err);
-  process.exit(err instanceof ConfigError ? 2 : 1);
+  process.exitCode = err instanceof ConfigError ? 2 : 3;
 });

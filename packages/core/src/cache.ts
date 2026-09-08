@@ -5,7 +5,7 @@ import { analyzeSource, type SourceAnalysis } from './analysis.js';
 import type { ScanWarning } from './types.js';
 
 const CACHE_VERSION = 1;
-const ANALYZER_VERSION = 'consent-flow-v3';
+const ANALYZER_VERSION = 'real-world-v5';
 
 interface CacheEntry {
   hash: string;

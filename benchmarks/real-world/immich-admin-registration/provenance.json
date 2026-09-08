@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "immich-admin-registration",
+  "repository": "immich-app/immich",
+  "commit": "4f503c4b6b7d35ad8c620c6a5ee734eeed357732",
+  "independenceGroup": "immich-app/immich",
+  "license": "AGPL-3.0",
+  "licenseUrl": "https://github.com/immich-app/immich/blob/4f503c4b6b7d35ad8c620c6a5ee734eeed357732/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "ce3fb82d9ee80a1cb0e548f9b0560ead52378ee2b4e826fd9459b4acf7075d89",
+  "files": [
+    {
+      "filename": "Register.svelte",
+      "sourcePath": "web/src/routes/auth/register/+page.svelte",
+      "sourceUrl": "https://github.com/immich-app/immich/blob/4f503c4b6b7d35ad8c620c6a5ee734eeed357732/web/src/routes/auth/register/+page.svelte",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "122c28bebe4d520acac544c6c3fe56dcb5dfda1709686ea639eef9eac52844fd",
+      "sha256": "122c28bebe4d520acac544c6c3fe56dcb5dfda1709686ea639eef9eac52844fd"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The admin registration form exposes email/name inputs and no consent control. This checks field recognition and absence of prechecked consent only; no legal conclusion about the basis for account creation.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.FORM.PRECHECKED_CONSENT": false
+    },
+    "checks": [
+      {
+        "file": "Register.svelte",
+        "forms": [
+          {
+            "hasPii": true,
+            "hasConsent": false,
+            "hasPrecheckedConsent": false
+          }
+        ]
+      }
+    ]
+  }
+}

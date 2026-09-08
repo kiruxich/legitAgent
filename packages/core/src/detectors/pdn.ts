@@ -1,16 +1,14 @@
-export const PII = /(email|e-mail|phone|tel|name|fio|имя|телефон|почта)/i;
-export const CONSENT = /(персональн|согласи|consent|обработк)/i;
+import { analyzeSource, type SourceAnalysis } from '../analysis.js';
 
 export function hasPiiForm(source: string): boolean {
-  return /<form[\s>]/i.test(source) && /<input\b/i.test(source) && PII.test(source);
+  return analyzeSource('snippet.html', source).forms.some((form) => form.hasPii);
 }
 
 export function hasConsentControl(source: string): boolean {
-  const control =
-    /type=["']checkbox["']/i.test(source) || /<Checkbox\b/.test(source) || /role=["']checkbox["']/i.test(source);
-  return control && CONSENT.test(source);
+  return analyzeSource('snippet.html', source).forms.some((form) => form.hasConsent);
 }
 
-export function collectsPdn(files: { source: string }[]): boolean {
-  return files.some((f) => hasPiiForm(f.source));
+export function collectsPdn(files: { source: string; relativePath?: string; filePath?: string; analysis?: SourceAnalysis }[]): boolean {
+  return files.some((file) => (file.analysis ?? analyzeSource(file.filePath ?? file.relativePath ?? 'snippet.html', file.source))
+    .forms.some((form) => form.hasPii));
 }

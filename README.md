@@ -115,7 +115,7 @@ Telegram (опционально): `LEGITAGENT_TELEGRAM_BOT_TOKEN`, `LEGITAGENT_
 | `local` | `LEGITAGENT_REVIEW_MODE=local`, `LEGITAGENT_LOCAL_LLM_BASE_URL=http://127.0.0.1:11434/v1`, `LEGITAGENT_LLM_MODEL=...` | На loopback endpoint с `/chat/completions`; удалённый host отклоняется |
 | `openrouter` | `LEGITAGENT_REVIEW_MODE=openrouter`, `LEGITAGENT_OPENROUTER_API_KEY=...` | В OpenRouter и к выбранному им/model-провайдеру |
 
-Для OpenRouter модель по умолчанию — `openrouter/auto`; её можно зафиксировать через `LEGITAGENT_LLM_MODEL`. Если ключ `LEGITAGENT_OPENROUTER_API_KEY` задан, а режим не указан, выбирается `openrouter`; иначе — `offline`. Старое имя `LEGITAGENT_LLM_API_KEY` временно поддерживается как alias ключа OpenRouter.
+Для OpenRouter модель по умолчанию — `openrouter/auto`; её можно зафиксировать через `LEGITAGENT_LLM_MODEL`. Если ключ `LEGITAGENT_OPENROUTER_API_KEY` задан, а режим не указан, выбирается `openrouter`; иначе — `offline`. Явно заданный неизвестный или пустой `LEGITAGENT_REVIEW_MODE` вызывает ошибку конфигурации: опечатка не включает внешнюю отправку. Режим `local` принимает только HTTP(S) loopback endpoint и запрещает redirects. Старое имя `LEGITAGENT_LLM_API_KEY` временно поддерживается как alias ключа OpenRouter.
 
 OpenRouter review использует строгий JSON Schema, batches, timeout/retry и process-local cache по fingerprint+snippet. Защитные лимиты: `LEGITAGENT_LLM_BATCH_SIZE` (10), `LEGITAGENT_LLM_MAX_FINDINGS` (100), `LEGITAGENT_LLM_MAX_PROMPT_CHARS` (48000), `LEGITAGENT_LLM_MAX_OUTPUT_TOKENS` (2000), `LEGITAGENT_LLM_MAX_COST_USD` (0.25), `LEGITAGENT_LLM_TIMEOUT_MS` (30000), `LEGITAGENT_LLM_RETRIES` (1). `LEGITAGENT_LLM_MAX_COST_USD` — это post-response budget для batch review: после достижения суммарного `usage.cost` новые batches не отправляются, но последний уже отправленный batch может превысить порог. Это не hard provider spend cap. Ответ показывает фактически выбранную модель в `reviewModel`.
 
@@ -162,12 +162,17 @@ User rule для Cursor always-on: скопируйте текст из `[docs/c
 
 `--sarif` без пути пишет `legitagent.sarif` (SARIF 2.1.0). `scan-url` открывает страницу в Chromium в изолированных контекстах: ждёт гидрацию SPA, отдельно проверяет состояния до/после Reject и Accept, сравнивает cookie/storage/network и прогоняет тот же каталог правил по HTML страницы. `scan_url` в MCP при `evidenceDir` сохраняет только скриншоты; полный evidence pack (JSON/SARIF/PDF) создаёт CLI.
 
+Автоматические клики выполняются только в распознанном cookie-интерфейсе; обычный диалог с кнопкой Accept не считается баннером согласия. HTTP 4xx/5xx при загрузке страницы или повторном заходе для Accept завершают проверку технической ошибкой. Изображения в PDF встраиваются в документ и проверяются перед сохранением.
+
 
 | Код выхода | Значение                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
 | `0`        | Нет серьёзных находок (в том числе нечего сканировать)                                                       |
 | `1`        | Есть хотя бы одна находка `high` с confidence не ниже `--fail-on-confidence`                                 |
-| `2`        | Нет команды / `scan-url` без URL / невалидный `legitagent.config.json` / `--notify-telegram` без credentials |
+| `2`        | Ошибка команды или конфигурации, включая невалидный режим review и отсутствующие обязательные credentials |
+| `3`        | Технический сбой: загрузка страницы, браузер, LLM API или запись отчёта                                      |
+
+В GitHub Action `fail-on-high=false` допускает только код `1` после успешного создания SARIF. Ошибки конфигурации, выполнения и отсутствующий отчёт продолжают блокировать job.
 
 
 В CI достаточно `npx @legit-agent/cli@0.8.0 scan --json`: ненулевой код — стоп пайплайна. Source-scan без `--review` не запускает второй проход; даже с `--review` сеть не используется в режиме `offline`. Для code scanning скопируйте `[examples/github-scan.yml](examples/github-scan.yml)` в `.github/workflows/legitagent.yml` — он вызывает композитное действие `[.github/actions/legitagent-scan](.github/actions/legitagent-scan/action.yml)` с пином `@v0.8.0`: пишет SARIF, загружает его в GitHub, поддерживает baseline/changed-files/confidence threshold, комментирует PR и создаёт issue при новых находках `high`. Для мониторинга живого сайта после деплоя — `[examples/github-watch.yml](examples/github-watch.yml)` (`scan-url --review --evidence`, опционально Telegram и OpenRouter).
@@ -273,7 +278,7 @@ pnpm release:check
 
 Правила: `packages/core/rules/*.yaml`. Выдержки: `packages/core/legal/*.yaml`. Корпус законов: `packages/core/legal/corpus/` (`pnpm fetch-law`). Каталог для людей: `pnpm catalog` → `docs/RULES.md` и `website/rules.html`.
 
-`pnpm benchmark` берёт 20 synthetic regression seed-кейсов, разворачивает их в 100 семантически эквивалентных parser-stability сценариев и считает TP/FP/FN/TN, precision/recall по правилам и framework. Форматные мутации не являются 100 независимыми real-world cases: перед v1 корпус всё равно должен быть дополнен анонимизированными примерами с независимой ручной разметкой.
+`pnpm benchmark` проверяет 52 исходных случая: 40 synthetic regression seeds и 12 обезличенных случаев из реальных проектов. Пять форматных вариантов дают 260 parser-stability сценариев; повторные представления одного источника не увеличивают независимый счётчик. Отчёт отдельно считает TP/FP/FN/TN и precision/recall по исходным кейсам (`seedRules`, `seedFrameworks`) и всем вариантам (`rules`, `frameworks`). Реальные случаи дополнительно проверяются строго: любая ошибка ожидаемого правила или технического признака завершает прогон с ошибкой. Источники, SHA, лицензии и обоснования разметки сохранены в [benchmarks/real-world](benchmarks/real-world); [разбор покрытия](benchmarks/real-world-cases.md) указывает границы статической проверки. Для v1 по-прежнему нужны минимум 100 независимых групп источников и проверенное покрытие правил.
 
 `pnpm legal:check` проверяет integrity hash локальных snapshot-ов и свежесть `verifiedAt`. Еженедельный workflow `legal-drift.yml` сравнивает snapshot с источником; изменение закона блокирует задачу до ручной ревизии и обновления hash.
 

@@ -23,10 +23,11 @@ import { assertPublicHttpUrl, startPinnedProxy } from './network-safety.js';
 const ANALYTICS_COOKIE = /^(_ga|_gid|_gat|_fbp|_ym_|tmr_)/;
 const ANALYTICS_COOKIE_EXACT = new Set(['_ym_uid', '_fbp']);
 const BANNER = /cookie-banner|CookieBanner|cookie consent|куки/i;
-const ACCEPT = /принять|accept/i;
-const REJECT = /отклон|отказ|reject|decline/i;
-const FOREIGN = /google-analytics|googletagmanager|facebook\.net|connect\.facebook\.net/;
-const COOKIE_CONTROL = /принять|accept|отклон|отказ|reject|decline/i;
+const ACCEPT = /^(?:(?:accept|allow)(?: (?:all|selected))?(?: cookies)?|принять(?: (?:все|выбранные))?(?: (?:cookies?|куки))?)$/i;
+const REJECT = /^(?:(?:reject|decline)(?: all)?(?: cookies)?|отклонить(?: все)?(?: (?:cookies?|куки))?|отказаться(?: от (?:cookies?|куки))?|(?:use )?only necessary(?: cookies)?|(?:использовать )?только необходимые(?: (?:cookies?|куки))?)$/i;
+const FOREIGN_TRACKER_DOMAINS = ['google-analytics.com', 'googletagmanager.com', 'facebook.net'];
+const COOKIE_CONTEXT = /cookie|куки/i;
+const COOKIE_CONTROL = /принять|accept|allow|отклон|отказ|reject|decline|only necessary|только необходимые/i;
 const CONSENT_CONTAINER = '[role="dialog"], [class*="cookie" i], [id*="cookie" i], [class*="consent" i], [id*="consent" i]';
 const INTERACTIVE_CONTROL = 'button, a, [role="button"], input[type="button"], input[type="submit"]';
 
@@ -65,6 +66,25 @@ async function validateInputUrl(url: string, allowPrivateNetwork: boolean): Prom
 
 function isAnalyticsCookie(name: string): boolean {
   return ANALYTICS_COOKIE.test(name) || ANALYTICS_COOKIE_EXACT.has(name);
+}
+
+export function isForeignTrackerUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return false;
+    const hostname = parsed.hostname.toLowerCase().replace(/\.$/, '');
+    return FOREIGN_TRACKER_DOMAINS.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`));
+  } catch {
+    return false;
+  }
+}
+
+async function navigateToScanPage(page: Page, url: string, timeout: number): Promise<void> {
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
+  if (!response || !response.ok()) {
+    const status = response ? `HTTP ${response.status()}` : 'нет HTTP-ответа';
+    throw new Error(`Не удалось проверить страницу: ${status} (${evidenceUrl(response?.url() ?? url)})`);
+  }
 }
 
 function cookieNames(cookies: Array<{
@@ -137,28 +157,35 @@ async function visibleConsentContainer(page: Page): Promise<Locator | undefined>
   const count = await containers.count();
   for (let index = 0; index < count; index += 1) {
     const candidate = containers.nth(index);
-    if (await candidate.isVisible().catch(() => false)) return candidate;
+    if (!await candidate.isVisible().catch(() => false)) continue;
+    const context = await candidate.evaluate((element) => [
+      element.id,
+      element.className,
+      element.getAttribute('aria-label'),
+      (element as HTMLElement).innerText,
+    ].filter(Boolean).join(' '));
+    if (COOKIE_CONTEXT.test(context)
+      && (await hasVisibleControl(candidate, ACCEPT) || await hasVisibleControl(candidate, REJECT))) return candidate;
   }
   return undefined;
 }
 
 async function hasVisibleControl(container: Locator | undefined, pattern: RegExp): Promise<boolean> {
-  if (!container) return false;
-  const controls = container.locator(INTERACTIVE_CONTROL).filter({ hasText: pattern });
-  const count = await controls.count();
-  for (let index = 0; index < count; index += 1) {
-    if (await controls.nth(index).isVisible().catch(() => false)) return true;
-  }
-  return false;
+  return Boolean(await visibleControl(container, pattern));
 }
 
 async function visibleControl(container: Locator | undefined, pattern: RegExp): Promise<Locator | undefined> {
   if (!container) return undefined;
-  const controls = container.locator(INTERACTIVE_CONTROL).filter({ hasText: pattern });
+  const controls = container.locator(INTERACTIVE_CONTROL);
   const count = await controls.count();
   for (let index = 0; index < count; index += 1) {
     const candidate = controls.nth(index);
-    if (await candidate.isVisible().catch(() => false)) return candidate;
+    if (!await candidate.isVisible().catch(() => false)) continue;
+    const label = await candidate.evaluate((element) => {
+      const text = element instanceof HTMLInputElement ? element.value : (element as HTMLElement).innerText;
+      return (text || element.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim();
+    });
+    if (pattern.test(label)) return candidate;
   }
   return undefined;
 }
@@ -308,7 +335,7 @@ async function captureAcceptState(args: {
     await installRequestGuard(page, allowPrivateNetwork);
     const phase: { value: NetworkRequestEvidence['phase'] } = { value: 'before_accept' };
     recorder = await attachNetworkRecorder(context, page, phase, networkRequests);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: navigationTimeoutMs });
+    await navigateToScanPage(page, url, navigationTimeoutMs);
     await settleInitialPage(page);
 
     const container = await visibleConsentContainer(page);
@@ -371,7 +398,7 @@ export async function scanUrl(url: string, options: ScanUrlOptions = {}): Promis
       recorder = await attachNetworkRecorder(context, page, phase, networkRequests);
       page.on('request', (request) => requestUrls.push(evidenceUrl(request.url())));
 
-      await page.goto(navigationUrl, { waitUntil: 'domcontentloaded', timeout: navigationTimeoutMs });
+      await navigateToScanPage(page, navigationUrl, navigationTimeoutMs);
       await settleInitialPage(page);
 
       const cookiesBefore = cookieNames(await context.cookies());
@@ -403,8 +430,8 @@ export async function scanUrl(url: string, options: ScanUrlOptions = {}): Promis
         }));
       }
 
-      if (requestUrls.some((requestUrl) => FOREIGN.test(requestUrl))) {
-        const trackerUrls = requestUrls.filter((requestUrl) => FOREIGN.test(requestUrl));
+      const trackerUrls = requestUrls.filter(isForeignTrackerUrl);
+      if (trackerUrls.length > 0) {
         findings.push(findingFromRule(catalog, 'PDN.TRANSFER.FOREIGN_TRACKER', publicUrl, null, {
           evidence: {
             summary: 'Браузер зафиксировал попытку запроса к домену иностранного трекера.',

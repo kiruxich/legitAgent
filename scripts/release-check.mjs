@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { validateRealWorldCases } from './benchmark-corpus.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const packageNames = ['core', 'live', 'cli', 'mcp'];
@@ -19,7 +20,7 @@ for (const pkg of packages) {
   if (pkg.engines?.node !== minimumNodeVersion) failures.push(`${pkg.name}: engines.node должна быть ${minimumNodeVersion}`);
 }
 const benchmark = JSON.parse(fs.readFileSync(path.join(root, 'benchmarks/corpus.json'), 'utf8'));
-const independentCases = benchmark.cases.filter((testCase) => testCase.provenance === 'independent-real-world').length;
+const independentCases = validateRealWorldCases(root, benchmark);
 if (Number(version.split('.')[0]) >= 1 && independentCases < benchmark.v1MinimumIndependentCases) {
   failures.push(
     `v1 требует минимум ${benchmark.v1MinimumIndependentCases} независимо размеченных real-world benchmark cases; сейчас ${independentCases}`,

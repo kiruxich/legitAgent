@@ -1,6 +1,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import http from 'node:http';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import type { AddressInfo } from 'node:net';
 import path from 'node:path';
@@ -9,17 +10,18 @@ import { describe, expect, it } from 'vitest';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const cli = path.resolve(here, '../src/index.ts');
+const tsxLoader = createRequire(import.meta.url).resolve('tsx');
 const fixture = path.resolve(here, '../../core/tests/fixtures/bad-form');
 const cleanLive = path.resolve(here, '../../live/tests/fixtures/clean.html');
 const formNoConsentLive = path.resolve(here, '../../live/tests/fixtures/form-no-consent.html');
 
 function runCli(args: string[], cwd?: string) {
-  return spawnSync('npx', ['tsx', cli, ...args], { encoding: 'utf8', cwd });
+  return spawnSync(process.execPath, ['--import', tsxLoader, cli, ...args], { encoding: 'utf8', cwd, maxBuffer: 10 * 1024 * 1024 });
 }
 
 function runCliAsync(args: string[]): Promise<{ status: number | null; stdout: string; stderr: string }> {
   return new Promise((resolve, reject) => {
-    const child = spawn('npx', ['tsx', cli, ...args]);
+    const child = spawn(process.execPath, ['--import', tsxLoader, cli, ...args]);
     let stdout = '';
     let stderr = '';
     child.stdout.on('data', (chunk: Buffer) => {
@@ -39,6 +41,35 @@ describe('cli', () => {
     expect(result.status).toBe(1);
     const parsed = JSON.parse(result.stdout);
     expect(parsed.findings.some((f: { ruleId: string }) => f.ruleId === 'PDN.FORM.NO_CONSENT')).toBe(true);
+  });
+
+  it('flushes a large JSON report completely when stdout is piped', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-cli-large-report-'));
+    try {
+      for (let i = 0; i < 100; i += 1) {
+        fs.writeFileSync(path.join(root, `form-${i}.html`), '<form><input name="email" type="email"/></form>');
+      }
+      const result = runCli(['scan', root, '--json']);
+      expect(result.status).toBe(1);
+      expect(Buffer.byteLength(result.stdout)).toBeGreaterThan(65_536);
+      const report = JSON.parse(result.stdout);
+      expect(report.scannedFileCount).toBe(100);
+      expect(report.findings.filter((finding: { ruleId: string }) => finding.ruleId === 'PDN.FORM.NO_CONSENT')).toHaveLength(100);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it('distinguishes an operational failure from completed scans with high findings', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-cli-report-failure-'));
+    try {
+      const result = runCli(['scan', fixture, '--sarif', path.join(root, 'missing', 'report.sarif')]);
+      expect(result.status).toBe(3);
+      expect(result.stderr).toContain('ENOENT');
+      expect(result.stdout).toBe('');
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   });
 
   it('writes SARIF to the given --sarif path and still exits 1 on high', () => {

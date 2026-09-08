@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "payload-consent-actions",
+  "repository": "payloadcms/website",
+  "commit": "b1aaaaf76e7ec52984ef39a6075771c9067d866f",
+  "independenceGroup": "payloadcms/website",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "a6c3efacb4ac267190b23ce8fe4d4a6e322af9c51ff4ec6461f84fbee34ce553",
+  "files": [
+    {
+      "filename": "PrivacyBanner.tsx",
+      "sourcePath": "src/components/PrivacyBanner/index.tsx",
+      "sourceUrl": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/components/PrivacyBanner/index.tsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "d514aa7af0d108a5224a10ef258447c445e8912bd5e2b2d9d689ec536b48c4d5",
+      "sha256": "d514aa7af0d108a5224a10ef258447c445e8912bd5e2b2d9d689ec536b48c4d5"
+    },
+    {
+      "filename": "PrivacyProvider.tsx",
+      "sourcePath": "src/providers/Privacy/index.tsx",
+      "sourceUrl": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/providers/Privacy/index.tsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "f87be27a1e189971f73c4b52896bbe55b060a9422b5b0a5a7b6440e35e741bd9",
+      "sha256": "f87be27a1e189971f73c4b52896bbe55b060a9422b5b0a5a7b6440e35e741bd9"
+    },
+    {
+      "filename": "GoogleAnalytics.tsx",
+      "sourcePath": "src/components/Analytics/GoogleAnalytics/index.tsx",
+      "sourceUrl": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/components/Analytics/GoogleAnalytics/index.tsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "b729af5a6db5818cade1f399a9f33474b4bd4e1524b04c1872267b99783ba5ab",
+      "sha256": "b729af5a6db5818cade1f399a9f33474b4bd4e1524b04c1872267b99783ba5ab"
+    },
+    {
+      "filename": "GoogleTagManager.tsx",
+      "sourcePath": "src/components/Analytics/GoogleTagManager/index.tsx",
+      "sourceUrl": "https://github.com/payloadcms/website/blob/b1aaaaf76e7ec52984ef39a6075771c9067d866f/src/components/Analytics/GoogleTagManager/index.tsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "17cccbd83eb49be3b8b38b3de1b854fe79efce15eaf820c2aaf6eae4e69bf5e3",
+      "sha256": "17cccbd83eb49be3b8b38b3de1b854fe79efce15eaf820c2aaf6eae4e69bf5e3"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The banner has a Dismiss control explicitly calling updateCookieConsent(false), and a separate Accept control passing true. The provider and analytics components are included for source context. This is a static rejection-control label, not a test of region lookup, timers, persistence or analytics lifecycle.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.COOKIE.NO_REJECT": false
+    },
+    "checks": []
+  }
+}

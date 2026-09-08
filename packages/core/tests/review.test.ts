@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import type { Finding } from '../src/types.js';
 import type { LlmComplete } from '../src/review.js';
 import { clearReviewCache, forEvidencePack, reviewFindings, SOFT_RULE_IDS, createLlmComplete } from '../src/review.js';
+import { ConfigError } from '../src/config.js';
 
 const form: Finding = {
   fingerprint: 'form-1',
@@ -103,7 +104,7 @@ describe('reviewFindings', () => {
       await complete!('prompt');
       expect(fetchMock).toHaveBeenCalledWith(
         'http://127.0.0.1:11434/v1/chat/completions',
-        expect.objectContaining({ method: 'POST' }),
+        expect.objectContaining({ method: 'POST', redirect: 'error' }),
       );
       expect(complete?.dataShared).toBe(false);
     } finally {
@@ -120,6 +121,85 @@ describe('reviewFindings', () => {
       LEGITAGENT_REVIEW_MODE: 'local',
       LEGITAGENT_LOCAL_LLM_BASE_URL: 'https://127.0.0.1.evil.example/v1',
     })).toThrow('loopback endpoint');
+    expect(() => createLlmComplete({
+      LEGITAGENT_REVIEW_MODE: 'local',
+      LEGITAGENT_LOCAL_LLM_BASE_URL: 'ftp://127.0.0.1/v1',
+    })).toThrow('HTTP или HTTPS');
+  });
+
+  it.each(['offine', 'remote', '', '   '])('rejects explicit invalid review mode %j even when an API key is present', (mode) => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+    try {
+      expect(() => createLlmComplete({
+        LEGITAGENT_REVIEW_MODE: mode,
+        LEGITAGENT_OPENROUTER_API_KEY: 'test-key',
+      })).toThrow(ConfigError);
+      expect(fetchMock).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('auto-selects from credentials only when the review mode is absent', () => {
+    expect(createLlmComplete({})).toBeUndefined();
+    expect(createLlmComplete({ LEGITAGENT_OPENROUTER_API_KEY: 'test-key' })?.reviewMode).toBe('openrouter');
+    expect(createLlmComplete({
+      LEGITAGENT_REVIEW_MODE: ' OFFLINE ',
+      LEGITAGENT_OPENROUTER_API_KEY: 'test-key',
+    })).toBeUndefined();
+  });
+
+  it('times out a response body that stalls after HTTP headers arrive', async () => {
+    vi.useFakeTimers();
+    let signal: AbortSignal | undefined;
+    const fetchMock = vi.fn(async (_url: string, init?: RequestInit) => {
+      signal = init?.signal ?? undefined;
+      return new Response(new ReadableStream({
+        start(controller) {
+          controller.enqueue(new TextEncoder().encode('{"choices":'));
+          signal!.addEventListener('abort', () => controller.error(signal!.reason), { once: true });
+        },
+      }), { status: 200 });
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    try {
+      const complete = createLlmComplete({
+        LEGITAGENT_REVIEW_MODE: 'local',
+        LEGITAGENT_LOCAL_LLM_BASE_URL: 'http://127.0.0.1:11434/v1',
+        LEGITAGENT_LLM_TIMEOUT_MS: '1000',
+        LEGITAGENT_LLM_RETRIES: '0',
+      })!;
+      const rejection = expect(complete('prompt')).rejects.toMatchObject({ name: 'AbortError' });
+      await vi.advanceTimersByTimeAsync(999);
+      expect(signal?.aborted).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      await rejection;
+      expect(signal?.aborted).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('cleans up the timeout after a complete response', async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({
+      choices: [{ message: { content: '{"reviews":[]}' } }],
+    }), { status: 200 })));
+    try {
+      const complete = createLlmComplete({
+        LEGITAGENT_REVIEW_MODE: 'local',
+        LEGITAGENT_LOCAL_LLM_BASE_URL: 'http://127.0.0.1:11434/v1',
+      })!;
+      await expect(complete('prompt')).resolves.toBe('{"reviews":[]}');
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
   });
 
   it('retries a retryable OpenRouter response and respects Retry-After', async () => {

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "opentdf-consent-config",
+  "repository": "opentdf/docs",
+  "commit": "af7de4e687326328330935470932d05074778e38",
+  "independenceGroup": "opentdf/docs",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "7908c35e658668c1d8e50b4a7bc1beb2134dab748b54a25986b7e97b9ff93079",
+  "files": [
+    {
+      "filename": "consent-default.js",
+      "sourcePath": "docusaurus.config.ts",
+      "sourceUrl": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/docusaurus.config.ts",
+      "extractedLines": [
+        52,
+        65
+      ],
+      "changes": [
+        "Extracted original lines 52-65; unrelated page sections omitted."
+      ],
+      "upstreamSha256": "d8ec3ef9819c7ca8a1a50666ab812e8e4c665d7f9567b523f31d97634aa73e3e",
+      "sha256": "7e653494862f55ed8a9810c4e60925680dfd35329e26ad7d50e8216594684e10"
+    },
+    {
+      "filename": "head-config.ts",
+      "sourcePath": "docusaurus.config.ts",
+      "sourceUrl": "https://github.com/opentdf/docs/blob/af7de4e687326328330935470932d05074778e38/docusaurus.config.ts",
+      "extractedLines": [
+        47,
+        72
+      ],
+      "changes": [
+        "Extracted original lines 47-72; unrelated page sections omitted.",
+        "Wrapped the two original headTags entries in a minimal config; supplied an inert test GTM identifier."
+      ],
+      "upstreamSha256": "d8ec3ef9819c7ca8a1a50666ab812e8e4c665d7f9567b523f31d97634aa73e3e",
+      "sha256": "734714fcb8f86e3eaa02dee197a6a2332821956a82ac7330485e2f6a45e3bb0f"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The head configuration contains a Google Tag Manager provider URL. The separately extracted literal consent-default script contains consent and set commands, not page-view/event calls. Its negative label does not claim that the GTM loader or full website makes no requests.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.TRANSFER.FOREIGN_TRACKER": true
+    },
+    "checks": [
+      {
+        "file": "consent-default.js",
+        "forms": [],
+        "trackers": [],
+        "rules": {
+          "PDN.TRACKER.NO_CONSENT": false
+        }
+      }
+    ]
+  }
+}

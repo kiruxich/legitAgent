@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "nextcloud-invite-search",
+  "repository": "nextcloud/contacts",
+  "commit": "986f82595218b375d12a5236282c8b15aa78b97d",
+  "independenceGroup": "nextcloud/contacts",
+  "license": "AGPL-3.0-or-later",
+  "licenseUrl": "https://github.com/nextcloud/contacts/blob/986f82595218b375d12a5236282c8b15aa78b97d/COPYING",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "070a6eda6dfa58ec174f25187909bcda4dae215f7b099aa6b37ab891e89d2ac9",
+  "files": [
+    {
+      "filename": "OcmInvitesList.vue",
+      "sourcePath": "src/components/Ocm/OcmInvitesList.vue",
+      "sourceUrl": "https://github.com/nextcloud/contacts/blob/986f82595218b375d12a5236282c8b15aa78b97d/src/components/Ocm/OcmInvitesList.vue",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "75921dd9481d82665a5118c6f07392a86f138bbe23438395956957843de32ad9",
+      "sha256": "75921dd9481d82665a5118c6f07392a86f138bbe23438395956957843de32ad9"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The text control filters existing invitations locally and is outside any form; no contact-collection form finding belongs to this component.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.FORM.NO_CONSENT": false,
+      "PDN.FORM.NO_POLICY_LINK": false
+    },
+    "checks": [
+      {
+        "file": "OcmInvitesList.vue",
+        "forms": []
+      }
+    ]
+  }
+}

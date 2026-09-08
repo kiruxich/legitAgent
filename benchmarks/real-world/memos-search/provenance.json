@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "memos-search",
+  "repository": "usememos/memos",
+  "commit": "d3d0b35231d557feac5d32a018f153405e496564",
+  "independenceGroup": "usememos/memos",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/usememos/memos/blob/d3d0b35231d557feac5d32a018f153405e496564/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "dadc85262cec40d1344736b57da50814194ff721ab98012c09cd9d35c4b8582a",
+  "files": [
+    {
+      "filename": "QuickFindDialog.tsx",
+      "sourcePath": "web/src/components/AppSidebar/QuickFindDialog.tsx",
+      "sourceUrl": "https://github.com/usememos/memos/blob/d3d0b35231d557feac5d32a018f153405e496564/web/src/components/AppSidebar/QuickFindDialog.tsx",
+      "extractedLines": null,
+      "changes": [
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "ff138502a9257feaf0aa6d3b020fd80e517b2cb909d9e77d2349971c8678ce00",
+      "sha256": "84c0688142d4846f5289711bc95d808235e5bd8ab6172eb205ce0616697c2f2e"
+    },
+    {
+      "filename": "input.tsx",
+      "sourcePath": "web/src/components/ui/input.tsx",
+      "sourceUrl": "https://github.com/usememos/memos/blob/d3d0b35231d557feac5d32a018f153405e496564/web/src/components/ui/input.tsx",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "0eb9fa7708ba43345613988cbee15fc2ec06894071600d1edfb08806c700c23b",
+      "sha256": "0eb9fa7708ba43345613988cbee15fc2ec06894071600d1edfb08806c700c23b"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The form updates a note-search query, not named contact data. Its Input implementation and field props are preserved. No project-wide policy label is assigned.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.FORM.NO_CONSENT": false,
+      "PDN.FORM.NO_POLICY_LINK": false
+    },
+    "checks": [
+      {
+        "file": "QuickFindDialog.tsx",
+        "forms": [
+          {
+            "hasPii": false,
+            "hasConsent": false
+          }
+        ]
+      }
+    ]
+  }
+}

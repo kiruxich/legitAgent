@@ -1,0 +1,30 @@
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  // Default: GRANT everywhere (US etc. get personalized ads, no message
+	  // needed) — then DENY only where prior consent is legally required
+	  // (EEA + UK). Google's consent message (loaded below; Google shows it in
+	  // the EEA/UK only) flips these when a visitor there makes a choice. The
+	  // denied region list mirrors the countries Google's message covers.
+	  gtag('consent', 'default', {
+	    'ad_storage': 'granted',
+	    'ad_user_data': 'granted',
+	    'ad_personalization': 'granted',
+	    'analytics_storage': 'granted'
+	  });
+	  gtag('consent', 'default', {
+	    'ad_storage': 'denied',
+	    'ad_user_data': 'denied',
+	    'ad_personalization': 'denied',
+	    'analytics_storage': 'denied',
+	    'region': ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB'],
+	    'wait_for_update': 500
+	  });
+	  gtag('set', 'ads_data_redaction', true);
+	  gtag('set', 'url_passthrough', true);
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-EXAMPLE"></script>
+	<script>
+	  gtag('js', new Date());
+	  gtag('config', 'G-EXAMPLE');
+	</script>

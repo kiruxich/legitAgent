@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "supabase-consent-categories",
+  "repository": "supabase/supabase",
+  "commit": "45199443c8e927f623f758399bdf52796adc6615",
+  "independenceGroup": "supabase/supabase",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c29468abcd629e248c2f76848155c386b733872bcabcc4cf65ef1e7c61431042",
+  "files": [
+    {
+      "filename": "ConsentToast.tsx",
+      "sourcePath": "packages/ui-patterns/src/ConsentToast/index.tsx",
+      "sourceUrl": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/ui-patterns/src/ConsentToast/index.tsx",
+      "extractedLines": null,
+      "changes": [
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "36e5550ca4ccfc3eb78af5f71985d62b336cd4622cadb77024362bb7144b656c",
+      "sha256": "602aee23a26e76dd6ae701ec1ddb296651a67c6f2f80631168ea93d9c8f087a8"
+    },
+    {
+      "filename": "consent.tsx",
+      "sourcePath": "packages/ui-patterns/src/consent.tsx",
+      "sourceUrl": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/ui-patterns/src/consent.tsx",
+      "extractedLines": null,
+      "changes": [
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "fa97d75e396a8b33583d08e569324939e5195efbc8548491537541e1f2e2ce98",
+      "sha256": "57501897520af6bcdb9446606cd6752dd9788fb1727a0c0600cc05d1be2c76ed"
+    },
+    {
+      "filename": "PrivacySettings.tsx",
+      "sourcePath": "packages/ui-patterns/src/PrivacySettings/index.tsx",
+      "sourceUrl": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/ui-patterns/src/PrivacySettings/index.tsx",
+      "extractedLines": null,
+      "changes": [
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "8f15496dd2c8afb1dcad9e40dd78a1dac3c49399b392faec52dbe910c0416aac",
+      "sha256": "7753e92e53b49703f1f9693bbabd6ce69717363b92c020e5a1d9c5840e20d3b4"
+    },
+    {
+      "filename": "consent-state.ts",
+      "sourcePath": "packages/common/consent-state.ts",
+      "sourceUrl": "https://github.com/supabase/supabase/blob/45199443c8e927f623f758399bdf52796adc6615/packages/common/consent-state.ts",
+      "extractedLines": null,
+      "changes": [],
+      "upstreamSha256": "55fecb9665ed8bd1a0a0c639e7506df7c9a688525cb3df1a0d2a8a21607bbcef",
+      "sha256": "55fecb9665ed8bd1a0a0c639e7506df7c9a688525cb3df1a0d2a8a21607bbcef"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "ConsentToast exposes an Opt out control, wired to denyAll in consent.tsx; the state adapter delegates to denyAllServices. Preferences/state sources are retained as context. SDK execution, category persistence and production/local environment behavior are not scored by this static case.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.COOKIE.NO_REJECT": false
+    },
+    "checks": []
+  }
+}

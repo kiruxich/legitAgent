@@ -6,13 +6,31 @@ import type { AddressInfo } from 'node:net';
 import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { scanUrl } from '../src/index.js';
+import { isForeignTrackerUrl } from '../src/scan-url.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const fixtures = path.join(here, 'fixtures');
 
-function startFixtureServer(): Promise<{ server: http.Server; port: number }> {
+function startFixtureServer(): Promise<{ server: http.Server; port: number; requests: Map<string, number> }> {
+  const requests = new Map<string, number>();
   const server = http.createServer((req, res) => {
     const urlPath = (req.url ?? '/').split('?')[0] ?? '/';
+    requests.set(urlPath, (requests.get(urlPath) ?? 0) + 1);
+    if (urlPath === '/redirect-to-error.html') {
+      res.writeHead(302, { location: '/http-error.html?token=redirect-secret' });
+      res.end();
+      return;
+    }
+    if (urlPath === '/http-error.html' || (urlPath === '/accept-http-error.html' && requests.get(urlPath)! > 1)) {
+      res.writeHead(503, { 'content-type': 'text/html; charset=utf-8' });
+      res.end('<h1>Service unavailable</h1><a href="/privacy">Privacy policy</a>');
+      return;
+    }
+    if (urlPath === '/accept-http-error.html') {
+      res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+      res.end('<div role="dialog"><p>Cookie consent</p><button>Accept</button><button>Reject</button></div><a href="/privacy">Privacy policy</a>');
+      return;
+    }
     if (urlPath.includes('google-analytics') || urlPath.includes('facebook')) {
       res.writeHead(200, { 'content-type': 'application/javascript' });
       res.end('');
@@ -31,7 +49,7 @@ function startFixtureServer(): Promise<{ server: http.Server; port: number }> {
   return new Promise((resolve) => {
     server.listen(0, '127.0.0.1', () => {
       const port = (server.address() as AddressInfo).port;
-      resolve({ server, port });
+      resolve({ server, port, requests });
     });
   });
 }
@@ -40,9 +58,10 @@ describe('scanUrl', () => {
   let server: http.Server;
   let port: number;
   let origin: string;
+  let requests: Map<string, number>;
 
   beforeAll(async () => {
-    ({ server, port } = await startFixtureServer());
+    ({ server, port, requests } = await startFixtureServer());
     origin = `http://127.0.0.1:${port}`;
   });
 
@@ -69,11 +88,51 @@ describe('scanUrl', () => {
     expect(Array.isArray(result.cookiesBefore)).toBe(true);
   });
 
-  it('flags foreign tracker requests', async () => {
+  it('does not mistake a same-origin analytics asset path for a foreign tracker request', async () => {
     const url = `${origin}/foreign-tracker.html`;
     const result = await scanUrl(url, { allowPrivateNetwork: true });
-    expect(result.findings.some((f) => f.ruleId === 'PDN.TRANSFER.FOREIGN_TRACKER')).toBe(true);
-    expect(result.findings.find((f) => f.ruleId === 'PDN.TRANSFER.FOREIGN_TRACKER')?.file).toBe(url);
+    expect(result.networkRequests.some((request) => request.url === `${origin}/google-analytics/analytics.js`)).toBe(true);
+    expect(result.findings.some((f) => f.ruleId === 'PDN.TRANSFER.FOREIGN_TRACKER')).toBe(false);
+  });
+
+  it.each(['http-error.html', 'redirect-to-error.html', 'missing.html'])('rejects an HTTP error instead of auditing its error page: %s', async (route) => {
+    const scan = scanUrl(`${origin}/${route}?token=input-secret`, { allowPrivateNetwork: true });
+    await expect(scan)
+      .rejects.toThrow(/Не удалось проверить страницу: HTTP (503|404)/);
+    await expect(scan)
+      .rejects.not.toThrow(/input-secret|redirect-secret/);
+  });
+
+  it('rejects an HTTP error on the fresh navigation used to measure Accept', async () => {
+    await expect(scanUrl(`${origin}/accept-http-error.html`, { allowPrivateNetwork: true }))
+      .rejects.toThrow('Не удалось проверить страницу: HTTP 503');
+    expect(requests.get('/accept-http-error.html')).toBe(2);
+  });
+
+  it('does not click Accept or Reject in an unrelated consent dialog', async () => {
+    const result = await scanUrl(`${origin}/unrelated-dialog.html`, { allowPrivateNetwork: true });
+    expect(result.acceptStatus).toBe('not_available');
+    expect(result.rejectStatus).toBe('not_available');
+    expect(requests.has('/unexpected-accept')).toBe(false);
+    expect(requests.has('/unexpected-reject')).toBe(false);
+  });
+
+  it('does not click ambiguous actions even when the dialog mentions cookies', async () => {
+    const result = await scanUrl(`${origin}/ambiguous-cookie-actions.html`, { allowPrivateNetwork: true });
+    expect(result.acceptStatus).toBe('not_available');
+    expect(result.rejectStatus).toBe('not_available');
+    expect(requests.has('/unexpected-order-action')).toBe(false);
+    expect(requests.has('/unexpected-deletion-action')).toBe(false);
+  });
+
+  it('skips unrelated dialogs and operates the cookie dialog that follows them', async () => {
+    const result = await scanUrl(`${origin}/mixed-dialogs.html`, { allowPrivateNetwork: true });
+    expect(result.acceptStatus).toBe('completed');
+    expect(result.rejectStatus).toBe('completed');
+    expect(result.cookiesAfterAccept.map((cookie) => cookie.name)).toContain('_ga_cookie_accept');
+    expect(result.cookiesAfterReject.map((cookie) => cookie.name)).toContain('cookie_reject');
+    expect(requests.has('/unexpected-accept')).toBe(false);
+    expect(requests.has('/unexpected-reject')).toBe(false);
   });
 
   it('returns no findings for a clean page', async () => {
@@ -189,5 +248,29 @@ describe('scanUrl', () => {
     const result = await scanUrl(url, { allowPrivateNetwork: true });
     expect(result.findings.some((f) => f.ruleId === 'PDN.POLICY.NO_LINK')).toBe(true);
     expect(result.findings.find((f) => f.ruleId === 'PDN.POLICY.NO_LINK')?.file).toBe(url);
+  });
+});
+
+describe('foreign tracker URL classification', () => {
+  it.each([
+    'https://google-analytics.com/collect',
+    'https://www.google-analytics.com/collect',
+    'https://region1.google-analytics.com/collect',
+    'https://www.googletagmanager.com/gtm.js',
+    'https://CONNECT.FACEBOOK.NET./en_US/fbevents.js',
+  ])('recognizes a tracker domain: %s', (url) => {
+    expect(isForeignTrackerUrl(url)).toBe(true);
+  });
+
+  it.each([
+    'https://example.com/google-analytics/analytics.js',
+    'https://example.com/?next=https://google-analytics.com',
+    'https://google-analytics.com.example.com/collect',
+    'https://not-google-analytics.com/collect',
+    'https://google-analytics.com@example.com/collect',
+    'file://google-analytics.com/collect',
+    '/google-analytics/analytics.js',
+  ])('ignores a path, lookalike, credentials, or non-HTTP URL: %s', (url) => {
+    expect(isForeignTrackerUrl(url)).toBe(false);
   });
 });

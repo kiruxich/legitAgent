@@ -1,0 +1,19 @@
+        <form action="{% url "pay" %}" method="get">
+
+        <div class="join-subtitle" id="select_package">Пакет брать будем?</div>
+
+        {% include "payments/blocks/packages.html" %}
+
+        <div class="join-subtitle">Ваш e-mail</div>
+
+        <div class="block join-email">
+            <div class="join-email-form">
+                <label>Вот сюда 👉&nbsp;&nbsp;<input type="email" name="email" placeholder="person@example.invalid" required></label>
+            </div>
+        </div>
+
+        <label class="join-consent"><input type="checkbox" name="iconsent" value="true" required> &larr; я даю согласие на обработку <a href="{% url "show_post" "docs" "privacy_policy" %}" target="_blank">персональных данных</a>, соглашаюсь с <a href="{% url "show_post" "docs" "about" %}" target="_blank">правилами</a> Клуба и помню, что мне придётся написать интро и пройти модерацию</label>
+
+        <button type="submit" class="button button-big join-button">Перейти к оплате</button>
+
+        </form>

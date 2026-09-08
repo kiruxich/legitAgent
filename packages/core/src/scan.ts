@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { defaultCatalog } from './catalog.js';
 import { analyzeSource } from './analysis.js';
+import { sourceSyntaxError } from './parse-jsx.js';
 import { analyzeWithCache } from './cache.js';
 import { loadBaseline } from './baseline.js';
 import { ConfigError, loadScanConfig } from './config.js';
@@ -29,12 +30,8 @@ export interface SourceFile {
   analysis?: ReturnType<typeof analyzeSource>;
 }
 
-function looksBroken(filePath: string, source: string): boolean {
-  if (/\.(vue|svelte|astro)$/i.test(filePath)) return false;
-  return (source.match(/{/g) ?? []).length !== (source.match(/}/g) ?? []).length;
-}
-
 export function scanSources(files: SourceFile[], catalog: Catalog = defaultCatalog()): Finding[] {
+  files = files.map((file) => ({ ...file, analysis: file.analysis ?? analyzeSource(file.filePath ?? file.relativePath, file.source) }));
   const findings: Finding[] = [];
   for (const file of files) {
     const filePath = file.filePath ?? file.relativePath;
@@ -190,10 +187,8 @@ export async function scanProject(
       warnings.push({ file: relativePath, message: (err as Error).message });
       continue;
     }
-    if (looksBroken(filePath, source)) {
-      warnings.push({ file: relativePath, message: 'Файл пропущен: похоже на синтаксическую ошибку' });
-      continue;
-    }
+    const syntaxError = sourceSyntaxError(filePath, source);
+    if (syntaxError) warnings.push({ file: relativePath, message: `Синтаксическая ошибка: ${syntaxError}. Проверены доступные фрагменты файла.` });
     loaded.push({ relativePath, source, filePath });
   }
 

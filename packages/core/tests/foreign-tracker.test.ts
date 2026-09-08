@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { defaultCatalog } from '../src/catalog.js';
 import { detectForeignTracker } from '../src/detectors/foreign-tracker.js';
+import { scanSources } from '../src/scan.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const catalog = defaultCatalog();
@@ -44,5 +45,27 @@ describe('detectForeignTracker', () => {
         'PDN.TRANSFER.FOREIGN_TRACKER',
       );
     }
+  });
+
+  it.each([
+    '/google-analytics/analytics.js',
+    'https://shop.test/google-analytics/analytics.js',
+    'https://shop.test/?source=googletagmanager.com',
+    'https://google-analytics.com.shop.test/analytics.js',
+    'https://notfacebook.net/script.js',
+    'https://google-analytics.com@shop.test/analytics.js',
+    'ftp://google-analytics.com/analytics.js',
+  ])('does not infer a foreign tracker from a path or lookalike URL: %s', (url) => {
+    const findings = scanSources([{ relativePath: 'page.html', source: `<form><input name="email" /></form><script src="${url}"></script>` }]);
+    expect(findings.filter((finding) => ['PDN.TRANSFER.FOREIGN_TRACKER', 'PDN.LOCALIZATION.UNCLEAR'].includes(finding.ruleId))).toEqual([]);
+  });
+
+  it.each([
+    '//www.google-analytics.com/analytics.js',
+    'https://www.GOOGLETAGMANAGER.COM./gtm.js',
+    'https://connect.facebook.net/en_US/fbevents.js',
+  ])('recognizes actual tracker hostnames: %s', (url) => {
+    const findings = scanSources([{ relativePath: 'page.html', source: `<form><input name="email" /></form><script src="${url}"></script>` }]);
+    expect(findings.map((finding) => finding.ruleId)).toEqual(expect.arrayContaining(['PDN.TRANSFER.FOREIGN_TRACKER', 'PDN.LOCALIZATION.UNCLEAR']));
   });
 });

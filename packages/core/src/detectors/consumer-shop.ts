@@ -5,7 +5,7 @@ const STRONG_SHOP = /addToCart|add-to-cart|оформить заказ/i;
 const CART = /корзин/i;
 const BUY = /купить/i;
 const OFFER = /оферт|публичн\w{0,8}\s+договор/i;
-const REQUISITES = /\bИНН\b|\bОГРН\b/;
+const REQUISITES = /(?:^|[^\p{L}\p{N}_])(?:ИНН|ОГРН|ОГРНИП)(?=$|[^\p{L}\p{N}_])/iu;
 const RETURN = /возврат|обмен товар/i;
 
 export function looksLikeShop(source: string): boolean {

@@ -1,34 +1,575 @@
 {
   "version": 1,
-  "description": "Synthetic regression seeds expanded with semantics-preserving mutations. Import anonymized, independently labeled real-world cases before v1 release.",
+  "description": "40 synthetic regression seeds and 12 independently sourced, technically reviewed real-world seeds; formatting variants are not independent cases.",
   "v1MinimumIndependentCases": 100,
   "mutationCount": 5,
   "thresholds": {
     "precision": 0.85,
     "recall": 0.85,
     "minimumLabeledExamplesPerRule": 10,
+    "minimumPositiveSeedsPerRule": 1,
+    "minimumNegativeSeedsPerRule": 1,
     "minimumExpandedCases": 100
   },
   "cases": [
-    { "name": "form without consent", "path": "packages/core/tests/fixtures/bad-form", "rules": { "PDN.FORM.NO_CONSENT": true } },
-    { "name": "form with consent", "path": "packages/core/tests/fixtures/good-form", "rules": { "PDN.FORM.NO_CONSENT": false } },
-    { "name": "prechecked JSX consent", "path": "packages/core/tests/fixtures/bad-prechecked", "rules": { "PDN.FORM.PRECHECKED_CONSENT": true } },
-    { "name": "unchecked JSX consent", "path": "packages/core/tests/fixtures/good-prechecked", "rules": { "PDN.FORM.PRECHECKED_CONSENT": false } },
-    { "name": "consent without policy link", "path": "packages/core/tests/fixtures/bad-no-policy-link", "rules": { "PDN.FORM.NO_POLICY_LINK": true } },
-    { "name": "consent with policy link", "path": "packages/core/tests/fixtures/good-no-policy-link", "rules": { "PDN.FORM.NO_POLICY_LINK": false } },
-    { "name": "unguarded tracker", "path": "packages/core/tests/fixtures/bad-tracker", "rules": { "PDN.TRACKER.NO_CONSENT": true } },
-    { "name": "guarded tracker", "path": "packages/core/tests/fixtures/good-v2-source", "rules": { "PDN.TRACKER.NO_CONSENT": false } },
-    { "name": "foreign tracker", "path": "packages/core/tests/fixtures/bad-foreign-tracker", "rules": { "PDN.TRANSFER.FOREIGN_TRACKER": true } },
-    { "name": "domestic tracker", "path": "packages/core/tests/fixtures/good-foreign-tracker", "rules": { "PDN.TRANSFER.FOREIGN_TRACKER": false } },
-    { "name": "banner without reject", "path": "packages/core/tests/fixtures/bad-cookie-banner", "rules": { "PDN.COOKIE.NO_REJECT": true } },
-    { "name": "banner with reject", "path": "packages/core/tests/fixtures/good-cookie-banner", "rules": { "PDN.COOKIE.NO_REJECT": false } },
-    { "name": "incomplete policy", "path": "packages/core/tests/fixtures/bad-incomplete-policy", "rules": { "PDN.POLICY.INCOMPLETE": true } },
-    { "name": "complete policy", "path": "packages/core/tests/fixtures/good-complete-policy", "rules": { "PDN.POLICY.INCOMPLETE": false } },
-    { "name": "missing policy", "path": "packages/core/tests/fixtures/no-policy", "rules": { "PDN.POLICY.NO_LINK": true } },
-    { "name": "linked policy", "path": "packages/core/tests/fixtures/good-policy", "rules": { "PDN.POLICY.NO_LINK": false } },
-    { "name": "ad without erid", "path": "packages/core/tests/fixtures/bad-erid", "rules": { "ADV.ERID.MISSING": true } },
-    { "name": "ad with erid", "path": "packages/core/tests/fixtures/good-erid", "rules": { "ADV.ERID.MISSING": false } },
-    { "name": "shop markers", "path": "packages/core/tests/fixtures/astro-shop", "rules": { "CONSUMER.OFFER.MISSING": true, "CONSUMER.REQUISITES.MISSING": true, "CONSUMER.RETURN.MISSING": true } },
-    { "name": "buy CTA is not a shop", "path": "packages/core/tests/fixtures/buy-cta-only", "rules": { "CONSUMER.OFFER.MISSING": false, "CONSUMER.REQUISITES.MISSING": false, "CONSUMER.RETURN.MISSING": false } }
+    {
+      "name": "form without consent",
+      "path": "packages/core/tests/fixtures/bad-form",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "form with consent",
+      "path": "packages/core/tests/fixtures/good-form",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "prechecked JSX consent",
+      "path": "packages/core/tests/fixtures/bad-prechecked",
+      "rules": {
+        "PDN.FORM.PRECHECKED_CONSENT": true
+      }
+    },
+    {
+      "name": "unchecked JSX consent",
+      "path": "packages/core/tests/fixtures/good-prechecked",
+      "rules": {
+        "PDN.FORM.PRECHECKED_CONSENT": false
+      }
+    },
+    {
+      "name": "consent without policy link",
+      "path": "packages/core/tests/fixtures/bad-no-policy-link",
+      "rules": {
+        "PDN.FORM.NO_POLICY_LINK": true
+      }
+    },
+    {
+      "name": "consent with policy link",
+      "path": "packages/core/tests/fixtures/good-no-policy-link",
+      "rules": {
+        "PDN.FORM.NO_POLICY_LINK": false
+      }
+    },
+    {
+      "name": "unguarded tracker",
+      "path": "packages/core/tests/fixtures/bad-tracker",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "guarded tracker",
+      "path": "packages/core/tests/fixtures/good-v2-source",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "foreign tracker",
+      "path": "packages/core/tests/fixtures/bad-foreign-tracker",
+      "rules": {
+        "PDN.TRANSFER.FOREIGN_TRACKER": true
+      }
+    },
+    {
+      "name": "domestic tracker",
+      "path": "packages/core/tests/fixtures/good-foreign-tracker",
+      "rules": {
+        "PDN.TRANSFER.FOREIGN_TRACKER": false
+      }
+    },
+    {
+      "name": "banner without reject",
+      "path": "packages/core/tests/fixtures/bad-cookie-banner",
+      "rules": {
+        "PDN.COOKIE.NO_REJECT": true
+      }
+    },
+    {
+      "name": "banner with reject",
+      "path": "packages/core/tests/fixtures/good-cookie-banner",
+      "rules": {
+        "PDN.COOKIE.NO_REJECT": false
+      }
+    },
+    {
+      "name": "incomplete policy",
+      "path": "packages/core/tests/fixtures/bad-incomplete-policy",
+      "rules": {
+        "PDN.POLICY.INCOMPLETE": true
+      }
+    },
+    {
+      "name": "complete policy",
+      "path": "packages/core/tests/fixtures/good-complete-policy",
+      "rules": {
+        "PDN.POLICY.INCOMPLETE": false
+      }
+    },
+    {
+      "name": "missing policy",
+      "path": "packages/core/tests/fixtures/no-policy",
+      "rules": {
+        "PDN.POLICY.NO_LINK": true
+      }
+    },
+    {
+      "name": "linked policy",
+      "path": "packages/core/tests/fixtures/good-policy",
+      "rules": {
+        "PDN.POLICY.NO_LINK": false
+      }
+    },
+    {
+      "name": "ad without erid",
+      "path": "packages/core/tests/fixtures/bad-erid",
+      "rules": {
+        "ADV.ERID.MISSING": true
+      }
+    },
+    {
+      "name": "ad with erid",
+      "path": "packages/core/tests/fixtures/good-erid",
+      "rules": {
+        "ADV.ERID.MISSING": false
+      }
+    },
+    {
+      "name": "shop markers",
+      "path": "packages/core/tests/fixtures/astro-shop",
+      "rules": {
+        "CONSUMER.OFFER.MISSING": true,
+        "CONSUMER.REQUISITES.MISSING": true,
+        "CONSUMER.RETURN.MISSING": true
+      }
+    },
+    {
+      "name": "buy CTA is not a shop",
+      "path": "packages/core/tests/fixtures/buy-cta-only",
+      "rules": {
+        "CONSUMER.OFFER.MISSING": false,
+        "CONSUMER.REQUISITES.MISSING": false,
+        "CONSUMER.RETURN.MISSING": false
+      }
+    },
+    {
+      "name": "search html",
+      "path": "benchmarks/fixtures/search-html",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.ORG.RKN_NOTICE": false
+      }
+    },
+    {
+      "name": "search tsx",
+      "path": "benchmarks/fixtures/search-tsx",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.ORG.RKN_NOTICE": false
+      }
+    },
+    {
+      "name": "search vue",
+      "path": "benchmarks/fixtures/search-vue",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.ORG.RKN_NOTICE": false
+      }
+    },
+    {
+      "name": "search svelte",
+      "path": "benchmarks/fixtures/search-svelte",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.ORG.RKN_NOTICE": false
+      }
+    },
+    {
+      "name": "tracker denied html",
+      "path": "benchmarks/fixtures/tracker-denied-html",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "tracker granted html",
+      "path": "benchmarks/fixtures/tracker-granted-html",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "tracker denied vue",
+      "path": "benchmarks/fixtures/tracker-denied-vue",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "tracker granted vue",
+      "path": "benchmarks/fixtures/tracker-granted-vue",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "tracker denied svelte",
+      "path": "benchmarks/fixtures/tracker-denied-svelte",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "tracker granted svelte",
+      "path": "benchmarks/fixtures/tracker-granted-svelte",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "tracker denied astro",
+      "path": "benchmarks/fixtures/tracker-denied-astro",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "tracker granted astro",
+      "path": "benchmarks/fixtures/tracker-granted-astro",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "tracker inequality else",
+      "path": "benchmarks/fixtures/tracker-inequality-else",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "tracker equality",
+      "path": "benchmarks/fixtures/tracker-equality",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false
+      }
+    },
+    {
+      "name": "literal brace html",
+      "path": "benchmarks/fixtures/literal-brace-html",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.FORM.NO_CONSENT": true,
+        "PDN.ORG.RKN_NOTICE": true
+      }
+    },
+    {
+      "name": "literal brace js",
+      "path": "benchmarks/fixtures/literal-brace-js",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": true
+      }
+    },
+    {
+      "name": "shop requisites present",
+      "path": "benchmarks/fixtures/shop-requisites-present",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "CONSUMER.REQUISITES.MISSING": false
+      }
+    },
+    {
+      "name": "shop requisites missing",
+      "path": "benchmarks/fixtures/shop-requisites-missing",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "CONSUMER.REQUISITES.MISSING": true
+      }
+    },
+    {
+      "name": "first party tracker path",
+      "path": "benchmarks/fixtures/first-party-tracker-path",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRANSFER.FOREIGN_TRACKER": false
+      }
+    },
+    {
+      "name": "tracker lookalike domain",
+      "path": "benchmarks/fixtures/tracker-lookalike-domain",
+      "provenance": "synthetic-regression",
+      "rules": {
+        "PDN.TRANSFER.FOREIGN_TRACKER": false
+      }
+    },
+    {
+      "id": "vas3k-join",
+      "name": "real world: vas3k-join",
+      "path": "benchmarks/real-world/vas3k-join",
+      "provenance": "independent-real-world",
+      "independenceGroup": "vas3k/vas3k.club",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.FORM.PRECHECKED_CONSENT": false,
+        "PDN.FORM.NO_POLICY_LINK": false
+      },
+      "checks": [
+        {
+          "file": "join.html",
+          "forms": [
+            {
+              "hasPii": true,
+              "hasConsent": true,
+              "hasPolicyLink": true,
+              "hasPrecheckedConsent": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memos-search",
+      "name": "real world: memos-search",
+      "path": "benchmarks/real-world/memos-search",
+      "provenance": "independent-real-world",
+      "independenceGroup": "usememos/memos",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.FORM.NO_POLICY_LINK": false
+      },
+      "checks": [
+        {
+          "file": "QuickFindDialog.tsx",
+          "forms": [
+            {
+              "hasPii": false,
+              "hasConsent": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "immich-admin-registration",
+      "name": "real world: immich-admin-registration",
+      "path": "benchmarks/real-world/immich-admin-registration",
+      "provenance": "independent-real-world",
+      "independenceGroup": "immich-app/immich",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.PRECHECKED_CONSENT": false
+      },
+      "checks": [
+        {
+          "file": "Register.svelte",
+          "forms": [
+            {
+              "hasPii": true,
+              "hasConsent": false,
+              "hasPrecheckedConsent": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hoppscotch-email-login",
+      "name": "real world: hoppscotch-email-login",
+      "path": "benchmarks/real-world/hoppscotch-email-login",
+      "provenance": "independent-real-world",
+      "independenceGroup": "hoppscotch/hoppscotch",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.PRECHECKED_CONSENT": false
+      },
+      "checks": [
+        {
+          "file": "Login.vue",
+          "forms": [
+            {
+              "hasPii": true,
+              "hasConsent": false,
+              "hasPrecheckedConsent": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nextcloud-invite-search",
+      "name": "real world: nextcloud-invite-search",
+      "path": "benchmarks/real-world/nextcloud-invite-search",
+      "provenance": "independent-real-world",
+      "independenceGroup": "nextcloud/contacts",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.NO_CONSENT": false,
+        "PDN.FORM.NO_POLICY_LINK": false
+      },
+      "checks": [
+        {
+          "file": "OcmInvitesList.vue",
+          "forms": []
+        }
+      ]
+    },
+    {
+      "id": "opentdf-consent-config",
+      "name": "real world: opentdf-consent-config",
+      "path": "benchmarks/real-world/opentdf-consent-config",
+      "provenance": "independent-real-world",
+      "independenceGroup": "opentdf/docs",
+      "strict": true,
+      "rules": {
+        "PDN.TRANSFER.FOREIGN_TRACKER": true
+      },
+      "checks": [
+        {
+          "file": "consent-default.js",
+          "forms": [],
+          "trackers": [],
+          "rules": {
+            "PDN.TRACKER.NO_CONSENT": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "keto-regional-consent",
+      "name": "real world: keto-regional-consent",
+      "path": "benchmarks/real-world/keto-regional-consent",
+      "provenance": "independent-real-world",
+      "independenceGroup": "martinus/keto-calculator",
+      "strict": true,
+      "rules": {
+        "PDN.TRANSFER.FOREIGN_TRACKER": true
+      },
+      "checks": [
+        {
+          "file": "analytics.html",
+          "forms": [],
+          "trackers": [
+            {
+              "name": "gtag",
+              "snippetIncludes": "gtag('config'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "payload-consent-actions",
+      "name": "real world: payload-consent-actions",
+      "path": "benchmarks/real-world/payload-consent-actions",
+      "provenance": "independent-real-world",
+      "independenceGroup": "payloadcms/website",
+      "strict": true,
+      "rules": {
+        "PDN.COOKIE.NO_REJECT": false
+      },
+      "checks": []
+    },
+    {
+      "id": "supabase-consent-categories",
+      "name": "real world: supabase-consent-categories",
+      "path": "benchmarks/real-world/supabase-consent-categories",
+      "provenance": "independent-real-world",
+      "independenceGroup": "supabase/supabase",
+      "strict": true,
+      "rules": {
+        "PDN.COOKIE.NO_REJECT": false
+      },
+      "checks": []
+    },
+    {
+      "id": "gta-inert-analytics",
+      "name": "real world: gta-inert-analytics",
+      "path": "benchmarks/real-world/gta-inert-analytics",
+      "provenance": "independent-real-world",
+      "independenceGroup": "smtchahal/gta-snap-to-jpg",
+      "strict": true,
+      "rules": {
+        "PDN.TRACKER.NO_CONSENT": false,
+        "PDN.COOKIE.NO_REJECT": false
+      },
+      "checks": [
+        {
+          "file": "analytics.html",
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "freefeed-unrelated-checkboxes",
+      "name": "real world: freefeed-unrelated-checkboxes",
+      "path": "benchmarks/real-world/freefeed-unrelated-checkboxes",
+      "provenance": "independent-real-world",
+      "independenceGroup": "freefeed/freefeed-react-client",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.PRECHECKED_CONSENT": false,
+        "PDN.COOKIE.NO_REJECT": false
+      },
+      "checks": [
+        {
+          "file": "signup-form.jsx",
+          "forms": [
+            {
+              "hasPii": true,
+              "hasConsent": false,
+              "hasPrecheckedConsent": false
+            }
+          ]
+        },
+        {
+          "file": "cookies-warning.jsx",
+          "forms": []
+        }
+      ]
+    },
+    {
+      "id": "pretix-checkout-confirmations",
+      "name": "real world: pretix-checkout-confirmations",
+      "path": "benchmarks/real-world/pretix-checkout-confirmations",
+      "provenance": "independent-real-world",
+      "independenceGroup": "pretix/pretix",
+      "strict": true,
+      "rules": {
+        "PDN.FORM.PRECHECKED_CONSENT": false
+      },
+      "checks": [
+        {
+          "file": "checkout_confirm.html",
+          "forms": [
+            {
+              "hasPii": false,
+              "hasPrecheckedConsent": false
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

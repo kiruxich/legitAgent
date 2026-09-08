@@ -136,6 +136,17 @@ describe('evidence pack', () => {
     expect(fs.existsSync(paths.sarif)).toBe(true);
     expect(fs.existsSync(paths.pdf)).toBe(true);
 
+    const pdf = fs.readFileSync(paths.pdf).toString('latin1');
+    const imageObjects = pdf.match(/<<(?:(?!>>)[\s\S])*\/Subtype\s*\/Image(?:(?!>>)[\s\S])*>>/g) ?? [];
+    for (const shot of live.screenshots.filter((shot) => shot.id === 'page' || shot.id === 'banner')) {
+      const png = fs.readFileSync(path.join(evidenceDir, shot.file));
+      const width = png.readUInt32BE(16);
+      const height = png.readUInt32BE(20);
+      expect(imageObjects.some((object) =>
+        new RegExp(`/Width\\s+${width}\\b`).test(object) && new RegExp(`/Height\\s+${height}\\b`).test(object),
+      ), `PDF must embed the ${shot.id} screenshot (${width}×${height})`).toBe(true);
+    }
+
     const json = JSON.parse(fs.readFileSync(paths.json, 'utf8')) as {
       findings: unknown[];
       reviewed: unknown[];

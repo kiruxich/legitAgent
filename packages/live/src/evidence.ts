@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import {
   forEvidencePack,
@@ -268,24 +267,26 @@ function readScreenshotAsset(asset: SafeScreenshotAsset): Buffer {
   }
 }
 
-function stageScreenshotAssets(
-  outputRoot: string,
-  assets: SafeScreenshotAsset[],
-): { dir: string; screenshots: EvidenceShot[] } {
-  const stagingDir = fs.mkdtempSync(path.join(outputRoot, '.legitagent-pdf-assets-'));
-  try {
-    const screenshots = assets.map((asset, index) => {
-      const extension = path.extname(asset.shot.file).toLowerCase();
-      const safeExtension = /^\.(?:png|jpe?g|webp)$/.test(extension) ? extension : '.bin';
-      const file = `screenshot-${index}${safeExtension}`;
-      fs.writeFileSync(path.join(stagingDir, file), readScreenshotAsset(asset), { flag: 'wx', mode: 0o600 });
-      return { id: asset.shot.id, file };
-    });
-    return { dir: stagingDir, screenshots };
-  } catch (error) {
-    fs.rmSync(stagingDir, { recursive: true, force: true });
-    throw error;
-  }
+interface EmbeddedScreenshot {
+  id: string;
+  src: string;
+}
+
+function embedScreenshotAssets(assets: SafeScreenshotAsset[]): EmbeddedScreenshot[] {
+  const mimeTypes: Record<string, string> = {
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.webp': 'image/webp',
+  };
+  return assets.map((asset) => {
+    const mimeType = mimeTypes[path.extname(asset.shot.file).toLowerCase()];
+    if (!mimeType) throw new Error(`Неподдерживаемый screenshot format: ${asset.shot.file}`);
+    return {
+      id: asset.shot.id,
+      src: `data:${mimeType};base64,${readScreenshotAsset(asset).toString('base64')}`,
+    };
+  });
 }
 
 function assertOutputIsNotSymlink(file: string): void {
@@ -308,19 +309,16 @@ function buildPdfHtml(
   live: LiveScanResult,
   packFindings: ReviewedFinding[],
   disclaimerText: string,
+  screenshots: EmbeddedScreenshot[],
 ): string {
-  const shotBase = live.evidenceDir ?? '';
   const rows = packFindings
     .map(
       (f) =>
         `<tr><td>${escapeHtml(f.ruleId)}</td><td>${escapeHtml(f.kind)}</td><td>${escapeHtml(f.confidence)}</td><td>${escapeHtml(f.verdict)}</td><td>${escapeHtml(f.evidence.summary)}</td><td>${escapeHtml(f.excerpt)}</td><td>${escapeHtml(f.file)}</td></tr>`,
     )
     .join('');
-  const imgs = live.screenshots
-    .map((s) => {
-      const src = pathToFileURL(path.join(shotBase, s.file)).href;
-      return `<figure><figcaption>${escapeHtml(s.id)}</figcaption><img src="${escapeHtml(src)}" style="max-width:100%"/></figure>`;
-    })
+  const imgs = screenshots
+    .map((s) => `<figure><figcaption>${escapeHtml(s.id)}</figcaption><img src="${escapeHtml(s.src)}" style="max-width:100%"/></figure>`)
     .join('');
   const requests = live.networkRequests.slice(0, 100).map((request) =>
     `<tr><td>${escapeHtml(request.phase)}</td><td>${escapeHtml(request.outcome)}</td><td>${escapeHtml(request.domain)}</td><td>${escapeHtml(request.resourceType)}</td><td>${escapeHtml(request.initiator ?? '')}</td></tr>`,
@@ -429,19 +427,20 @@ export async function writeEvidencePack(args: {
   writeTextAtomically(jsonPath, JSON.stringify(evidence, null, 2) + '\n');
   writeTextAtomically(sarifPath, JSON.stringify(toSarif(packFindings), null, 2) + '\n');
 
-  const staged = stageScreenshotAssets(outputRoot, screenshotAssets);
-  const pdfLive: LiveScanResult = {
-    ...sanitizedLive,
-    evidenceDir: staged.dir,
-    screenshots: staged.screenshots,
-  };
+  const embeddedScreenshots = embedScreenshotAssets(screenshotAssets);
   const temporaryPdf = path.join(outputRoot, `.evidence.pdf.${randomUUID()}.tmp`);
   try {
     const browser = await chromium.launch({ headless: true });
     try {
       const page = await browser.newPage();
       try {
-        await page.setContent(buildPdfHtml(pdfLive, packFindings, disclaimerText), { waitUntil: 'load' });
+        await page.setContent(buildPdfHtml(sanitizedLive, packFindings, disclaimerText, embeddedScreenshots), { waitUntil: 'load' });
+        await page.locator('img').evaluateAll(async (images) => {
+          await Promise.all(images.map(async (image) => {
+            await (image as HTMLImageElement).decode();
+            if (!(image as HTMLImageElement).naturalWidth) throw new Error('Screenshot image did not load');
+          }));
+        });
         await page.pdf({ path: temporaryPdf, format: 'A4' });
         const stat = fs.lstatSync(temporaryPdf);
         if (stat.isSymbolicLink() || !stat.isFile()) throw new Error('Небезопасный temporary PDF asset');
@@ -454,7 +453,6 @@ export async function writeEvidencePack(args: {
     }
   } finally {
     if (fs.existsSync(temporaryPdf)) fs.rmSync(temporaryPdf, { force: true });
-    fs.rmSync(staged.dir, { recursive: true, force: true });
   }
 
   return {

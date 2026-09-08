@@ -1,6 +1,7 @@
 import { Node, SyntaxKind, type CallExpression, type FunctionDeclaration, type ArrowFunction, type FunctionExpression } from 'ts-morph';
 import { parseHtml } from './parse-html.js';
 import { tryParseJsx } from './parse-jsx.js';
+import { htmlFormHasPii, jsxFormHasPii } from './form-fields.js';
 
 export type AnalysisAdapter = 'html' | 'jsx' | 'template';
 
@@ -35,13 +36,13 @@ export interface SourceAnalysis {
   trackers: TrackerEvidence[];
 }
 
-const PII = /(email|e-mail|phone|tel|name|fio|имя|телефон|почта)/i;
 const CONSENT = /(персональн|согласи|consent|обработк)/i;
 const POLICY_HREF = /href\s*=\s*["'][^"']*(privacy|personal-data|политик|pdn|confidential)[^"']*["']/i;
+// Django URL tags may contain the same quote character as the surrounding HTML attribute.
+const TEMPLATE_POLICY_HREF = /\bhref\s*=\s*(["'])\s*{%\s*url\b[^%]*\b(?:privacy\w*|personal-data|pdn|confidential\w*)\b[^%]*%}\s*\1/i;
 const INPUT_TAG = /<input\b[^>]*>/gi;
 const TRACKER = /\b(ym|gtag|ga|fbq|VK\.Retargeting)\s*\(/g;
 const FOREIGN_TRACKER = /^(gtag|ga|fbq)$/i;
-const CONSENT_GUARD = /if\s*\([^)]*(consent|cookie|tracking|analytics|marketing|метрик|согласи)/i;
 const CONSENT_SUBJECT = /(consent|cookie(?:bot)?|tracking|analytics|marketing|согласи|метрик)/i;
 const NEGATIVE_CONSENT = /(denied?|declin|reject|revoke|disable|opt.?out|without|отказ|отклон|отозв|запрет)/i;
 const POSITIVE_CONSENT_EVENT = /(granted|accept|allow|enable|opt.?in|получен|принят|разреш)/i;
@@ -87,12 +88,12 @@ function formEvidence(
   endOffset: number,
   startLine: number,
   endLine: number,
+  hasPii = htmlFormHasPii(source),
 ): FormEvidence {
-  const hasPii = /<input\b/i.test(source) && PII.test(source);
   const hasConsentControl =
     /type=["']checkbox["']/i.test(source) || /<Checkbox\b/.test(source) || /role=["']checkbox["']/i.test(source);
   const hasConsent = hasConsentControl && CONSENT.test(source);
-  const hasPolicyLink = POLICY_HREF.test(source);
+  const hasPolicyLink = POLICY_HREF.test(source) || TEMPLATE_POLICY_HREF.test(source);
   const prechecked = hasPrecheckedConsent(source);
   const signals: string[] = [];
   if (hasPii) signals.push('form contains a field that looks like personal data');
@@ -153,6 +154,7 @@ function jsxForms(filePath: string, source: string): FormEvidence[] {
       node.getEnd(),
       node.getStartLineNumber(),
       node.getEndLineNumber(),
+      jsxFormHasPii(node),
     ));
 }
 
@@ -170,6 +172,12 @@ function templateForms(source: string): FormEvidence[] {
 function trackerName(call: CallExpression): string | undefined {
   const expression = call.getExpression().getText();
   const match = expression.match(/^(ym|gtag|ga|fbq)$/i);
+  // Consent/settings commands are not event or page-view calls. Still inspect
+  // their descendants: a get callback can contain a separate tracking event.
+  if (match?.[1]?.toLowerCase() === 'gtag') {
+    const command = call.getArguments()[0];
+    if (command && Node.isStringLiteral(command) && /^(consent|set|get|js)$/.test(command.getLiteralValue())) return undefined;
+  }
   return match?.[1];
 }
 
@@ -184,16 +192,65 @@ function enclosingFunctionName(call: CallExpression): string | undefined {
 }
 
 type ConsentState = 'granted' | 'denied' | 'unknown';
+interface ConsentBranches { whenTrue: ConsentState; whenFalse: ConsentState }
+const UNKNOWN_CONSENT: ConsentBranches = { whenTrue: 'unknown', whenFalse: 'unknown' };
 
-function consentState(expression: string): ConsentState {
-  const compact = expression.replace(/\s+/g, ' ');
-  if (!CONSENT_SUBJECT.test(compact) || compact.includes('||')) return 'unknown';
-  if (NEGATIVE_CONSENT.test(compact)) return 'denied';
-  const subject = '(?:[\\w$.]*(?:consent|cookie(?:bot)?|tracking|analytics|marketing|согласи|метрик)[\\w$.]*)';
-  if (new RegExp(`!\\s*${subject}`, 'i').test(compact)) return 'denied';
-  if (new RegExp(`${subject}\\s*(?:===?|!==?)\\s*(?:false|null|undefined)`, 'i').test(compact)) return 'denied';
-  if (new RegExp(`${subject}\\s*(?:!==?|!=)\\s*true`, 'i').test(compact)) return 'denied';
-  return 'granted';
+function unwrapExpression(node: Node): Node {
+  if (Node.isParenthesizedExpression(node) || Node.isAsExpression(node) ||
+    Node.isTypeAssertion(node) || Node.isNonNullExpression(node)) return unwrapExpression(node.getExpression());
+  return node;
+}
+
+function consentSubject(node: Node): boolean {
+  const expression = unwrapExpression(node);
+  if (!Node.isIdentifier(expression) && !Node.isPropertyAccessExpression(expression)) return false;
+  const name = expression.getText();
+  return /consent|согласи/i.test(name) || (CONSENT_SUBJECT.test(name) && POSITIVE_CONSENT_EVENT.test(name));
+}
+
+function consentBranches(node: Node): ConsentBranches {
+  const expression = unwrapExpression(node);
+  if (Node.isPrefixUnaryExpression(expression) && expression.getOperatorToken() === SyntaxKind.ExclamationToken) {
+    const operand = consentBranches(expression.getOperand());
+    return { whenTrue: operand.whenFalse, whenFalse: operand.whenTrue };
+  }
+  if (Node.isBinaryExpression(expression)) {
+    const operator = expression.getOperatorToken().getText();
+    const left = unwrapExpression(expression.getLeft());
+    const right = unwrapExpression(expression.getRight());
+    if (operator === '&&' || operator === '||') {
+      const a = consentBranches(left);
+      const b = consentBranches(right);
+      const either = (x: ConsentState, y: ConsentState): ConsentState =>
+        x === 'unknown' ? y : y === 'unknown' || x === y ? x : 'unknown';
+      const both = (x: ConsentState, y: ConsentState): ConsentState => x === y ? x : 'unknown';
+      return operator === '&&'
+        ? { whenTrue: either(a.whenTrue, b.whenTrue), whenFalse: both(a.whenFalse, b.whenFalse) }
+        : { whenTrue: both(a.whenTrue, b.whenTrue), whenFalse: either(a.whenFalse, b.whenFalse) };
+    }
+    if (['===', '!==', '==', '!='].includes(operator)) {
+      const subject = consentSubject(left) ? left : consentSubject(right) ? right : undefined;
+      if (!subject) return UNKNOWN_CONSENT;
+      const literal = subject === left ? right : left;
+      let equalState: ConsentState = 'unknown';
+      if (literal.getKind() === SyntaxKind.TrueKeyword) equalState = consentBranches(subject).whenTrue;
+      else if (literal.getKind() === SyntaxKind.FalseKeyword) equalState = consentBranches(subject).whenFalse;
+      else if (Node.isStringLiteral(literal)) {
+        const value = literal.getLiteralValue();
+        if (/^(granted|accepted|allowed|enabled)$/i.test(value)) equalState = 'granted';
+        else if (/^(denied|rejected|declined|revoked|disabled)$/i.test(value)) equalState = 'denied';
+      }
+      // An unequal value may be unset or unknown; it does not prove consent.
+      return operator === '===' || operator === '=='
+        ? { whenTrue: equalState, whenFalse: 'unknown' }
+        : { whenTrue: 'unknown', whenFalse: equalState };
+    }
+    return UNKNOWN_CONSENT;
+  }
+  if (!consentSubject(expression)) return UNKNOWN_CONSENT;
+  return NEGATIVE_CONSENT.test(expression.getText())
+    ? { whenTrue: 'denied', whenFalse: 'unknown' }
+    : { whenTrue: 'granted', whenFalse: 'denied' };
 }
 
 function isDescendantOf(call: CallExpression, node: Node): boolean {
@@ -207,18 +264,21 @@ function isGrantedEvent(value: string): boolean {
 function guardedByAncestor(call: CallExpression): boolean {
   return call.getAncestors().some((ancestor) => {
     if (Node.isIfStatement(ancestor)) {
-      const state = consentState(ancestor.getExpression().getText());
-      if (isDescendantOf(call, ancestor.getThenStatement())) return state === 'granted';
+      const state = consentBranches(ancestor.getExpression());
+      if (isDescendantOf(call, ancestor.getThenStatement())) return state.whenTrue === 'granted';
       const otherwise = ancestor.getElseStatement();
-      return Boolean(otherwise && isDescendantOf(call, otherwise) && state === 'denied');
+      return Boolean(otherwise && isDescendantOf(call, otherwise) && state.whenFalse === 'granted');
     }
     if (Node.isConditionalExpression(ancestor)) {
-      const state = consentState(ancestor.getCondition().getText());
-      if (isDescendantOf(call, ancestor.getWhenTrue())) return state === 'granted';
-      return isDescendantOf(call, ancestor.getWhenFalse()) && state === 'denied';
+      const state = consentBranches(ancestor.getCondition());
+      if (isDescendantOf(call, ancestor.getWhenTrue())) return state.whenTrue === 'granted';
+      return isDescendantOf(call, ancestor.getWhenFalse()) && state.whenFalse === 'granted';
     }
     if (Node.isBinaryExpression(ancestor) && ancestor.getOperatorToken().getText() === '&&') {
-      return isDescendantOf(call, ancestor.getRight()) && consentState(ancestor.getLeft().getText()) === 'granted';
+      return isDescendantOf(call, ancestor.getRight()) && consentBranches(ancestor.getLeft()).whenTrue === 'granted';
+    }
+    if (Node.isBinaryExpression(ancestor) && ancestor.getOperatorToken().getText() === '||') {
+      return isDescendantOf(call, ancestor.getRight()) && consentBranches(ancestor.getLeft()).whenFalse === 'granted';
     }
     if (Node.isJsxAttribute(ancestor)) return isGrantedEvent(ancestor.getNameNode().getText());
     if (Node.isCallExpression(ancestor)) {
@@ -263,19 +323,54 @@ function structuralTrackers(filePath: string, source: string): TrackerEvidence[]
   });
 }
 
-function fallbackTrackers(source: string): TrackerEvidence[] {
+interface ScriptRange { start: number; end: number; executable?: boolean }
+
+function embeddedScripts(source: string, filePath: string): ScriptRange[] {
+  const ranges: ScriptRange[] = [];
+  const visit = (node: ReturnType<typeof parseHtml> | { childNodes?: unknown[] }) => {
+    const element = node as {
+      tagName?: string;
+      attrs?: { name: string; value: string }[];
+      childNodes?: unknown[];
+      content?: { childNodes?: unknown[] };
+      sourceCodeLocation?: { startTag?: { endOffset: number }; endTag?: { startOffset: number } };
+    };
+    if (element.tagName === 'script') {
+      const location = element.sourceCodeLocation;
+      const type = element.attrs?.find((attribute) => attribute.name === 'type')?.value.trim().toLowerCase() ?? '';
+      const executable = !type || type === 'module' ||
+        /^(?:text|application)\/(?:x-)?(?:java|ecma)script(?:\s*;.*)?$/.test(type);
+      if (location?.startTag) ranges.push({
+        start: location.startTag.endOffset,
+        end: location.endTag?.startOffset ?? source.length,
+        executable,
+      });
+    }
+    for (const child of element.childNodes ?? []) visit(child as { childNodes?: unknown[] });
+    if (element.content) visit(element.content);
+  };
+  visit(parseHtml(source));
+  if (/\.astro$/i.test(filePath)) {
+    const frontmatter = source.match(/^\s*---[^\S\n]*\r?\n([\s\S]*?)^---[^\S\n]*(?:\r?\n|$)/m);
+    if (frontmatter?.[1]) {
+      const start = (frontmatter.index ?? 0) + frontmatter[0].indexOf(frontmatter[1]);
+      ranges.push({ start, end: start + frontmatter[1].length });
+    }
+  }
+  return ranges;
+}
+
+function fallbackTrackers(source: string, excluded: ScriptRange[] = []): TrackerEvidence[] {
   const trackers: TrackerEvidence[] = [];
   for (const match of source.matchAll(TRACKER)) {
     const offset = match.index ?? 0;
+    if (excluded.some(({ start, end }) => offset >= start && offset < end)) continue;
     const name = match[1] ?? 'tracker';
     const startLine = lineAt(source, offset);
     const startOffset = source.lastIndexOf('\n', Math.max(0, offset - 1)) + 1;
     const nextLine = source.indexOf('\n', offset);
     const endOffset = nextLine < 0 ? source.length : nextLine;
     const line = source.slice(startOffset, endOffset) || match[0];
-    const context = source.slice(Math.max(0, offset - 600), Math.min(source.length, offset + 300));
-    const guardedByConsent = CONSENT_GUARD.test(context) ||
-      /(?:addEventListener|subscribe|\.on)\s*\([^)]*(?:consent|accept|opt.?in|согласи|принят)[\s\S]{0,500}$/i.test(context);
     trackers.push({
       startOffset,
       endOffset,
@@ -283,15 +378,35 @@ function fallbackTrackers(source: string): TrackerEvidence[] {
       endLine: startLine,
       snippet: boundedSnippet(line),
       name,
-      guardedByConsent,
+      guardedByConsent: false,
       foreign: FOREIGN_TRACKER.test(name),
       signals: [
         `tracker call: ${name}`,
-        guardedByConsent ? 'consent guard detected near tracker call' : 'no consent guard detected near tracker call',
+        'consent-controlled execution path could not be established',
       ],
     });
   }
   return trackers;
+}
+
+function templateTrackers(filePath: string, source: string): TrackerEvidence[] {
+  const scripts = embeddedScripts(source, filePath);
+  const trackers = scripts.flatMap(({ start, end, executable }, index) => {
+    // Data blocks can later be activated by a CMP. Their initial contents are
+    // not executable JS, and must also stay excluded from the fallback scan.
+    if (executable === false) return [];
+    const script = source.slice(start, end);
+    const analysis = structuralTrackers(`${filePath}.${index}.tsx`, script) ?? fallbackTrackers(script);
+    const precedingLines = lineAt(source, start) - 1;
+    return analysis.map((tracker) => ({
+      ...tracker,
+      startOffset: tracker.startOffset + start,
+      endOffset: tracker.endOffset + start,
+      startLine: tracker.startLine + precedingLines,
+      endLine: tracker.endLine + precedingLines,
+    }));
+  });
+  return [...trackers, ...fallbackTrackers(source, scripts)].sort((a, b) => a.startOffset - b.startOffset);
 }
 
 export function analyzeSource(filePath: string, source: string): SourceAnalysis {
@@ -302,5 +417,5 @@ export function analyzeSource(filePath: string, source: string): SourceAnalysis 
       ? 'html'
       : 'template';
   const forms = adapter === 'jsx' ? jsxForms(filePath, source) : adapter === 'html' ? htmlForms(source) : templateForms(source);
-  return { adapter, forms, trackers: structuralTrackers(filePath, source) ?? fallbackTrackers(source) };
+  return { adapter, forms, trackers: structuralTrackers(filePath, source) ?? templateTrackers(filePath, source) };
 }

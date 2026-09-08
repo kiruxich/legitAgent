@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { isIP } from 'node:net';
+import { ConfigError } from './config.js';
 import type { Finding, ReviewedFinding, ReviewMode, ReviewOptions, Verdict } from './types.js';
 
 export type { ReviewedFinding, Verdict } from './types.js';
@@ -72,36 +73,35 @@ export function createLlmComplete(env?: NodeJS.ProcessEnv): LlmComplete | undefi
   const openRouterKey = (e.LEGITAGENT_OPENROUTER_API_KEY ?? e.LEGITAGENT_LLM_API_KEY)?.trim();
   const configuredMode = e.LEGITAGENT_REVIEW_MODE?.trim().toLowerCase();
   const localBase = (e.LEGITAGENT_LOCAL_LLM_BASE_URL ?? e.LEGITAGENT_LLM_BASE_URL)?.trim();
-  const mode: ReviewMode = configuredMode === 'local'
-    ? 'local'
-    : configuredMode === 'openrouter'
-      ? 'openrouter'
-      : configuredMode === 'offline'
-        ? 'offline'
-        : openRouterKey
-          ? 'openrouter'
-          : 'offline';
+  if (configuredMode !== undefined && configuredMode !== 'offline' && configuredMode !== 'local' && configuredMode !== 'openrouter') {
+    throw new ConfigError('LEGITAGENT_REVIEW_MODE должен быть offline, local или openrouter');
+  }
+  const mode = configuredMode ?? (openRouterKey ? 'openrouter' : 'offline');
   if (mode === 'offline') return undefined;
   if (mode === 'openrouter' && !openRouterKey) {
-    throw new Error('Для review.mode=openrouter задайте LEGITAGENT_OPENROUTER_API_KEY');
+    throw new ConfigError('Для review.mode=openrouter задайте LEGITAGENT_OPENROUTER_API_KEY');
   }
   if (mode === 'local' && !localBase) {
-    throw new Error('Для review.mode=local задайте LEGITAGENT_LOCAL_LLM_BASE_URL');
+    throw new ConfigError('Для review.mode=local задайте LEGITAGENT_LOCAL_LLM_BASE_URL');
   }
   if (mode === 'local') {
-    let hostname: string;
+    let endpoint: URL;
     try {
-      hostname = new URL(localBase!).hostname.toLowerCase();
+      endpoint = new URL(localBase!);
     } catch {
-      throw new Error('LEGITAGENT_LOCAL_LLM_BASE_URL должен быть корректным URL');
+      throw new ConfigError('LEGITAGENT_LOCAL_LLM_BASE_URL должен быть корректным URL');
     }
+    if (!['http:', 'https:'].includes(endpoint.protocol)) {
+      throw new ConfigError('LEGITAGENT_LOCAL_LLM_BASE_URL должен использовать HTTP или HTTPS');
+    }
+    const hostname = endpoint.hostname.toLowerCase();
     const normalizedHost = hostname.replace(/^\[|\]$/g, '');
     const loopback = hostname === 'localhost' ||
       hostname.endsWith('.localhost') ||
       normalizedHost === '::1' ||
       (isIP(normalizedHost) === 4 && normalizedHost.split('.')[0] === '127');
     if (!loopback) {
-      throw new Error('Режим local принимает только loopback endpoint (localhost, 127.0.0.0/8 или ::1)');
+      throw new ConfigError('Режим local принимает только loopback endpoint (localhost, 127.0.0.0/8 или ::1)');
     }
   }
 
@@ -153,12 +153,14 @@ export function createLlmComplete(env?: NodeJS.ProcessEnv): LlmComplete | undefi
     };
     let lastError: Error | undefined;
     for (let attempt = 0; attempt <= retries; attempt += 1) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      let retryDelayMs = 0;
       try {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), timeoutMs);
         const res = await fetch(`${base}/chat/completions`, {
           method: 'POST', headers, body: JSON.stringify(body), signal: controller.signal,
-        }).finally(() => clearTimeout(timer));
+          ...(mode === 'local' ? { redirect: 'error' as const } : {}),
+        });
         if (!res.ok) {
           const retryable = res.status === 429 || res.status >= 500;
           const retryAfter = res.headers.get('retry-after');
@@ -182,9 +184,11 @@ export function createLlmComplete(env?: NodeJS.ProcessEnv): LlmComplete | undefi
         lastError = error as Error;
         if ((error as Error & { retryable?: boolean }).retryable === false) throw error;
         if (attempt >= retries) break;
-        const retryDelayMs = Math.max(0, Math.min(5_000, (error as Error & { retryDelayMs?: number }).retryDelayMs ?? 250 * (2 ** attempt)));
-        if (retryDelayMs > 0) await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
+        retryDelayMs = Math.max(0, Math.min(5_000, (error as Error & { retryDelayMs?: number }).retryDelayMs ?? 250 * (2 ** attempt)));
+      } finally {
+        clearTimeout(timer);
       }
+      if (retryDelayMs > 0) await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
     }
     throw lastError ?? new Error('LLM API error');
   };

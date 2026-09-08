@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "hoppscotch-email-login",
+  "repository": "hoppscotch/hoppscotch",
+  "commit": "ac145e7f758151b41fd46d3e5f513886ce9068ba",
+  "independenceGroup": "hoppscotch/hoppscotch",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/hoppscotch/hoppscotch/blob/ac145e7f758151b41fd46d3e5f513886ce9068ba/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "a5e6ddb3af783a02eacc848cbe309cc0940b4859ac653e9b1a2e21a4fea22552",
+  "files": [
+    {
+      "filename": "Login.vue",
+      "sourcePath": "packages/hoppscotch-common/src/components/firebase/Login.vue",
+      "sourceUrl": "https://github.com/hoppscotch/hoppscotch/blob/ac145e7f758151b41fd46d3e5f513886ce9068ba/packages/hoppscotch-common/src/components/firebase/Login.vue",
+      "extractedLines": null,
+      "changes": [
+        "Replaced operational URLs, placeholder email and analytics identifiers; known tracker-provider hostname retained for provider classification. Exact original values remain only in upstream source."
+      ],
+      "upstreamSha256": "10b376262f4b41baa80ad5680a7f4cc575823e74881d5f2260cae17053011854",
+      "sha256": "5b450f2b293b0568f0d6f6006802b4088400112b93ba4cee40da872a3545ee41"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Source inspection and scoped technical annotation by Codex; not independent legal review. Expected labels were defined separately from scanner output.",
+    "rationale": "The email-mode form uses HoppSmartInput type=email and has no checkbox. The policy link is conditional in a different sign-in-mode footer, so it is not labeled as present inside the email form. No legal label is assigned to login.",
+    "scope": "Static source only. Original application dependencies are not installed or executed.",
+    "datasetRole": "development-regression"
+  },
+  "labels": {
+    "rules": {
+      "PDN.FORM.PRECHECKED_CONSENT": false
+    },
+    "checks": [
+      {
+        "file": "Login.vue",
+        "forms": [
+          {
+            "hasPii": true,
+            "hasConsent": false,
+            "hasPrecheckedConsent": false
+          }
+        ]
+      }
+    ]
+  }
+}
