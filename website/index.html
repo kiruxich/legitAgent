@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>legitAgent — проверка сайта на 152-ФЗ, 38-ФЗ и ЗоЗПП</title>
-  <meta name="description" content="Сканер HTML, JSX, Vue, Svelte и Astro на типичные риски 152-ФЗ, 38-ФЗ и ЗоЗПП. MCP, CLI, GitHub Action и живой scan-url." />
+  <title>legitAgent v1.1.1 — privacy-проверка до деплоя</title>
+  <meta name="description" content="Local-first сканер HTML, JSX, Vue, Svelte и Astro на privacy-риски. MCP, CLI, GitHub Action и живой scan-url для v1.1.1." />
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,21 +34,30 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">v0.8.0 · MIT · бесплатно · local-first</p>
-      <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;и после деплоя</em></h1>
+      <p class="eyebrow">v1.1.1 · release candidate · MIT · local-first</p>
+      <h1>Найдите privacy-риски <em>до&nbsp;того, как их найдут пользователи</em></h1>
       <p class="lead">
-        legitAgent читает HTML, JS, TS, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
-        формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика,
-        реклама без erid, витрина без обязательной информации о продаже.
-        Живой <code>scan-url</code> смотрит тот же каталог по DOM, плюс cookie/storage/network до и после Reject и Accept;
-        evidence pack сохраняет скрины, PDF и SARIF. Review работает без сети по умолчанию;
-        внешняя проверка через OpenRouter включается только ключом пользователя.
-        В Cursor — MCP и <code>/check</code>; в Claude и Kimi — те же tools; в CI — GitHub Action.
-        Платного тарифа нет. При каждом запуске IDE подтягивается актуальный пакет с npm.
+        Один каталог правил для исходников, живого DOM и CI. legitAgent показывает файл, строку,
+        норму и следующий шаг: от формы без согласия и метрики без opt-in до cookie, рекламы и витрины.
+        Работает локально по умолчанию, без платного тарифа и обязательного облака.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="cursor://anysphere.cursor-deeplink/mcp/install?name=legitagent&amp;config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcHJlZmVyLW9ubGluZSIsIkBsZWdpdC1hZ2VudC9tY3BAbGF0ZXN0Il19">Add to Cursor</a>
         <a class="btn btn-ghost" href="#start">JSON для Claude / Kimi</a>
+      </div>
+      <div class="hero-proof" aria-label="Что проверяет v1.1.1">
+        <div class="proof-card"><strong>15</strong><span>детекторов</span></div>
+        <div class="proof-card"><strong>260</strong><span>parser-сценариев</span></div>
+        <div class="proof-card"><strong>12</strong><span>real-world групп</span></div>
+      </div>
+      <div class="audit-preview" aria-label="Пример отчёта legitAgent">
+        <div class="preview-top">
+          <span class="preview-command"><span class="preview-dot"></span>legitagent scan ./site</span>
+          <span class="preview-badge">READY</span>
+        </div>
+        <div class="preview-row preview-row-danger"><span class="severity-dot"></span><code>PDN.FORM.NO_CONSENT</code><b>high</b><small>Contact.tsx:18</small></div>
+        <div class="preview-row preview-row-warning"><span class="severity-dot"></span><code>PDN.COOKIE.NO_REJECT</code><b>medium</b><small>CookieBanner.vue:42</small></div>
+        <div class="preview-row preview-row-ok"><span class="severity-dot"></span><code>PDN.POLICY.NO_LINK</code><b>fixed</b><small>PrivacyLink.tsx:7</small></div>
       </div>
       <p class="disclaimer-inline">Эвристическая проверка кода, не юридическое заключение.</p>
     </section>
@@ -60,6 +69,7 @@
       <span>React / Next.js</span>
       <span>Vue · Svelte · Astro</span>
       <span>npm</span>
+      <span>JSON · SARIF</span>
       <span>MIT</span>
     </section>
 
@@ -133,6 +143,29 @@
       </ul>
     </section>
 
+    <section class="section release">
+      <p class="section-kicker">Что нового</p>
+      <h2>v1.1.1 собирает проверку в один понятный цикл</h2>
+      <p class="section-lead">От первого scan до evidence pack — одинаковые правила, одинаковые уровни серьёзности, одинаковый формат для разработчика и CI.</p>
+      <div class="release-grid">
+        <article class="release-card">
+          <span class="release-icon">01</span>
+          <h3>Строгий benchmark</h3>
+          <p>52 seed-кейса и 260 вариантов помогают ловить регрессии парсеров, а не только демонстрационные ошибки.</p>
+        </article>
+        <article class="release-card">
+          <span class="release-icon">02</span>
+          <h3>Живой контекст</h3>
+          <p><code>scan-url</code> сравнивает cookie, storage и network до и после Reject и Accept в изолированной сессии.</p>
+        </article>
+        <article class="release-card">
+          <span class="release-icon">03</span>
+          <h3>Безопасный CI</h3>
+          <p>Baseline, changed-files, confidence threshold и SARIF позволяют блокировать только новые достоверные находки.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="start" class="section start">
       <h2>Быстрый старт</h2>
       <div class="start-grid">
@@ -158,7 +191,7 @@ npx @legit-agent/cli@latest scan ./my-site --cache
 npx @legit-agent/cli@latest fix ./my-site
 npx @legit-agent/cli@latest scan-url https://example.com
 npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code></pre>
-          <p class="panel-note">В CI лучше пин <code>@0.8.0</code>. Baseline, changed-files и confidence threshold позволяют блокировать только новые достоверные находки. <code>fix</code> сначала делает dry-run; <code>--write</code> применяйте после проверки preview. GitHub Action: <code>legitagent-scan@v0.8.0</code>.</p>
+          <p class="panel-note">После публикации v1.1.1 в CI фиксируйте <code>@1.1.1</code>. До релиза используйте локальную сборку или <code>@latest</code>. Baseline, changed-files и confidence threshold блокируют только новые достоверные находки. <code>fix</code> сначала делает dry-run; <code>--write</code> применяйте после проверки preview.</p>
         </div>
       </div>
     </section>
@@ -173,7 +206,7 @@ npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code><
           выдержки норм и ограниченные связанные фрагменты кода, а не весь репозиторий. Это настройки маршрутизации/провайдера, а не абсолютная гарантия хранения: перед включением OpenRouter проверьте его политику и выбранного провайдера; redaction — best effort.
         </p>
         <p class="section-lead"><strong>Важно:</strong> screenshots из evidence pack могут визуально содержать персональные или другие чувствительные данные. Передавайте и храните их с соответствующими ограничениями доступа; перед публикацией обязательно проверьте изображения вручную. Для OpenRouter <code>LEGITAGENT_LLM_MAX_COST_USD</code> ограничивает отправку новых batches только после получения <code>usage.cost</code>; последний batch может превысить порог, и это не hard provider spend cap.</p>
-        <p class="section-lead">Текущий benchmark содержит 40 synthetic seeds и 12 случаев из реальных проектов — 260 parser-stability сценариев. Метрики исходных примеров и форматных вариантов считаются отдельно; новые случаи проходят строгую проверку технических признаков и разметки. Для v1.0.0 нужен отдельный gate: минимум 100 независимых групп источников с проверенной разметкой.</p>
+        <p class="section-lead">Текущий benchmark содержит 52 seed-кейса: 40 synthetic и 12 real-world source-групп — всего 260 parser-stability сценариев. Метрики исходных примеров и форматных вариантов считаются отдельно; новые случаи проходят строгую проверку технических признаков и разметки.</p>
       </div>
       <ul class="catalog-list">
         <li><code>offline</code> — default</li>
