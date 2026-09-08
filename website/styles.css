@@ -111,6 +111,20 @@ main,
   color: var(--text);
 }
 
+.github-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.github-stars-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -533,7 +547,7 @@ code {
 }
 
 @media (max-width: 720px) {
-  .nav-links a:not(.btn) {
+  .nav-links a:not(.btn):not(.github-stars) {
     display: none;
   }
 
