@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { countHigh, formatReport } from '../../../.github/actions/legitagent-scan/format-report.mjs';
 
-function sarif(results: Array<{ ruleId: string; level: string; uri?: string }> = []) {
+function sarif(results: Array<{ ruleId: string; level: string; uri?: string; confidence?: string; kind?: string }> = []) {
   return {
     runs: [
       {
@@ -9,6 +9,7 @@ function sarif(results: Array<{ ruleId: string; level: string; uri?: string }> =
           ruleId: r.ruleId,
           level: r.level,
           message: { text: 'test' },
+          properties: { confidence: r.confidence ?? 'low', kind: r.kind ?? 'risk' },
           locations: [
             {
               physicalLocation: {
@@ -27,7 +28,7 @@ describe('formatReport', () => {
     const report = formatReport(sarif());
     expect(report).toMatch(/^<!-- legitagent-scan -->/);
     expect(report).toContain('## legitAgent');
-    expect(report).toContain('Нарушений не найдено.');
+    expect(report).toContain('Находок нет.');
   });
 
   it('lists each result as a bullet with ruleId, level, and uri', () => {
@@ -38,8 +39,8 @@ describe('formatReport', () => {
       ]),
     );
     expect(report).toContain('<!-- legitagent-scan -->');
-    expect(report).toContain('- `PDN.FORM.NO_CONSENT` (error) — src/form.tsx');
-    expect(report).toContain('- `PDN.COOKIE.NO_REJECT` (warning) — src/cookie.tsx');
+    expect(report).toContain('- `PDN.FORM.NO_CONSENT` (error, risk, confidence low) — src/form.tsx');
+    expect(report).toContain('- `PDN.COOKIE.NO_REJECT` (warning, risk, confidence low) — src/cookie.tsx');
   });
 });
 
@@ -60,5 +61,15 @@ describe('countHigh', () => {
   it('returns 0 for missing or empty sarif', () => {
     expect(countHigh({})).toBe(0);
     expect(countHigh({ runs: [] })).toBe(0);
+  });
+
+  it('honors the minimum confidence threshold', () => {
+    const report = sarif([
+      { ruleId: 'A', level: 'error', confidence: 'low' },
+      { ruleId: 'B', level: 'error', confidence: 'medium' },
+      { ruleId: 'C', level: 'error', confidence: 'high' },
+    ]);
+    expect(countHigh(report, 'medium')).toBe(2);
+    expect(countHigh(report, 'high')).toBe(1);
   });
 });

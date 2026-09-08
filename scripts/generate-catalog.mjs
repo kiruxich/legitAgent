@@ -33,10 +33,12 @@ function ruleCard(rule) {
   <div class="rule-meta">
     <span class="tag tag-${esc(rule.status)}">${esc(STATUS_LABEL[rule.status])}</span>
     <span class="tag tag-${esc(rule.severity)}">${esc(rule.severity)} · ${esc(rule.law)}</span>
+    <span class="tag">${esc(rule.kind ?? 'risk')} · confidence ${esc(rule.confidence ?? 'medium')}</span>
   </div>
   <p>${esc(rule.message)}</p>
   <p><strong>Как исправить:</strong> ${esc(rule.fix)}</p>
   <p class="excerpt">${esc(excerpt.text)} <a href="${esc(excerpt.sourceUrl)}" target="_blank" rel="noopener">${esc(excerpt.article)}</a></p>
+  ${excerpt.verifiedAt ? `<p class="excerpt">Источник проверен: ${esc(excerpt.verifiedAt)}</p>` : ''}
 </article>`;
 }
 

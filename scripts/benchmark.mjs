@@ -1,0 +1,99 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { scanSources } from '../packages/core/dist/index.js';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'benchmarks/corpus.json'), 'utf8'));
+const metrics = new Map();
+const frameworkMetrics = new Map();
+const supported = /\.(?:html|jsx|tsx|js|ts|mjs|cjs|vue|svelte|astro)$/i;
+
+function readSources(dir) {
+  const result = [];
+  const visit = (current) => {
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const file = path.join(current, entry.name);
+      if (entry.isDirectory()) visit(file);
+      else if (supported.test(entry.name)) {
+        result.push({ relativePath: path.relative(dir, file), filePath: file, source: fs.readFileSync(file, 'utf8') });
+      }
+    }
+  };
+  visit(dir);
+  return result;
+}
+
+function framework(file) {
+  const ext = path.extname(file).slice(1).toLowerCase();
+  return ext === 'htm' ? 'html' : ext || 'unknown';
+}
+
+function mutate(source, index) {
+  if (index === 0) return source;
+  if (index === 1) return `\n${source}`;
+  if (index === 2) return source.replace(/\n/g, '\n  ');
+  if (index === 3) return source.replace(/\n/g, '\r\n');
+  return `${source}\n\n`;
+}
+
+function updateMetric(target, ruleId, expected, found) {
+  const row = target.get(ruleId) ?? { tp: 0, fp: 0, fn: 0, tn: 0 };
+  if (expected && found) row.tp += 1;
+  else if (expected && !found) row.fn += 1;
+  else if (!expected && found) row.fp += 1;
+  else row.tn += 1;
+  target.set(ruleId, row);
+}
+
+for (const testCase of manifest.cases) {
+  const seeds = readSources(path.join(root, testCase.path));
+  for (let variant = 0; variant < manifest.mutationCount; variant += 1) {
+    const sources = seeds.map((file) => ({ ...file, source: mutate(file.source, variant) }));
+    const actual = new Set(scanSources(sources).map((finding) => finding.ruleId));
+    const frameworks = [...new Set(sources.map((file) => framework(file.relativePath)))];
+    for (const [ruleId, expected] of Object.entries(testCase.rules)) {
+      const found = actual.has(ruleId);
+      updateMetric(metrics, ruleId, expected, found);
+      for (const name of frameworks) {
+        const target = frameworkMetrics.get(name) ?? new Map();
+        updateMetric(target, ruleId, expected, found);
+        frameworkMetrics.set(name, target);
+      }
+    }
+  }
+}
+
+function rows(source) {
+  return [...source.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([ruleId, row]) => ({
+    ruleId,
+    ...row,
+    labeled: row.tp + row.fp + row.fn + row.tn,
+    precision: row.tp + row.fp === 0 ? 1 : row.tp / (row.tp + row.fp),
+    recall: row.tp + row.fn === 0 ? 1 : row.tp / (row.tp + row.fn),
+  }));
+}
+
+const report = rows(metrics);
+const expandedCases = manifest.cases.length * manifest.mutationCount;
+const independentCases = manifest.cases.filter((testCase) => testCase.provenance === 'independent-real-world').length;
+const output = {
+  corpusVersion: manifest.version,
+  seedCases: manifest.cases.length,
+  independentCases,
+  v1MinimumIndependentCases: manifest.v1MinimumIndependentCases,
+  expandedCases,
+  thresholds: manifest.thresholds,
+  rules: report,
+  frameworks: Object.fromEntries([...frameworkMetrics.entries()].map(([name, value]) => [name, rows(value)])),
+};
+
+process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
+if (
+  expandedCases < manifest.thresholds.minimumExpandedCases ||
+  report.some((row) =>
+    row.precision < manifest.thresholds.precision ||
+    row.recall < manifest.thresholds.recall ||
+    row.labeled < manifest.thresholds.minimumLabeledExamplesPerRule,
+  )
+) process.exitCode = 1;

@@ -1,0 +1,13 @@
+<!doctype html>
+<html><body>
+  <div class="cookie-banner">
+    <button id="accept">Принять</button>
+    <button id="reject">Отклонить</button>
+  </div>
+  <script>
+    document.getElementById('accept').addEventListener('click', () => {
+      document.cookie = '_ga=after-accept; path=/';
+      localStorage.setItem('analyticsConsent', 'accepted');
+    });
+  </script>
+</body></html>

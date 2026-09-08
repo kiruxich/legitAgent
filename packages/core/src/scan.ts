@@ -1,7 +1,10 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { defaultCatalog } from './catalog.js';
+import { analyzeSource } from './analysis.js';
+import { analyzeWithCache } from './cache.js';
+import { loadBaseline } from './baseline.js';
 import { ConfigError, loadScanConfig } from './config.js';
 import { disclaimer } from './disclaimer.js';
 import { discoverSourceFiles } from './discover.js';
@@ -23,6 +26,7 @@ export interface SourceFile {
   relativePath: string;
   source: string;
   filePath?: string;
+  analysis?: ReturnType<typeof analyzeSource>;
 }
 
 function looksBroken(filePath: string, source: string): boolean {
@@ -34,7 +38,13 @@ export function scanSources(files: SourceFile[], catalog: Catalog = defaultCatal
   const findings: Finding[] = [];
   for (const file of files) {
     const filePath = file.filePath ?? file.relativePath;
-    const args = { filePath, relativePath: file.relativePath, source: file.source, catalog };
+    const args = {
+      filePath,
+      relativePath: file.relativePath,
+      source: file.source,
+      catalog,
+      analysis: file.analysis ?? analyzeSource(filePath, file.source),
+    };
     findings.push(
       ...detectFormNoConsent(args),
       ...detectFormPrecheckedConsent(args),
@@ -58,23 +68,87 @@ export function scanSources(files: SourceFile[], catalog: Catalog = defaultCatal
 export function dedupeFindings(findings: Finding[]): Finding[] {
   const seen = new Set<string>();
   return findings.filter((f) => {
-    const key = `${f.ruleId}\0${f.file}`;
+    const key = f.fingerprint;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
 }
 
+function wildcardMatch(pattern: string, value: string): boolean {
+  const escaped = pattern.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*\*/g, '\0').replace(/\*/g, '[^/]*').replace(/\0/g, '.*');
+  return new RegExp(`^${escaped}$`).test(value.replace(/\\/g, '/'));
+}
+
+function inlineSuppressionReason(finding: Finding, source: string | undefined): string | undefined {
+  if (!source || finding.line === null) return undefined;
+  const lines = source.split('\n');
+  const candidates = [lines[finding.line - 1], lines[finding.line - 2]].filter(Boolean) as string[];
+  for (const line of candidates) {
+    const match = line.match(/legitagent-ignore(?:-next-line)?\s+([A-Z0-9.*_-]+)\s+--\s+(.+)/i);
+    if (match && (match[1] === finding.ruleId || match[1] === '*')) return match[2]?.trim();
+  }
+  return undefined;
+}
+
+function configuredSuppressionReason(
+  finding: Finding,
+  suppressions: ReturnType<typeof loadScanConfig>['config']['suppress'],
+  warnings: ScanWarning[],
+): string | undefined {
+  for (const suppression of suppressions) {
+    if (suppression.expires) {
+      const expiry = Date.parse(suppression.expires);
+      if (!Number.isFinite(expiry)) {
+        warnings.push({ file: 'legitagent.config.json', message: `Некорректная дата expires: ${suppression.expires}` });
+        continue;
+      }
+      if (expiry < Date.now()) continue;
+    }
+    if (suppression.fingerprint && suppression.fingerprint !== finding.fingerprint) continue;
+    if (suppression.ruleId && suppression.ruleId !== finding.ruleId) continue;
+    if (suppression.file && !wildcardMatch(suppression.file, finding.file)) continue;
+    return suppression.reason;
+  }
+  return undefined;
+}
+
 export const UNSAFE_ROOT_MESSAGE =
   'Не сканирую домашний каталог или корень диска. Укажите папку проекта.';
 
+function canonicalPath(value: string): string {
+  const resolved = path.resolve(value);
+  try {
+    return realpathSync.native(resolved);
+  } catch {
+    return resolved;
+  }
+}
+
 export function isUnsafeScanRoot(root: string, home = os.homedir()): boolean {
-  const resolved = path.resolve(root);
-  return resolved === path.parse(resolved).root || resolved === path.resolve(home);
+  const canonicalRoot = canonicalPath(root);
+  return canonicalRoot === path.parse(canonicalRoot).root || canonicalRoot === canonicalPath(home);
 }
 
 export function assertSafeScanRoot(root: string, home = os.homedir()): void {
   if (isUnsafeScanRoot(root, home)) throw new ConfigError(UNSAFE_ROOT_MESSAGE);
+}
+
+function normalizeChangedFiles(root: string, changedFiles: string[] | undefined, warnings: ScanWarning[]): Set<string> | undefined {
+  if (changedFiles === undefined) return undefined;
+  const resolvedRoot = path.resolve(root);
+  const normalized = new Set<string>();
+  for (const input of changedFiles) {
+    if (!input.trim()) continue;
+    const absolute = path.resolve(resolvedRoot, input);
+    const relative = path.relative(resolvedRoot, absolute);
+    if (relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+      warnings.push({ file: input, message: 'Changed file находится вне корня проекта и проигнорирован' });
+      continue;
+    }
+    if (relative) normalized.add(relative.replace(/\\/g, '/'));
+  }
+  return normalized;
 }
 
 export async function scanProject(
@@ -86,6 +160,11 @@ export async function scanProject(
   const lang: Lang = options.lang === 'en' ? 'en' : 'ru';
   const { config, warnings: configWarnings } = loadScanConfig(root);
   const warnings: ScanWarning[] = [...configWarnings];
+  const loadedBaseline = options.baselineFingerprints
+    ? { fingerprints: options.baselineFingerprints, warnings: [] }
+    : loadBaseline(root, config.baseline);
+  warnings.push(...loadedBaseline.warnings);
+  const baseline = new Set(loadedBaseline.fingerprints);
 
   for (const id of config.disabled) {
     if (!catalog.rules.some((r) => r.id === id)) {
@@ -99,10 +178,11 @@ export async function scanProject(
   }
 
   const files = await discoverSourceFiles(root, config.ignore);
+  const changed = normalizeChangedFiles(root, options.changedFiles, warnings);
   const loaded: SourceFile[] = [];
 
   for (const filePath of files) {
-    const relativePath = path.relative(root, filePath) || path.basename(filePath);
+    const relativePath = (path.relative(root, filePath) || path.basename(filePath)).replace(/\\/g, '/');
     let source: string;
     try {
       source = readFileSync(filePath, 'utf8');
@@ -117,15 +197,58 @@ export async function scanProject(
     loaded.push({ relativePath, source, filePath });
   }
 
-  const filtered = dedupeFindings(scanSources(loaded, catalog))
+  const cacheSetting = options.cache ?? config.cache ?? false;
+  let cacheStats: ScanResult['cache'];
+  if (cacheSetting) {
+    const cached = analyzeWithCache(
+      root,
+      loaded.map((file) => ({ relativePath: file.relativePath, filePath: file.filePath!, source: file.source })),
+      cacheSetting,
+    );
+    warnings.push(...cached.warnings);
+    cacheStats = cached.stats;
+    for (const file of loaded) file.analysis = cached.analyses.get(file.relativePath);
+  }
+
+  const candidates = dedupeFindings(scanSources(loaded, catalog))
     .filter((f) => !config.disabled.includes(f.ruleId))
+    .filter((f) => !changed || (changed.size > 0 && (f.file === '.' || changed.has(f.file))))
     .map((f) => localizeFinding(catalog, f, lang));
-  for (const finding of filtered) {
+  for (const finding of candidates) {
     const override = config.severity[finding.ruleId];
     if (override) finding.severity = override;
   }
 
-  return { findings: filtered, warnings, scannedFileCount: loaded.length };
+  const sources = new Map(loaded.map((file) => [file.relativePath, file.source]));
+  const findings: Finding[] = [];
+  const suppressedFindings: Finding[] = [];
+  for (const finding of candidates) {
+    if (baseline.has(finding.fingerprint)) {
+      suppressedFindings.push({ ...finding, suppression: { source: 'baseline', reason: 'Присутствует в baseline' } });
+      continue;
+    }
+    const inlineReason = inlineSuppressionReason(finding, sources.get(finding.file));
+    if (inlineReason) {
+      suppressedFindings.push({ ...finding, suppression: { source: 'inline', reason: inlineReason } });
+      continue;
+    }
+    const configReason = configuredSuppressionReason(finding, config.suppress, warnings);
+    if (configReason) {
+      suppressedFindings.push({ ...finding, suppression: { source: 'config', reason: configReason } });
+      continue;
+    }
+    findings.push(finding);
+  }
+
+  const scannedFileCount = changed ? loaded.filter((file) => changed.has(file.relativePath)).length : loaded.length;
+  return {
+    findings,
+    suppressedFindings,
+    warnings,
+    scannedFileCount,
+    ...(changed ? { contextFileCount: loaded.length } : {}),
+    ...(cacheStats ? { cache: cacheStats } : {}),
+  };
 }
 
 export function listRules(catalog = defaultCatalog()): Rule[] {

@@ -10,7 +10,8 @@ description: >-
 
 1. Вызови MCP-инструмент `scan_url` сервера legitagent.
    - URL — из текста после `/scan-url`. Если URL нет, спроси и не вызывай инструмент без него.
-   - Опционально `evidenceDir` для скриншотов (page.png, banner.png). Полную evidence pack (JSON, SARIF, PDF) создаёт CLI `scan-url --evidence`, не MCP.
+   - Опционально `evidenceDir` для скриншотов (`page.png` и, если найден баннер, `banner.png`). Полную evidence pack (JSON, SARIF, PDF) создаёт CLI `scan-url --evidence`, не MCP.
+   - Локальные и private-network URL запрещены по умолчанию. Передавай `allowPrivateNetwork: true` только по явному запросу пользователя; для `evidenceDir` также передай безопасный абсолютный `root`.
 2. Покажи `findings` из ответа `scan_url`. **Не вызывай MCP `review`** — он пересканирует проект с диска, а не live-страницу.
 3. Находки по RKN, локализации, витрине и неполной политике (`PDN.ORG.RKN_NOTICE`, `PDN.LOCALIZATION.UNCLEAR`, `CONSUMER.*`, `PDN.POLICY.INCOMPLETE`) **не трактуй как доказанное нарушение** — покажи как `ask_human` для решения человека.
 4. Остальные findings показывай как эвристические сигналы; не выдумывай дополнительных нарушений.

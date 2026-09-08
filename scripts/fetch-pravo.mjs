@@ -4,6 +4,7 @@
  * Heuristic HTML strip — not a certified consolidated edition.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -87,7 +88,14 @@ async function main() {
     const file = `${law.id}.txt`;
     const header = `${fetched.title}\nИсточник: ${fetched.url}\nСкачано: ${new Date().toISOString()}\n\n`;
     writeFileSync(path.join(outDir, file), header + fetched.text + '\n');
-    index.push({ id: law.id, title: law.title, nd: law.nd, sourceUrl: fetched.url, file });
+    index.push({
+      id: law.id,
+      title: law.title,
+      nd: law.nd,
+      sourceUrl: fetched.url,
+      file,
+      snapshotSha256: crypto.createHash('sha256').update(fetched.text.trim()).digest('hex'),
+    });
     console.log(`Wrote ${file} (${fetched.text.length} chars)`);
   }
   writeFileSync(path.join(outDir, 'index.json'), JSON.stringify(index, null, 2) + '\n');

@@ -2,6 +2,8 @@
   law: 152-ФЗ ст. 9
   severity: high
   status: active
+  kind: violation
+  confidence: high
   title: Форма собирает ПДн без согласия
   titleEn: Form collects personal data without consent
   message: Найдена форма с полями имени, email или телефона без чекбокса согласия на обработку ПДн.
@@ -13,6 +15,8 @@
   law: 152-ФЗ ст. 9
   severity: high
   status: active
+  kind: violation
+  confidence: high
   title: Чекбокс согласия предзаполнен
   titleEn: Consent checkbox is pre-checked
   message: Предзаполненная галочка не считается полученным согласием.
@@ -24,6 +28,8 @@
   law: 152-ФЗ ст. 9
   severity: medium
   status: active
+  kind: risk
+  confidence: high
   title: Согласие без ссылки на политику
   titleEn: Consent without a policy link
   message: Рядом с согласием должна быть кликабельная ссылка на политику обработки ПДн.

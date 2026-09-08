@@ -94,8 +94,45 @@ describe('cli', () => {
     expect(result.status).toBe(1);
     const parsed = JSON.parse(result.stdout);
     expect(parsed.reviewed).toBeDefined();
-    expect(parsed.reviewed.some((f: { ruleId: string; verdict: string }) => f.ruleId === 'PDN.FORM.NO_CONSENT' && f.verdict)).toBe(true);
+    expect(parsed.reviewed.some((f: { ruleId: string; verdict: string; reviewMode: string; dataShared: boolean }) =>
+      f.ruleId === 'PDN.FORM.NO_CONSENT' && f.verdict === 'not_reviewed' && f.reviewMode === 'offline' && !f.dataShared,
+    )).toBe(true);
     expect(parsed.findings.some((f: { severity: string }) => f.severity === 'high')).toBe(true);
+  });
+
+  it('writes and reuses a finding baseline', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-baseline-'));
+    const baseline = path.join(dir, 'baseline.json');
+    const first = runCli(['scan', fixture, '--json', '--write-baseline', baseline]);
+    expect(first.status).toBe(1);
+    expect(fs.existsSync(baseline)).toBe(true);
+
+    const second = runCli(['scan', fixture, '--json', '--baseline', baseline]);
+    expect(second.status).toBe(0);
+    const parsed = JSON.parse(second.stdout);
+    expect(parsed.findings).toEqual([]);
+    expect(parsed.suppressedFindings.length).toBeGreaterThan(0);
+  });
+
+  it('reports a missing baseline as a warning instead of silently ignoring it', () => {
+    const result = runCli(['scan', fixture, '--json', '--baseline', 'missing-baseline.json']);
+    const parsed = JSON.parse(result.stdout);
+    expect(parsed.warnings.some((warning: { message: string }) => warning.message === 'Baseline не найден')).toBe(true);
+  });
+
+  it('previews and applies safe fixes', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-cli-fix-'));
+    const file = path.join(root, 'Form.tsx');
+    fs.writeFileSync(file, '<form><input name="email"/><label><input type="checkbox" defaultChecked/>Согласие на обработку персональных данных</label></form>');
+    const preview = runCli(['fix', root, '--json']);
+    expect(preview.status).toBe(0);
+    expect(JSON.parse(preview.stdout).dryRun).toBe(true);
+    expect(fs.readFileSync(file, 'utf8')).toContain('defaultChecked');
+
+    const applied = runCli(['fix', root, '--json', '--write', '--cache']);
+    expect(applied.status).toBe(0);
+    expect(JSON.parse(applied.stdout).changedFiles).toEqual(['Form.tsx']);
+    expect(fs.readFileSync(file, 'utf8')).not.toContain('defaultChecked');
   });
 
   it('scan-url --review --evidence writes evidence pack', async () => {
@@ -118,6 +155,7 @@ describe('cli', () => {
         '--review',
         '--evidence',
         dir,
+        '--allow-private-network',
       ]);
       expect(result.status).toBe(0);
       const parsed = JSON.parse(result.stdout);
@@ -148,6 +186,7 @@ describe('cli', () => {
         'scan-url',
         `http://127.0.0.1:${port}/clean.html`,
         '--notify-telegram',
+        '--allow-private-network',
       ]);
       expect(result.status).toBe(2);
       expect(result.stderr).toContain('LEGITAGENT_TELEGRAM_BOT_TOKEN');
@@ -178,6 +217,7 @@ describe('cli', () => {
         '--review',
         '--sarif',
         out,
+        '--allow-private-network',
       ]);
       expect(result.status).toBe(1);
       const sarif = JSON.parse(fs.readFileSync(out, 'utf8'));
@@ -205,7 +245,12 @@ describe('cli', () => {
       });
     });
     try {
-      const result = await runCliAsync(['scan-url', `http://127.0.0.1:${port}/clean.html`, '--json']);
+      const result = await runCliAsync([
+        'scan-url',
+        `http://127.0.0.1:${port}/clean.html`,
+        '--json',
+        '--allow-private-network',
+      ]);
       expect(result.status).toBe(0);
       const parsed = JSON.parse(result.stdout);
       expect(parsed.scannedFileCount).toBe(1);

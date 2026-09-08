@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/kiruxich/legitAgent/main/packages/core/config.schema.json",
+  "title": "legitAgent configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "ignore": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "disabled": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "severity": {
+      "type": "object",
+      "additionalProperties": { "enum": ["high", "medium", "low"] }
+    },
+    "baseline": { "type": "string", "minLength": 1 },
+    "cache": { "oneOf": [{ "type": "boolean" }, { "type": "string", "minLength": 1 }] },
+    "suppress": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fingerprint": { "type": "string", "minLength": 1 },
+          "ruleId": { "type": "string", "minLength": 1 },
+          "file": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "expires": { "type": "string", "format": "date" }
+        },
+        "required": ["reason"],
+        "anyOf": [{ "required": ["fingerprint"] }, { "required": ["ruleId"] }]
+      }
+    }
+  }
+}

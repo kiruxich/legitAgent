@@ -45,4 +45,17 @@ describe('discoverSourceFiles', () => {
     expect(files.some((f) => f.includes('.Trash'))).toBe(false);
     expect(files.some((f) => f.endsWith('ok.tsx'))).toBe(true);
   });
+
+  it('does not scan source files through symlinks', async () => {
+    const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-discover-symlink-'));
+    const root = path.join(parent, 'project');
+    const outside = path.join(parent, 'outside');
+    fs.mkdirSync(root);
+    fs.mkdirSync(outside);
+    fs.writeFileSync(path.join(outside, 'external.tsx'), '<form><input name="email" /></form>');
+    fs.symlinkSync(path.join(outside, 'external.tsx'), path.join(root, 'linked.tsx'));
+    fs.symlinkSync(outside, path.join(root, 'linked-dir'));
+    const files = await discoverSourceFiles(root);
+    expect(files).toEqual([]);
+  });
 });

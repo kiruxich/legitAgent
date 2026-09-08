@@ -3,7 +3,11 @@
 Дата: 2026-08-14  
 Статус: поставлено (v0.7.0).
 
-v1–v6 остаются в силе: эвристики, не юрзаключение; MCP не пишет патчи в репозиторий клиента (агент чинит по скиллу); YAML-каталог; MIT; `@legit-agent/*`; облака и платного тарифа нет.
+> Архивная спецификация. Текущая реализация использует offline/local/OpenRouter modes; актуальные переменные перечислены в README.
+
+> Ниже сохранён исторический дизайн v0.7. Это не текущий контракт: для v0.8 актуальны batching/лимиты и provider privacy controls OpenRouter, accept/reject + storage/network evidence, safe autofix dry-run, incremental cache и benchmark/v1 gate из README и `benchmarks/README.md`.
+
+v1–v6 остаются историческим контекстом: эвристики, не юрзаключение; YAML-каталог; MIT; `@legit-agent/*`; собственного облака и платного тарифа нет. В текущем v0.8 MCP имеет отдельные явно вызываемые `create_baseline` и `autofix`; см. актуальный контракт в README.
 
 ## Цель
 
@@ -21,9 +25,9 @@ v1–v6 остаются в силе: эвристики, не юрзаключ�
 - Выход: `ReviewedFinding[]` (`Finding` + `verdict` + `reason`).
 - `forEvidencePack(reviewed)` — отбрасывает `verdict === 'reject'`.
 - LLM: опциональный `LlmComplete`. Если не передан — `createLlmComplete()` из env:
-  - `LEGITAGENT_LLM_API_KEY` (обязателен для сети)
-  - `LEGITAGENT_LLM_BASE_URL` по умолчанию `https://api.openai.com/v1`
-  - `LEGITAGENT_LLM_MODEL` по умолчанию `gpt-4o-mini`
+  - `LEGITAGENT_OPENROUTER_API_KEY` (обязателен для OpenRouter)
+  - `LEGITAGENT_REVIEW_MODE=openrouter`
+  - `LEGITAGENT_LLM_MODEL` по умолчанию `openrouter/auto`
 - Нет ключа / нет `complete`: fallback без сети. `SOFT_RULE_IDS` → `ask_human`, остальные → `confirm`. Причина: `нет LLM, эвристика`.
 - `SOFT_RULE_IDS`: `PDN.ORG.RKN_NOTICE`, `PDN.LOCALIZATION.UNCLEAR`, `PDN.POLICY.INCOMPLETE`, `PDN.POLICY.NO_LINK`, `CONSUMER.OFFER.MISSING`, `CONSUMER.REQUISITES.MISSING`, `CONSUMER.RETURN.MISSING`.
 - Промпт модели: вернуть JSON-массив `{ ruleId, file, verdict, reason }`. Если по сниппету нельзя доказать нарушение — `ask_human`. Не выдумывать факты. Некорректный JSON или пропуск пункта → `ask_human`.

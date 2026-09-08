@@ -2,6 +2,8 @@
   law: 152-ФЗ ст. 18.1
   severity: high
   status: active
+  kind: risk
+  confidence: medium
   title: Нет ссылки на политику обработки ПДн
   titleEn: No personal-data policy link
   message: В проекте не найдена ссылка на политику обработки персональных данных.
@@ -13,10 +15,12 @@
   law: 152-ФЗ ст. 18.1
   severity: medium
   status: active
+  kind: risk
+  confidence: low
   title: Политика без обязательных сведений
   titleEn: Policy is missing required details
-  message: Политика должна называть оператора, цели, состав данных, сроки и порядок отзыва согласия.
-  messageEn: The policy must name the operator, purposes, data categories, retention, and how to withdraw consent.
-  fix: Дополните политику обязательными сведениями ст. 18.1.
-  fixEn: Add the details required by article 18.1.
+  message: "В тексте политики не найдены некоторые сведения, обычно необходимые для прозрачного описания обработки: оператор, цели, категории данных, сроки или порядок прекращения обработки. Нужна ручная проверка документа."
+  messageEn: "The policy text appears to omit information normally needed for a transparent processing description: operator, purposes, data categories, retention, or termination procedure. Manual review is required."
+  fix: Проверьте содержание политики по ст. 18.1 и рекомендациям Роскомнадзора; подтвердите итоговый текст с юристом.
+  fixEn: Review the policy against article 18.1 and Roskomnadzor guidance; have counsel confirm the final text.
   excerptRef: art18-1

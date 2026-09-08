@@ -55,32 +55,70 @@ describe('evidence pack', () => {
 
   it('captures screenshots and writes evidence pack with filtered findings', async () => {
     const evidenceDir = fs.mkdtempSync(path.join(os.tmpdir(), 'legitagent-evidence-'));
-    const url = `${origin}/banner-no-reject.html`;
+    const url = `${origin}/banner-no-reject.html?token=must-not-leak#private`;
 
-    const live = await scanUrl(url, { evidenceDir });
+    const live = await scanUrl(url, { evidenceDir, allowPrivateNetwork: true });
     expect(fs.existsSync(path.join(evidenceDir, 'page.png'))).toBe(true);
+    live.cookiesBefore = [{ name: 'session', value: 'cookie-value-secret' } as never];
+    live.localStorageBefore = [{ name: 'access_token=storage-name-secret', value: 'storage-value-secret' } as never];
+    live.networkRequests.push({
+      url: `${origin}/pixel?token=network-query-secret`,
+      domain: '127.0.0.1',
+      resourceType: 'Image',
+      phase: 'initial',
+      outcome: 'completed',
+      headers: { authorization: 'Bearer network-header-secret' },
+    } as never);
+    const outsideDir = fs.mkdtempSync(path.join(os.tmpdir(), 'legitagent-outside-'));
+    fs.writeFileSync(path.join(outsideDir, 'secret.svg'), '<svg><text>outside-file-secret</text></svg>');
+    live.screenshots.push({ id: 'escape', file: path.relative(evidenceDir, path.join(outsideDir, 'secret.svg')) });
+    fs.symlinkSync(path.join(outsideDir, 'secret.svg'), path.join(evidenceDir, 'linked-secret.svg'));
+    live.screenshots.push({ id: 'symlink-escape', file: 'linked-secret.svg' });
 
     const confirm: ReviewedFinding = {
+      fingerprint: 'cookie-1',
       ruleId: 'PDN.COOKIE.NO_REJECT',
       file: url,
       line: null,
+      endLine: null,
       severity: 'low',
+      confidence: 'medium',
+      kind: 'risk',
       message: 'нет отказа',
       fix: 'добавьте отказ',
       excerpt: 'ст. 18',
+      legalBasis: ['152-ФЗ ст. 9'],
+      evidence: {
+        summary: 'banner token=summary-secret',
+        signals: [
+          `request ${origin}/collect?token=signal-query-secret`,
+          'authorization: Bearer signal-header-secret',
+        ],
+        snippet: '<input value="source-snippet-secret">',
+      },
       verdict: 'confirm',
-      reason: 'баннер без отказа',
+      reason: 'баннер без отказа; password=reason-secret',
+      reviewMode: 'custom',
+      dataShared: false,
     };
     const reject: ReviewedFinding = {
+      fingerprint: 'policy-1',
       ruleId: 'PDN.POLICY.NO_LINK',
       file: url,
       line: null,
+      endLine: null,
       severity: 'medium',
+      confidence: 'medium',
+      kind: 'risk',
       message: 'нет ссылки',
       fix: 'добавьте ссылку',
       excerpt: 'ст. 18',
+      legalBasis: ['152-ФЗ ст. 18.1'],
+      evidence: { summary: 'policy', signals: ['no link'] },
       verdict: 'reject',
       reason: 'ссылка есть',
+      reviewMode: 'custom',
+      dataShared: false,
     };
 
     const packDir = fs.mkdtempSync(path.join(os.tmpdir(), 'legitagent-pack-'));
@@ -103,13 +141,52 @@ describe('evidence pack', () => {
       reviewed: unknown[];
       capturedAt: string;
       timestamp: string;
+      url: string;
+      screenshots: Array<{ id: string; file: string }>;
+      networkRequests: Array<Record<string, unknown>>;
     };
     expect(json.findings).toHaveLength(1);
     expect(json.reviewed).toHaveLength(1);
     expect(json.timestamp).toBe(json.capturedAt);
+    expect(json.url).toBe(`${origin}/banner-no-reject.html`);
+    expect(json.screenshots.some((shot) => shot.id === 'escape')).toBe(false);
+    expect(json.screenshots.some((shot) => shot.id === 'symlink-escape')).toBe(false);
+    expect(json.networkRequests.at(-1)).not.toHaveProperty('headers');
     expect(json.findings[0]).toMatchObject({ ruleId: 'PDN.COOKIE.NO_REJECT', verdict: 'confirm' });
 
-    const sarif = JSON.parse(fs.readFileSync(paths.sarif, 'utf8')) as { version: string };
+    const jsonText = fs.readFileSync(paths.json, 'utf8');
+    const sarifText = fs.readFileSync(paths.sarif, 'utf8');
+    for (const secret of [
+      'must-not-leak',
+      'cookie-value-secret',
+      'storage-value-secret',
+      'storage-name-secret',
+      'network-query-secret',
+      'network-header-secret',
+      'summary-secret',
+      'signal-query-secret',
+      'signal-header-secret',
+      'source-snippet-secret',
+      'reason-secret',
+      'outside-file-secret',
+    ]) {
+      expect(jsonText).not.toContain(secret);
+      expect(sarifText).not.toContain(secret);
+    }
+
+    const sarif = JSON.parse(sarifText) as { version: string };
     expect(sarif.version).toBe('2.1.0');
+
+    const unsafePackDir = fs.mkdtempSync(path.join(os.tmpdir(), 'legitagent-pack-symlink-'));
+    const outsidePdf = path.join(outsideDir, 'outside.pdf');
+    fs.writeFileSync(outsidePdf, 'outside-pdf-sentinel');
+    fs.symlinkSync(outsidePdf, path.join(unsafePackDir, 'evidence.pdf'));
+    await expect(writeEvidencePack({
+      dir: unsafePackDir,
+      live,
+      reviewed: [confirm],
+      disclaimer: disclaimer('ru'),
+    })).rejects.toThrow('symbolic link evidence.pdf');
+    expect(fs.readFileSync(outsidePdf, 'utf8')).toBe('outside-pdf-sentinel');
   });
 });

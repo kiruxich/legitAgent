@@ -2,6 +2,8 @@
   law: 152-ФЗ ст. 18
   severity: low
   status: active
+  kind: manual_check
+  confidence: low
   title: Локализация баз ПДн
   titleEn: Personal-data localization
   message: Есть форма с ПДн и иностранный трекер, но в проекте не видно, что запись идёт через базы на территории РФ.
@@ -13,6 +15,8 @@
   law: 152-ФЗ ст. 22
   severity: low
   status: active
+  kind: manual_check
+  confidence: low
   title: Уведомление Роскомнадзора
   titleEn: Roskomnadzor notification
   message: В проекте есть форма с ПДн, но нет следов уведомления РКН. Проверьте организационно.

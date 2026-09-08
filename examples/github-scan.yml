@@ -17,8 +17,19 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.7.1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Changed source files
+        id: changed
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          files="$(git diff --name-only --diff-filter=ACMR "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" | grep -E '\.(html|js|jsx|ts|tsx|mjs|cjs|vue|svelte|astro)$' | paste -sd, - || true)"
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.8.0
         with:
           root: .
           fail-on-high: true
+          changed-files: ${{ steps.changed.outputs.files }}
+          fail-on-confidence: medium

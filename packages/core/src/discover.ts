@@ -12,10 +12,11 @@ const IGNORE = [
 ];
 
 export async function discoverSourceFiles(root: string, extraIgnore: string[] = []): Promise<string[]> {
-  return fg(['**/*.html', '**/*.jsx', '**/*.tsx', '**/*.vue', '**/*.svelte', '**/*.astro'], {
+  return fg(['**/*.html', '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.mjs', '**/*.cjs', '**/*.vue', '**/*.svelte', '**/*.astro'], {
     cwd: root,
     absolute: true,
     ignore: [...IGNORE, ...extraIgnore],
     dot: false,
+    followSymbolicLinks: false,
   });
 }

@@ -16,7 +16,14 @@ export function detectLocalizationUnclear(args: {
   if (!foreign) return [];
   if (args.files.some((f) => LOCALIZED.test(f.source))) return [];
   const line = foreign.source.split(/\n/).findIndex((l) => FOREIGN.test(l));
-  return [findingFromRule(args.catalog, 'PDN.LOCALIZATION.UNCLEAR', foreign.relativePath, line >= 0 ? line + 1 : null)];
+  return [findingFromRule(args.catalog, 'PDN.LOCALIZATION.UNCLEAR', foreign.relativePath, line >= 0 ? line + 1 : null, {
+    kind: 'manual_check',
+    confidence: 'low',
+    evidence: {
+      summary: 'Проект собирает ПДн и содержит иностранный трекер, но место первичной записи данных нельзя подтвердить по коду.',
+      signals: ['personal-data form', 'foreign tracker', 'localization statement not found'],
+    },
+  })];
 }
 
 export function detectRknNotice(args: {
@@ -25,5 +32,12 @@ export function detectRknNotice(args: {
 }): Finding[] {
   if (!collectsPdn(args.files)) return [];
   if (args.files.some((f) => RKN.test(f.source))) return [];
-  return [findingFromRule(args.catalog, 'PDN.ORG.RKN_NOTICE', args.files[0]?.relativePath ?? '.', null)];
+  return [findingFromRule(args.catalog, 'PDN.ORG.RKN_NOTICE', args.files[0]?.relativePath ?? '.', null, {
+    kind: 'manual_check',
+    confidence: 'low',
+    evidence: {
+      summary: 'Наличие или применимость уведомления Роскомнадзора невозможно достоверно определить по исходникам сайта.',
+      signals: ['personal-data form', 'RKN notice evidence not found in project'],
+    },
+  })];
 }

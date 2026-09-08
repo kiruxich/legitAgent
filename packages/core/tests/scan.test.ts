@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +13,16 @@ describe('scanProject', () => {
   it('refuses the home directory and filesystem root', async () => {
     await expect(scanProject(os.homedir())).rejects.toThrow(ConfigError);
     await expect(scanProject('/')).rejects.toThrow(/домашний каталог|корень диска/);
+  });
+
+  it.skipIf(process.platform === 'win32')('refuses symlinks resolving to home or filesystem root', async () => {
+    const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'legit-unsafe-root-'));
+    const homeLink = path.join(parent, 'home-link');
+    const rootLink = path.join(parent, 'root-link');
+    fs.symlinkSync(os.homedir(), homeLink, 'dir');
+    fs.symlinkSync(path.parse(parent).root, rootLink, 'dir');
+    await expect(scanProject(homeLink)).rejects.toThrow(ConfigError);
+    await expect(scanProject(rootLink)).rejects.toThrow(ConfigError);
   });
 
   it('finds a bad form', async () => {

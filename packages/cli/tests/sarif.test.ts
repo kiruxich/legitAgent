@@ -4,19 +4,25 @@ import { toSarif } from '../src/sarif.js';
 
 function finding(overrides: Partial<Finding> = {}): Finding {
   return {
+    fingerprint: 'test-fingerprint',
     ruleId: 'PDN.FORM.NO_CONSENT',
     file: 'src/form.tsx',
     line: 12,
+    endLine: 12,
     severity: 'high',
+    confidence: 'high',
+    kind: 'violation',
     message: 'Форма без согласия',
     fix: 'Добавьте чекбокс',
     excerpt: 'ст. 9',
+    legalBasis: ['152-ФЗ ст. 9'],
+    evidence: { summary: 'form', signals: ['missing consent'] },
     ...overrides,
   };
 }
 
 function scan(findings: Finding[]): ScanResult {
-  return { findings, warnings: [], scannedFileCount: findings.length };
+  return { findings, suppressedFindings: [], warnings: [], scannedFileCount: findings.length };
 }
 
 function firstResult(sarif: ReturnType<typeof toSarif>) {

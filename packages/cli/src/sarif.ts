@@ -17,11 +17,21 @@ export function toSarif(result: ScanResult): object {
           ruleId: finding.ruleId,
           level: LEVEL[finding.severity],
           message: { text: finding.message },
+          partialFingerprints: { legitAgentFingerprint: finding.fingerprint },
+          properties: {
+            confidence: finding.confidence,
+            kind: finding.kind,
+            evidence: finding.evidence,
+            legalBasis: finding.legalBasis,
+          },
           locations: [
             {
               physicalLocation: {
                 artifactLocation: { uri: finding.file },
-                region: { startLine: finding.line ?? 1 },
+                region: {
+                  startLine: finding.line ?? 1,
+                  ...(finding.endLine ? { endLine: finding.endLine } : {}),
+                },
               },
             },
           ],

@@ -34,14 +34,15 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">v0.7.1 · MIT · бесплатно · без облака</p>
+      <p class="eyebrow">v0.8.0 · MIT · бесплатно · local-first</p>
       <h1>Проверка сайта на&nbsp;риски персональных данных <em>до&nbsp;и после деплоя</em></h1>
       <p class="lead">
-        legitAgent читает HTML, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
+        legitAgent читает HTML, JS, TS, JSX, TSX, Vue, Svelte и Astro и ищет типичные дыры:
         формы без согласия, метрика без opt-in, cookie-баннер, иностранные трекеры, неполная политика,
-        реклама без erid, витрина без оферты.
-        Живой <code>scan-url</code> смотрит тот же каталог по DOM, плюс cookie до согласия;
-        v0.7.1 добавляет evidence pack (скрины, PDF, SARIF) и LLM-review (<code>confirm</code> / <code>reject</code> / <code>ask_human</code>).
+        реклама без erid, витрина без обязательной информации о продаже.
+        Живой <code>scan-url</code> смотрит тот же каталог по DOM, плюс cookie/storage/network до и после Reject и Accept;
+        evidence pack сохраняет скрины, PDF и SARIF. Review работает без сети по умолчанию;
+        внешняя проверка через OpenRouter включается только ключом пользователя.
         В Cursor — MCP и <code>/check</code>; в Claude и Kimi — те же tools; в CI — GitHub Action.
         Платного тарифа нет. При каждом запуске IDE подтягивается актуальный пакет с npm.
       </p>
@@ -106,7 +107,7 @@
           <h3>Иностранный трекер</h3>
           <code>PDN.TRANSFER.FOREIGN_TRACKER</code>
           <p>GA, Meta Pixel и аналоги могут означать трансграничную передачу ПДн.</p>
-          <span class="tag tag-medium">medium · ст. 6</span>
+          <span class="tag tag-medium">medium · ст. 12</span>
         </article>
       </div>
     </section>
@@ -117,9 +118,9 @@
         <p>
           Все детекторы активны: формы и согласие, политика, метрики, cookie, иностранные трекеры,
           локализация и уведомление РКН (только если есть форма с ПДн, серьёзность <code>low</code>),
-          ERID, оферта / реквизиты / возврат.
+          ERID, условия продажи / реквизиты / возврат.
           <code>scan-url</code> прогоняет тот же набор по HTML живой страницы, ждёт гидрацию SPA
-          и проверяет cookie до и после отказа.
+          и в изолированных сессиях сравнивает cookie, storage и network до/после Reject и Accept.
           Полный список: <a href="rules.html">каталог правил</a>
           и <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">сломанный демо-сайт</a>.
         </p>
@@ -146,24 +147,45 @@
     }
   }
 }</code></pre>
-          <p class="panel-note">В Cursor кнопка Add to Cursor пишет в <code>~/.cursor/mcp.json</code> (User, все проекты). Файл <code>.cursor/mcp.json</code> в репозитории — только этот проект. При каждом запуске IDE — актуальный пакет с npm (<code>@latest</code>). Инструменты: <strong>scan</strong>, <strong>review</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong>, <strong>generate_policy</strong>, <strong>get_law</strong></p>
+          <p class="panel-note">Инструменты: <strong>scan</strong>, <strong>review</strong>, <strong>autofix</strong>, <strong>create_baseline</strong>, <strong>scan_url</strong>, <strong>list_rules</strong>, <strong>explain_rule</strong>, <strong>generate_policy</strong>, <strong>get_law</strong>. Scan поддерживает changed-files, baseline, incremental cache и confidence gate; autofix по умолчанию dry-run.</p>
         </div>
         <div class="panel">
           <h3>CLI — для терминала и CI</h3>
           <p>Node.js 20+, без установки:</p>
           <pre><code>npx @legit-agent/cli@latest scan
 npx @legit-agent/cli@latest scan ./my-site --json --sarif --lang en
+npx @legit-agent/cli@latest scan ./my-site --cache
+npx @legit-agent/cli@latest fix ./my-site
 npx @legit-agent/cli@latest scan-url https://example.com
 npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code></pre>
-          <p class="panel-note">В CI лучше пин <code>@0.7.1</code>. Код выхода <strong>1</strong> при находках <strong>high</strong>. GitHub Action: <code>legitagent-scan@v0.7.1</code>.</p>
+          <p class="panel-note">В CI лучше пин <code>@0.8.0</code>. Baseline, changed-files и confidence threshold позволяют блокировать только новые достоверные находки. <code>fix</code> сначала делает dry-run; <code>--write</code> применяйте после проверки preview. GitHub Action: <code>legitagent-scan@v0.8.0</code>.</p>
         </div>
       </div>
+    </section>
+
+    <section class="section catalog">
+      <div class="catalog-text">
+        <h2>Локально по умолчанию</h2>
+        <p>
+          Исходники, DOM, cookie-метаданные, SARIF и evidence pack обрабатываются на вашем ПК или CI-runner-е.
+          Собственного облака у legitAgent нет. Режим <code>offline</code> не вызывает LLM и ничего не отправляет наружу.
+          Можно явно подключить локальную модель с <code>/chat/completions</code> API или OpenRouter с запрошенными ZDR и запретом data collection; тогда наружу уйдут только поля находок,
+          выдержки норм и ограниченные связанные фрагменты кода, а не весь репозиторий. Это настройки маршрутизации/провайдера, а не абсолютная гарантия хранения: перед включением OpenRouter проверьте его политику и выбранного провайдера; redaction — best effort.
+        </p>
+        <p class="section-lead"><strong>Важно:</strong> screenshots из evidence pack могут визуально содержать персональные или другие чувствительные данные. Передавайте и храните их с соответствующими ограничениями доступа; перед публикацией обязательно проверьте изображения вручную. Для OpenRouter <code>LEGITAGENT_LLM_MAX_COST_USD</code> ограничивает отправку новых batches только после получения <code>usage.cost</code>; последний batch может превысить порог, и это не hard provider spend cap.</p>
+        <p class="section-lead">Текущий benchmark содержит synthetic seeds и их 100 parser-stability мутаций — это не 100 реальных сайтов. Для v1.0.0 нужен отдельный gate: минимум 100 анонимизированных и независимо размеченных real-world cases.</p>
+      </div>
+      <ul class="catalog-list">
+        <li><code>offline</code> — default</li>
+        <li><code>local</code> — ваш endpoint</li>
+        <li><code>openrouter</code> — ваш API key</li>
+      </ul>
     </section>
 
     <section class="section flow">
       <h2>Как это работает</h2>
       <ol class="steps">
-        <li><span>1</span> Сканер обходит <code>.html</code>, <code>.jsx</code>, <code>.tsx</code>, <code>.vue</code>, <code>.svelte</code>, <code>.astro</code> — или открывает URL в Chromium</li>
+        <li><span>1</span> Сканер обходит HTML/JS/TS/JSX/TSX/Vue/Svelte/Astro — или открывает URL в Chromium</li>
         <li><span>2</span> Сверяет код с YAML-каталогом правил и выдержками статей</li>
         <li><span>3</span> Возвращает находки: файл, строка, норма, как исправить</li>
         <li><span>4</span> Агент или разработчик принимает решение</li>
@@ -177,7 +199,7 @@ npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code><
       <a href="https://www.npmjs.com/org/legit-agent" target="_blank" rel="noopener">@legit-agent</a>
       ·
       <a href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">GitHub</a>
-      · MIT, без облака и без платного тарифа
+      · MIT, local-first и без платного тарифа
     </p>
     <p class="footer-disclaimer">
       legitAgent не заменяет юриста. Это эвристическая проверка исходников, а не заключение о соответствии закону.

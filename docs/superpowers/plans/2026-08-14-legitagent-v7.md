@@ -1,12 +1,14 @@
 # legitAgent v7 Implementation Plan
 
+> Archived plan. The shipped review provider is OpenRouter; see README for the current configuration and privacy controls.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Ship v0.7.0 with LLM review (confirm/reject/ask_human), a live evidence pack (screenshots, cookies, PDF/SARIF), Cursor scan-fix-rescan skills, and optional Telegram/issue watch after deploy.
 
 **Architecture:** Detectors stay deterministic. `reviewFindings` in core labels candidates. Live `scanUrl` optionally writes screenshots and cookie-name timelines. CLI/MCP compose review + pack. GitHub Action source-scan never calls the LLM; an optional URL mode runs `scan-url --review --evidence` and may notify Telegram.
 
-**Tech Stack:** TypeScript, vitest, Playwright (already in `@legit-agent/live`), `fetch` for OpenAI-compatible LLM and Telegram. No new npm dependencies.
+**Tech Stack:** TypeScript, vitest, Playwright (already in `@legit-agent/live`), `fetch` for OpenRouter/local chat-completions APIs and Telegram. No new npm dependencies.
 
 ## Global Constraints
 
@@ -76,7 +78,7 @@ export function snippetAround(source: string, line: number | null, radius = 15):
 
 `snippets` keys are `finding.file`. Missing snippet → empty string.
 
-`createLlmComplete` returns `undefined` unless `LEGITAGENT_LLM_API_KEY` is a non-empty string. POST `{base}/chat/completions` with JSON `{ model, temperature: 0, messages: [{ role: 'user', content: prompt }] }`. Parse `choices[0].message.content`. Default base `https://api.openai.com/v1`, model `gpt-4o-mini`. Authorization `Bearer ${key}`.
+`createLlmComplete` uses OpenRouter only when `LEGITAGENT_REVIEW_MODE=openrouter` and `LEGITAGENT_OPENROUTER_API_KEY` is non-empty. POST to OpenRouter `/chat/completions`, parse `choices[0].message.content`, and default to `openrouter/auto`. Local mode accepts only an explicit loopback endpoint.
 
 When `complete` is omitted, call `createLlmComplete(process.env)`. If still undefined, fallback: soft ids `ask_human` reason `нет LLM, эвристика`; else `confirm` same reason.
 

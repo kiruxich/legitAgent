@@ -85,4 +85,9 @@ describe('detectFormPrecheckedConsent', () => {
       expect(detect('Contact.tsx', source), source).toEqual([]);
     }
   });
+
+  it('does not treat a dynamic defaultChecked value as statically prechecked', () => {
+    const source = `<form><input name="email" /><label><input type="checkbox" defaultChecked={savedChoice} /> согласие на обработку персональных данных</label></form>`;
+    expect(detect('Contact.tsx', source)).toEqual([]);
+  });
 });

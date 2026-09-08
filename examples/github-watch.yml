@@ -2,7 +2,8 @@
 # Скопируйте в .github/workflows/legitagent-watch.yml.
 # Задайте vars.LEGITAGENT_WATCH_URL или передайте url при workflow_dispatch.
 # Telegram secrets опциональны — если LEGITAGENT_TELEGRAM_BOT_TOKEN и LEGITAGENT_TELEGRAM_CHAT_ID
-# заданы в env шага, action отправит summary в Telegram.
+# заданы в env шага, action отправит summary в Telegram. OpenRouter тоже опционален:
+# без LEGITAGENT_OPENROUTER_API_KEY review остаётся локальным offline-проходом.
 name: legitAgent watch
 
 on:
@@ -24,12 +25,15 @@ jobs:
   watch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.7.1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.8.0
         with:
           url: ${{ github.event.inputs.url || vars.LEGITAGENT_WATCH_URL }}
           fail-on-high: true
         env:
           LEGITAGENT_TELEGRAM_BOT_TOKEN: ${{ secrets.LEGITAGENT_TELEGRAM_BOT_TOKEN }}
           LEGITAGENT_TELEGRAM_CHAT_ID: ${{ secrets.LEGITAGENT_TELEGRAM_CHAT_ID }}
-          LEGITAGENT_LLM_API_KEY: ${{ secrets.LEGITAGENT_LLM_API_KEY }}
+          # Удалите эти три строки, чтобы review всегда оставался offline.
+          LEGITAGENT_REVIEW_MODE: ${{ secrets.LEGITAGENT_OPENROUTER_API_KEY && 'openrouter' || 'offline' }}
+          LEGITAGENT_OPENROUTER_API_KEY: ${{ secrets.LEGITAGENT_OPENROUTER_API_KEY }}
+          LEGITAGENT_LLM_MODEL: openrouter/auto

@@ -4,20 +4,23 @@
     "title": "Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»",
     "nd": "102108261",
     "sourceUrl": "http://pravo.gov.ru/proxy/ips/?doc_itself=&nd=102108261&page=1&rdk=0",
-    "file": "152-fz.txt"
+    "file": "152-fz.txt",
+    "snapshotSha256": "d1224baeee9307c9c3eaff8c69aa80613cc77e11d74239c2e3695fcbf4b9891e"
   },
   {
     "id": "38-fz",
     "title": "Федеральный закон от 13.03.2006 № 38-ФЗ «О рекламе»",
     "nd": "102105292",
     "sourceUrl": "http://pravo.gov.ru/proxy/ips/?doc_itself=&nd=102105292&page=1&rdk=0",
-    "file": "38-fz.txt"
+    "file": "38-fz.txt",
+    "snapshotSha256": "0f2c755230f69b8ce98162424eea8921859f10966273f80a3623d0ab84fffd83"
   },
   {
     "id": "zozpp",
     "title": "Закон РФ от 07.02.1992 № 2300-1 «О защите прав потребителей»",
     "nd": "102014512",
     "sourceUrl": "http://pravo.gov.ru/proxy/ips/?doc_itself=&nd=102014512&page=1&rdk=0",
-    "file": "zozpp.txt"
+    "file": "zozpp.txt",
+    "snapshotSha256": "ee9ac50c8d83ee0c1c7352444fee9ad2e1e85736054d3ab688b718b212d35639"
   }
 ]

@@ -1,9 +1,20 @@
-import { findingFromRule, type DetectorArgs } from './helpers.js';
-import { hasConsentControl, hasPiiForm } from './pdn.js';
+import { findingFromRule, sourceAnalysis, type DetectorArgs } from './helpers.js';
 import type { Finding } from '../types.js';
 
 export function detectFormNoConsent(args: DetectorArgs): Finding[] {
-  if (!hasPiiForm(args.source) || hasConsentControl(args.source)) return [];
-  const line = args.source.split(/\n/).findIndex((l) => /<form[\s>]/i.test(l));
-  return [findingFromRule(args.catalog, 'PDN.FORM.NO_CONSENT', args.relativePath, line >= 0 ? line + 1 : null)];
+  return sourceAnalysis(args).forms
+    .filter((form) => form.hasPii && !form.hasConsent)
+    .map((form) =>
+      findingFromRule(args.catalog, 'PDN.FORM.NO_CONSENT', args.relativePath, form.startLine, {
+        endLine: form.endLine,
+        confidence: 'high',
+        kind: 'violation',
+        evidence: {
+          summary: 'Форма собирает похожие на персональные данные поля, но внутри неё нет элемента согласия.',
+          signals: form.signals,
+          snippet: form.snippet,
+        },
+        fingerprintHint: form.snippet,
+      }),
+    );
 }

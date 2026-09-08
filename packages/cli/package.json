@@ -1,8 +1,11 @@
 {
   "name": "@legit-agent/cli",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiruxich/legitAgent.git",

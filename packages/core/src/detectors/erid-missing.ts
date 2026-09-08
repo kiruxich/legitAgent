@@ -7,5 +7,12 @@ const ERID = /erid\s*[:=]|data-erid/i;
 export function detectEridMissing(args: DetectorArgs): Finding[] {
   if (!AD_LABEL.test(args.source) || ERID.test(args.source)) return [];
   const line = args.source.split(/\n/).findIndex((l) => AD_LABEL.test(l));
-  return [findingFromRule(args.catalog, 'ADV.ERID.MISSING', args.relativePath, line >= 0 ? line + 1 : null)];
+  const startLine = line >= 0 ? line + 1 : null;
+  return [findingFromRule(args.catalog, 'ADV.ERID.MISSING', args.relativePath, startLine, {
+    evidence: {
+      summary: 'Найдена явная пометка «Реклама», но рядом в файле не найден erid.',
+      signals: ['advertising label', 'erid not found'],
+      snippet: startLine ? args.source.split(/\n/)[startLine - 1] : undefined,
+    },
+  })];
 }

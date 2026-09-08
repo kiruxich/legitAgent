@@ -41,6 +41,12 @@ export function detectPolicyIncomplete(args: {
     .filter((file) => isIncomplete(file.source))
     .map((file) => {
       const line = file.source.split(/\n/).findIndex((l) => HEADING_POLICY.test(l) || POLICY_PATH.test(l));
-      return findingFromRule(args.catalog, 'PDN.POLICY.INCOMPLETE', file.relativePath, line >= 0 ? line + 1 : 1);
+      const missing = REQUIRED.filter((pattern) => !pattern.test(file.source)).map((pattern) => pattern.source);
+      return findingFromRule(args.catalog, 'PDN.POLICY.INCOMPLETE', file.relativePath, line >= 0 ? line + 1 : 1, {
+        evidence: {
+          summary: 'Политика найдена, но несколько ожидаемых разделов не распознаны; требуется ручная проверка.',
+          signals: missing.map((item) => `section marker not found: ${item}`),
+        },
+      });
     });
 }

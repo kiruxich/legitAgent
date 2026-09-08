@@ -23,13 +23,19 @@ export function detectConsumerShop(args: {
   const line = shop.source.split(/\n/).findIndex((l) => looksLikeShop(l) || STRONG_SHOP.test(l) || CART.test(l));
   const loc = line >= 0 ? line + 1 : null;
   if (!OFFER.test(all)) {
-    findings.push(findingFromRule(args.catalog, 'CONSUMER.OFFER.MISSING', shop.relativePath, loc));
+    findings.push(findingFromRule(args.catalog, 'CONSUMER.OFFER.MISSING', shop.relativePath, loc, {
+      evidence: { summary: 'Есть признаки дистанционной продажи, но не найдены условия продажи.', signals: ['storefront markers', 'sales terms not found'] },
+    }));
   }
   if (!REQUISITES.test(all)) {
-    findings.push(findingFromRule(args.catalog, 'CONSUMER.REQUISITES.MISSING', shop.relativePath, loc));
+    findings.push(findingFromRule(args.catalog, 'CONSUMER.REQUISITES.MISSING', shop.relativePath, loc, {
+      evidence: { summary: 'Есть признаки дистанционной продажи, но не найдены ИНН или ОГРН.', signals: ['storefront markers', 'seller registration details not found'] },
+    }));
   }
   if (!RETURN.test(all)) {
-    findings.push(findingFromRule(args.catalog, 'CONSUMER.RETURN.MISSING', shop.relativePath, loc));
+    findings.push(findingFromRule(args.catalog, 'CONSUMER.RETURN.MISSING', shop.relativePath, loc, {
+      evidence: { summary: 'Есть признаки дистанционной продажи, но не найдены условия возврата.', signals: ['storefront markers', 'return terms not found'] },
+    }));
   }
   return findings;
 }

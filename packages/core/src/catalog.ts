@@ -81,12 +81,16 @@ export function renderCatalogMarkdown(catalog = defaultCatalog()): string {
       lines.push(`### \`${rule.id}\` — ${rule.title}`, '');
       lines.push(`- **Статус:** ${STATUS_RU[rule.status]}`);
       lines.push(`- **Серьёзность:** ${rule.severity}`);
+      lines.push(`- **Тип:** ${rule.kind ?? 'risk'}`);
+      lines.push(`- **Уверенность детектора:** ${rule.confidence ?? 'medium'}`);
       lines.push(`- **Норма:** ${rule.law}`);
       lines.push(`- **Что находит:** ${rule.message}`);
       lines.push(`- **Как исправить:** ${rule.fix}`);
       if (excerpt) {
         lines.push(`- **Выдержка (${excerpt.article}):** ${excerpt.text}`);
         lines.push(`- **Источник:** ${excerpt.sourceUrl}`);
+        if (excerpt.verifiedAt) lines.push(`- **Проверено:** ${excerpt.verifiedAt}`);
+        if (excerpt.effectiveFrom) lines.push(`- **Действует с:** ${excerpt.effectiveFrom}`);
       }
       lines.push('');
     }

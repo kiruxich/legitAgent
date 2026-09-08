@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+  <body>
+    <div class="cookie-banner">
+      <button id="accept">Принять</button>
+      <button id="reject">Отклонить</button>
+    </div>
+    <script>
+      document.getElementById('accept').addEventListener('click', () => {
+        document.cookie = '_ga_accept=accept-cookie-secret; path=/';
+        localStorage.setItem('analyticsConsent', 'accept-storage-secret');
+        fetch('/accept-beacon?token=accept-query-secret');
+        document.querySelector('.cookie-banner').remove();
+      });
+      document.getElementById('reject').addEventListener('click', () => {
+        document.cookie = '_ga_reject=reject-cookie-secret; path=/';
+        localStorage.setItem('analyticsConsent', 'reject-storage-secret');
+        fetch('/reject-beacon?token=reject-query-secret');
+        document.querySelector('.cookie-banner').remove();
+      });
+    </script>
+  </body>
+</html>

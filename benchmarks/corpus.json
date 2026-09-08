@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "description": "Synthetic regression seeds expanded with semantics-preserving mutations. Import anonymized, independently labeled real-world cases before v1 release.",
+  "v1MinimumIndependentCases": 100,
+  "mutationCount": 5,
+  "thresholds": {
+    "precision": 0.85,
+    "recall": 0.85,
+    "minimumLabeledExamplesPerRule": 10,
+    "minimumExpandedCases": 100
+  },
+  "cases": [
+    { "name": "form without consent", "path": "packages/core/tests/fixtures/bad-form", "rules": { "PDN.FORM.NO_CONSENT": true } },
+    { "name": "form with consent", "path": "packages/core/tests/fixtures/good-form", "rules": { "PDN.FORM.NO_CONSENT": false } },
+    { "name": "prechecked JSX consent", "path": "packages/core/tests/fixtures/bad-prechecked", "rules": { "PDN.FORM.PRECHECKED_CONSENT": true } },
+    { "name": "unchecked JSX consent", "path": "packages/core/tests/fixtures/good-prechecked", "rules": { "PDN.FORM.PRECHECKED_CONSENT": false } },
+    { "name": "consent without policy link", "path": "packages/core/tests/fixtures/bad-no-policy-link", "rules": { "PDN.FORM.NO_POLICY_LINK": true } },
+    { "name": "consent with policy link", "path": "packages/core/tests/fixtures/good-no-policy-link", "rules": { "PDN.FORM.NO_POLICY_LINK": false } },
+    { "name": "unguarded tracker", "path": "packages/core/tests/fixtures/bad-tracker", "rules": { "PDN.TRACKER.NO_CONSENT": true } },
+    { "name": "guarded tracker", "path": "packages/core/tests/fixtures/good-v2-source", "rules": { "PDN.TRACKER.NO_CONSENT": false } },
+    { "name": "foreign tracker", "path": "packages/core/tests/fixtures/bad-foreign-tracker", "rules": { "PDN.TRANSFER.FOREIGN_TRACKER": true } },
+    { "name": "domestic tracker", "path": "packages/core/tests/fixtures/good-foreign-tracker", "rules": { "PDN.TRANSFER.FOREIGN_TRACKER": false } },
+    { "name": "banner without reject", "path": "packages/core/tests/fixtures/bad-cookie-banner", "rules": { "PDN.COOKIE.NO_REJECT": true } },
+    { "name": "banner with reject", "path": "packages/core/tests/fixtures/good-cookie-banner", "rules": { "PDN.COOKIE.NO_REJECT": false } },
+    { "name": "incomplete policy", "path": "packages/core/tests/fixtures/bad-incomplete-policy", "rules": { "PDN.POLICY.INCOMPLETE": true } },
+    { "name": "complete policy", "path": "packages/core/tests/fixtures/good-complete-policy", "rules": { "PDN.POLICY.INCOMPLETE": false } },
+    { "name": "missing policy", "path": "packages/core/tests/fixtures/no-policy", "rules": { "PDN.POLICY.NO_LINK": true } },
+    { "name": "linked policy", "path": "packages/core/tests/fixtures/good-policy", "rules": { "PDN.POLICY.NO_LINK": false } },
+    { "name": "ad without erid", "path": "packages/core/tests/fixtures/bad-erid", "rules": { "ADV.ERID.MISSING": true } },
+    { "name": "ad with erid", "path": "packages/core/tests/fixtures/good-erid", "rules": { "ADV.ERID.MISSING": false } },
+    { "name": "shop markers", "path": "packages/core/tests/fixtures/astro-shop", "rules": { "CONSUMER.OFFER.MISSING": true, "CONSUMER.REQUISITES.MISSING": true, "CONSUMER.RETURN.MISSING": true } },
+    { "name": "buy CTA is not a shop", "path": "packages/core/tests/fixtures/buy-cta-only", "rules": { "CONSUMER.OFFER.MISSING": false, "CONSUMER.REQUISITES.MISSING": false, "CONSUMER.RETURN.MISSING": false } }
+  ]
+}

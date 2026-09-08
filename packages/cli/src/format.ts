@@ -32,6 +32,13 @@ export function formatHuman(result: ScanResult, lang: Lang = 'ru'): string {
       lines.push(lang === 'en' ? `Law: ${f.excerpt}` : `Норма: ${f.excerpt}`);
     }
   }
+  if (result.suppressedFindings.length > 0) {
+    lines.push(
+      lang === 'en'
+        ? `Suppressed or baselined findings: ${result.suppressedFindings.length}.`
+        : `Подавлено или учтено baseline: ${result.suppressedFindings.length}.`,
+    );
+  }
   for (const w of result.warnings) {
     lines.push(lang === 'en' ? `Warning ${w.file}: ${w.message}` : `Предупреждение ${w.file}: ${w.message}`);
   }
