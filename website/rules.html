@@ -23,8 +23,11 @@
     <nav class="nav-links">
       <a href="index.html#features">Возможности</a>
       <a href="rules.html">Правила</a>
-      <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">Демо</a>
-      <a href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener">GitHub</a>
+      <a class="github-stars" href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener" aria-label="GitHub: загрузка количества звёзд">
+        <span>GitHub</span>
+        <svg class="github-stars-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.25 10.1 5.5l4.7.68-3.4 3.31.8 4.68L8 11.96l-4.2 2.21.8-4.68-3.4-3.31 4.7-.68L8 1.25Z" /></svg>
+        <span id="github-stars-count"></span>
+      </a>
       <a class="btn btn-sm" href="https://www.npmjs.com/package/@legit-agent/cli" target="_blank" rel="noopener">npm</a>
     </nav>
   </header>
@@ -237,5 +240,6 @@
       · MIT
     </p>
   </footer>
+  <script src="github-stars.js"></script>
 </body>
 </html>

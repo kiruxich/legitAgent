@@ -6,7 +6,7 @@
 
 Проверка сайта на типичные риски **152-ФЗ**, **38-ФЗ** и **ЗоЗПП** прямо в Cursor, Claude, Kimi и в терминале.
 
-Сайт: [kiruxich.github.io/legitAgent](https://kiruxich.github.io/legitAgent/). Каталог правил: [docs/RULES.md](docs/RULES.md). Сломанный пример: [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo).
+Сайт: [kiruxich.github.io/legitAgent](https://kiruxich.github.io/legitAgent/). Каталог правил: [docs/RULES.md](docs/RULES.md).
 
 Подключите MCP — агент локально просканирует HTML/JS/TS/JSX/TSX/Vue/Svelte/Astro, покажет находки со статьёй закона, confidence, evidence и подскажет, как исправить. В Cursor после установки плагина те же действия доступны через `/check`, `/scan`, `/scan-url`. Либо одна команда в CI, GitHub Action с выгрузкой SARIF, либо `scan-url` для живой страницы: тот же каталог по DOM плюс cookie/storage/network до и после Reject и Accept.
 
@@ -249,8 +249,6 @@ User rule для Cursor always-on: скопируйте текст из `[docs/c
 У каждого правила в репозитории есть короткая выдержка статьи. Без выдержки правило в каталог не попадает.
 
 Полный каталог с выдержками закона: [docs/RULES.md](docs/RULES.md). На сайте — [страница правил](https://kiruxich.github.io/legitAgent/rules.html).
-
-Проверить, что сканер вообще что-то находит: клонируйте [legitAgent-demo](https://github.com/kiruxich/legitAgent-demo) (форма без согласия, метрика без opt-in, нет политики) и выполните `npx @legit-agent/cli scan`.
 
 ---
 

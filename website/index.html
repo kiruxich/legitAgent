@@ -23,10 +23,10 @@
     <nav class="nav-links">
       <a href="index.html#features">Возможности</a>
       <a href="rules.html">Правила</a>
-      <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">Демо</a>
       <a class="github-stars" href="https://github.com/kiruxich/legitAgent" target="_blank" rel="noopener" aria-label="GitHub: загрузка количества звёзд">
+        <span>GitHub</span>
         <svg class="github-stars-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.25 10.1 5.5l4.7.68-3.4 3.31.8 4.68L8 11.96l-4.2 2.21.8-4.68-3.4-3.31 4.7-.68L8 1.25Z" /></svg>
-        <span id="github-stars-count">—</span>
+        <span id="github-stars-count"></span>
       </a>
       <a class="btn btn-sm" href="https://www.npmjs.com/package/@legit-agent/cli" target="_blank" rel="noopener">npm</a>
     </nav>
@@ -131,8 +131,7 @@
           ERID, условия продажи / реквизиты / возврат.
           <code>scan-url</code> прогоняет тот же набор по HTML живой страницы, ждёт гидрацию SPA
           и в изолированных сессиях сравнивает cookie, storage и network до/после Reject и Accept.
-          Полный список: <a href="rules.html">каталог правил</a>
-          и <a href="https://github.com/kiruxich/legitAgent-demo" target="_blank" rel="noopener">сломанный демо-сайт</a>.
+          Полный список — в <a href="rules.html">каталоге правил</a>.
         </p>
       </div>
       <ul class="catalog-list">
@@ -241,39 +240,6 @@ npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code><
       <a href="https://alba-creation.ru" target="_blank" rel="noopener">Сделано IT-студией Alba Creation</a>
     </p>
   </footer>
-  <script>
-    (() => {
-      const repository = "kiruxich/legitAgent";
-      const count = document.getElementById("github-stars-count");
-      const link = document.querySelector(".github-stars");
-
-      const formatCount = (value) => new Intl.NumberFormat("ru-RU", {
-        notation: value >= 1000 ? "compact" : "standard",
-        maximumFractionDigits: 1
-      }).format(value);
-
-      async function updateStars() {
-        try {
-          const response = await fetch(`https://api.github.com/repos/${repository}`, {
-            headers: { Accept: "application/vnd.github+json" }
-          });
-          if (!response.ok) throw new Error("GitHub API request failed");
-
-          const { stargazers_count: stars } = await response.json();
-          count.textContent = formatCount(stars);
-          link.setAttribute("aria-label", `GitHub: ${stars} звёзд`);
-        } catch {
-          count.textContent = "GitHub";
-          link.setAttribute("aria-label", "Открыть репозиторий на GitHub");
-        }
-      }
-
-      updateStars();
-      window.setInterval(updateStars, 5 * 60 * 1000);
-      document.addEventListener("visibilitychange", () => {
-        if (!document.hidden) updateStars();
-      });
-    })();
-  </script>
+  <script src="github-stars.js"></script>
 </body>
 </html>
