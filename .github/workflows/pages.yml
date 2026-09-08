@@ -29,7 +29,7 @@ jobs:
       - name: Stage static site
         run: |
           mkdir -p _site
-          cp website/index.html website/rules.html website/styles.css website/logo.png _site/
+          cp website/index.html website/rules.html website/styles.css website/logo.png website/github-stars.js _site/
 
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
