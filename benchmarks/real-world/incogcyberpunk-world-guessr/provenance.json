@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "incogcyberpunk-world-guessr",
+  "repository": "incogcyberpunk/World-Guessr",
+  "commit": "0d33ae3de7f9ab936729d341620b03edc29004c3",
+  "independenceGroup": "incogcyberpunk/World-Guessr",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/incogcyberpunk/World-Guessr/blob/0d33ae3de7f9ab936729d341620b03edc29004c3/LICENSE.md",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "6fed80f98a3a590cd46dbc18e8af5e348b93ce50e86b90f1861540847e821af1",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/incogcyberpunk/World-Guessr/blob/0d33ae3de7f9ab936729d341620b03edc29004c3/privacyPolicyLink.js",
+      "upstreamSha256": "39d9ec08e6ddb7aea013dd14cc812f79116c9c429452f7d95f22b642aaaf745b",
+      "sha256": "39d9ec08e6ddb7aea013dd14cc812f79116c9c429452f7d95f22b642aaaf745b"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from incogcyberpunk/World-Guessr contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

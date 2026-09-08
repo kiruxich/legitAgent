@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ialias-openconsent",
+  "repository": "iAlias/openconsent",
+  "commit": "4140462c8b6e8d7b09aa4eef75a81801469617a2",
+  "independenceGroup": "iAlias/openconsent",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/iAlias/openconsent/blob/4140462c8b6e8d7b09aa4eef75a81801469617a2/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "bf6dda1ea43623c0ff0c6825601a87709fc87d63a6ae13a5082af1c4224cc641",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/iAlias/openconsent/blob/4140462c8b6e8d7b09aa4eef75a81801469617a2/src/cmp.js",
+      "upstreamSha256": "c308699e26b3219bf3773200fedc2cf6922740aa0f9078df1f671785e7ff4dec",
+      "sha256": "c308699e26b3219bf3773200fedc2cf6922740aa0f9078df1f671785e7ff4dec"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from iAlias/openconsent contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "reject"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

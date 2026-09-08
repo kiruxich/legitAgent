@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "streeva-very-simple-cookie-consent",
+  "repository": "streeva/very-simple-cookie-consent",
+  "commit": "6e78a9d4a92487b15f0deb56d48a7bf09fccb2f3",
+  "independenceGroup": "streeva/very-simple-cookie-consent",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/streeva/very-simple-cookie-consent/blob/6e78a9d4a92487b15f0deb56d48a7bf09fccb2f3/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "6709727ad90e0701ef1c7461bbe9bd84c96ef1457a422ad8c2b5342f102d4b4e",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/streeva/very-simple-cookie-consent/blob/6e78a9d4a92487b15f0deb56d48a7bf09fccb2f3/src/main.ts",
+      "upstreamSha256": "83c4ece8b718a57c60bb7c2b12c5c41c1c3c54f4d7620072a4d02b7e1c64e635",
+      "sha256": "83c4ece8b718a57c60bb7c2b12c5c41c1c3c54f4d7620072a4d02b7e1c64e635"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from streeva/very-simple-cookie-consent contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

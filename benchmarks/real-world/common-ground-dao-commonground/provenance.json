@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "common-ground-dao-commonground",
+  "repository": "Common-Ground-DAO/commonground",
+  "commit": "ffe888bd495b00ddffca6775657156ea63c9a05e",
+  "independenceGroup": "Common-Ground-DAO/commonground",
+  "license": "AGPL-3.0",
+  "licenseUrl": "https://github.com/Common-Ground-DAO/commonground/blob/ffe888bd495b00ddffca6775657156ea63c9a05e/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/Common-Ground-DAO/commonground/blob/ffe888bd495b00ddffca6775657156ea63c9a05e/src/views/Home/Home.tsx",
+      "upstreamSha256": "b59b735e86a43a0bbd963faeb327926e6b7c7088f7d9bf82e27ba2129e4d458e",
+      "sha256": "b59b735e86a43a0bbd963faeb327926e6b7c7088f7d9bf82e27ba2129e4d458e"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Common-Ground-DAO/commonground contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

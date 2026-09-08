@@ -47,8 +47,8 @@
       </div>
       <div class="hero-proof" aria-label="Что проверяет v1.1.1">
         <div class="proof-card"><strong>15</strong><span>детекторов</span></div>
-        <div class="proof-card"><strong>260</strong><span>parser-сценариев</span></div>
-        <div class="proof-card"><strong>12</strong><span>real-world групп</span></div>
+        <div class="proof-card"><strong>700</strong><span>parser-сценариев</span></div>
+        <div class="proof-card"><strong>100</strong><span>real-world групп</span></div>
       </div>
       <div class="audit-preview" aria-label="Пример отчёта legitAgent">
         <div class="preview-top">
@@ -151,7 +151,7 @@
         <article class="release-card">
           <span class="release-icon">01</span>
           <h3>Строгий benchmark</h3>
-          <p>52 seed-кейса и 260 вариантов помогают ловить регрессии парсеров, а не только демонстрационные ошибки.</p>
+          <p>140 seed-кейсов и 700 вариантов помогают ловить регрессии парсеров, а не только демонстрационные ошибки.</p>
         </article>
         <article class="release-card">
           <span class="release-icon">02</span>
@@ -206,7 +206,7 @@ npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code><
           выдержки норм и ограниченные связанные фрагменты кода, а не весь репозиторий. Это настройки маршрутизации/провайдера, а не абсолютная гарантия хранения: перед включением OpenRouter проверьте его политику и выбранного провайдера; redaction — best effort.
         </p>
         <p class="section-lead"><strong>Важно:</strong> screenshots из evidence pack могут визуально содержать персональные или другие чувствительные данные. Передавайте и храните их с соответствующими ограничениями доступа; перед публикацией обязательно проверьте изображения вручную. Для OpenRouter <code>LEGITAGENT_LLM_MAX_COST_USD</code> ограничивает отправку новых batches только после получения <code>usage.cost</code>; последний batch может превысить порог, и это не hard provider spend cap.</p>
-        <p class="section-lead">Текущий benchmark содержит 52 seed-кейса: 40 synthetic и 12 real-world source-групп — всего 260 parser-stability сценариев. Метрики исходных примеров и форматных вариантов считаются отдельно; новые случаи проходят строгую проверку технических признаков и разметки.</p>
+        <p class="section-lead">Текущий benchmark содержит 140 seed-кейсов: 40 synthetic и 100 real-world source-групп — всего 700 parser-stability сценариев. Метрики исходных примеров и форматных вариантов считаются отдельно; новые случаи проходят строгую проверку технических признаков и разметки.</p>
       </div>
       <ul class="catalog-list">
         <li><code>offline</code> — default</li>

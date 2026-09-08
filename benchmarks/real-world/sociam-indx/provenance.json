@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "sociam-indx",
+  "repository": "sociam/indx",
+  "commit": "3f6cb634ffcb07d049d055cab1f374be5503bbf5",
+  "independenceGroup": "sociam/indx",
+  "license": "AGPL-3.0",
+  "licenseUrl": "https://github.com/sociam/indx/blob/3f6cb634ffcb07d049d055cab1f374be5503bbf5/COPYING",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/sociam/indx/blob/3f6cb634ffcb07d049d055cab1f374be5503bbf5/html/js/indx.js",
+      "upstreamSha256": "c5746495e35020a5f9e9c250e07523c3bdb98738a00cc1492d13039aa449b830",
+      "sha256": "c5746495e35020a5f9e9c250e07523c3bdb98738a00cc1492d13039aa449b830"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from sociam/indx contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "reject"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

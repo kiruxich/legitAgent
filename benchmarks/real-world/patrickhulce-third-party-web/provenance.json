@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "patrickhulce-third-party-web",
+  "repository": "patrickhulce/third-party-web",
+  "commit": "424dc03d2deabe001827b6826fed3c8cc00362de",
+  "independenceGroup": "patrickhulce/third-party-web",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/patrickhulce/third-party-web/blob/424dc03d2deabe001827b6826fed3c8cc00362de/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/patrickhulce/third-party-web/blob/424dc03d2deabe001827b6826fed3c8cc00362de/data/entities.js",
+      "upstreamSha256": "b7589395d8c4e7e7daa94596625eedf0ed3725dd133456d47382d13e387cb893",
+      "sha256": "b7589395d8c4e7e7daa94596625eedf0ed3725dd133456d47382d13e387cb893"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from patrickhulce/third-party-web contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

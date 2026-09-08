@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "houselearning-houselearning-github-io",
+  "repository": "houselearning/houselearning.github.io",
+  "commit": "3ec8e1da9a303c5192bc397fc2dcdf3a8cd20cfb",
+  "independenceGroup": "houselearning/houselearning.github.io",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/houselearning/houselearning.github.io/blob/3ec8e1da9a303c5192bc397fc2dcdf3a8cd20cfb/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/houselearning/houselearning.github.io/blob/3ec8e1da9a303c5192bc397fc2dcdf3a8cd20cfb/cookiebanner.js",
+      "upstreamSha256": "6e3cf5a571b786fa3a458804d17f4ed8cf77f465b15cfb6baeebb52d7dc962e1",
+      "sha256": "6e3cf5a571b786fa3a458804d17f4ed8cf77f465b15cfb6baeebb52d7dc962e1"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from houselearning/houselearning.github.io contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "accept"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

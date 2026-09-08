@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "itslenny-slack-emoji-import",
+  "repository": "itslenny/slack-emoji-import",
+  "commit": "f83c67649b0358e1a154c9e227676ce473fc25b1",
+  "independenceGroup": "itslenny/slack-emoji-import",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/itslenny/slack-emoji-import/blob/f83c67649b0358e1a154c9e227676ce473fc25b1/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e4263b3451f03266304a528b2a45f5c306cd302926e04ad4f4b29c6c93584dca",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/itslenny/slack-emoji-import/blob/f83c67649b0358e1a154c9e227676ce473fc25b1/index.ts",
+      "upstreamSha256": "a8c7d665eb290fc3d6a93a7799fb11b5e51c519b559b8a1c2018ef338f5556f0",
+      "sha256": "a8c7d665eb290fc3d6a93a7799fb11b5e51c519b559b8a1c2018ef338f5556f0"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from itslenny/slack-emoji-import contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "input[type=email"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

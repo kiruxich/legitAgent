@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "meilisearch-documentation",
+  "repository": "meilisearch/documentation",
+  "commit": "65035e23f21794f923d2175ecfb1d6750b9d5fd9",
+  "independenceGroup": "meilisearch/documentation",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/meilisearch/documentation/blob/65035e23f21794f923d2175ecfb1d6750b9d5fd9/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "f38718a82ebe1e2370944154795104fec672b3f87b43888ac2280e8c63b82a77",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/meilisearch/documentation/blob/65035e23f21794f923d2175ecfb1d6750b9d5fd9/gtm.js",
+      "upstreamSha256": "22bacc3696627ef460760a91a882dbd1a7ad83f910b090da29e8dfc5c2e4a948",
+      "sha256": "22bacc3696627ef460760a91a882dbd1a7ad83f910b090da29e8dfc5c2e4a948"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from meilisearch/documentation contains the reviewed marker \"'ad_storage':\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "'ad_storage':"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

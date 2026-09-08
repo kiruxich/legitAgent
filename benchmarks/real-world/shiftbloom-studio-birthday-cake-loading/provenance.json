@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "shiftbloom-studio-birthday-cake-loading",
+  "repository": "shiftbloom-studio/birthday-cake-loading",
+  "commit": "449bc2e1119284b80291f4b53fbafb5c76599c10",
+  "independenceGroup": "shiftbloom-studio/birthday-cake-loading",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/shiftbloom-studio/birthday-cake-loading/blob/449bc2e1119284b80291f4b53fbafb5c76599c10/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "4562d87ea5d31c0194995f8a4bc73b4e51eab61952261cc4475e5a1cd58a8abc",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/shiftbloom-studio/birthday-cake-loading/blob/449bc2e1119284b80291f4b53fbafb5c76599c10/src/types.ts",
+      "upstreamSha256": "3d5764f80939acc45f4421a8f98427cf378f648270d85c1e3384c391b1729d17",
+      "sha256": "3d5764f80939acc45f4421a8f98427cf378f648270d85c1e3384c391b1729d17"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from shiftbloom-studio/birthday-cake-loading contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

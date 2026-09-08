@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "centerforopenscience-angular-osf-playwright",
+  "repository": "CenterForOpenScience/angular-osf-playwright",
+  "commit": "cacee7d3680701f79756cf1eab9bdc8ec6cda8b5",
+  "independenceGroup": "CenterForOpenScience/angular-osf-playwright",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/CenterForOpenScience/angular-osf-playwright/blob/cacee7d3680701f79756cf1eab9bdc8ec6cda8b5/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/CenterForOpenScience/angular-osf-playwright/blob/cacee7d3680701f79756cf1eab9bdc8ec6cda8b5/src/pages/LoginPage.ts",
+      "upstreamSha256": "c1d0af05aca1f2df3e9bb80e34db5f2ca5b26fc94db346df6cdd32d52bf9092d",
+      "sha256": "c1d0af05aca1f2df3e9bb80e34db5f2ca5b26fc94db346df6cdd32d52bf9092d"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from CenterForOpenScience/angular-osf-playwright contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

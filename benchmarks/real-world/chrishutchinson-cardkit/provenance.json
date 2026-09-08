@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "chrishutchinson-cardkit",
+  "repository": "chrishutchinson/cardkit",
+  "commit": "52f5aed2afb7b45a7beb03dd0b7b0fe27dc521e1",
+  "independenceGroup": "chrishutchinson/cardkit",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/chrishutchinson/cardkit/blob/52f5aed2afb7b45a7beb03dd0b7b0fe27dc521e1/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "db662f600a61659f0ff9752511f55b48928caa60bd29773f2e69468b72f5b13b",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/chrishutchinson/cardkit/blob/52f5aed2afb7b45a7beb03dd0b7b0fe27dc521e1/dom.js",
+      "upstreamSha256": "e659a4a0e0577b061dfc43f1e052f6ebe7b2198034b61d944b52bd04d5f77aa4",
+      "sha256": "e659a4a0e0577b061dfc43f1e052f6ebe7b2198034b61d944b52bd04d5f77aa4"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from chrishutchinson/cardkit contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "input[type=email"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ramanaditya-claude-project-loader",
+  "repository": "ramanaditya/claude-project-loader",
+  "commit": "aaa53b4032551e293bb01e578f2d159cf1384b97",
+  "independenceGroup": "ramanaditya/claude-project-loader",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ramanaditya/claude-project-loader/blob/aaa53b4032551e293bb01e578f2d159cf1384b97/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "b3a73b7689195d0983c1bb5c8b1a9a3b32d54a4389326c57a654dcc491ac34ca",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/ramanaditya/claude-project-loader/blob/aaa53b4032551e293bb01e578f2d159cf1384b97/preview.tsx",
+      "upstreamSha256": "32df7b3e592ece09689eeccfa3c3dff47cdcdf304eb8c3b26ce6b03d21a1f9d2",
+      "sha256": "32df7b3e592ece09689eeccfa3c3dff47cdcdf304eb8c3b26ce6b03d21a1f9d2"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ramanaditya/claude-project-loader contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

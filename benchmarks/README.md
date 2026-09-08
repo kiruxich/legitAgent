@@ -1,6 +1,6 @@
 # Benchmark corpus
 
-`corpus.json` contains 52 seeds: 40 synthetic regressions and 12 imported real-world source cases. The runner applies five formatting variants (including the original), reports TP/FP/FN/TN plus precision/recall by rule and framework, and enforces the thresholds stored in the manifest. `seedRules` and `seedFrameworks` count each original case once; `rules` and `frameworks` include the 260 expanded cases. Positive and negative seed coverage is checked before mutations, so repeating formats cannot substitute for a missing kind of example.
+`corpus.json` contains 140 seeds: 40 synthetic regressions and 100 imported real-world source cases. The runner applies five formatting variants (including the original), reports TP/FP/FN/TN plus precision/recall by rule and framework, and enforces the thresholds stored in the manifest. `seedRules` and `seedFrameworks` count each original case once; `rules` and `frameworks` include the 700 expanded cases. Positive and negative seed coverage is checked before mutations, so repeating formats cannot substitute for a missing kind of example.
 
 Mutations test parser stability but are not independent examples. Before the v1 release, add reviewed real-world seeds until every release-critical rule has enough genuinely independent positive and negative labels. Remove personal data, credentials, operational site URLs, contact addresses, analytics IDs and free-form user content from fixtures. Preserve upstream copyright/license notices and public source attribution separately. Known tracker-provider hostnames are retained where provider classification is the feature under test.
 
@@ -14,7 +14,7 @@ The real-world labels are technical source annotations, not independent legal au
 
 ## Choosing new examples
 
-The [real-world source shortlist](real-world-cases.md) and [pinned candidate registry](real-world-candidates.json) document 12 imported cases, their licenses, scoped technical observations and remaining runtime limits. Files live in `benchmarks/real-world/<id>` with upstream license, attribution, source/fixture hashes and review rationale. They contribute 12 source groups to the release gate; multiple views and mutations of a group count once.
+The [real-world source shortlist](real-world-cases.md) and [pinned candidate registry](real-world-candidates.json) document 100 imported cases, their licenses, scoped technical observations and remaining runtime limits. Files live in `benchmarks/real-world/<id>` with upstream license, attribution, source/fixture hashes and review rationale. Twelve cases preserve richer component/runtime context; 88 additions are pinned source-excerpt controls with exact markers and structural checks. They contribute 100 source groups to the release gate; multiple views and mutations of a group count once.
 
 Prioritize new behavior over more formatting variants:
 

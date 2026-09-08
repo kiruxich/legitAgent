@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "bestjobs-bestjobs",
+  "repository": "bestjobs/bestjobs",
+  "commit": "a05a6be2c7dfe4fcb3475a03947219b4f4c81918",
+  "independenceGroup": "bestjobs/bestjobs",
+  "license": "LGPL-3.0",
+  "licenseUrl": "https://github.com/bestjobs/bestjobs/blob/a05a6be2c7dfe4fcb3475a03947219b4f4c81918/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/bestjobs/bestjobs/blob/a05a6be2c7dfe4fcb3475a03947219b4f4c81918/app.js",
+      "upstreamSha256": "ccee92d1be5d6390cc205659098d1b30d3d01c175ce5f19ed2cf1ab9c4dc84d2",
+      "sha256": "ccee92d1be5d6390cc205659098d1b30d3d01c175ce5f19ed2cf1ab9c4dc84d2"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from bestjobs/bestjobs contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

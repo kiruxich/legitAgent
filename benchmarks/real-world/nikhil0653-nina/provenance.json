@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "nikhil0653-nina",
+  "repository": "NIKHIL0653/NINA",
+  "commit": "1d4df1323021087c451775661e51332d173572f2",
+  "independenceGroup": "NIKHIL0653/NINA",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/NIKHIL0653/NINA/blob/1d4df1323021087c451775661e51332d173572f2/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/NIKHIL0653/NINA/blob/1d4df1323021087c451775661e51332d173572f2/api/index.js",
+      "upstreamSha256": "fb241e559acef964aa027ba43e28a7a3445050263d65a6aa771bbfb145c701be",
+      "sha256": "fb241e559acef964aa027ba43e28a7a3445050263d65a6aa771bbfb145c701be"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from NIKHIL0653/NINA contains the reviewed marker \"ConsentStatus2[\\\"EXPI\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "ConsentStatus2[\"EXPI"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

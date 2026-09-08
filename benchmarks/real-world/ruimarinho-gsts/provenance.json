@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ruimarinho-gsts",
+  "repository": "ruimarinho/gsts",
+  "commit": "4370bece03e2ccc68316c7fbf2ae9be486e1dd2e",
+  "independenceGroup": "ruimarinho/gsts",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ruimarinho/gsts/blob/4370bece03e2ccc68316c7fbf2ae9be486e1dd2e/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "2a27f2ae7dffc40f3eb56a8e36f38ec6db58fb2b3bc79ff93a8bbf686357f129",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/ruimarinho/gsts/blob/4370bece03e2ccc68316c7fbf2ae9be486e1dd2e/index.js",
+      "upstreamSha256": "ea9063bc60ab3198bc47c6469413c2c5be97b56f3469c1f4709573d618f6326a",
+      "sha256": "ea9063bc60ab3198bc47c6469413c2c5be97b56f3469c1f4709573d618f6326a"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ruimarinho/gsts contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "input[type=email"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

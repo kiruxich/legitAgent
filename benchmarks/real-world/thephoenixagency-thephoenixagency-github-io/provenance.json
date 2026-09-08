@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "thephoenixagency-thephoenixagency-github-io",
+  "repository": "ThePhoenixAgency/ThePhoenixAgency.github.io",
+  "commit": "3fcc9ec9e481cdb4640339843e6b23fdb71a8ec9",
+  "independenceGroup": "ThePhoenixAgency/ThePhoenixAgency.github.io",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ThePhoenixAgency/ThePhoenixAgency.github.io/blob/3fcc9ec9e481cdb4640339843e6b23fdb71a8ec9/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e2cdc5fdb6f5f014604cc1b6a291b615c752706def57e94dad783fc7615c4042",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/ThePhoenixAgency/ThePhoenixAgency.github.io/blob/3fcc9ec9e481cdb4640339843e6b23fdb71a8ec9/theme.js",
+      "upstreamSha256": "91fdab7ad89c6d7d5597e644941962071e1e0665684f576555a70809d18e6d03",
+      "sha256": "91fdab7ad89c6d7d5597e644941962071e1e0665684f576555a70809d18e6d03"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ThePhoenixAgency/ThePhoenixAgency.github.io contains the reviewed marker \"cookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "cookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

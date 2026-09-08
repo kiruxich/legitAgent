@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "fmeum-smart-pass",
+  "repository": "fmeum/smart-pass",
+  "commit": "55d1d4fb64706396bf8fb705fe223c744a893746",
+  "independenceGroup": "fmeum/smart-pass",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/fmeum/smart-pass/blob/55d1d4fb64706396bf8fb705fe223c744a893746/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "b1fd1a3236b9fa4ee6e5ea9128d3a8b5f4b20716eae557bb859b6b681de73936",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/fmeum/smart-pass/blob/55d1d4fb64706396bf8fb705fe223c744a893746/popup.js",
+      "upstreamSha256": "93c4e848cb72be42299b8e2f4a2c04a8236b4be75a91cb56ba58550e4a9c6289",
+      "sha256": "93c4e848cb72be42299b8e2f4a2c04a8236b4be75a91cb56ba58550e4a9c6289"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from fmeum/smart-pass contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "input[type=email"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

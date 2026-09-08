@@ -1,0 +1,6 @@
+  mediumLink: 'https://example.invalid',
+  faqLink: 'https://example.invalid',
+  termsAndConditionsLink: 'https://example.invalid',
+  privacyPolicyLink: 'https://example.invalid',
+  nextStepsKycSuccess: 'https://example.invalid',
+  nextStepsKycFail: 'https://example.invalid',

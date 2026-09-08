@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "andreasarendt-atlo",
+  "repository": "AndreasArendt/Atlo",
+  "commit": "50612ed5ec1ef4f2945810493b5b3d9a74bbfaa4",
+  "independenceGroup": "AndreasArendt/Atlo",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/AndreasArendt/Atlo/blob/50612ed5ec1ef4f2945810493b5b3d9a74bbfaa4/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e0632a4d6322076c65f5f1cb8e69b4c5ff9d773b3b878636e8ef4ae1c45cac70",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/AndreasArendt/Atlo/blob/50612ed5ec1ef4f2945810493b5b3d9a74bbfaa4/public/dom.js",
+      "upstreamSha256": "e033ed85a058a5784aa68edda88e3ae7c3046a1bfeccd9a8cbbb26b5c1497fb1",
+      "sha256": "e033ed85a058a5784aa68edda88e3ae7c3046a1bfeccd9a8cbbb26b5c1497fb1"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from AndreasArendt/Atlo contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

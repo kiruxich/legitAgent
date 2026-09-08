@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "neoalienson-hexo-plugin-cookieconsent",
+  "repository": "neoalienson/hexo-plugin-cookieconsent",
+  "commit": "306bd3c7098c546bc2e02ffb38e519d5b22e5c0c",
+  "independenceGroup": "neoalienson/hexo-plugin-cookieconsent",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/neoalienson/hexo-plugin-cookieconsent/blob/306bd3c7098c546bc2e02ffb38e519d5b22e5c0c/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "7f0e353d33979d13e9882c2f130914724c9aabf7de3826a5845512af136d6618",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/neoalienson/hexo-plugin-cookieconsent/blob/306bd3c7098c546bc2e02ffb38e519d5b22e5c0c/index.js",
+      "upstreamSha256": "e627b14d06571b5d72687adf3a551f0fb0f9ce275bab09841cc0de37af903d80",
+      "sha256": "e627b14d06571b5d72687adf3a551f0fb0f9ce275bab09841cc0de37af903d80"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from neoalienson/hexo-plugin-cookieconsent contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "CookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

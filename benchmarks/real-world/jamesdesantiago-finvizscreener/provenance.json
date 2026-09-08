@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "jamesdesantiago-finvizscreener",
+  "repository": "jamesdesantiago/FinvizScreener",
+  "commit": "ca68cc18e9d06eb651d272c7dc5323f7e614a5ba",
+  "independenceGroup": "jamesdesantiago/FinvizScreener",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/jamesdesantiago/FinvizScreener/blob/ca68cc18e9d06eb651d272c7dc5323f7e614a5ba/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/jamesdesantiago/FinvizScreener/blob/ca68cc18e9d06eb651d272c7dc5323f7e614a5ba/modules/privacyBanner.js",
+      "upstreamSha256": "a39fb655f4a494cdb93108cee6fd9c36b165985bf9493f510a60fe2a2b5005c5",
+      "sha256": "a39fb655f4a494cdb93108cee6fd9c36b165985bf9493f510a60fe2a2b5005c5"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from jamesdesantiago/FinvizScreener contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

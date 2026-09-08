@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "hypershiphq-react-cookie-manager",
+  "repository": "hypershiphq/react-cookie-manager",
+  "commit": "25ae700b0f774bd3413dd2b4d6fbd0553dbfb887",
+  "independenceGroup": "hypershiphq/react-cookie-manager",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/hypershiphq/react-cookie-manager/blob/25ae700b0f774bd3413dd2b4d6fbd0553dbfb887/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "dcdb200bd1b0a1a14295d656f47fcbda7d074386b36790dad3b2e21a7353025b",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/hypershiphq/react-cookie-manager/blob/25ae700b0f774bd3413dd2b4d6fbd0553dbfb887/src/types/types.ts",
+      "upstreamSha256": "a7f6f65243d70af73aa1756267989f91160acbcc3f2666f5708262370cb58668",
+      "sha256": "a7f6f65243d70af73aa1756267989f91160acbcc3f2666f5708262370cb58668"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from hypershiphq/react-cookie-manager contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

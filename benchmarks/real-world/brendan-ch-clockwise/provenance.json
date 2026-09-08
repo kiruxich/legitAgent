@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "brendan-ch-clockwise",
+  "repository": "brendan-ch/clockwise",
+  "commit": "62d82c2fe7c0b6e418aaa18e6391e8ca30f58a08",
+  "independenceGroup": "brendan-ch/clockwise",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/brendan-ch/clockwise/blob/62d82c2fe7c0b6e418aaa18e6391e8ca30f58a08/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "81ee7af3a323798916613d8771b0608511129997026e13f1f01fe9180761f54e",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/brendan-ch/clockwise/blob/62d82c2fe7c0b6e418aaa18e6391e8ca30f58a08/app.config.js",
+      "upstreamSha256": "05839aa664ae80cb35276395e3b9e80d713d93718a2ce5da246ed8740c99556f",
+      "sha256": "05839aa664ae80cb35276395e3b9e80d713d93718a2ce5da246ed8740c99556f"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from brendan-ch/clockwise contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

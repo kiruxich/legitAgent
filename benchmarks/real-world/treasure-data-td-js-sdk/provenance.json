@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "treasure-data-td-js-sdk",
+  "repository": "treasure-data/td-js-sdk",
+  "commit": "692d51b148c8acf6668cce679789bf5a974aa71f",
+  "independenceGroup": "treasure-data/td-js-sdk",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/treasure-data/td-js-sdk/blob/692d51b148c8acf6668cce679789bf5a974aa71f/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/treasure-data/td-js-sdk/blob/692d51b148c8acf6668cce679789bf5a974aa71f/lib/treasure.js",
+      "upstreamSha256": "cc2732dc719da79c135f6587f3448faa9021b7a0d581226b9c727c85003aac5b",
+      "sha256": "cc2732dc719da79c135f6587f3448faa9021b7a0d581226b9c727c85003aac5b"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from treasure-data/td-js-sdk contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "rawgraphs-rawgraphs-app",
+  "repository": "rawgraphs/rawgraphs-app",
+  "commit": "b7b2909111cc029ccf418dc3e7d079e0f4c50d6f",
+  "independenceGroup": "rawgraphs/rawgraphs-app",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/rawgraphs/rawgraphs-app/blob/b7b2909111cc029ccf418dc3e7d079e0f4c50d6f/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "36878f63187e9be7638d06f67896513263761af9e842ec7c3ab4c702c010a3e7",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/rawgraphs/rawgraphs-app/blob/b7b2909111cc029ccf418dc3e7d079e0f4c50d6f/src/App.js",
+      "upstreamSha256": "36b0ccd75f8998ba95a04090dbd73c58c89ed76188459fadddbaae5ec773b7b8",
+      "sha256": "36b0ccd75f8998ba95a04090dbd73c58c89ed76188459fadddbaae5ec773b7b8"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from rawgraphs/rawgraphs-app contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "CookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

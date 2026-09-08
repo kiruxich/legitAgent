@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "structured-world-vue-privacy",
+  "repository": "structured-world/vue-privacy",
+  "commit": "6d8a1bdf972a14525bb0b1e3dfc42da0709fe46f",
+  "independenceGroup": "structured-world/vue-privacy",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/structured-world/vue-privacy/blob/6d8a1bdf972a14525bb0b1e3dfc42da0709fe46f/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "2d9022a37621738c4cc3c12fc735114b12665db807f1c3062aa45a0602444561",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/structured-world/vue-privacy/blob/6d8a1bdf972a14525bb0b1e3dfc42da0709fe46f/src/vue/index.ts",
+      "upstreamSha256": "72b1b130096bfb8ad3d0e9d111654072eb98fd14925a4a18e68b1853bced0b55",
+      "sha256": "72b1b130096bfb8ad3d0e9d111654072eb98fd14925a4a18e68b1853bced0b55"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from structured-world/vue-privacy contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "accept"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

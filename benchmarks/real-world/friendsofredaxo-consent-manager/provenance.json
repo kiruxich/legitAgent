@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "friendsofredaxo-consent-manager",
+  "repository": "FriendsOfREDAXO/consent_manager",
+  "commit": "4cf7e01f4bc6f9fe924ed9a6cd3236c513d7e7b9",
+  "independenceGroup": "FriendsOfREDAXO/consent_manager",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/FriendsOfREDAXO/consent_manager/blob/4cf7e01f4bc6f9fe924ed9a6cd3236c513d7e7b9/LICENSE.md",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "14e84567b2af468a05bc9030729d1b023d0ab11b0aa16dd476002720624b645a",
+  "files": [
+    {
+      "filename": "source.php",
+      "sourceUrl": "https://github.com/FriendsOfREDAXO/consent_manager/blob/4cf7e01f4bc6f9fe924ed9a6cd3236c513d7e7b9/pages/cookie.php",
+      "upstreamSha256": "aa24c8813f93383d0286289aae0a7c0fe1e0c22adbe7aecce9399091411a08f9",
+      "sha256": "aa24c8813f93383d0286289aae0a7c0fe1e0c22adbe7aecce9399091411a08f9"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from FriendsOfREDAXO/consent_manager contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.php",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "foundationinccorporateteam-cookie-manage",
+  "repository": "FoundationINCCorporateTeam/Cookie-Manage",
+  "commit": "090da73524f4dff046771230a7773f045e63e6a7",
+  "independenceGroup": "FoundationINCCorporateTeam/Cookie-Manage",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/FoundationINCCorporateTeam/Cookie-Manage/blob/090da73524f4dff046771230a7773f045e63e6a7/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "7320996489548319549ae90b51b41b1c9f50a56b5b2b0c2a3c78e58a3f4057c5",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/FoundationINCCorporateTeam/Cookie-Manage/blob/090da73524f4dff046771230a7773f045e63e6a7/src/js/cmp.js",
+      "upstreamSha256": "971f32ecde7481b9e73ba8fa32efb8eb00cb5694fc185907de2224254894f530",
+      "sha256": "971f32ecde7481b9e73ba8fa32efb8eb00cb5694fc185907de2224254894f530"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from FoundationINCCorporateTeam/Cookie-Manage contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "reject"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

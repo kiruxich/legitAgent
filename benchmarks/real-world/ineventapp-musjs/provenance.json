@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ineventapp-musjs",
+  "repository": "ineventapp/musjs",
+  "commit": "a27886387a9b64b3893bf3d1313bd9439df39a8d",
+  "independenceGroup": "ineventapp/musjs",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ineventapp/musjs/blob/a27886387a9b64b3893bf3d1313bd9439df39a8d/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "6fca8a0e131e3f9352f3289f0a50103be192c7dde23493f79fd518c3e303a7b1",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/ineventapp/musjs/blob/a27886387a9b64b3893bf3d1313bd9439df39a8d/mus.js",
+      "upstreamSha256": "b304f6c1f65d3c6d2009952284cb1215d14ba0666182219d057bdc3842c9408f",
+      "sha256": "b304f6c1f65d3c6d2009952284cb1215d14ba0666182219d057bdc3842c9408f"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ineventapp/musjs contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "input[type=email"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

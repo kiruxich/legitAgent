@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "sfarpak-alifullstack",
+  "repository": "SFARPak/AliFullStack",
+  "commit": "c34f5cfea36db008b7c3e29c0d451b60758a30f4",
+  "independenceGroup": "SFARPak/AliFullStack",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/SFARPak/AliFullStack/blob/c34f5cfea36db008b7c3e29c0d451b60758a30f4/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "5879706212ef8157e7f5fb4fe98dc8ca98e9b2554cd853f4b8acb4a7550ae0b2",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/SFARPak/AliFullStack/blob/c34f5cfea36db008b7c3e29c0d451b60758a30f4/src/pages/home.tsx",
+      "upstreamSha256": "9e994200de6d8768ecbab165f19c8f319554bc64ff8a7e0ffe8095acf6f4d86e",
+      "sha256": "9e994200de6d8768ecbab165f19c8f319554bc64ff8a7e0ffe8095acf6f4d86e"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from SFARPak/AliFullStack contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

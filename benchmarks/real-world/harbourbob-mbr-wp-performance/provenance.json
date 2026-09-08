@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "harbourbob-mbr-wp-performance",
+  "repository": "HarbourBob/MBR-WP-Performance",
+  "commit": "0d71c81bc91d57d24c206985779ddf9c5c5590a6",
+  "independenceGroup": "HarbourBob/MBR-WP-Performance",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://github.com/HarbourBob/MBR-WP-Performance/blob/0d71c81bc91d57d24c206985779ddf9c5c5590a6/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/HarbourBob/MBR-WP-Performance/blob/0d71c81bc91d57d24c206985779ddf9c5c5590a6/assets/js/banner.js",
+      "upstreamSha256": "f857e0f89b9cc27f78a5e798e45acd43b38991df4e74ee3d12da599ac8294935",
+      "sha256": "f857e0f89b9cc27f78a5e798e45acd43b38991df4e74ee3d12da599ac8294935"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from HarbourBob/MBR-WP-Performance contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

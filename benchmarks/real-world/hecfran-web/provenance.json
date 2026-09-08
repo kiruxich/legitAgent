@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "hecfran-web",
+  "repository": "hecfran/web",
+  "commit": "39d6a3a594b89f7827e9944ce7f55b8ba50a5201",
+  "independenceGroup": "hecfran/web",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/hecfran/web/blob/39d6a3a594b89f7827e9944ce7f55b8ba50a5201/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c5cab32919b3c80ea2f0ff7292f9987b89f2fd548784e634c0eb20d784151fd8",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/hecfran/web/blob/39d6a3a594b89f7827e9944ce7f55b8ba50a5201/script.js",
+      "upstreamSha256": "ad0b0ae7bab04b8c5f6c46521b08d3473f7ad6a2d445f1bfa3621e8eaa7374a2",
+      "sha256": "ad0b0ae7bab04b8c5f6c46521b08d3473f7ad6a2d445f1bfa3621e8eaa7374a2"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from hecfran/web contains the reviewed marker \"cookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "cookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

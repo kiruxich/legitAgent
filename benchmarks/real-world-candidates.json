@@ -3,13 +3,13 @@
   "researchedAt": "2026-09-08",
   "purpose": "Imported source inventory for the executable static benchmark. Labels describe scoped technical facts, not legal verdicts about the original projects.",
   "validation": {
-    "sourceReview": "Pinned public source, license declarations and fixture transformations reviewed.",
-    "staticProbes": "Original pre-import observations remain in probe fields; current behavior is verified by pnpm benchmark.",
-    "liveRuntime": "Not exercised; SDK and production consent lifecycles remain outside the static labels.",
-    "importedFixtures": 12,
-    "releaseGateContribution": 12,
-    "benchmarkSeedCases": 52,
-    "benchmarkExpandedCases": 260
+    "sourceReview": "Pinned public source and license declarations inspected; imported excerpts carry per-case review rationale.",
+    "staticProbes": "100 source groups run as strict benchmark cases. The 88 additions are scoped source-excerpt cases with exact text and structural checks.",
+    "liveRuntime": "Not exercised; complete applications, SDKs and browser consent lifecycles remain outside excerpt cases.",
+    "importedFixtures": 100,
+    "releaseGateContribution": 100,
+    "benchmarkSeedCases": 140,
+    "benchmarkExpandedCases": 700
   },
   "labelPolicy": "Expected fields describe scoped technical facts only. A positive PDN rule label requires separate manual justification; omitted rules must not be scored. Current detector output must not define expected labels.",
   "independencePolicy": "One provisional source group per independently developed repository. Check shared implementation ancestry before import. Translations, generated output, state variants and multiple apps in one monorepo do not create new independent sources.",
@@ -838,6 +838,4406 @@
           }
         ],
         "scope": "Static source only; see provenance review rationale for limits."
+      }
+    },
+    {
+      "id": "neoalienson-hexo-plugin-cookieconsent",
+      "repository": "neoalienson/hexo-plugin-cookieconsent",
+      "commit": "306bd3c7098c546bc2e02ffb38e519d5b22e5c0c",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "index.js",
+          "url": "https://github.com/neoalienson/hexo-plugin-cookieconsent/blob/306bd3c7098c546bc2e02ffb38e519d5b22e5c0c/index.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"CookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "CookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from neoalienson/hexo-plugin-cookieconsent contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "neoalienson/hexo-plugin-cookieconsent",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/neoalienson/hexo-plugin-cookieconsent/blob/306bd3c7098c546bc2e02ffb38e519d5b22e5c0c/LICENSE",
+      "import": {
+        "corpusId": "neoalienson-hexo-plugin-cookieconsent",
+        "fixturePath": "benchmarks/real-world/neoalienson-hexo-plugin-cookieconsent",
+        "provenancePath": "benchmarks/real-world/neoalienson-hexo-plugin-cookieconsent/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "CookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "sahat-hackathon-starter",
+      "repository": "sahat/hackathon-starter",
+      "commit": "b3974efd50a067684fcc4f7292e2000378f63d4e",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app.js",
+          "url": "https://github.com/sahat/hackathon-starter/blob/b3974efd50a067684fcc4f7292e2000378f63d4e/app.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from sahat/hackathon-starter contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "sahat/hackathon-starter",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/sahat/hackathon-starter/blob/b3974efd50a067684fcc4f7292e2000378f63d4e/LICENSE",
+      "import": {
+        "corpusId": "sahat-hackathon-starter",
+        "fixturePath": "benchmarks/real-world/sahat-hackathon-starter",
+        "provenancePath": "benchmarks/real-world/sahat-hackathon-starter/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "yanniga01-gilliansperkin-github-io",
+      "repository": "Yanniga01/gilliansperkin.github.io",
+      "commit": "92e6fc1b27d760597518a50a0e73aa9561d498fc",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "cookies.js",
+          "url": "https://github.com/Yanniga01/gilliansperkin.github.io/blob/92e6fc1b27d760597518a50a0e73aa9561d498fc/cookies.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"accept\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "accept",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Yanniga01/gilliansperkin.github.io contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Yanniga01/gilliansperkin.github.io",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Yanniga01/gilliansperkin.github.io/blob/92e6fc1b27d760597518a50a0e73aa9561d498fc/LICENSE",
+      "import": {
+        "corpusId": "yanniga01-gilliansperkin-github-io",
+        "fixturePath": "benchmarks/real-world/yanniga01-gilliansperkin-github-io",
+        "provenancePath": "benchmarks/real-world/yanniga01-gilliansperkin-github-io/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "accept"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "fyrestar-cc-in-out",
+      "repository": "Fyrestar/cc-in-out",
+      "commit": "c7f6d5fb50ddf2f6881af45be839de2c0ddafe5d",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "index.js",
+          "url": "https://github.com/Fyrestar/cc-in-out/blob/c7f6d5fb50ddf2f6881af45be839de2c0ddafe5d/index.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"CookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "CookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Fyrestar/cc-in-out contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Fyrestar/cc-in-out",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Fyrestar/cc-in-out/blob/c7f6d5fb50ddf2f6881af45be839de2c0ddafe5d/LICENSE",
+      "import": {
+        "corpusId": "fyrestar-cc-in-out",
+        "fixturePath": "benchmarks/real-world/fyrestar-cc-in-out",
+        "provenancePath": "benchmarks/real-world/fyrestar-cc-in-out/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "CookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "thephoenixagency-thephoenixagency-github-io",
+      "repository": "ThePhoenixAgency/ThePhoenixAgency.github.io",
+      "commit": "3fcc9ec9e481cdb4640339843e6b23fdb71a8ec9",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "theme.js",
+          "url": "https://github.com/ThePhoenixAgency/ThePhoenixAgency.github.io/blob/3fcc9ec9e481cdb4640339843e6b23fdb71a8ec9/theme.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"cookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "cookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ThePhoenixAgency/ThePhoenixAgency.github.io contains the reviewed marker \"cookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ThePhoenixAgency/ThePhoenixAgency.github.io",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ThePhoenixAgency/ThePhoenixAgency.github.io/blob/3fcc9ec9e481cdb4640339843e6b23fdb71a8ec9/LICENSE",
+      "import": {
+        "corpusId": "thephoenixagency-thephoenixagency-github-io",
+        "fixturePath": "benchmarks/real-world/thephoenixagency-thephoenixagency-github-io",
+        "provenancePath": "benchmarks/real-world/thephoenixagency-thephoenixagency-github-io/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "cookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "rawgraphs-rawgraphs-app",
+      "repository": "rawgraphs/rawgraphs-app",
+      "commit": "b7b2909111cc029ccf418dc3e7d079e0f4c50d6f",
+      "framework": "source excerpt (JS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/App.js",
+          "url": "https://github.com/rawgraphs/rawgraphs-app/blob/b7b2909111cc029ccf418dc3e7d079e0f4c50d6f/src/App.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"CookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "CookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from rawgraphs/rawgraphs-app contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "rawgraphs/rawgraphs-app",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/rawgraphs/rawgraphs-app/blob/b7b2909111cc029ccf418dc3e7d079e0f4c50d6f/LICENSE",
+      "import": {
+        "corpusId": "rawgraphs-rawgraphs-app",
+        "fixturePath": "benchmarks/real-world/rawgraphs-rawgraphs-app",
+        "provenancePath": "benchmarks/real-world/rawgraphs-rawgraphs-app/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "CookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "hecfran-web",
+      "repository": "hecfran/web",
+      "commit": "39d6a3a594b89f7827e9944ce7f55b8ba50a5201",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "script.js",
+          "url": "https://github.com/hecfran/web/blob/39d6a3a594b89f7827e9944ce7f55b8ba50a5201/script.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"cookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "cookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from hecfran/web contains the reviewed marker \"cookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "hecfran/web",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/hecfran/web/blob/39d6a3a594b89f7827e9944ce7f55b8ba50a5201/LICENSE",
+      "import": {
+        "corpusId": "hecfran-web",
+        "fixturePath": "benchmarks/real-world/hecfran-web",
+        "provenancePath": "benchmarks/real-world/hecfran-web/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "cookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "kahel3352-newworld-site",
+      "repository": "Kahel3352/newworld_site",
+      "commit": "9eb385d2b70adc02e41a392d8b1c660c0cc445fe",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "license.txt",
+      "files": [
+        {
+          "path": "js/mdb.js",
+          "url": "https://github.com/Kahel3352/newworld_site/blob/9eb385d2b70adc02e41a392d8b1c660c0cc445fe/js/mdb.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"var\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "var",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Kahel3352/newworld_site contains the reviewed marker \"var\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Kahel3352/newworld_site",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Kahel3352/newworld_site/blob/9eb385d2b70adc02e41a392d8b1c660c0cc445fe/license.txt",
+      "import": {
+        "corpusId": "kahel3352-newworld-site",
+        "fixturePath": "benchmarks/real-world/kahel3352-newworld-site",
+        "provenancePath": "benchmarks/real-world/kahel3352-newworld-site/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "var"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "chrishutchinson-cardkit",
+      "repository": "chrishutchinson/cardkit",
+      "commit": "52f5aed2afb7b45a7beb03dd0b7b0fe27dc521e1",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "dom.js",
+          "url": "https://github.com/chrishutchinson/cardkit/blob/52f5aed2afb7b45a7beb03dd0b7b0fe27dc521e1/dom.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"input[type=email\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "input[type=email",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from chrishutchinson/cardkit contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "chrishutchinson/cardkit",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/chrishutchinson/cardkit/blob/52f5aed2afb7b45a7beb03dd0b7b0fe27dc521e1/LICENSE",
+      "import": {
+        "corpusId": "chrishutchinson-cardkit",
+        "fixturePath": "benchmarks/real-world/chrishutchinson-cardkit",
+        "provenancePath": "benchmarks/real-world/chrishutchinson-cardkit/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "input[type=email"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ineventapp-musjs",
+      "repository": "ineventapp/musjs",
+      "commit": "a27886387a9b64b3893bf3d1313bd9439df39a8d",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "mus.js",
+          "url": "https://github.com/ineventapp/musjs/blob/a27886387a9b64b3893bf3d1313bd9439df39a8d/mus.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"input[type=email\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "input[type=email",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ineventapp/musjs contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ineventapp/musjs",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ineventapp/musjs/blob/a27886387a9b64b3893bf3d1313bd9439df39a8d/LICENSE",
+      "import": {
+        "corpusId": "ineventapp-musjs",
+        "fixturePath": "benchmarks/real-world/ineventapp-musjs",
+        "provenancePath": "benchmarks/real-world/ineventapp-musjs/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "input[type=email"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "epam-xframework",
+      "repository": "epam/xframework",
+      "commit": "6b2a1b954dc998274922feaf3a363a47258c7bd5",
+      "framework": "source excerpt (JS)",
+      "license": "BSD-3-Clause",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "js/xf.js",
+          "url": "https://github.com/epam/xframework/blob/6b2a1b954dc998274922feaf3a363a47258c7bd5/js/xf.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"email\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "email",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from epam/xframework contains the reviewed marker \"email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "epam/xframework",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/epam/xframework/blob/6b2a1b954dc998274922feaf3a363a47258c7bd5/LICENSE",
+      "import": {
+        "corpusId": "epam-xframework",
+        "fixturePath": "benchmarks/real-world/epam-xframework",
+        "provenancePath": "benchmarks/real-world/epam-xframework/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "email"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ruimarinho-gsts",
+      "repository": "ruimarinho/gsts",
+      "commit": "4370bece03e2ccc68316c7fbf2ae9be486e1dd2e",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "index.js",
+          "url": "https://github.com/ruimarinho/gsts/blob/4370bece03e2ccc68316c7fbf2ae9be486e1dd2e/index.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"input[type=email\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "input[type=email",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ruimarinho/gsts contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ruimarinho/gsts",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ruimarinho/gsts/blob/4370bece03e2ccc68316c7fbf2ae9be486e1dd2e/LICENSE",
+      "import": {
+        "corpusId": "ruimarinho-gsts",
+        "fixturePath": "benchmarks/real-world/ruimarinho-gsts",
+        "provenancePath": "benchmarks/real-world/ruimarinho-gsts/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "input[type=email"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "itslenny-slack-emoji-import",
+      "repository": "itslenny/slack-emoji-import",
+      "commit": "f83c67649b0358e1a154c9e227676ce473fc25b1",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "index.ts",
+          "url": "https://github.com/itslenny/slack-emoji-import/blob/f83c67649b0358e1a154c9e227676ce473fc25b1/index.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"input[type=email\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "input[type=email",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from itslenny/slack-emoji-import contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "itslenny/slack-emoji-import",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/itslenny/slack-emoji-import/blob/f83c67649b0358e1a154c9e227676ce473fc25b1/LICENSE",
+      "import": {
+        "corpusId": "itslenny-slack-emoji-import",
+        "fixturePath": "benchmarks/real-world/itslenny-slack-emoji-import",
+        "provenancePath": "benchmarks/real-world/itslenny-slack-emoji-import/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "input[type=email"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "fmeum-smart-pass",
+      "repository": "fmeum/smart-pass",
+      "commit": "55d1d4fb64706396bf8fb705fe223c744a893746",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "popup.js",
+          "url": "https://github.com/fmeum/smart-pass/blob/55d1d4fb64706396bf8fb705fe223c744a893746/popup.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"input[type=email\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "input[type=email",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from fmeum/smart-pass contains the reviewed marker \"input[type=email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "fmeum/smart-pass",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/fmeum/smart-pass/blob/55d1d4fb64706396bf8fb705fe223c744a893746/LICENSE",
+      "import": {
+        "corpusId": "fmeum-smart-pass",
+        "fixturePath": "benchmarks/real-world/fmeum-smart-pass",
+        "provenancePath": "benchmarks/real-world/fmeum-smart-pass/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "input[type=email"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "incogcyberpunk-world-guessr",
+      "repository": "incogcyberpunk/World-Guessr",
+      "commit": "0d33ae3de7f9ab936729d341620b03edc29004c3",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE.md",
+      "files": [
+        {
+          "path": "privacyPolicyLink.js",
+          "url": "https://github.com/incogcyberpunk/World-Guessr/blob/0d33ae3de7f9ab936729d341620b03edc29004c3/privacyPolicyLink.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from incogcyberpunk/World-Guessr contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "incogcyberpunk/World-Guessr",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/incogcyberpunk/World-Guessr/blob/0d33ae3de7f9ab936729d341620b03edc29004c3/LICENSE.md",
+      "import": {
+        "corpusId": "incogcyberpunk-world-guessr",
+        "fixturePath": "benchmarks/real-world/incogcyberpunk-world-guessr",
+        "provenancePath": "benchmarks/real-world/incogcyberpunk-world-guessr/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "celo-org-staked-celo-web-app",
+      "repository": "celo-org/staked-celo-web-app",
+      "commit": "394c5d757c9159c2b91d420ad9a58f19adae3db9",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/pages/terms.tsx",
+          "url": "https://github.com/celo-org/staked-celo-web-app/blob/394c5d757c9159c2b91d420ad9a58f19adae3db9/src/pages/terms.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from celo-org/staked-celo-web-app contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "celo-org/staked-celo-web-app",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/celo-org/staked-celo-web-app/blob/394c5d757c9159c2b91d420ad9a58f19adae3db9/LICENSE",
+      "import": {
+        "corpusId": "celo-org-staked-celo-web-app",
+        "fixturePath": "benchmarks/real-world/celo-org-staked-celo-web-app",
+        "provenancePath": "benchmarks/real-world/celo-org-staked-celo-web-app/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "patchcrafter-owls",
+      "repository": "PatchCrafter/owls",
+      "commit": "90d095d92ea9ebad8bfdd34fcb0e279d8f3d24a7",
+      "framework": "source excerpt (TS)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "e2e/model/LoginModel.ts",
+          "url": "https://github.com/PatchCrafter/owls/blob/90d095d92ea9ebad8bfdd34fcb0e279d8f3d24a7/e2e/model/LoginModel.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from PatchCrafter/owls contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "PatchCrafter/owls",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/PatchCrafter/owls/blob/90d095d92ea9ebad8bfdd34fcb0e279d8f3d24a7/LICENSE",
+      "import": {
+        "corpusId": "patchcrafter-owls",
+        "fixturePath": "benchmarks/real-world/patchcrafter-owls",
+        "provenancePath": "benchmarks/real-world/patchcrafter-owls/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "oleksandrbaior-cypress-framework-ts-cucumber",
+      "repository": "OleksandrBaior/Cypress_framework_TS_cucumber",
+      "commit": "472be4661c9210023a64ff33d75fb98a69a4cb80",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "cypress/pages/main.page.ts",
+          "url": "https://github.com/OleksandrBaior/Cypress_framework_TS_cucumber/blob/472be4661c9210023a64ff33d75fb98a69a4cb80/cypress/pages/main.page.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from OleksandrBaior/Cypress_framework_TS_cucumber contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "OleksandrBaior/Cypress_framework_TS_cucumber",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/OleksandrBaior/Cypress_framework_TS_cucumber/blob/472be4661c9210023a64ff33d75fb98a69a4cb80/LICENSE",
+      "import": {
+        "corpusId": "oleksandrbaior-cypress-framework-ts-cucumber",
+        "fixturePath": "benchmarks/real-world/oleksandrbaior-cypress-framework-ts-cucumber",
+        "provenancePath": "benchmarks/real-world/oleksandrbaior-cypress-framework-ts-cucumber/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "donovandmc-maidboye",
+      "repository": "DonovanDMC/MaidBoye",
+      "commit": "6973be8277bfc623afe990c05247b5feca783cfb",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/config/index.ts",
+          "url": "https://github.com/DonovanDMC/MaidBoye/blob/6973be8277bfc623afe990c05247b5feca783cfb/src/config/index.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from DonovanDMC/MaidBoye contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "DonovanDMC/MaidBoye",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/DonovanDMC/MaidBoye/blob/6973be8277bfc623afe990c05247b5feca783cfb/LICENSE",
+      "import": {
+        "corpusId": "donovandmc-maidboye",
+        "fixturePath": "benchmarks/real-world/donovandmc-maidboye",
+        "provenancePath": "benchmarks/real-world/donovandmc-maidboye/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "centerforopenscience-angular-osf-playwright",
+      "repository": "CenterForOpenScience/angular-osf-playwright",
+      "commit": "cacee7d3680701f79756cf1eab9bdc8ec6cda8b5",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/pages/LoginPage.ts",
+          "url": "https://github.com/CenterForOpenScience/angular-osf-playwright/blob/cacee7d3680701f79756cf1eab9bdc8ec6cda8b5/src/pages/LoginPage.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from CenterForOpenScience/angular-osf-playwright contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "CenterForOpenScience/angular-osf-playwright",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/CenterForOpenScience/angular-osf-playwright/blob/cacee7d3680701f79756cf1eab9bdc8ec6cda8b5/LICENSE",
+      "import": {
+        "corpusId": "centerforopenscience-angular-osf-playwright",
+        "fixturePath": "benchmarks/real-world/centerforopenscience-angular-osf-playwright",
+        "provenancePath": "benchmarks/real-world/centerforopenscience-angular-osf-playwright/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "securitybunker-databunker",
+      "repository": "securitybunker/databunker",
+      "commit": "1d96827d1cd6faf880f918595cdd104511aa8b7b",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "ui/site/site.js",
+          "url": "https://github.com/securitybunker/databunker/blob/1d96827d1cd6faf880f918595cdd104511aa8b7b/ui/site/site.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from securitybunker/databunker contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "securitybunker/databunker",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/securitybunker/databunker/blob/1d96827d1cd6faf880f918595cdd104511aa8b7b/LICENSE",
+      "import": {
+        "corpusId": "securitybunker-databunker",
+        "fixturePath": "benchmarks/real-world/securitybunker-databunker",
+        "provenancePath": "benchmarks/real-world/securitybunker-databunker/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "sefaria-sefaria-project",
+      "repository": "Sefaria/Sefaria-Project",
+      "commit": "b853870d756e4ea524265977a856d63e0572732b",
+      "framework": "source excerpt (JSX)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE.md",
+      "files": [
+        {
+          "path": "static/js/Misc.jsx",
+          "url": "https://github.com/Sefaria/Sefaria-Project/blob/b853870d756e4ea524265977a856d63e0572732b/static/js/Misc.jsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Sefaria/Sefaria-Project contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Sefaria/Sefaria-Project",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Sefaria/Sefaria-Project/blob/b853870d756e4ea524265977a856d63e0572732b/LICENSE.md",
+      "import": {
+        "corpusId": "sefaria-sefaria-project",
+        "fixturePath": "benchmarks/real-world/sefaria-sefaria-project",
+        "provenancePath": "benchmarks/real-world/sefaria-sefaria-project/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.jsx",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "qcl-qclean",
+      "repository": "qcl/QCLean",
+      "commit": "6a357f4cfe870c4e0f2eef0390bf3d86eca337a5",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE.md",
+      "files": [
+        {
+          "path": "Web-Extension/popup.js",
+          "url": "https://github.com/qcl/QCLean/blob/6a357f4cfe870c4e0f2eef0390bf3d86eca337a5/Web-Extension/popup.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from qcl/QCLean contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "qcl/QCLean",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/qcl/QCLean/blob/6a357f4cfe870c4e0f2eef0390bf3d86eca337a5/LICENSE.md",
+      "import": {
+        "corpusId": "qcl-qclean",
+        "fixturePath": "benchmarks/real-world/qcl-qclean",
+        "provenancePath": "benchmarks/real-world/qcl-qclean/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "transcend-io-consent-manager-ui",
+      "repository": "transcend-io/consent-manager-ui",
+      "commit": "a8c041c4aad1315f047bab0345d0ecbec53fd840",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/api.ts",
+          "url": "https://github.com/transcend-io/consent-manager-ui/blob/a8c041c4aad1315f047bab0345d0ecbec53fd840/src/api.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from transcend-io/consent-manager-ui contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "transcend-io/consent-manager-ui",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/transcend-io/consent-manager-ui/blob/a8c041c4aad1315f047bab0345d0ecbec53fd840/LICENSE",
+      "import": {
+        "corpusId": "transcend-io-consent-manager-ui",
+        "fixturePath": "benchmarks/real-world/transcend-io-consent-manager-ui",
+        "provenancePath": "benchmarks/real-world/transcend-io-consent-manager-ui/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "serenity-kit-serenity-notes-clients",
+      "repository": "serenity-kit/serenity-notes-clients",
+      "commit": "5b135a2fef671c2bb355e036b6ba74a5476bf2ce",
+      "framework": "source excerpt (TS)",
+      "license": "AGPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/src/utils/links.ts",
+          "url": "https://github.com/serenity-kit/serenity-notes-clients/blob/5b135a2fef671c2bb355e036b6ba74a5476bf2ce/app/src/utils/links.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from serenity-kit/serenity-notes-clients contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "serenity-kit/serenity-notes-clients",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/serenity-kit/serenity-notes-clients/blob/5b135a2fef671c2bb355e036b6ba74a5476bf2ce/LICENSE",
+      "import": {
+        "corpusId": "serenity-kit-serenity-notes-clients",
+        "fixturePath": "benchmarks/real-world/serenity-kit-serenity-notes-clients",
+        "provenancePath": "benchmarks/real-world/serenity-kit-serenity-notes-clients/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "howlrapp-howlr-app",
+      "repository": "howlrapp/howlr-app",
+      "commit": "71f91c8731514781bf881f7c1200c39da3f194b2",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "screens/Settings.js",
+          "url": "https://github.com/howlrapp/howlr-app/blob/71f91c8731514781bf881f7c1200c39da3f194b2/screens/Settings.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from howlrapp/howlr-app contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "howlrapp/howlr-app",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/howlrapp/howlr-app/blob/71f91c8731514781bf881f7c1200c39da3f194b2/LICENSE",
+      "import": {
+        "corpusId": "howlrapp-howlr-app",
+        "fixturePath": "benchmarks/real-world/howlrapp-howlr-app",
+        "provenancePath": "benchmarks/real-world/howlrapp-howlr-app/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "railslove-rcvr-app",
+      "repository": "railslove/rcvr-app",
+      "commit": "9630a9c8c174336cfd79a700b9252307dcfb5650",
+      "framework": "source excerpt (TS)",
+      "license": "AGPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "lib/api/areas.ts",
+          "url": "https://github.com/railslove/rcvr-app/blob/9630a9c8c174336cfd79a700b9252307dcfb5650/lib/api/areas.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from railslove/rcvr-app contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "railslove/rcvr-app",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/railslove/rcvr-app/blob/9630a9c8c174336cfd79a700b9252307dcfb5650/LICENSE",
+      "import": {
+        "corpusId": "railslove-rcvr-app",
+        "fixturePath": "benchmarks/real-world/railslove-rcvr-app",
+        "provenancePath": "benchmarks/real-world/railslove-rcvr-app/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "cobalt-strike-community-kit",
+      "repository": "Cobalt-Strike/community_kit",
+      "commit": "6f0cf86189fc42396651c0f574ff89fb9f902ee4",
+      "framework": "source excerpt (HTML)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "index.html",
+          "url": "https://github.com/Cobalt-Strike/community_kit/blob/6f0cf86189fc42396651c0f574ff89fb9f902ee4/index.html"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Cobalt-Strike/community_kit contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Cobalt-Strike/community_kit",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Cobalt-Strike/community_kit/blob/6f0cf86189fc42396651c0f574ff89fb9f902ee4/LICENSE",
+      "import": {
+        "corpusId": "cobalt-strike-community-kit",
+        "fixturePath": "benchmarks/real-world/cobalt-strike-community-kit",
+        "provenancePath": "benchmarks/real-world/cobalt-strike-community-kit/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.html",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "matematikk-mooc-frontend",
+      "repository": "matematikk-mooc/frontend",
+      "commit": "3859bcc074b039e5fe470bbbe9ee7fa0a362af49",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/js/settings.js",
+          "url": "https://github.com/matematikk-mooc/frontend/blob/3859bcc074b039e5fe470bbbe9ee7fa0a362af49/src/js/settings.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from matematikk-mooc/frontend contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "matematikk-mooc/frontend",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/matematikk-mooc/frontend/blob/3859bcc074b039e5fe470bbbe9ee7fa0a362af49/LICENSE",
+      "import": {
+        "corpusId": "matematikk-mooc-frontend",
+        "fixturePath": "benchmarks/real-world/matematikk-mooc-frontend",
+        "provenancePath": "benchmarks/real-world/matematikk-mooc-frontend/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "stellar-stellar-disbursement-platform-frontend",
+      "repository": "stellar/stellar-disbursement-platform-frontend",
+      "commit": "e586f33252f65d57d66341d60f983ad88978682b",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/types/index.ts",
+          "url": "https://github.com/stellar/stellar-disbursement-platform-frontend/blob/e586f33252f65d57d66341d60f983ad88978682b/src/types/index.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from stellar/stellar-disbursement-platform-frontend contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "stellar/stellar-disbursement-platform-frontend",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/stellar/stellar-disbursement-platform-frontend/blob/e586f33252f65d57d66341d60f983ad88978682b/LICENSE",
+      "import": {
+        "corpusId": "stellar-stellar-disbursement-platform-frontend",
+        "fixturePath": "benchmarks/real-world/stellar-stellar-disbursement-platform-frontend",
+        "provenancePath": "benchmarks/real-world/stellar-stellar-disbursement-platform-frontend/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "clearvis-io-clearvisio-appointment-booker",
+      "repository": "clearvis-io/clearvisio-appointment-booker",
+      "commit": "1ff898271533c62f0a1f4e6551e166628c8ef786",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "store/privacy.js",
+          "url": "https://github.com/clearvis-io/clearvisio-appointment-booker/blob/1ff898271533c62f0a1f4e6551e166628c8ef786/store/privacy.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from clearvis-io/clearvisio-appointment-booker contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "clearvis-io/clearvisio-appointment-booker",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/clearvis-io/clearvisio-appointment-booker/blob/1ff898271533c62f0a1f4e6551e166628c8ef786/LICENSE",
+      "import": {
+        "corpusId": "clearvis-io-clearvisio-appointment-booker",
+        "fixturePath": "benchmarks/real-world/clearvis-io-clearvisio-appointment-booker",
+        "provenancePath": "benchmarks/real-world/clearvis-io-clearvisio-appointment-booker/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "mapdraw-mapdraw",
+      "repository": "mapdraw/mapdraw",
+      "commit": "d310fcea3b57ab780b506b19054dfa7a5b8e3bb5",
+      "framework": "source excerpt (JS)",
+      "license": "AGPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "js/settings-panel.js",
+          "url": "https://github.com/mapdraw/mapdraw/blob/d310fcea3b57ab780b506b19054dfa7a5b8e3bb5/js/settings-panel.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from mapdraw/mapdraw contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "mapdraw/mapdraw",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/mapdraw/mapdraw/blob/d310fcea3b57ab780b506b19054dfa7a5b8e3bb5/LICENSE",
+      "import": {
+        "corpusId": "mapdraw-mapdraw",
+        "fixturePath": "benchmarks/real-world/mapdraw-mapdraw",
+        "provenancePath": "benchmarks/real-world/mapdraw-mapdraw/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "hypershiphq-react-cookie-manager",
+      "repository": "hypershiphq/react-cookie-manager",
+      "commit": "25ae700b0f774bd3413dd2b4d6fbd0553dbfb887",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/types/types.ts",
+          "url": "https://github.com/hypershiphq/react-cookie-manager/blob/25ae700b0f774bd3413dd2b4d6fbd0553dbfb887/src/types/types.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from hypershiphq/react-cookie-manager contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "hypershiphq/react-cookie-manager",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/hypershiphq/react-cookie-manager/blob/25ae700b0f774bd3413dd2b4d6fbd0553dbfb887/LICENSE",
+      "import": {
+        "corpusId": "hypershiphq-react-cookie-manager",
+        "fixturePath": "benchmarks/real-world/hypershiphq-react-cookie-manager",
+        "provenancePath": "benchmarks/real-world/hypershiphq-react-cookie-manager/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "arimah-ss14-cookbook",
+      "repository": "arimah/ss14-cookbook",
+      "commit": "2d24f78e7bc7f4e456ac3cd31fb66fe3edf6933a",
+      "framework": "source excerpt (TSX)",
+      "license": "AGPL-3.0",
+      "licensePath": "LICENSE.txt",
+      "files": [
+        {
+          "path": "src/web/privacy.tsx",
+          "url": "https://github.com/arimah/ss14-cookbook/blob/2d24f78e7bc7f4e456ac3cd31fb66fe3edf6933a/src/web/privacy.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from arimah/ss14-cookbook contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "arimah/ss14-cookbook",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/arimah/ss14-cookbook/blob/2d24f78e7bc7f4e456ac3cd31fb66fe3edf6933a/LICENSE.txt",
+      "import": {
+        "corpusId": "arimah-ss14-cookbook",
+        "fixturePath": "benchmarks/real-world/arimah-ss14-cookbook",
+        "provenancePath": "benchmarks/real-world/arimah-ss14-cookbook/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "rate3-network-rate3-kyc-aml-client-release",
+      "repository": "rate3-network/rate3-kyc-aml-client-release",
+      "commit": "544df95528044006e3efc74caa690e2e906360ad",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/locales/globals.js",
+          "url": "https://github.com/rate3-network/rate3-kyc-aml-client-release/blob/544df95528044006e3efc74caa690e2e906360ad/src/locales/globals.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from rate3-network/rate3-kyc-aml-client-release contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "rate3-network/rate3-kyc-aml-client-release",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/rate3-network/rate3-kyc-aml-client-release/blob/544df95528044006e3efc74caa690e2e906360ad/LICENSE",
+      "import": {
+        "corpusId": "rate3-network-rate3-kyc-aml-client-release",
+        "fixturePath": "benchmarks/real-world/rate3-network-rate3-kyc-aml-client-release",
+        "provenancePath": "benchmarks/real-world/rate3-network-rate3-kyc-aml-client-release/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ruenetwork-rueclient",
+      "repository": "RueNetwork/RueClient",
+      "commit": "146f3ae72785991b3eee95a1ddfd0e929a0e1288",
+      "framework": "source excerpt (JSX)",
+      "license": "GPL-2.0",
+      "licensePath": "LICENSE.md",
+      "files": [
+        {
+          "path": "client/me/privacy/main.jsx",
+          "url": "https://github.com/RueNetwork/RueClient/blob/146f3ae72785991b3eee95a1ddfd0e929a0e1288/client/me/privacy/main.jsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from RueNetwork/RueClient contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "RueNetwork/RueClient",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/RueNetwork/RueClient/blob/146f3ae72785991b3eee95a1ddfd0e929a0e1288/LICENSE.md",
+      "import": {
+        "corpusId": "ruenetwork-rueclient",
+        "fixturePath": "benchmarks/real-world/ruenetwork-rueclient",
+        "provenancePath": "benchmarks/real-world/ruenetwork-rueclient/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.jsx",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "devoxx4kids-npo-littil-frontend",
+      "repository": "Devoxx4Kids-NPO/littil-frontend",
+      "commit": "bfaaa0030c073ef23a4104a6e1a1494200b91296",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/app/app.module.ts",
+          "url": "https://github.com/Devoxx4Kids-NPO/littil-frontend/blob/bfaaa0030c073ef23a4104a6e1a1494200b91296/src/app/app.module.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Devoxx4Kids-NPO/littil-frontend contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Devoxx4Kids-NPO/littil-frontend",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Devoxx4Kids-NPO/littil-frontend/blob/bfaaa0030c073ef23a4104a6e1a1494200b91296/LICENSE",
+      "import": {
+        "corpusId": "devoxx4kids-npo-littil-frontend",
+        "fixturePath": "benchmarks/real-world/devoxx4kids-npo-littil-frontend",
+        "provenancePath": "benchmarks/real-world/devoxx4kids-npo-littil-frontend/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "common-ground-dao-commonground",
+      "repository": "Common-Ground-DAO/commonground",
+      "commit": "ffe888bd495b00ddffca6775657156ea63c9a05e",
+      "framework": "source excerpt (TSX)",
+      "license": "AGPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/views/Home/Home.tsx",
+          "url": "https://github.com/Common-Ground-DAO/commonground/blob/ffe888bd495b00ddffca6775657156ea63c9a05e/src/views/Home/Home.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Common-Ground-DAO/commonground contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Common-Ground-DAO/commonground",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Common-Ground-DAO/commonground/blob/ffe888bd495b00ddffca6775657156ea63c9a05e/LICENSE",
+      "import": {
+        "corpusId": "common-ground-dao-commonground",
+        "fixturePath": "benchmarks/real-world/common-ground-dao-commonground",
+        "provenancePath": "benchmarks/real-world/common-ground-dao-commonground/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "brendan-ch-clockwise",
+      "repository": "brendan-ch/clockwise",
+      "commit": "62d82c2fe7c0b6e418aaa18e6391e8ca30f58a08",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app.config.js",
+          "url": "https://github.com/brendan-ch/clockwise/blob/62d82c2fe7c0b6e418aaa18e6391e8ca30f58a08/app.config.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from brendan-ch/clockwise contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "brendan-ch/clockwise",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/brendan-ch/clockwise/blob/62d82c2fe7c0b6e418aaa18e6391e8ca30f58a08/LICENSE",
+      "import": {
+        "corpusId": "brendan-ch-clockwise",
+        "fixturePath": "benchmarks/real-world/brendan-ch-clockwise",
+        "provenancePath": "benchmarks/real-world/brendan-ch-clockwise/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "oovictorfranco-the-calculator-movie-industry-tycoon",
+      "repository": "ooVictorFranco/the-calculator-movie-industry-tycoon",
+      "commit": "0c26c689eb48f5e48c1f01a5f957893ad4cb663e",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/components/Footer.tsx",
+          "url": "https://github.com/ooVictorFranco/the-calculator-movie-industry-tycoon/blob/0c26c689eb48f5e48c1f01a5f957893ad4cb663e/src/components/Footer.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ooVictorFranco/the-calculator-movie-industry-tycoon contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ooVictorFranco/the-calculator-movie-industry-tycoon",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ooVictorFranco/the-calculator-movie-industry-tycoon/blob/0c26c689eb48f5e48c1f01a5f957893ad4cb663e/LICENSE",
+      "import": {
+        "corpusId": "oovictorfranco-the-calculator-movie-industry-tycoon",
+        "fixturePath": "benchmarks/real-world/oovictorfranco-the-calculator-movie-industry-tycoon",
+        "provenancePath": "benchmarks/real-world/oovictorfranco-the-calculator-movie-industry-tycoon/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "streeva-very-simple-cookie-consent",
+      "repository": "streeva/very-simple-cookie-consent",
+      "commit": "6e78a9d4a92487b15f0deb56d48a7bf09fccb2f3",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/main.ts",
+          "url": "https://github.com/streeva/very-simple-cookie-consent/blob/6e78a9d4a92487b15f0deb56d48a7bf09fccb2f3/src/main.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from streeva/very-simple-cookie-consent contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "streeva/very-simple-cookie-consent",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/streeva/very-simple-cookie-consent/blob/6e78a9d4a92487b15f0deb56d48a7bf09fccb2f3/LICENSE",
+      "import": {
+        "corpusId": "streeva-very-simple-cookie-consent",
+        "fixturePath": "benchmarks/real-world/streeva-very-simple-cookie-consent",
+        "provenancePath": "benchmarks/real-world/streeva-very-simple-cookie-consent/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "haihaihaihai-1-versa",
+      "repository": "haihaihaihai-1/versa",
+      "commit": "c04ddfb1889e7fcdd36f82138cf59bf26ed849de",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/privacy/index.ts",
+          "url": "https://github.com/haihaihaihai-1/versa/blob/c04ddfb1889e7fcdd36f82138cf59bf26ed849de/src/privacy/index.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from haihaihaihai-1/versa contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "haihaihaihai-1/versa",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/haihaihaihai-1/versa/blob/c04ddfb1889e7fcdd36f82138cf59bf26ed849de/LICENSE",
+      "import": {
+        "corpusId": "haihaihaihai-1-versa",
+        "fixturePath": "benchmarks/real-world/haihaihaihai-1-versa",
+        "provenancePath": "benchmarks/real-world/haihaihaihai-1-versa/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "nikhil0653-nina",
+      "repository": "NIKHIL0653/NINA",
+      "commit": "1d4df1323021087c451775661e51332d173572f2",
+      "framework": "source excerpt (JS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "api/index.js",
+          "url": "https://github.com/NIKHIL0653/NINA/blob/1d4df1323021087c451775661e51332d173572f2/api/index.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"ConsentStatus2[\\\"EXPI\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "ConsentStatus2[\"EXPI",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from NIKHIL0653/NINA contains the reviewed marker \"ConsentStatus2[\\\"EXPI\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "NIKHIL0653/NINA",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/NIKHIL0653/NINA/blob/1d4df1323021087c451775661e51332d173572f2/LICENSE",
+      "import": {
+        "corpusId": "nikhil0653-nina",
+        "fixturePath": "benchmarks/real-world/nikhil0653-nina",
+        "provenancePath": "benchmarks/real-world/nikhil0653-nina/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "ConsentStatus2[\"EXPI"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "friendsofredaxo-consent-manager",
+      "repository": "FriendsOfREDAXO/consent_manager",
+      "commit": "4cf7e01f4bc6f9fe924ed9a6cd3236c513d7e7b9",
+      "framework": "source excerpt (PHP)",
+      "license": "MIT",
+      "licensePath": "LICENSE.md",
+      "files": [
+        {
+          "path": "pages/cookie.php",
+          "url": "https://github.com/FriendsOfREDAXO/consent_manager/blob/4cf7e01f4bc6f9fe924ed9a6cd3236c513d7e7b9/pages/cookie.php"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from FriendsOfREDAXO/consent_manager contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "FriendsOfREDAXO/consent_manager",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/FriendsOfREDAXO/consent_manager/blob/4cf7e01f4bc6f9fe924ed9a6cd3236c513d7e7b9/LICENSE.md",
+      "import": {
+        "corpusId": "friendsofredaxo-consent-manager",
+        "fixturePath": "benchmarks/real-world/friendsofredaxo-consent-manager",
+        "provenancePath": "benchmarks/real-world/friendsofredaxo-consent-manager/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.php",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "dhjs0000-dhjs0000-github-io",
+      "repository": "dhjs0000/dhjs0000.github.io",
+      "commit": "cfbfb75f6337bf71ee0bc018170032929c35ad32",
+      "framework": "source excerpt (JS)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENCE",
+      "files": [
+        {
+          "path": "cookie-consent.js",
+          "url": "https://github.com/dhjs0000/dhjs0000.github.io/blob/cfbfb75f6337bf71ee0bc018170032929c35ad32/cookie-consent.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"CookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "CookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from dhjs0000/dhjs0000.github.io contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "dhjs0000/dhjs0000.github.io",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/dhjs0000/dhjs0000.github.io/blob/cfbfb75f6337bf71ee0bc018170032929c35ad32/LICENCE",
+      "import": {
+        "corpusId": "dhjs0000-dhjs0000-github-io",
+        "fixturePath": "benchmarks/real-world/dhjs0000-dhjs0000-github-io",
+        "provenancePath": "benchmarks/real-world/dhjs0000-dhjs0000-github-io/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "CookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "treasure-data-td-js-sdk",
+      "repository": "treasure-data/td-js-sdk",
+      "commit": "692d51b148c8acf6668cce679789bf5a974aa71f",
+      "framework": "source excerpt (JS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "lib/treasure.js",
+          "url": "https://github.com/treasure-data/td-js-sdk/blob/692d51b148c8acf6668cce679789bf5a974aa71f/lib/treasure.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from treasure-data/td-js-sdk contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "treasure-data/td-js-sdk",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/treasure-data/td-js-sdk/blob/692d51b148c8acf6668cce679789bf5a974aa71f/LICENSE",
+      "import": {
+        "corpusId": "treasure-data-td-js-sdk",
+        "fixturePath": "benchmarks/real-world/treasure-data-td-js-sdk",
+        "provenancePath": "benchmarks/real-world/treasure-data-td-js-sdk/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "artsy-force",
+      "repository": "artsy/force",
+      "commit": "a40c722d3d9d0484e56bf41a3f7faae3b283ad8e",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/System/Boot.tsx",
+          "url": "https://github.com/artsy/force/blob/a40c722d3d9d0484e56bf41a3f7faae3b283ad8e/src/System/Boot.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"CookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "CookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from artsy/force contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "artsy/force",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/artsy/force/blob/a40c722d3d9d0484e56bf41a3f7faae3b283ad8e/LICENSE",
+      "import": {
+        "corpusId": "artsy-force",
+        "fixturePath": "benchmarks/real-world/artsy-force",
+        "provenancePath": "benchmarks/real-world/artsy-force/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "CookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ryanbr-fingerprint-detector",
+      "repository": "ryanbr/fingerprint-detector",
+      "commit": "4c3194e91acffcd03c9e4653d585f16317ebecc7",
+      "framework": "source excerpt (JS)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/popup.js",
+          "url": "https://github.com/ryanbr/fingerprint-detector/blob/4c3194e91acffcd03c9e4653d585f16317ebecc7/src/popup.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ryanbr/fingerprint-detector contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ryanbr/fingerprint-detector",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ryanbr/fingerprint-detector/blob/4c3194e91acffcd03c9e4653d585f16317ebecc7/LICENSE",
+      "import": {
+        "corpusId": "ryanbr-fingerprint-detector",
+        "fixturePath": "benchmarks/real-world/ryanbr-fingerprint-detector",
+        "provenancePath": "benchmarks/real-world/ryanbr-fingerprint-detector/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "offline-gmbh-oc-gdpr-plugin",
+      "repository": "OFFLINE-GmbH/oc-gdpr-plugin",
+      "commit": "91eb39becc50b32402aee357a4cba6ed873bf4a1",
+      "framework": "source excerpt (PHP)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "Plugin.php",
+          "url": "https://github.com/OFFLINE-GmbH/oc-gdpr-plugin/blob/91eb39becc50b32402aee357a4cba6ed873bf4a1/Plugin.php"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from OFFLINE-GmbH/oc-gdpr-plugin contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "OFFLINE-GmbH/oc-gdpr-plugin",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/OFFLINE-GmbH/oc-gdpr-plugin/blob/91eb39becc50b32402aee357a4cba6ed873bf4a1/LICENSE",
+      "import": {
+        "corpusId": "offline-gmbh-oc-gdpr-plugin",
+        "fixturePath": "benchmarks/real-world/offline-gmbh-oc-gdpr-plugin",
+        "provenancePath": "benchmarks/real-world/offline-gmbh-oc-gdpr-plugin/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.php",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "patrickhulce-third-party-web",
+      "repository": "patrickhulce/third-party-web",
+      "commit": "424dc03d2deabe001827b6826fed3c8cc00362de",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "data/entities.js",
+          "url": "https://github.com/patrickhulce/third-party-web/blob/424dc03d2deabe001827b6826fed3c8cc00362de/data/entities.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from patrickhulce/third-party-web contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "patrickhulce/third-party-web",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/patrickhulce/third-party-web/blob/424dc03d2deabe001827b6826fed3c8cc00362de/LICENSE",
+      "import": {
+        "corpusId": "patrickhulce-third-party-web",
+        "fixturePath": "benchmarks/real-world/patrickhulce-third-party-web",
+        "provenancePath": "benchmarks/real-world/patrickhulce-third-party-web/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "mparticle-mparticle-web-sdk",
+      "repository": "mParticle/mparticle-web-sdk",
+      "commit": "71162c6df17f30be194d0b357f23fbbaf0cb8e15",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/mp-instance.ts",
+          "url": "https://github.com/mParticle/mparticle-web-sdk/blob/71162c6df17f30be194d0b357f23fbbaf0cb8e15/src/mp-instance.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"CookieConsent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "CookieConsent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from mParticle/mparticle-web-sdk contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "mParticle/mparticle-web-sdk",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/mParticle/mparticle-web-sdk/blob/71162c6df17f30be194d0b357f23fbbaf0cb8e15/LICENSE",
+      "import": {
+        "corpusId": "mparticle-mparticle-web-sdk",
+        "fixturePath": "benchmarks/real-world/mparticle-mparticle-web-sdk",
+        "provenancePath": "benchmarks/real-world/mparticle-mparticle-web-sdk/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "CookieConsent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "meilisearch-documentation",
+      "repository": "meilisearch/documentation",
+      "commit": "65035e23f21794f923d2175ecfb1d6750b9d5fd9",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "gtm.js",
+          "url": "https://github.com/meilisearch/documentation/blob/65035e23f21794f923d2175ecfb1d6750b9d5fd9/gtm.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"'ad_storage':\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "'ad_storage':",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from meilisearch/documentation contains the reviewed marker \"'ad_storage':\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "meilisearch/documentation",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/meilisearch/documentation/blob/65035e23f21794f923d2175ecfb1d6750b9d5fd9/LICENSE",
+      "import": {
+        "corpusId": "meilisearch-documentation",
+        "fixturePath": "benchmarks/real-world/meilisearch-documentation",
+        "provenancePath": "benchmarks/real-world/meilisearch-documentation/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "'ad_storage':"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "unknown-entity98-carelink",
+      "repository": "unknown-entity98/carelink",
+      "commit": "2f8c74ce0c5c1829e392e7cdf76fc0f0218f349f",
+      "framework": "source excerpt (TSX)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "components/PrivacyBanner.tsx",
+          "url": "https://github.com/unknown-entity98/carelink/blob/2f8c74ce0c5c1829e392e7cdf76fc0f0218f349f/components/PrivacyBanner.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from unknown-entity98/carelink contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "unknown-entity98/carelink",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/unknown-entity98/carelink/blob/2f8c74ce0c5c1829e392e7cdf76fc0f0218f349f/LICENSE",
+      "import": {
+        "corpusId": "unknown-entity98-carelink",
+        "fixturePath": "benchmarks/real-world/unknown-entity98-carelink",
+        "provenancePath": "benchmarks/real-world/unknown-entity98-carelink/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "hati8haha-aspect-ratio-calculator",
+      "repository": "hati8haha/aspect-ratio-calculator",
+      "commit": "a88c69eea59514c3d7cfc394d32949479121b6b1",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/components/PrivacyBanner.tsx",
+          "url": "https://github.com/hati8haha/aspect-ratio-calculator/blob/a88c69eea59514c3d7cfc394d32949479121b6b1/src/components/PrivacyBanner.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from hati8haha/aspect-ratio-calculator contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "hati8haha/aspect-ratio-calculator",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/hati8haha/aspect-ratio-calculator/blob/a88c69eea59514c3d7cfc394d32949479121b6b1/LICENSE",
+      "import": {
+        "corpusId": "hati8haha-aspect-ratio-calculator",
+        "fixturePath": "benchmarks/real-world/hati8haha-aspect-ratio-calculator",
+        "provenancePath": "benchmarks/real-world/hati8haha-aspect-ratio-calculator/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "montevive-openai-privacy-filter",
+      "repository": "montevive/openai-privacy-filter",
+      "commit": "16f2a86ec0ca635e362841f14f33f3512c1771c8",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/App.tsx",
+          "url": "https://github.com/montevive/openai-privacy-filter/blob/16f2a86ec0ca635e362841f14f33f3512c1771c8/src/App.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from montevive/openai-privacy-filter contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "montevive/openai-privacy-filter",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/montevive/openai-privacy-filter/blob/16f2a86ec0ca635e362841f14f33f3512c1771c8/LICENSE",
+      "import": {
+        "corpusId": "montevive-openai-privacy-filter",
+        "fixturePath": "benchmarks/real-world/montevive-openai-privacy-filter",
+        "provenancePath": "benchmarks/real-world/montevive-openai-privacy-filter/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ether-etherpad",
+      "repository": "ether/etherpad",
+      "commit": "15681f4e9d1127fc018accb98eebb7796790cf9d",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/static/js/pad.ts",
+          "url": "https://github.com/ether/etherpad/blob/15681f4e9d1127fc018accb98eebb7796790cf9d/src/static/js/pad.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ether/etherpad contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ether/etherpad",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ether/etherpad/blob/15681f4e9d1127fc018accb98eebb7796790cf9d/LICENSE",
+      "import": {
+        "corpusId": "ether-etherpad",
+        "fixturePath": "benchmarks/real-world/ether-etherpad",
+        "provenancePath": "benchmarks/real-world/ether-etherpad/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "shehansanjula-sri-lanka-income-tax-calculator",
+      "repository": "ShehanSanjula/Sri-Lanka-Income-Tax-Calculator",
+      "commit": "68c18eb18308879315f9b3434d90a65e39f5f01e",
+      "framework": "source excerpt (JSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/App.jsx",
+          "url": "https://github.com/ShehanSanjula/Sri-Lanka-Income-Tax-Calculator/blob/68c18eb18308879315f9b3434d90a65e39f5f01e/src/App.jsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ShehanSanjula/Sri-Lanka-Income-Tax-Calculator contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ShehanSanjula/Sri-Lanka-Income-Tax-Calculator",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ShehanSanjula/Sri-Lanka-Income-Tax-Calculator/blob/68c18eb18308879315f9b3434d90a65e39f5f01e/LICENSE",
+      "import": {
+        "corpusId": "shehansanjula-sri-lanka-income-tax-calculator",
+        "fixturePath": "benchmarks/real-world/shehansanjula-sri-lanka-income-tax-calculator",
+        "provenancePath": "benchmarks/real-world/shehansanjula-sri-lanka-income-tax-calculator/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.jsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "jeremygracey-ai-nexus-neuromirror",
+      "repository": "JeremyGracey-AI/nexus-neuromirror",
+      "commit": "ba23ced829826b5a21f9f520adb45ea2541fe11f",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "web/vercel/frontend/src/App.tsx",
+          "url": "https://github.com/JeremyGracey-AI/nexus-neuromirror/blob/ba23ced829826b5a21f9f520adb45ea2541fe11f/web/vercel/frontend/src/App.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from JeremyGracey-AI/nexus-neuromirror contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "JeremyGracey-AI/nexus-neuromirror",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/JeremyGracey-AI/nexus-neuromirror/blob/ba23ced829826b5a21f9f520adb45ea2541fe11f/LICENSE",
+      "import": {
+        "corpusId": "jeremygracey-ai-nexus-neuromirror",
+        "fixturePath": "benchmarks/real-world/jeremygracey-ai-nexus-neuromirror",
+        "provenancePath": "benchmarks/real-world/jeremygracey-ai-nexus-neuromirror/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "linzeyang-mortal-stardust",
+      "repository": "linzeyang/mortal-stardust",
+      "commit": "d4f9ef46fb48dac256c4cfcdb91a8bd4fb8e4dd1",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/collect-experience/page.tsx",
+          "url": "https://github.com/linzeyang/mortal-stardust/blob/d4f9ef46fb48dac256c4cfcdb91a8bd4fb8e4dd1/app/collect-experience/page.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from linzeyang/mortal-stardust contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "linzeyang/mortal-stardust",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/linzeyang/mortal-stardust/blob/d4f9ef46fb48dac256c4cfcdb91a8bd4fb8e4dd1/LICENSE",
+      "import": {
+        "corpusId": "linzeyang-mortal-stardust",
+        "fixturePath": "benchmarks/real-world/linzeyang-mortal-stardust",
+        "provenancePath": "benchmarks/real-world/linzeyang-mortal-stardust/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "jamesdesantiago-finvizscreener",
+      "repository": "jamesdesantiago/FinvizScreener",
+      "commit": "ca68cc18e9d06eb651d272c7dc5323f7e614a5ba",
+      "framework": "source excerpt (JS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "modules/privacyBanner.js",
+          "url": "https://github.com/jamesdesantiago/FinvizScreener/blob/ca68cc18e9d06eb651d272c7dc5323f7e614a5ba/modules/privacyBanner.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from jamesdesantiago/FinvizScreener contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "jamesdesantiago/FinvizScreener",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/jamesdesantiago/FinvizScreener/blob/ca68cc18e9d06eb651d272c7dc5323f7e614a5ba/LICENSE",
+      "import": {
+        "corpusId": "jamesdesantiago-finvizscreener",
+        "fixturePath": "benchmarks/real-world/jamesdesantiago-finvizscreener",
+        "provenancePath": "benchmarks/real-world/jamesdesantiago-finvizscreener/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ensembl-ensembl-client",
+      "repository": "Ensembl/ensembl-client",
+      "commit": "cfe8e54d6de27b10132f9c5cdafbee48dc23b2c9",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/root/Root.tsx",
+          "url": "https://github.com/Ensembl/ensembl-client/blob/cfe8e54d6de27b10132f9c5cdafbee48dc23b2c9/src/root/Root.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Ensembl/ensembl-client contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Ensembl/ensembl-client",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Ensembl/ensembl-client/blob/cfe8e54d6de27b10132f9c5cdafbee48dc23b2c9/LICENSE",
+      "import": {
+        "corpusId": "ensembl-ensembl-client",
+        "fixturePath": "benchmarks/real-world/ensembl-ensembl-client",
+        "provenancePath": "benchmarks/real-world/ensembl-ensembl-client/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "jamesmontemagno-pdf-diff",
+      "repository": "jamesmontemagno/pdf-diff",
+      "commit": "398acad519be98ad6db4fe571eb39a9af707effd",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/components/index.ts",
+          "url": "https://github.com/jamesmontemagno/pdf-diff/blob/398acad519be98ad6db4fe571eb39a9af707effd/src/components/index.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from jamesmontemagno/pdf-diff contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "jamesmontemagno/pdf-diff",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/jamesmontemagno/pdf-diff/blob/398acad519be98ad6db4fe571eb39a9af707effd/LICENSE",
+      "import": {
+        "corpusId": "jamesmontemagno-pdf-diff",
+        "fixturePath": "benchmarks/real-world/jamesmontemagno-pdf-diff",
+        "provenancePath": "benchmarks/real-world/jamesmontemagno-pdf-diff/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "sfarpak-alifullstack",
+      "repository": "SFARPak/AliFullStack",
+      "commit": "c34f5cfea36db008b7c3e29c0d451b60758a30f4",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/pages/home.tsx",
+          "url": "https://github.com/SFARPak/AliFullStack/blob/c34f5cfea36db008b7c3e29c0d451b60758a30f4/src/pages/home.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from SFARPak/AliFullStack contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "SFARPak/AliFullStack",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/SFARPak/AliFullStack/blob/c34f5cfea36db008b7c3e29c0d451b60758a30f4/LICENSE",
+      "import": {
+        "corpusId": "sfarpak-alifullstack",
+        "fixturePath": "benchmarks/real-world/sfarpak-alifullstack",
+        "provenancePath": "benchmarks/real-world/sfarpak-alifullstack/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "shiftbloom-studio-birthday-cake-loading",
+      "repository": "shiftbloom-studio/birthday-cake-loading",
+      "commit": "449bc2e1119284b80291f4b53fbafb5c76599c10",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/types.ts",
+          "url": "https://github.com/shiftbloom-studio/birthday-cake-loading/blob/449bc2e1119284b80291f4b53fbafb5c76599c10/src/types.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from shiftbloom-studio/birthday-cake-loading contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "shiftbloom-studio/birthday-cake-loading",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/shiftbloom-studio/birthday-cake-loading/blob/449bc2e1119284b80291f4b53fbafb5c76599c10/LICENSE",
+      "import": {
+        "corpusId": "shiftbloom-studio-birthday-cake-loading",
+        "fixturePath": "benchmarks/real-world/shiftbloom-studio-birthday-cake-loading",
+        "provenancePath": "benchmarks/real-world/shiftbloom-studio-birthday-cake-loading/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "bestjobs-bestjobs",
+      "repository": "bestjobs/bestjobs",
+      "commit": "a05a6be2c7dfe4fcb3475a03947219b4f4c81918",
+      "framework": "source excerpt (JS)",
+      "license": "LGPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app.js",
+          "url": "https://github.com/bestjobs/bestjobs/blob/a05a6be2c7dfe4fcb3475a03947219b4f4c81918/app.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from bestjobs/bestjobs contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "bestjobs/bestjobs",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/bestjobs/bestjobs/blob/a05a6be2c7dfe4fcb3475a03947219b4f4c81918/LICENSE",
+      "import": {
+        "corpusId": "bestjobs-bestjobs",
+        "fixturePath": "benchmarks/real-world/bestjobs-bestjobs",
+        "provenancePath": "benchmarks/real-world/bestjobs-bestjobs/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "robert-kratz-pdf-tools",
+      "repository": "robert-kratz/pdf-tools",
+      "commit": "51dd1757d4b92d151518dba5eaa67cef7e456452",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/layout.tsx",
+          "url": "https://github.com/robert-kratz/pdf-tools/blob/51dd1757d4b92d151518dba5eaa67cef7e456452/app/layout.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from robert-kratz/pdf-tools contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "robert-kratz/pdf-tools",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/robert-kratz/pdf-tools/blob/51dd1757d4b92d151518dba5eaa67cef7e456452/LICENSE",
+      "import": {
+        "corpusId": "robert-kratz-pdf-tools",
+        "fixturePath": "benchmarks/real-world/robert-kratz-pdf-tools",
+        "provenancePath": "benchmarks/real-world/robert-kratz-pdf-tools/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "wenzhi-ding-zupu",
+      "repository": "Wenzhi-Ding/zupu",
+      "commit": "17af31a2d0c923bb3ba928fa0bd0a61f6095201d",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/App.tsx",
+          "url": "https://github.com/Wenzhi-Ding/zupu/blob/17af31a2d0c923bb3ba928fa0bd0a61f6095201d/src/App.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Wenzhi-Ding/zupu contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Wenzhi-Ding/zupu",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Wenzhi-Ding/zupu/blob/17af31a2d0c923bb3ba928fa0bd0a61f6095201d/LICENSE",
+      "import": {
+        "corpusId": "wenzhi-ding-zupu",
+        "fixturePath": "benchmarks/real-world/wenzhi-ding-zupu",
+        "provenancePath": "benchmarks/real-world/wenzhi-ding-zupu/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "pepobj-json-editor",
+      "repository": "PepoBJ/json-editor",
+      "commit": "8b2dd1ba15a28b503a09490e00b62a4bd3fa41e9",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/page.tsx",
+          "url": "https://github.com/PepoBJ/json-editor/blob/8b2dd1ba15a28b503a09490e00b62a4bd3fa41e9/app/page.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from PepoBJ/json-editor contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "PepoBJ/json-editor",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/PepoBJ/json-editor/blob/8b2dd1ba15a28b503a09490e00b62a4bd3fa41e9/LICENSE",
+      "import": {
+        "corpusId": "pepobj-json-editor",
+        "fixturePath": "benchmarks/real-world/pepobj-json-editor",
+        "provenancePath": "benchmarks/real-world/pepobj-json-editor/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "chrisroyse-ccdyad",
+      "repository": "ChrisRoyse/CCdyad",
+      "commit": "4ed9b99cc52239975879f7037a7fc0fce3e7eef4",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/pages/home.tsx",
+          "url": "https://github.com/ChrisRoyse/CCdyad/blob/4ed9b99cc52239975879f7037a7fc0fce3e7eef4/src/pages/home.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ChrisRoyse/CCdyad contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ChrisRoyse/CCdyad",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ChrisRoyse/CCdyad/blob/4ed9b99cc52239975879f7037a7fc0fce3e7eef4/LICENSE",
+      "import": {
+        "corpusId": "chrisroyse-ccdyad",
+        "fixturePath": "benchmarks/real-world/chrisroyse-ccdyad",
+        "provenancePath": "benchmarks/real-world/chrisroyse-ccdyad/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "tomash-dev-v0-lovable-openai",
+      "repository": "tomash-dev/V0-Lovable-OpenAI",
+      "commit": "ca462f7458ff358028e7b570bcccfb228d59b3cd",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/pages/home.tsx",
+          "url": "https://github.com/tomash-dev/V0-Lovable-OpenAI/blob/ca462f7458ff358028e7b570bcccfb228d59b3cd/src/pages/home.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from tomash-dev/V0-Lovable-OpenAI contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "tomash-dev/V0-Lovable-OpenAI",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/tomash-dev/V0-Lovable-OpenAI/blob/ca462f7458ff358028e7b570bcccfb228d59b3cd/LICENSE",
+      "import": {
+        "corpusId": "tomash-dev-v0-lovable-openai",
+        "fixturePath": "benchmarks/real-world/tomash-dev-v0-lovable-openai",
+        "provenancePath": "benchmarks/real-world/tomash-dev-v0-lovable-openai/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "zakelfassi-repo-prompt-cockpit",
+      "repository": "zakelfassi/repo-prompt-cockpit",
+      "commit": "40e176d0dbd2729d30208675ebdcd6aad32fd490",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/domain/dashboard.ts",
+          "url": "https://github.com/zakelfassi/repo-prompt-cockpit/blob/40e176d0dbd2729d30208675ebdcd6aad32fd490/src/domain/dashboard.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from zakelfassi/repo-prompt-cockpit contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "zakelfassi/repo-prompt-cockpit",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/zakelfassi/repo-prompt-cockpit/blob/40e176d0dbd2729d30208675ebdcd6aad32fd490/LICENSE",
+      "import": {
+        "corpusId": "zakelfassi-repo-prompt-cockpit",
+        "fixturePath": "benchmarks/real-world/zakelfassi-repo-prompt-cockpit",
+        "provenancePath": "benchmarks/real-world/zakelfassi-repo-prompt-cockpit/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "elibattistoni-brenta-wild-race",
+      "repository": "elibattistoni/brenta-wild-race",
+      "commit": "880e8dc9528b6210ba31f128d84bd42a29605ff5",
+      "framework": "source excerpt (JSX)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/App.jsx",
+          "url": "https://github.com/elibattistoni/brenta-wild-race/blob/880e8dc9528b6210ba31f128d84bd42a29605ff5/src/App.jsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from elibattistoni/brenta-wild-race contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "elibattistoni/brenta-wild-race",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/elibattistoni/brenta-wild-race/blob/880e8dc9528b6210ba31f128d84bd42a29605ff5/LICENSE",
+      "import": {
+        "corpusId": "elibattistoni-brenta-wild-race",
+        "fixturePath": "benchmarks/real-world/elibattistoni-brenta-wild-race",
+        "provenancePath": "benchmarks/real-world/elibattistoni-brenta-wild-race/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.jsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ramanaditya-claude-project-loader",
+      "repository": "ramanaditya/claude-project-loader",
+      "commit": "aaa53b4032551e293bb01e578f2d159cf1384b97",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "preview.tsx",
+          "url": "https://github.com/ramanaditya/claude-project-loader/blob/aaa53b4032551e293bb01e578f2d159cf1384b97/preview.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from ramanaditya/claude-project-loader contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "ramanaditya/claude-project-loader",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/ramanaditya/claude-project-loader/blob/aaa53b4032551e293bb01e578f2d159cf1384b97/LICENSE",
+      "import": {
+        "corpusId": "ramanaditya-claude-project-loader",
+        "fixturePath": "benchmarks/real-world/ramanaditya-claude-project-loader",
+        "provenancePath": "benchmarks/real-world/ramanaditya-claude-project-loader/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "maymun207-excel-anonymizer",
+      "repository": "maymun207/excel-anonymizer",
+      "commit": "4ce0cb8f2a41f8c2faa40bf70b999c7694fa75f6",
+      "framework": "source excerpt (TSX)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/page.tsx",
+          "url": "https://github.com/maymun207/excel-anonymizer/blob/4ce0cb8f2a41f8c2faa40bf70b999c7694fa75f6/app/page.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from maymun207/excel-anonymizer contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "maymun207/excel-anonymizer",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/maymun207/excel-anonymizer/blob/4ce0cb8f2a41f8c2faa40bf70b999c7694fa75f6/LICENSE",
+      "import": {
+        "corpusId": "maymun207-excel-anonymizer",
+        "fixturePath": "benchmarks/real-world/maymun207-excel-anonymizer",
+        "provenancePath": "benchmarks/real-world/maymun207-excel-anonymizer/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "weenable-openecho",
+      "repository": "weenable/openecho",
+      "commit": "f0d33cd7c384fcb96126749e7cff6210bfab6a73",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/lib/i18n.ts",
+          "url": "https://github.com/weenable/openecho/blob/f0d33cd7c384fcb96126749e7cff6210bfab6a73/src/lib/i18n.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from weenable/openecho contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "weenable/openecho",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/weenable/openecho/blob/f0d33cd7c384fcb96126749e7cff6210bfab6a73/LICENSE",
+      "import": {
+        "corpusId": "weenable-openecho",
+        "fixturePath": "benchmarks/real-world/weenable-openecho",
+        "provenancePath": "benchmarks/real-world/weenable-openecho/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "andreasarendt-atlo",
+      "repository": "AndreasArendt/Atlo",
+      "commit": "50612ed5ec1ef4f2945810493b5b3d9a74bbfaa4",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "public/dom.js",
+          "url": "https://github.com/AndreasArendt/Atlo/blob/50612ed5ec1ef4f2945810493b5b3d9a74bbfaa4/public/dom.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from AndreasArendt/Atlo contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "AndreasArendt/Atlo",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/AndreasArendt/Atlo/blob/50612ed5ec1ef4f2945810493b5b3d9a74bbfaa4/LICENSE",
+      "import": {
+        "corpusId": "andreasarendt-atlo",
+        "fixturePath": "benchmarks/real-world/andreasarendt-atlo",
+        "provenancePath": "benchmarks/real-world/andreasarendt-atlo/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "benjamin-shuster-is421",
+      "repository": "benjamin-shuster/IS421",
+      "commit": "e62ce3afa93e9c1cac821931fe8b4bfcb833c333",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/layout.tsx",
+          "url": "https://github.com/benjamin-shuster/IS421/blob/e62ce3afa93e9c1cac821931fe8b4bfcb833c333/app/layout.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from benjamin-shuster/IS421 contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "benjamin-shuster/IS421",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/benjamin-shuster/IS421/blob/e62ce3afa93e9c1cac821931fe8b4bfcb833c333/LICENSE",
+      "import": {
+        "corpusId": "benjamin-shuster-is421",
+        "fixturePath": "benchmarks/real-world/benjamin-shuster-is421",
+        "provenancePath": "benchmarks/real-world/benjamin-shuster-is421/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "yaremayurchyshyn-retro-stamp-web",
+      "repository": "yaremayurchyshyn/retro-stamp-web",
+      "commit": "9f65defc8f20b2e27b831af937dc80a8ea9321d7",
+      "framework": "source excerpt (TSX)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "app/src/App.tsx",
+          "url": "https://github.com/yaremayurchyshyn/retro-stamp-web/blob/9f65defc8f20b2e27b831af937dc80a8ea9321d7/app/src/App.tsx"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"Privacy\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "Privacy",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from yaremayurchyshyn/retro-stamp-web contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "yaremayurchyshyn/retro-stamp-web",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/yaremayurchyshyn/retro-stamp-web/blob/9f65defc8f20b2e27b831af937dc80a8ea9321d7/LICENSE",
+      "import": {
+        "corpusId": "yaremayurchyshyn-retro-stamp-web",
+        "fixturePath": "benchmarks/real-world/yaremayurchyshyn-retro-stamp-web",
+        "provenancePath": "benchmarks/real-world/yaremayurchyshyn-retro-stamp-web/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.tsx",
+            "textIncludes": [
+              "Privacy"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "see-kode-leadgen-solution",
+      "repository": "see-kode/leadgen-solution",
+      "commit": "4858db9294974b085e305cf09656e8e1799ba977",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "assets/js/cookies.js",
+          "url": "https://github.com/see-kode/leadgen-solution/blob/4858db9294974b085e305cf09656e8e1799ba977/assets/js/cookies.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"accept\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "accept",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from see-kode/leadgen-solution contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "see-kode/leadgen-solution",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/see-kode/leadgen-solution/blob/4858db9294974b085e305cf09656e8e1799ba977/LICENSE",
+      "import": {
+        "corpusId": "see-kode-leadgen-solution",
+        "fixturePath": "benchmarks/real-world/see-kode-leadgen-solution",
+        "provenancePath": "benchmarks/real-world/see-kode-leadgen-solution/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "accept"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "takirus6524-website-template",
+      "repository": "Takirus6524/Website-Template",
+      "commit": "85cc1861f6873e1472e22c0b8a3ad5591daab652",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "js/cookies.js",
+          "url": "https://github.com/Takirus6524/Website-Template/blob/85cc1861f6873e1472e22c0b8a3ad5591daab652/js/cookies.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"reject\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "reject",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from Takirus6524/Website-Template contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "Takirus6524/Website-Template",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/Takirus6524/Website-Template/blob/85cc1861f6873e1472e22c0b8a3ad5591daab652/LICENSE",
+      "import": {
+        "corpusId": "takirus6524-website-template",
+        "fixturePath": "benchmarks/real-world/takirus6524-website-template",
+        "provenancePath": "benchmarks/real-world/takirus6524-website-template/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "reject"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "structured-world-vue-privacy",
+      "repository": "structured-world/vue-privacy",
+      "commit": "6d8a1bdf972a14525bb0b1e3dfc42da0709fe46f",
+      "framework": "source excerpt (TS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/vue/index.ts",
+          "url": "https://github.com/structured-world/vue-privacy/blob/6d8a1bdf972a14525bb0b1e3dfc42da0709fe46f/src/vue/index.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"accept\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "accept",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from structured-world/vue-privacy contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "structured-world/vue-privacy",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/structured-world/vue-privacy/blob/6d8a1bdf972a14525bb0b1e3dfc42da0709fe46f/LICENSE",
+      "import": {
+        "corpusId": "structured-world-vue-privacy",
+        "fixturePath": "benchmarks/real-world/structured-world-vue-privacy",
+        "provenancePath": "benchmarks/real-world/structured-world-vue-privacy/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "accept"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "sociam-indx",
+      "repository": "sociam/indx",
+      "commit": "3f6cb634ffcb07d049d055cab1f374be5503bbf5",
+      "framework": "source excerpt (JS)",
+      "license": "AGPL-3.0",
+      "licensePath": "COPYING",
+      "files": [
+        {
+          "path": "html/js/indx.js",
+          "url": "https://github.com/sociam/indx/blob/3f6cb634ffcb07d049d055cab1f374be5503bbf5/html/js/indx.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"reject\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "reject",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from sociam/indx contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "sociam/indx",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/sociam/indx/blob/3f6cb634ffcb07d049d055cab1f374be5503bbf5/COPYING",
+      "import": {
+        "corpusId": "sociam-indx",
+        "fixturePath": "benchmarks/real-world/sociam-indx",
+        "provenancePath": "benchmarks/real-world/sociam-indx/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "reject"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "harbourbob-mbr-wp-performance",
+      "repository": "HarbourBob/MBR-WP-Performance",
+      "commit": "0d71c81bc91d57d24c206985779ddf9c5c5590a6",
+      "framework": "source excerpt (JS)",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "assets/js/banner.js",
+          "url": "https://github.com/HarbourBob/MBR-WP-Performance/blob/0d71c81bc91d57d24c206985779ddf9c5c5590a6/assets/js/banner.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"consent\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "consent",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from HarbourBob/MBR-WP-Performance contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "HarbourBob/MBR-WP-Performance",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/HarbourBob/MBR-WP-Performance/blob/0d71c81bc91d57d24c206985779ddf9c5c5590a6/LICENSE",
+      "import": {
+        "corpusId": "harbourbob-mbr-wp-performance",
+        "fixturePath": "benchmarks/real-world/harbourbob-mbr-wp-performance",
+        "provenancePath": "benchmarks/real-world/harbourbob-mbr-wp-performance/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "consent"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "sebaofficial-svelte-cookie-consent",
+      "repository": "SebaOfficial/svelte-cookie-consent",
+      "commit": "280e6a72aecccc25e108dfe2e24d7153efb29583",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/lib/core.ts",
+          "url": "https://github.com/SebaOfficial/svelte-cookie-consent/blob/280e6a72aecccc25e108dfe2e24d7153efb29583/src/lib/core.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"reject\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "reject",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from SebaOfficial/svelte-cookie-consent contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "SebaOfficial/svelte-cookie-consent",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/SebaOfficial/svelte-cookie-consent/blob/280e6a72aecccc25e108dfe2e24d7153efb29583/LICENSE",
+      "import": {
+        "corpusId": "sebaofficial-svelte-cookie-consent",
+        "fixturePath": "benchmarks/real-world/sebaofficial-svelte-cookie-consent",
+        "provenancePath": "benchmarks/real-world/sebaofficial-svelte-cookie-consent/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "reject"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "imaddde867-imadlab",
+      "repository": "imaddde867/imadlab",
+      "commit": "6833fce78ca99b300d690aa4c5ecbff98b862e71",
+      "framework": "source excerpt (TS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/lib/consent.ts",
+          "url": "https://github.com/imaddde867/imadlab/blob/6833fce78ca99b300d690aa4c5ecbff98b862e71/src/lib/consent.ts"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"reject\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "reject",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from imaddde867/imadlab contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "imaddde867/imadlab",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/imaddde867/imadlab/blob/6833fce78ca99b300d690aa4c5ecbff98b862e71/LICENSE",
+      "import": {
+        "corpusId": "imaddde867-imadlab",
+        "fixturePath": "benchmarks/real-world/imaddde867-imadlab",
+        "provenancePath": "benchmarks/real-world/imaddde867-imadlab/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.ts",
+            "textIncludes": [
+              "reject"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "foundationinccorporateteam-cookie-manage",
+      "repository": "FoundationINCCorporateTeam/Cookie-Manage",
+      "commit": "090da73524f4dff046771230a7773f045e63e6a7",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/js/cmp.js",
+          "url": "https://github.com/FoundationINCCorporateTeam/Cookie-Manage/blob/090da73524f4dff046771230a7773f045e63e6a7/src/js/cmp.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"reject\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "reject",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from FoundationINCCorporateTeam/Cookie-Manage contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "FoundationINCCorporateTeam/Cookie-Manage",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/FoundationINCCorporateTeam/Cookie-Manage/blob/090da73524f4dff046771230a7773f045e63e6a7/LICENSE",
+      "import": {
+        "corpusId": "foundationinccorporateteam-cookie-manage",
+        "fixturePath": "benchmarks/real-world/foundationinccorporateteam-cookie-manage",
+        "provenancePath": "benchmarks/real-world/foundationinccorporateteam-cookie-manage/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "reject"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "houselearning-houselearning-github-io",
+      "repository": "houselearning/houselearning.github.io",
+      "commit": "3ec8e1da9a303c5192bc397fc2dcdf3a8cd20cfb",
+      "framework": "source excerpt (JS)",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "cookiebanner.js",
+          "url": "https://github.com/houselearning/houselearning.github.io/blob/3ec8e1da9a303c5192bc397fc2dcdf3a8cd20cfb/cookiebanner.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"accept\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "accept",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from houselearning/houselearning.github.io contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "houselearning/houselearning.github.io",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/houselearning/houselearning.github.io/blob/3ec8e1da9a303c5192bc397fc2dcdf3a8cd20cfb/LICENSE",
+      "import": {
+        "corpusId": "houselearning-houselearning-github-io",
+        "fixturePath": "benchmarks/real-world/houselearning-houselearning-github-io",
+        "provenancePath": "benchmarks/real-world/houselearning-houselearning-github-io/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "accept"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
+      }
+    },
+    {
+      "id": "ialias-openconsent",
+      "repository": "iAlias/openconsent",
+      "commit": "4140462c8b6e8d7b09aa4eef75a81801469617a2",
+      "framework": "source excerpt (JS)",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "files": [
+        {
+          "path": "src/cmp.js",
+          "url": "https://github.com/iAlias/openconsent/blob/4140462c8b6e8d7b09aa4eef75a81801469617a2/src/cmp.js"
+        }
+      ],
+      "observations": [
+        "Pinned excerpt preserves marker \"reject\".",
+        "The fixture is intentionally scoped to an extracted source signal; complete application behavior is not inferred."
+      ],
+      "targets": [
+        "source excerpt preservation",
+        "parser structural negative control"
+      ],
+      "labelStatus": "reviewed-source-excerpt",
+      "expected": {
+        "sourceMarker": "reject",
+        "forms": 0,
+        "trackers": 0
+      },
+      "context": "Pinned source excerpt from iAlias/openconsent contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+      "independenceGroup": "iAlias/openconsent",
+      "status": "imported",
+      "countsTowardReleaseGate": true,
+      "licenseUrl": "https://github.com/iAlias/openconsent/blob/4140462c8b6e8d7b09aa4eef75a81801469617a2/LICENSE",
+      "import": {
+        "corpusId": "ialias-openconsent",
+        "fixturePath": "benchmarks/real-world/ialias-openconsent",
+        "provenancePath": "benchmarks/real-world/ialias-openconsent/provenance.json",
+        "rules": {},
+        "checks": [
+          {
+            "file": "source.js",
+            "textIncludes": [
+              "reject"
+            ],
+            "forms": [],
+            "trackers": []
+          }
+        ],
+        "scope": "Pinned sanitized source excerpt only."
       }
     }
   ]

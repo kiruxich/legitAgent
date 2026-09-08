@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "imaddde867-imadlab",
+  "repository": "imaddde867/imadlab",
+  "commit": "6833fce78ca99b300d690aa4c5ecbff98b862e71",
+  "independenceGroup": "imaddde867/imadlab",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/imaddde867/imadlab/blob/6833fce78ca99b300d690aa4c5ecbff98b862e71/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "d2303eee93d712a63c7d0f02cfb102cd209565c9564bca79104afbcc8bc74706",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/imaddde867/imadlab/blob/6833fce78ca99b300d690aa4c5ecbff98b862e71/src/lib/consent.ts",
+      "upstreamSha256": "b598452d97a6343d5007d85ae40c1e646e52bdf2ef6e4d559a593d7e5569e434",
+      "sha256": "b598452d97a6343d5007d85ae40c1e646e52bdf2ef6e4d559a593d7e5569e434"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from imaddde867/imadlab contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "reject"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

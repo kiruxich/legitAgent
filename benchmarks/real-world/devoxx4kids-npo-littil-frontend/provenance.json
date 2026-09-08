@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "devoxx4kids-npo-littil-frontend",
+  "repository": "Devoxx4Kids-NPO/littil-frontend",
+  "commit": "bfaaa0030c073ef23a4104a6e1a1494200b91296",
+  "independenceGroup": "Devoxx4Kids-NPO/littil-frontend",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/Devoxx4Kids-NPO/littil-frontend/blob/bfaaa0030c073ef23a4104a6e1a1494200b91296/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/Devoxx4Kids-NPO/littil-frontend/blob/bfaaa0030c073ef23a4104a6e1a1494200b91296/src/app/app.module.ts",
+      "upstreamSha256": "5e271d67edf18d32e566c833a231fb8bb4ec10586c9dc3d007e03597c310d0d8",
+      "sha256": "5e271d67edf18d32e566c833a231fb8bb4ec10586c9dc3d007e03597c310d0d8"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Devoxx4Kids-NPO/littil-frontend contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

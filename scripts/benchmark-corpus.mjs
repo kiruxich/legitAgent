@@ -34,7 +34,7 @@ export function validateRealWorldCases(root, manifest) {
       if (!file.sourceUrl?.startsWith(`https://github.com/${metadata.repository}/blob/${metadata.commit}/`) ||
           !/^[a-f0-9]{64}$/.test(file.upstreamSha256 ?? '')) fail(`missing upstream pin/hash: ${file.filename}`);
     }
-    const sources = fs.readdirSync(directory).filter((name) => /\.(?:html|jsx|tsx|js|ts|mjs|cjs|vue|svelte|astro)$/i.test(name)).sort();
+    const sources = fs.readdirSync(directory).filter((name) => /\.(?:html|jsx|tsx|js|ts|mjs|cjs|vue|svelte|astro|php|erb|twig)$/i.test(name)).sort();
     if (!isDeepStrictEqual(sources, metadata.files.map((file) => file.filename).sort()) ||
         fs.readdirSync(directory, { withFileTypes: true }).some((entry) => entry.isDirectory())) fail('unreviewed source inventory');
     groups.add(testCase.independenceGroup);
@@ -66,6 +66,9 @@ export function evaluateEvidenceChecks(checks, sources, findings) {
           } else compare(`${check.file}.${section}[${index}].${property}`, value, actual[index]?.[property]);
         }
       });
+    }
+    for (const needle of check.textIncludes ?? []) {
+      compare(`${check.file}.textIncludes(${needle})`, true, source.source.includes(needle));
     }
     for (const [ruleId, expected] of Object.entries(check.rules ?? {})) {
       compare(`${check.file}.${ruleId}`, expected, findings.some((finding) => finding.file === check.file && finding.ruleId === ruleId));

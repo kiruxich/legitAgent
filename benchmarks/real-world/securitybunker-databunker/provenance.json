@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "securitybunker-databunker",
+  "repository": "securitybunker/databunker",
+  "commit": "1d96827d1cd6faf880f918595cdd104511aa8b7b",
+  "independenceGroup": "securitybunker/databunker",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/securitybunker/databunker/blob/1d96827d1cd6faf880f918595cdd104511aa8b7b/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e0a47de1312e4c12864d90b3f591e9bcfb0d99469c89641553bbaa7cd31df60e",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/securitybunker/databunker/blob/1d96827d1cd6faf880f918595cdd104511aa8b7b/ui/site/site.js",
+      "upstreamSha256": "9d611ca333da10d2fe9611bb538d646fa150258a7824d2b9cb888db9dc4a920b",
+      "sha256": "9d611ca333da10d2fe9611bb538d646fa150258a7824d2b9cb888db9dc4a920b"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from securitybunker/databunker contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

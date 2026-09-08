@@ -1,0 +1,7 @@
+  displayAlertsMenuItem : false,
+  displayCallForAssistanceButtonInGroupDisccussions : false,
+  displayInboxMenu: false,
+  privacyPolicyLink: 'https://example.invalid',
+  contactPoint: 'person@example.invalid',
+  platformName: 'UDIR - kompetanseplattform',
+  homeOrganization: 'Udir.no',

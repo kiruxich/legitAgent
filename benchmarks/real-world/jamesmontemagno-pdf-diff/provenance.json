@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "jamesmontemagno-pdf-diff",
+  "repository": "jamesmontemagno/pdf-diff",
+  "commit": "398acad519be98ad6db4fe571eb39a9af707effd",
+  "independenceGroup": "jamesmontemagno/pdf-diff",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/jamesmontemagno/pdf-diff/blob/398acad519be98ad6db4fe571eb39a9af707effd/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "a0448e5aabbbb3ac894d0dab8c7941c0b89c733ab9948594f74f88f5fa5b54e1",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/jamesmontemagno/pdf-diff/blob/398acad519be98ad6db4fe571eb39a9af707effd/src/components/index.ts",
+      "upstreamSha256": "a68728945b4c92ec593313a2c6495f6ab4437c2fc74cbce3162ceef1b05cf598",
+      "sha256": "a68728945b4c92ec593313a2c6495f6ab4437c2fc74cbce3162ceef1b05cf598"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from jamesmontemagno/pdf-diff contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

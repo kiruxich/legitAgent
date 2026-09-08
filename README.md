@@ -278,7 +278,7 @@ pnpm release:check
 
 Правила: `packages/core/rules/*.yaml`. Выдержки: `packages/core/legal/*.yaml`. Корпус законов: `packages/core/legal/corpus/` (`pnpm fetch-law`). Каталог для людей: `pnpm catalog` → `docs/RULES.md` и `website/rules.html`.
 
-`pnpm benchmark` проверяет 52 исходных случая: 40 synthetic regression seeds и 12 обезличенных случаев из реальных проектов. Пять форматных вариантов дают 260 parser-stability сценариев; повторные представления одного источника не увеличивают независимый счётчик. Отчёт отдельно считает TP/FP/FN/TN и precision/recall по исходным кейсам (`seedRules`, `seedFrameworks`) и всем вариантам (`rules`, `frameworks`). Реальные случаи дополнительно проверяются строго: любая ошибка ожидаемого правила или технического признака завершает прогон с ошибкой. Источники, SHA, лицензии и обоснования разметки сохранены в [benchmarks/real-world](benchmarks/real-world); [разбор покрытия](benchmarks/real-world-cases.md) указывает границы статической проверки. Для v1 по-прежнему нужны минимум 100 независимых групп источников и проверенное покрытие правил.
+`pnpm benchmark` проверяет 140 исходных случаев: 40 synthetic regression seeds и 100 закреплённых source groups из открытых проектов. Пять форматных вариантов дают 700 parser-stability сценариев; повторные представления одного источника не увеличивают независимый счётчик. Отчёт отдельно считает TP/FP/FN/TN и precision/recall по исходным кейсам (`seedRules`, `seedFrameworks`) и всем вариантам (`rules`, `frameworks`). Реальные случаи дополнительно проверяются строго: любая ошибка ожидаемого правила или технического признака завершает прогон с ошибкой. Источники, SHA, лицензии и обоснования разметки сохранены в [benchmarks/real-world](benchmarks/real-world); [разбор покрытия](benchmarks/real-world-cases.md) указывает границы статической проверки. Порог v1 в 100 независимых групп источников закрыт; покрытие отдельных правил и отложенная оценка всё ещё требуют ревью.
 
 `pnpm legal:check` проверяет integrity hash локальных snapshot-ов и свежесть `verifiedAt`. Еженедельный workflow `legal-drift.yml` сравнивает snapshot с источником; изменение закона блокирует задачу до ручной ревизии и обновления hash.
 
@@ -292,7 +292,7 @@ pnpm release:check
 
 Новая версия: одинаковый `version` в `packages/*/package.json` (core, cli, live, mcp), `pnpm release:check`, коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. Workflow использует commit-SHA pins для сторонних Actions, npm Trusted Publishing с provenance, генерирует SPDX SBOM, создаёт build attestation и прикладывает tarballs/SBOM к GitHub Release.
 
-Для `v1.0.0` release-check дополнительно требует минимум `100` entries с `provenance: "independent-real-world"` в `benchmarks/corpus.json`. Synthetic seeds и их пять мутаций в этот gate не засчитываются; пока корпус не дополнен, публикуемая версия остаётся `0.x`.
+Для `1.x` release-check дополнительно требует минимум `100` entries с `provenance: "independent-real-world"` в `benchmarks/corpus.json`. Synthetic seeds и их пять мутаций в этот gate не засчитываются. Сейчас в корпусе ровно 100 независимых групп, поэтому количественный gate закрыт; перед публикацией `v1.1.1` остаются version bump, полный CI и ручная проверка release-артефактов.
 
 ---
 

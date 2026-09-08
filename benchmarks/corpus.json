@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "40 synthetic regression seeds and 12 independently sourced, technically reviewed real-world seeds; formatting variants are not independent cases.",
+  "description": "40 synthetic regression seeds and 100 independently sourced, technically reviewed real-world source groups; formatting variants are not independent cases.",
   "v1MinimumIndependentCases": 100,
   "mutationCount": 5,
   "thresholds": {
@@ -568,6 +568,1678 @@
               "hasPrecheckedConsent": false
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "neoalienson-hexo-plugin-cookieconsent",
+      "name": "real world: neoalienson/hexo-plugin-cookieconsent",
+      "path": "benchmarks/real-world/neoalienson-hexo-plugin-cookieconsent",
+      "provenance": "independent-real-world",
+      "independenceGroup": "neoalienson/hexo-plugin-cookieconsent",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "CookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "sahat-hackathon-starter",
+      "name": "real world: sahat/hackathon-starter",
+      "path": "benchmarks/real-world/sahat-hackathon-starter",
+      "provenance": "independent-real-world",
+      "independenceGroup": "sahat/hackathon-starter",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "yanniga01-gilliansperkin-github-io",
+      "name": "real world: Yanniga01/gilliansperkin.github.io",
+      "path": "benchmarks/real-world/yanniga01-gilliansperkin-github-io",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Yanniga01/gilliansperkin.github.io",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "accept"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "fyrestar-cc-in-out",
+      "name": "real world: Fyrestar/cc-in-out",
+      "path": "benchmarks/real-world/fyrestar-cc-in-out",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Fyrestar/cc-in-out",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "CookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "thephoenixagency-thephoenixagency-github-io",
+      "name": "real world: ThePhoenixAgency/ThePhoenixAgency.github.io",
+      "path": "benchmarks/real-world/thephoenixagency-thephoenixagency-github-io",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ThePhoenixAgency/ThePhoenixAgency.github.io",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "cookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "rawgraphs-rawgraphs-app",
+      "name": "real world: rawgraphs/rawgraphs-app",
+      "path": "benchmarks/real-world/rawgraphs-rawgraphs-app",
+      "provenance": "independent-real-world",
+      "independenceGroup": "rawgraphs/rawgraphs-app",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "CookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "hecfran-web",
+      "name": "real world: hecfran/web",
+      "path": "benchmarks/real-world/hecfran-web",
+      "provenance": "independent-real-world",
+      "independenceGroup": "hecfran/web",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "cookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "kahel3352-newworld-site",
+      "name": "real world: Kahel3352/newworld_site",
+      "path": "benchmarks/real-world/kahel3352-newworld-site",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Kahel3352/newworld_site",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "var"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "chrishutchinson-cardkit",
+      "name": "real world: chrishutchinson/cardkit",
+      "path": "benchmarks/real-world/chrishutchinson-cardkit",
+      "provenance": "independent-real-world",
+      "independenceGroup": "chrishutchinson/cardkit",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "input[type=email"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ineventapp-musjs",
+      "name": "real world: ineventapp/musjs",
+      "path": "benchmarks/real-world/ineventapp-musjs",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ineventapp/musjs",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "input[type=email"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "epam-xframework",
+      "name": "real world: epam/xframework",
+      "path": "benchmarks/real-world/epam-xframework",
+      "provenance": "independent-real-world",
+      "independenceGroup": "epam/xframework",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "email"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ruimarinho-gsts",
+      "name": "real world: ruimarinho/gsts",
+      "path": "benchmarks/real-world/ruimarinho-gsts",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ruimarinho/gsts",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "input[type=email"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "itslenny-slack-emoji-import",
+      "name": "real world: itslenny/slack-emoji-import",
+      "path": "benchmarks/real-world/itslenny-slack-emoji-import",
+      "provenance": "independent-real-world",
+      "independenceGroup": "itslenny/slack-emoji-import",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "input[type=email"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "fmeum-smart-pass",
+      "name": "real world: fmeum/smart-pass",
+      "path": "benchmarks/real-world/fmeum-smart-pass",
+      "provenance": "independent-real-world",
+      "independenceGroup": "fmeum/smart-pass",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "input[type=email"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "incogcyberpunk-world-guessr",
+      "name": "real world: incogcyberpunk/World-Guessr",
+      "path": "benchmarks/real-world/incogcyberpunk-world-guessr",
+      "provenance": "independent-real-world",
+      "independenceGroup": "incogcyberpunk/World-Guessr",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "celo-org-staked-celo-web-app",
+      "name": "real world: celo-org/staked-celo-web-app",
+      "path": "benchmarks/real-world/celo-org-staked-celo-web-app",
+      "provenance": "independent-real-world",
+      "independenceGroup": "celo-org/staked-celo-web-app",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "patchcrafter-owls",
+      "name": "real world: PatchCrafter/owls",
+      "path": "benchmarks/real-world/patchcrafter-owls",
+      "provenance": "independent-real-world",
+      "independenceGroup": "PatchCrafter/owls",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "oleksandrbaior-cypress-framework-ts-cucumber",
+      "name": "real world: OleksandrBaior/Cypress_framework_TS_cucumber",
+      "path": "benchmarks/real-world/oleksandrbaior-cypress-framework-ts-cucumber",
+      "provenance": "independent-real-world",
+      "independenceGroup": "OleksandrBaior/Cypress_framework_TS_cucumber",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "donovandmc-maidboye",
+      "name": "real world: DonovanDMC/MaidBoye",
+      "path": "benchmarks/real-world/donovandmc-maidboye",
+      "provenance": "independent-real-world",
+      "independenceGroup": "DonovanDMC/MaidBoye",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "centerforopenscience-angular-osf-playwright",
+      "name": "real world: CenterForOpenScience/angular-osf-playwright",
+      "path": "benchmarks/real-world/centerforopenscience-angular-osf-playwright",
+      "provenance": "independent-real-world",
+      "independenceGroup": "CenterForOpenScience/angular-osf-playwright",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "securitybunker-databunker",
+      "name": "real world: securitybunker/databunker",
+      "path": "benchmarks/real-world/securitybunker-databunker",
+      "provenance": "independent-real-world",
+      "independenceGroup": "securitybunker/databunker",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "sefaria-sefaria-project",
+      "name": "real world: Sefaria/Sefaria-Project",
+      "path": "benchmarks/real-world/sefaria-sefaria-project",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Sefaria/Sefaria-Project",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.jsx",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "qcl-qclean",
+      "name": "real world: qcl/QCLean",
+      "path": "benchmarks/real-world/qcl-qclean",
+      "provenance": "independent-real-world",
+      "independenceGroup": "qcl/QCLean",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "transcend-io-consent-manager-ui",
+      "name": "real world: transcend-io/consent-manager-ui",
+      "path": "benchmarks/real-world/transcend-io-consent-manager-ui",
+      "provenance": "independent-real-world",
+      "independenceGroup": "transcend-io/consent-manager-ui",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "serenity-kit-serenity-notes-clients",
+      "name": "real world: serenity-kit/serenity-notes-clients",
+      "path": "benchmarks/real-world/serenity-kit-serenity-notes-clients",
+      "provenance": "independent-real-world",
+      "independenceGroup": "serenity-kit/serenity-notes-clients",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "howlrapp-howlr-app",
+      "name": "real world: howlrapp/howlr-app",
+      "path": "benchmarks/real-world/howlrapp-howlr-app",
+      "provenance": "independent-real-world",
+      "independenceGroup": "howlrapp/howlr-app",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "railslove-rcvr-app",
+      "name": "real world: railslove/rcvr-app",
+      "path": "benchmarks/real-world/railslove-rcvr-app",
+      "provenance": "independent-real-world",
+      "independenceGroup": "railslove/rcvr-app",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "cobalt-strike-community-kit",
+      "name": "real world: Cobalt-Strike/community_kit",
+      "path": "benchmarks/real-world/cobalt-strike-community-kit",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Cobalt-Strike/community_kit",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.html",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "matematikk-mooc-frontend",
+      "name": "real world: matematikk-mooc/frontend",
+      "path": "benchmarks/real-world/matematikk-mooc-frontend",
+      "provenance": "independent-real-world",
+      "independenceGroup": "matematikk-mooc/frontend",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "stellar-stellar-disbursement-platform-frontend",
+      "name": "real world: stellar/stellar-disbursement-platform-frontend",
+      "path": "benchmarks/real-world/stellar-stellar-disbursement-platform-frontend",
+      "provenance": "independent-real-world",
+      "independenceGroup": "stellar/stellar-disbursement-platform-frontend",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "clearvis-io-clearvisio-appointment-booker",
+      "name": "real world: clearvis-io/clearvisio-appointment-booker",
+      "path": "benchmarks/real-world/clearvis-io-clearvisio-appointment-booker",
+      "provenance": "independent-real-world",
+      "independenceGroup": "clearvis-io/clearvisio-appointment-booker",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "mapdraw-mapdraw",
+      "name": "real world: mapdraw/mapdraw",
+      "path": "benchmarks/real-world/mapdraw-mapdraw",
+      "provenance": "independent-real-world",
+      "independenceGroup": "mapdraw/mapdraw",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "hypershiphq-react-cookie-manager",
+      "name": "real world: hypershiphq/react-cookie-manager",
+      "path": "benchmarks/real-world/hypershiphq-react-cookie-manager",
+      "provenance": "independent-real-world",
+      "independenceGroup": "hypershiphq/react-cookie-manager",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "arimah-ss14-cookbook",
+      "name": "real world: arimah/ss14-cookbook",
+      "path": "benchmarks/real-world/arimah-ss14-cookbook",
+      "provenance": "independent-real-world",
+      "independenceGroup": "arimah/ss14-cookbook",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "rate3-network-rate3-kyc-aml-client-release",
+      "name": "real world: rate3-network/rate3-kyc-aml-client-release",
+      "path": "benchmarks/real-world/rate3-network-rate3-kyc-aml-client-release",
+      "provenance": "independent-real-world",
+      "independenceGroup": "rate3-network/rate3-kyc-aml-client-release",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ruenetwork-rueclient",
+      "name": "real world: RueNetwork/RueClient",
+      "path": "benchmarks/real-world/ruenetwork-rueclient",
+      "provenance": "independent-real-world",
+      "independenceGroup": "RueNetwork/RueClient",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.jsx",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "devoxx4kids-npo-littil-frontend",
+      "name": "real world: Devoxx4Kids-NPO/littil-frontend",
+      "path": "benchmarks/real-world/devoxx4kids-npo-littil-frontend",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Devoxx4Kids-NPO/littil-frontend",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "common-ground-dao-commonground",
+      "name": "real world: Common-Ground-DAO/commonground",
+      "path": "benchmarks/real-world/common-ground-dao-commonground",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Common-Ground-DAO/commonground",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "brendan-ch-clockwise",
+      "name": "real world: brendan-ch/clockwise",
+      "path": "benchmarks/real-world/brendan-ch-clockwise",
+      "provenance": "independent-real-world",
+      "independenceGroup": "brendan-ch/clockwise",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "oovictorfranco-the-calculator-movie-industry-tycoon",
+      "name": "real world: ooVictorFranco/the-calculator-movie-industry-tycoon",
+      "path": "benchmarks/real-world/oovictorfranco-the-calculator-movie-industry-tycoon",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ooVictorFranco/the-calculator-movie-industry-tycoon",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "streeva-very-simple-cookie-consent",
+      "name": "real world: streeva/very-simple-cookie-consent",
+      "path": "benchmarks/real-world/streeva-very-simple-cookie-consent",
+      "provenance": "independent-real-world",
+      "independenceGroup": "streeva/very-simple-cookie-consent",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "haihaihaihai-1-versa",
+      "name": "real world: haihaihaihai-1/versa",
+      "path": "benchmarks/real-world/haihaihaihai-1-versa",
+      "provenance": "independent-real-world",
+      "independenceGroup": "haihaihaihai-1/versa",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "nikhil0653-nina",
+      "name": "real world: NIKHIL0653/NINA",
+      "path": "benchmarks/real-world/nikhil0653-nina",
+      "provenance": "independent-real-world",
+      "independenceGroup": "NIKHIL0653/NINA",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "ConsentStatus2[\"EXPI"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "friendsofredaxo-consent-manager",
+      "name": "real world: FriendsOfREDAXO/consent_manager",
+      "path": "benchmarks/real-world/friendsofredaxo-consent-manager",
+      "provenance": "independent-real-world",
+      "independenceGroup": "FriendsOfREDAXO/consent_manager",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.php",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "dhjs0000-dhjs0000-github-io",
+      "name": "real world: dhjs0000/dhjs0000.github.io",
+      "path": "benchmarks/real-world/dhjs0000-dhjs0000-github-io",
+      "provenance": "independent-real-world",
+      "independenceGroup": "dhjs0000/dhjs0000.github.io",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "CookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "treasure-data-td-js-sdk",
+      "name": "real world: treasure-data/td-js-sdk",
+      "path": "benchmarks/real-world/treasure-data-td-js-sdk",
+      "provenance": "independent-real-world",
+      "independenceGroup": "treasure-data/td-js-sdk",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "artsy-force",
+      "name": "real world: artsy/force",
+      "path": "benchmarks/real-world/artsy-force",
+      "provenance": "independent-real-world",
+      "independenceGroup": "artsy/force",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "CookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ryanbr-fingerprint-detector",
+      "name": "real world: ryanbr/fingerprint-detector",
+      "path": "benchmarks/real-world/ryanbr-fingerprint-detector",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ryanbr/fingerprint-detector",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "offline-gmbh-oc-gdpr-plugin",
+      "name": "real world: OFFLINE-GmbH/oc-gdpr-plugin",
+      "path": "benchmarks/real-world/offline-gmbh-oc-gdpr-plugin",
+      "provenance": "independent-real-world",
+      "independenceGroup": "OFFLINE-GmbH/oc-gdpr-plugin",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.php",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "patrickhulce-third-party-web",
+      "name": "real world: patrickhulce/third-party-web",
+      "path": "benchmarks/real-world/patrickhulce-third-party-web",
+      "provenance": "independent-real-world",
+      "independenceGroup": "patrickhulce/third-party-web",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "mparticle-mparticle-web-sdk",
+      "name": "real world: mParticle/mparticle-web-sdk",
+      "path": "benchmarks/real-world/mparticle-mparticle-web-sdk",
+      "provenance": "independent-real-world",
+      "independenceGroup": "mParticle/mparticle-web-sdk",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "CookieConsent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "meilisearch-documentation",
+      "name": "real world: meilisearch/documentation",
+      "path": "benchmarks/real-world/meilisearch-documentation",
+      "provenance": "independent-real-world",
+      "independenceGroup": "meilisearch/documentation",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "'ad_storage':"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "unknown-entity98-carelink",
+      "name": "real world: unknown-entity98/carelink",
+      "path": "benchmarks/real-world/unknown-entity98-carelink",
+      "provenance": "independent-real-world",
+      "independenceGroup": "unknown-entity98/carelink",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "hati8haha-aspect-ratio-calculator",
+      "name": "real world: hati8haha/aspect-ratio-calculator",
+      "path": "benchmarks/real-world/hati8haha-aspect-ratio-calculator",
+      "provenance": "independent-real-world",
+      "independenceGroup": "hati8haha/aspect-ratio-calculator",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "montevive-openai-privacy-filter",
+      "name": "real world: montevive/openai-privacy-filter",
+      "path": "benchmarks/real-world/montevive-openai-privacy-filter",
+      "provenance": "independent-real-world",
+      "independenceGroup": "montevive/openai-privacy-filter",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ether-etherpad",
+      "name": "real world: ether/etherpad",
+      "path": "benchmarks/real-world/ether-etherpad",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ether/etherpad",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "shehansanjula-sri-lanka-income-tax-calculator",
+      "name": "real world: ShehanSanjula/Sri-Lanka-Income-Tax-Calculator",
+      "path": "benchmarks/real-world/shehansanjula-sri-lanka-income-tax-calculator",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ShehanSanjula/Sri-Lanka-Income-Tax-Calculator",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.jsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "jeremygracey-ai-nexus-neuromirror",
+      "name": "real world: JeremyGracey-AI/nexus-neuromirror",
+      "path": "benchmarks/real-world/jeremygracey-ai-nexus-neuromirror",
+      "provenance": "independent-real-world",
+      "independenceGroup": "JeremyGracey-AI/nexus-neuromirror",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "linzeyang-mortal-stardust",
+      "name": "real world: linzeyang/mortal-stardust",
+      "path": "benchmarks/real-world/linzeyang-mortal-stardust",
+      "provenance": "independent-real-world",
+      "independenceGroup": "linzeyang/mortal-stardust",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "jamesdesantiago-finvizscreener",
+      "name": "real world: jamesdesantiago/FinvizScreener",
+      "path": "benchmarks/real-world/jamesdesantiago-finvizscreener",
+      "provenance": "independent-real-world",
+      "independenceGroup": "jamesdesantiago/FinvizScreener",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ensembl-ensembl-client",
+      "name": "real world: Ensembl/ensembl-client",
+      "path": "benchmarks/real-world/ensembl-ensembl-client",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Ensembl/ensembl-client",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "jamesmontemagno-pdf-diff",
+      "name": "real world: jamesmontemagno/pdf-diff",
+      "path": "benchmarks/real-world/jamesmontemagno-pdf-diff",
+      "provenance": "independent-real-world",
+      "independenceGroup": "jamesmontemagno/pdf-diff",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "sfarpak-alifullstack",
+      "name": "real world: SFARPak/AliFullStack",
+      "path": "benchmarks/real-world/sfarpak-alifullstack",
+      "provenance": "independent-real-world",
+      "independenceGroup": "SFARPak/AliFullStack",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "shiftbloom-studio-birthday-cake-loading",
+      "name": "real world: shiftbloom-studio/birthday-cake-loading",
+      "path": "benchmarks/real-world/shiftbloom-studio-birthday-cake-loading",
+      "provenance": "independent-real-world",
+      "independenceGroup": "shiftbloom-studio/birthday-cake-loading",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "bestjobs-bestjobs",
+      "name": "real world: bestjobs/bestjobs",
+      "path": "benchmarks/real-world/bestjobs-bestjobs",
+      "provenance": "independent-real-world",
+      "independenceGroup": "bestjobs/bestjobs",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "robert-kratz-pdf-tools",
+      "name": "real world: robert-kratz/pdf-tools",
+      "path": "benchmarks/real-world/robert-kratz-pdf-tools",
+      "provenance": "independent-real-world",
+      "independenceGroup": "robert-kratz/pdf-tools",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "wenzhi-ding-zupu",
+      "name": "real world: Wenzhi-Ding/zupu",
+      "path": "benchmarks/real-world/wenzhi-ding-zupu",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Wenzhi-Ding/zupu",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "pepobj-json-editor",
+      "name": "real world: PepoBJ/json-editor",
+      "path": "benchmarks/real-world/pepobj-json-editor",
+      "provenance": "independent-real-world",
+      "independenceGroup": "PepoBJ/json-editor",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "chrisroyse-ccdyad",
+      "name": "real world: ChrisRoyse/CCdyad",
+      "path": "benchmarks/real-world/chrisroyse-ccdyad",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ChrisRoyse/CCdyad",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "tomash-dev-v0-lovable-openai",
+      "name": "real world: tomash-dev/V0-Lovable-OpenAI",
+      "path": "benchmarks/real-world/tomash-dev-v0-lovable-openai",
+      "provenance": "independent-real-world",
+      "independenceGroup": "tomash-dev/V0-Lovable-OpenAI",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "zakelfassi-repo-prompt-cockpit",
+      "name": "real world: zakelfassi/repo-prompt-cockpit",
+      "path": "benchmarks/real-world/zakelfassi-repo-prompt-cockpit",
+      "provenance": "independent-real-world",
+      "independenceGroup": "zakelfassi/repo-prompt-cockpit",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "elibattistoni-brenta-wild-race",
+      "name": "real world: elibattistoni/brenta-wild-race",
+      "path": "benchmarks/real-world/elibattistoni-brenta-wild-race",
+      "provenance": "independent-real-world",
+      "independenceGroup": "elibattistoni/brenta-wild-race",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.jsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ramanaditya-claude-project-loader",
+      "name": "real world: ramanaditya/claude-project-loader",
+      "path": "benchmarks/real-world/ramanaditya-claude-project-loader",
+      "provenance": "independent-real-world",
+      "independenceGroup": "ramanaditya/claude-project-loader",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "maymun207-excel-anonymizer",
+      "name": "real world: maymun207/excel-anonymizer",
+      "path": "benchmarks/real-world/maymun207-excel-anonymizer",
+      "provenance": "independent-real-world",
+      "independenceGroup": "maymun207/excel-anonymizer",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "weenable-openecho",
+      "name": "real world: weenable/openecho",
+      "path": "benchmarks/real-world/weenable-openecho",
+      "provenance": "independent-real-world",
+      "independenceGroup": "weenable/openecho",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "andreasarendt-atlo",
+      "name": "real world: AndreasArendt/Atlo",
+      "path": "benchmarks/real-world/andreasarendt-atlo",
+      "provenance": "independent-real-world",
+      "independenceGroup": "AndreasArendt/Atlo",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "benjamin-shuster-is421",
+      "name": "real world: benjamin-shuster/IS421",
+      "path": "benchmarks/real-world/benjamin-shuster-is421",
+      "provenance": "independent-real-world",
+      "independenceGroup": "benjamin-shuster/IS421",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "yaremayurchyshyn-retro-stamp-web",
+      "name": "real world: yaremayurchyshyn/retro-stamp-web",
+      "path": "benchmarks/real-world/yaremayurchyshyn-retro-stamp-web",
+      "provenance": "independent-real-world",
+      "independenceGroup": "yaremayurchyshyn/retro-stamp-web",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.tsx",
+          "textIncludes": [
+            "Privacy"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "see-kode-leadgen-solution",
+      "name": "real world: see-kode/leadgen-solution",
+      "path": "benchmarks/real-world/see-kode-leadgen-solution",
+      "provenance": "independent-real-world",
+      "independenceGroup": "see-kode/leadgen-solution",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "accept"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "takirus6524-website-template",
+      "name": "real world: Takirus6524/Website-Template",
+      "path": "benchmarks/real-world/takirus6524-website-template",
+      "provenance": "independent-real-world",
+      "independenceGroup": "Takirus6524/Website-Template",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "reject"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "structured-world-vue-privacy",
+      "name": "real world: structured-world/vue-privacy",
+      "path": "benchmarks/real-world/structured-world-vue-privacy",
+      "provenance": "independent-real-world",
+      "independenceGroup": "structured-world/vue-privacy",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "accept"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "sociam-indx",
+      "name": "real world: sociam/indx",
+      "path": "benchmarks/real-world/sociam-indx",
+      "provenance": "independent-real-world",
+      "independenceGroup": "sociam/indx",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "reject"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "harbourbob-mbr-wp-performance",
+      "name": "real world: HarbourBob/MBR-WP-Performance",
+      "path": "benchmarks/real-world/harbourbob-mbr-wp-performance",
+      "provenance": "independent-real-world",
+      "independenceGroup": "HarbourBob/MBR-WP-Performance",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "consent"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "sebaofficial-svelte-cookie-consent",
+      "name": "real world: SebaOfficial/svelte-cookie-consent",
+      "path": "benchmarks/real-world/sebaofficial-svelte-cookie-consent",
+      "provenance": "independent-real-world",
+      "independenceGroup": "SebaOfficial/svelte-cookie-consent",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "reject"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "imaddde867-imadlab",
+      "name": "real world: imaddde867/imadlab",
+      "path": "benchmarks/real-world/imaddde867-imadlab",
+      "provenance": "independent-real-world",
+      "independenceGroup": "imaddde867/imadlab",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.ts",
+          "textIncludes": [
+            "reject"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "foundationinccorporateteam-cookie-manage",
+      "name": "real world: FoundationINCCorporateTeam/Cookie-Manage",
+      "path": "benchmarks/real-world/foundationinccorporateteam-cookie-manage",
+      "provenance": "independent-real-world",
+      "independenceGroup": "FoundationINCCorporateTeam/Cookie-Manage",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "reject"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "houselearning-houselearning-github-io",
+      "name": "real world: houselearning/houselearning.github.io",
+      "path": "benchmarks/real-world/houselearning-houselearning-github-io",
+      "provenance": "independent-real-world",
+      "independenceGroup": "houselearning/houselearning.github.io",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "accept"
+          ],
+          "forms": [],
+          "trackers": []
+        }
+      ]
+    },
+    {
+      "id": "ialias-openconsent",
+      "name": "real world: iAlias/openconsent",
+      "path": "benchmarks/real-world/ialias-openconsent",
+      "provenance": "independent-real-world",
+      "independenceGroup": "iAlias/openconsent",
+      "strict": true,
+      "rules": {},
+      "checks": [
+        {
+          "file": "source.js",
+          "textIncludes": [
+            "reject"
+          ],
+          "forms": [],
+          "trackers": []
         }
       ]
     }

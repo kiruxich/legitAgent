@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ensembl-ensembl-client",
+  "repository": "Ensembl/ensembl-client",
+  "commit": "cfe8e54d6de27b10132f9c5cdafbee48dc23b2c9",
+  "independenceGroup": "Ensembl/ensembl-client",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/Ensembl/ensembl-client/blob/cfe8e54d6de27b10132f9c5cdafbee48dc23b2c9/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/Ensembl/ensembl-client/blob/cfe8e54d6de27b10132f9c5cdafbee48dc23b2c9/src/root/Root.tsx",
+      "upstreamSha256": "005366e1f559a2169d182fc499e59d73c9e827b40265e8a563a70765b13a6f66",
+      "sha256": "005366e1f559a2169d182fc499e59d73c9e827b40265e8a563a70765b13a6f66"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Ensembl/ensembl-client contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

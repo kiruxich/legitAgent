@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "sahat-hackathon-starter",
+  "repository": "sahat/hackathon-starter",
+  "commit": "b3974efd50a067684fcc4f7292e2000378f63d4e",
+  "independenceGroup": "sahat/hackathon-starter",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/sahat/hackathon-starter/blob/b3974efd50a067684fcc4f7292e2000378f63d4e/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "3459445443980fbc67520dc25529499ee3ab6f35d332ad7c1866119497c4e440",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/sahat/hackathon-starter/blob/b3974efd50a067684fcc4f7292e2000378f63d4e/app.js",
+      "upstreamSha256": "01c299b27d48c350c4abcdbeb7ce9c9bb4779141dd89090ff33a9c6b19161e5a",
+      "sha256": "01c299b27d48c350c4abcdbeb7ce9c9bb4779141dd89090ff33a9c6b19161e5a"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from sahat/hackathon-starter contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

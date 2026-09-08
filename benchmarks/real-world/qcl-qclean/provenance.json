@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "qcl-qclean",
+  "repository": "qcl/QCLean",
+  "commit": "6a357f4cfe870c4e0f2eef0390bf3d86eca337a5",
+  "independenceGroup": "qcl/QCLean",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/qcl/QCLean/blob/6a357f4cfe870c4e0f2eef0390bf3d86eca337a5/LICENSE.md",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "ac3fc92d8af659985392f77721c3cff78b4e5a693a2b3869fe13b7e03663b01d",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/qcl/QCLean/blob/6a357f4cfe870c4e0f2eef0390bf3d86eca337a5/Web-Extension/popup.js",
+      "upstreamSha256": "dc0a39df6ba5c0aa7e2907b09d7cc1df3713b3b7ceb0d6f2a8db790f977008e5",
+      "sha256": "dc0a39df6ba5c0aa7e2907b09d7cc1df3713b3b7ceb0d6f2a8db790f977008e5"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from qcl/QCLean contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

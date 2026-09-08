@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "takirus6524-website-template",
+  "repository": "Takirus6524/Website-Template",
+  "commit": "85cc1861f6873e1472e22c0b8a3ad5591daab652",
+  "independenceGroup": "Takirus6524/Website-Template",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/Takirus6524/Website-Template/blob/85cc1861f6873e1472e22c0b8a3ad5591daab652/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "b60a0683f2d42bdcad757e7ad6da9a14526a54c03df467504bf83d40105e6efa",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/Takirus6524/Website-Template/blob/85cc1861f6873e1472e22c0b8a3ad5591daab652/js/cookies.js",
+      "upstreamSha256": "fcd84b8b8f7439244a2bebe89c719d08d13447e3ab7d2046ac4fcf8863ae00a1",
+      "sha256": "fcd84b8b8f7439244a2bebe89c719d08d13447e3ab7d2046ac4fcf8863ae00a1"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Takirus6524/Website-Template contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "reject"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

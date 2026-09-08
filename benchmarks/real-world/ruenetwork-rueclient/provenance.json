@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ruenetwork-rueclient",
+  "repository": "RueNetwork/RueClient",
+  "commit": "146f3ae72785991b3eee95a1ddfd0e929a0e1288",
+  "independenceGroup": "RueNetwork/RueClient",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://github.com/RueNetwork/RueClient/blob/146f3ae72785991b3eee95a1ddfd0e929a0e1288/LICENSE.md",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "24b9075aaa15fc189697883aa0af869f4c5e3cc9a116fc091368ce5194ce9ecf",
+  "files": [
+    {
+      "filename": "source.jsx",
+      "sourceUrl": "https://github.com/RueNetwork/RueClient/blob/146f3ae72785991b3eee95a1ddfd0e929a0e1288/client/me/privacy/main.jsx",
+      "upstreamSha256": "66cc239196243a2509e905de44767a37785f61653d0d487abd463d1928cfc426",
+      "sha256": "66cc239196243a2509e905de44767a37785f61653d0d487abd463d1928cfc426"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from RueNetwork/RueClient contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.jsx",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

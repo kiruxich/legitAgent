@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ether-etherpad",
+  "repository": "ether/etherpad",
+  "commit": "15681f4e9d1127fc018accb98eebb7796790cf9d",
+  "independenceGroup": "ether/etherpad",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/ether/etherpad/blob/15681f4e9d1127fc018accb98eebb7796790cf9d/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "9bb380ff448a820820bf4351a3dbc68355d81e2bd936187f15528ae52cf12fc3",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/ether/etherpad/blob/15681f4e9d1127fc018accb98eebb7796790cf9d/src/static/js/pad.ts",
+      "upstreamSha256": "2af765c77ecaac80ffa1e6e7b248fb7196f0327a63fd123ce179b5b88f315019",
+      "sha256": "2af765c77ecaac80ffa1e6e7b248fb7196f0327a63fd123ce179b5b88f315019"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ether/etherpad contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

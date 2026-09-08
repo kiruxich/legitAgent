@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "sebaofficial-svelte-cookie-consent",
+  "repository": "SebaOfficial/svelte-cookie-consent",
+  "commit": "280e6a72aecccc25e108dfe2e24d7153efb29583",
+  "independenceGroup": "SebaOfficial/svelte-cookie-consent",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/SebaOfficial/svelte-cookie-consent/blob/280e6a72aecccc25e108dfe2e24d7153efb29583/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "e482517f99bafa8c2e9312cae2a9abef9e15d6069f105640c58c247e004db6b6",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/SebaOfficial/svelte-cookie-consent/blob/280e6a72aecccc25e108dfe2e24d7153efb29583/src/lib/core.ts",
+      "upstreamSha256": "7d280245d0b5a24debd44bccf6e35881e7b3e345d306160e0ac30d7d22d2cb5d",
+      "sha256": "7d280245d0b5a24debd44bccf6e35881e7b3e345d306160e0ac30d7d22d2cb5d"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from SebaOfficial/svelte-cookie-consent contains the reviewed marker \"reject\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "reject"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

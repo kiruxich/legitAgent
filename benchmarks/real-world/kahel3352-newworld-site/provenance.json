@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "kahel3352-newworld-site",
+  "repository": "Kahel3352/newworld_site",
+  "commit": "9eb385d2b70adc02e41a392d8b1c660c0cc445fe",
+  "independenceGroup": "Kahel3352/newworld_site",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/Kahel3352/newworld_site/blob/9eb385d2b70adc02e41a392d8b1c660c0cc445fe/license.txt",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "0f8ddd8c296a0ac2d728bddb6e5e19bf2f92b4655836d4ebd3875ac0b6a6f009",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/Kahel3352/newworld_site/blob/9eb385d2b70adc02e41a392d8b1c660c0cc445fe/js/mdb.js",
+      "upstreamSha256": "4d25be811444b9844ae5b5cbf0c4dcde6e1ead81753cdfe94e19b707e5ca5b01",
+      "sha256": "4d25be811444b9844ae5b5cbf0c4dcde6e1ead81753cdfe94e19b707e5ca5b01"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Kahel3352/newworld_site contains the reviewed marker \"var\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "var"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

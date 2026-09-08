@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "matematikk-mooc-frontend",
+  "repository": "matematikk-mooc/frontend",
+  "commit": "3859bcc074b039e5fe470bbbe9ee7fa0a362af49",
+  "independenceGroup": "matematikk-mooc/frontend",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/matematikk-mooc/frontend/blob/3859bcc074b039e5fe470bbbe9ee7fa0a362af49/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "daef9c0ddff2e1b032dfd81521a13699a498b0831effb888e3fea06758b867df",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/matematikk-mooc/frontend/blob/3859bcc074b039e5fe470bbbe9ee7fa0a362af49/src/js/settings.js",
+      "upstreamSha256": "b1f69fb64fcbe6afa2d144d749f8dc232b3e7e136d2d1470c04d8df6ed2ebb07",
+      "sha256": "b1f69fb64fcbe6afa2d144d749f8dc232b3e7e136d2d1470c04d8df6ed2ebb07"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from matematikk-mooc/frontend contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

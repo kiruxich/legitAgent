@@ -1,0 +1,7 @@
+import { useState } from 'react'
+import AnonymizePanel from '@/components/AnonymizePanel'
+import DeanonymizePanel from '@/components/DeanonymizePanel'
+import PrivacyBanner from '@/components/PrivacyBanner'
+import HowToGuide from '@/components/HowToGuide'
+import AppFooter from '@/components/AppFooter'
+import LanguageSwitcher from '@/components/LanguageSwitcher'

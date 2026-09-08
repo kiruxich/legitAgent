@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "oleksandrbaior-cypress-framework-ts-cucumber",
+  "repository": "OleksandrBaior/Cypress_framework_TS_cucumber",
+  "commit": "472be4661c9210023a64ff33d75fb98a69a4cb80",
+  "independenceGroup": "OleksandrBaior/Cypress_framework_TS_cucumber",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/OleksandrBaior/Cypress_framework_TS_cucumber/blob/472be4661c9210023a64ff33d75fb98a69a4cb80/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "97cc615e3df77b9cee8fb9f06a3ca10e5973e53c07459ed9358e5ec508a91abb",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/OleksandrBaior/Cypress_framework_TS_cucumber/blob/472be4661c9210023a64ff33d75fb98a69a4cb80/cypress/pages/main.page.ts",
+      "upstreamSha256": "aee761380383b9c71b6eea4b01f72b96b94cf135b14d3282352bc85af75e57ab",
+      "sha256": "aee761380383b9c71b6eea4b01f72b96b94cf135b14d3282352bc85af75e57ab"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from OleksandrBaior/Cypress_framework_TS_cucumber contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

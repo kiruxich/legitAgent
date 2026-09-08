@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "yaremayurchyshyn-retro-stamp-web",
+  "repository": "yaremayurchyshyn/retro-stamp-web",
+  "commit": "9f65defc8f20b2e27b831af937dc80a8ea9321d7",
+  "independenceGroup": "yaremayurchyshyn/retro-stamp-web",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/yaremayurchyshyn/retro-stamp-web/blob/9f65defc8f20b2e27b831af937dc80a8ea9321d7/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "82877527d40ce97f61ee59a763c0b9d630c6d2a3306d3e37d88cedc97fe58f02",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/yaremayurchyshyn/retro-stamp-web/blob/9f65defc8f20b2e27b831af937dc80a8ea9321d7/app/src/App.tsx",
+      "upstreamSha256": "3837dbe32b0554fa66c87adeaaaa78ae23e4a07eb540a491ba54bbaf1ac5d5f7",
+      "sha256": "3837dbe32b0554fa66c87adeaaaa78ae23e4a07eb540a491ba54bbaf1ac5d5f7"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from yaremayurchyshyn/retro-stamp-web contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

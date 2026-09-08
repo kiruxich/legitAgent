@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "serenity-kit-serenity-notes-clients",
+  "repository": "serenity-kit/serenity-notes-clients",
+  "commit": "5b135a2fef671c2bb355e036b6ba74a5476bf2ce",
+  "independenceGroup": "serenity-kit/serenity-notes-clients",
+  "license": "AGPL-3.0",
+  "licenseUrl": "https://github.com/serenity-kit/serenity-notes-clients/blob/5b135a2fef671c2bb355e036b6ba74a5476bf2ce/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/serenity-kit/serenity-notes-clients/blob/5b135a2fef671c2bb355e036b6ba74a5476bf2ce/app/src/utils/links.ts",
+      "upstreamSha256": "bcbea9a700b81926af836031bd8224190d106670a2dce5d115164709e8ef6b29",
+      "sha256": "bcbea9a700b81926af836031bd8224190d106670a2dce5d115164709e8ef6b29"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from serenity-kit/serenity-notes-clients contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

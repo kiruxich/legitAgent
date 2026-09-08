@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "benjamin-shuster-is421",
+  "repository": "benjamin-shuster/IS421",
+  "commit": "e62ce3afa93e9c1cac821931fe8b4bfcb833c333",
+  "independenceGroup": "benjamin-shuster/IS421",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/benjamin-shuster/IS421/blob/e62ce3afa93e9c1cac821931fe8b4bfcb833c333/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "af77ebcb3b3069badaecda0c862256e59ac8dceb20001a6c71b62f8e93cb2ecf",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/benjamin-shuster/IS421/blob/e62ce3afa93e9c1cac821931fe8b4bfcb833c333/app/layout.tsx",
+      "upstreamSha256": "0fd13ebf55cc3f30d7de5148650963cba9641e0fd0fecb460586139f60cec5e3",
+      "sha256": "0fd13ebf55cc3f30d7de5148650963cba9641e0fd0fecb460586139f60cec5e3"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from benjamin-shuster/IS421 contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

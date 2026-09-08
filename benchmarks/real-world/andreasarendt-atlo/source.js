@@ -1,0 +1,7 @@
+  rangePickerInput: document.getElementById("date-range-picker"),
+  cookieBanner: document.getElementById("cookie-banner"),
+  cookieAccept: document.getElementById("cookie-accept"),
+  privacyBanner: document.getElementById("privacy-banner"),
+  privacyAccept: document.getElementById("privacy-accept"),
+  activityFilterButtons: document.getElementById("activity-filter-buttons"),
+  activitySummaryButtons: document.getElementById("activitiy-summary-button"),

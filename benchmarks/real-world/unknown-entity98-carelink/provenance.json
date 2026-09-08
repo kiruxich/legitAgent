@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "unknown-entity98-carelink",
+  "repository": "unknown-entity98/carelink",
+  "commit": "2f8c74ce0c5c1829e392e7cdf76fc0f0218f349f",
+  "independenceGroup": "unknown-entity98/carelink",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://github.com/unknown-entity98/carelink/blob/2f8c74ce0c5c1829e392e7cdf76fc0f0218f349f/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/unknown-entity98/carelink/blob/2f8c74ce0c5c1829e392e7cdf76fc0f0218f349f/components/PrivacyBanner.tsx",
+      "upstreamSha256": "369d56fc5b4cc35f3eb05cd82ffba60aad39cc4aac153d60ae94ccbd6b1a2d27",
+      "sha256": "369d56fc5b4cc35f3eb05cd82ffba60aad39cc4aac153d60ae94ccbd6b1a2d27"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from unknown-entity98/carelink contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

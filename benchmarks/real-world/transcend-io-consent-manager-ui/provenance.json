@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "transcend-io-consent-manager-ui",
+  "repository": "transcend-io/consent-manager-ui",
+  "commit": "a8c041c4aad1315f047bab0345d0ecbec53fd840",
+  "independenceGroup": "transcend-io/consent-manager-ui",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/transcend-io/consent-manager-ui/blob/a8c041c4aad1315f047bab0345d0ecbec53fd840/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "d03796fa3a8ef263be0b6d841e83cd2924e1ea063a17b110aeb85846531fc7d4",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/transcend-io/consent-manager-ui/blob/a8c041c4aad1315f047bab0345d0ecbec53fd840/src/api.ts",
+      "upstreamSha256": "d9c531fe7321d08ce0db41a3eb5d0a23e710510c8a47af061d66d30f5c6414ba",
+      "sha256": "d9c531fe7321d08ce0db41a3eb5d0a23e710510c8a47af061d66d30f5c6414ba"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from transcend-io/consent-manager-ui contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

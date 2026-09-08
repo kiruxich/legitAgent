@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "artsy-force",
+  "repository": "artsy/force",
+  "commit": "a40c722d3d9d0484e56bf41a3f7faae3b283ad8e",
+  "independenceGroup": "artsy/force",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/artsy/force/blob/a40c722d3d9d0484e56bf41a3f7faae3b283ad8e/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "288e9912e2c2832eb9a4bdb860e5e86d6c780b638128a3b72734d5d01ae5d4a0",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/artsy/force/blob/a40c722d3d9d0484e56bf41a3f7faae3b283ad8e/src/System/Boot.tsx",
+      "upstreamSha256": "593bc9421f0c4f07941828e354706dc6c95ceeb8ca340afe706654fdfbc573bd",
+      "sha256": "593bc9421f0c4f07941828e354706dc6c95ceeb8ca340afe706654fdfbc573bd"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from artsy/force contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "CookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

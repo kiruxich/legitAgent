@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "sefaria-sefaria-project",
+  "repository": "Sefaria/Sefaria-Project",
+  "commit": "b853870d756e4ea524265977a856d63e0572732b",
+  "independenceGroup": "Sefaria/Sefaria-Project",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://github.com/Sefaria/Sefaria-Project/blob/b853870d756e4ea524265977a856d63e0572732b/LICENSE.md",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "files": [
+    {
+      "filename": "source.jsx",
+      "sourceUrl": "https://github.com/Sefaria/Sefaria-Project/blob/b853870d756e4ea524265977a856d63e0572732b/static/js/Misc.jsx",
+      "upstreamSha256": "4bfc467a563085fa1e6908ccce83c1b503f0dc2c4b9225b7e92fb6c0874cf9d6",
+      "sha256": "4bfc467a563085fa1e6908ccce83c1b503f0dc2c4b9225b7e92fb6c0874cf9d6"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Sefaria/Sefaria-Project contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.jsx",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

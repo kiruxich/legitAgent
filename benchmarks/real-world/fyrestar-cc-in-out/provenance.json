@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "fyrestar-cc-in-out",
+  "repository": "Fyrestar/cc-in-out",
+  "commit": "c7f6d5fb50ddf2f6881af45be839de2c0ddafe5d",
+  "independenceGroup": "Fyrestar/cc-in-out",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/Fyrestar/cc-in-out/blob/c7f6d5fb50ddf2f6881af45be839de2c0ddafe5d/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "de8b700d6edea2edce4981cb6c57de6572236106f1554e2ede5fdc3499e00ca2",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/Fyrestar/cc-in-out/blob/c7f6d5fb50ddf2f6881af45be839de2c0ddafe5d/index.js",
+      "upstreamSha256": "577e5fcf2054b4fb189f43e2715aaa43bea6725a9623c10355c70aa8fa864b89",
+      "sha256": "577e5fcf2054b4fb189f43e2715aaa43bea6725a9623c10355c70aa8fa864b89"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Fyrestar/cc-in-out contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "CookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

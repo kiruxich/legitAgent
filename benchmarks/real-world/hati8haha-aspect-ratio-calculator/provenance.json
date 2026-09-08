@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "hati8haha-aspect-ratio-calculator",
+  "repository": "hati8haha/aspect-ratio-calculator",
+  "commit": "a88c69eea59514c3d7cfc394d32949479121b6b1",
+  "independenceGroup": "hati8haha/aspect-ratio-calculator",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/hati8haha/aspect-ratio-calculator/blob/a88c69eea59514c3d7cfc394d32949479121b6b1/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "f3180364064b9491bd3e1c8abc782d2fb3538a0abd564b291eac482f5f0d3a5b",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/hati8haha/aspect-ratio-calculator/blob/a88c69eea59514c3d7cfc394d32949479121b6b1/src/components/PrivacyBanner.tsx",
+      "upstreamSha256": "b0fcd6cac749628cbbd41ce25143dc2680dd1011840202cb43a00bff072a9be5",
+      "sha256": "b0fcd6cac749628cbbd41ce25143dc2680dd1011840202cb43a00bff072a9be5"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from hati8haha/aspect-ratio-calculator contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

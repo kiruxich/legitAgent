@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "shehansanjula-sri-lanka-income-tax-calculator",
+  "repository": "ShehanSanjula/Sri-Lanka-Income-Tax-Calculator",
+  "commit": "68c18eb18308879315f9b3434d90a65e39f5f01e",
+  "independenceGroup": "ShehanSanjula/Sri-Lanka-Income-Tax-Calculator",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ShehanSanjula/Sri-Lanka-Income-Tax-Calculator/blob/68c18eb18308879315f9b3434d90a65e39f5f01e/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "37989b2333fdeb1de55312c476e4c60f91edfc692fdd5377511ea253b42337f5",
+  "files": [
+    {
+      "filename": "source.jsx",
+      "sourceUrl": "https://github.com/ShehanSanjula/Sri-Lanka-Income-Tax-Calculator/blob/68c18eb18308879315f9b3434d90a65e39f5f01e/src/App.jsx",
+      "upstreamSha256": "366f3000703e8cff80056fb5b75426d03ea1384878bdb1e50fa3696687687bcd",
+      "sha256": "366f3000703e8cff80056fb5b75426d03ea1384878bdb1e50fa3696687687bcd"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ShehanSanjula/Sri-Lanka-Income-Tax-Calculator contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.jsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

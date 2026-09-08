@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "clearvis-io-clearvisio-appointment-booker",
+  "repository": "clearvis-io/clearvisio-appointment-booker",
+  "commit": "1ff898271533c62f0a1f4e6551e166628c8ef786",
+  "independenceGroup": "clearvis-io/clearvisio-appointment-booker",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/clearvis-io/clearvisio-appointment-booker/blob/1ff898271533c62f0a1f4e6551e166628c8ef786/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "9431ced477507d4df0a02085eb718ecf04326ddd4b464262eb98ae99318af104",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/clearvis-io/clearvisio-appointment-booker/blob/1ff898271533c62f0a1f4e6551e166628c8ef786/store/privacy.js",
+      "upstreamSha256": "a5922f9003d41491d5387828fe5b458c94606382a1e987585692fae628320b00",
+      "sha256": "a5922f9003d41491d5387828fe5b458c94606382a1e987585692fae628320b00"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from clearvis-io/clearvisio-appointment-booker contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

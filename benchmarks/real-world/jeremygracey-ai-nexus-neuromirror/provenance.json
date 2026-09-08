@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "jeremygracey-ai-nexus-neuromirror",
+  "repository": "JeremyGracey-AI/nexus-neuromirror",
+  "commit": "ba23ced829826b5a21f9f520adb45ea2541fe11f",
+  "independenceGroup": "JeremyGracey-AI/nexus-neuromirror",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/JeremyGracey-AI/nexus-neuromirror/blob/ba23ced829826b5a21f9f520adb45ea2541fe11f/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "30174b28598a7bd6f6993ee708ecc2881fc95391b0d52bf97811782baba46b45",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/JeremyGracey-AI/nexus-neuromirror/blob/ba23ced829826b5a21f9f520adb45ea2541fe11f/web/vercel/frontend/src/App.tsx",
+      "upstreamSha256": "a9ed7959fd8891f7938ab6e5cd8765fd0191bde816ef248cbd5c6bb15c9987d8",
+      "sha256": "a9ed7959fd8891f7938ab6e5cd8765fd0191bde816ef248cbd5c6bb15c9987d8"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from JeremyGracey-AI/nexus-neuromirror contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

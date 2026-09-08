@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "mparticle-mparticle-web-sdk",
+  "repository": "mParticle/mparticle-web-sdk",
+  "commit": "71162c6df17f30be194d0b357f23fbbaf0cb8e15",
+  "independenceGroup": "mParticle/mparticle-web-sdk",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/mParticle/mparticle-web-sdk/blob/71162c6df17f30be194d0b357f23fbbaf0cb8e15/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "f565a93da6458bd3cf10eeac2e509fee1a4a20c65e085a25be54bd4de27972be",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/mParticle/mparticle-web-sdk/blob/71162c6df17f30be194d0b357f23fbbaf0cb8e15/src/mp-instance.ts",
+      "upstreamSha256": "0837230f85c794f28ed5cb4bf8f92c3d21f6aa34be6f64d5d604e153edf91345",
+      "sha256": "0837230f85c794f28ed5cb4bf8f92c3d21f6aa34be6f64d5d604e153edf91345"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from mParticle/mparticle-web-sdk contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "CookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

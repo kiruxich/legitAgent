@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "rate3-network-rate3-kyc-aml-client-release",
+  "repository": "rate3-network/rate3-kyc-aml-client-release",
+  "commit": "544df95528044006e3efc74caa690e2e906360ad",
+  "independenceGroup": "rate3-network/rate3-kyc-aml-client-release",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/rate3-network/rate3-kyc-aml-client-release/blob/544df95528044006e3efc74caa690e2e906360ad/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c148d6592719f46399fd51fd176f95614908cbe7e7f6b2161fb8dbd8dce8ac30",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/rate3-network/rate3-kyc-aml-client-release/blob/544df95528044006e3efc74caa690e2e906360ad/src/locales/globals.js",
+      "upstreamSha256": "1fab090fb9e1c4c0fa1b7123f38bf5698a1b9381315f2b845ae5de7f66e65f9b",
+      "sha256": "1fab090fb9e1c4c0fa1b7123f38bf5698a1b9381315f2b845ae5de7f66e65f9b"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from rate3-network/rate3-kyc-aml-client-release contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

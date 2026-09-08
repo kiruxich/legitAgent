@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "wenzhi-ding-zupu",
+  "repository": "Wenzhi-Ding/zupu",
+  "commit": "17af31a2d0c923bb3ba928fa0bd0a61f6095201d",
+  "independenceGroup": "Wenzhi-Ding/zupu",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/Wenzhi-Ding/zupu/blob/17af31a2d0c923bb3ba928fa0bd0a61f6095201d/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "06dcddbb6908a0c6dd4a9e8ec822eea41d5a460a53089fecccc8a68049e99241",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/Wenzhi-Ding/zupu/blob/17af31a2d0c923bb3ba928fa0bd0a61f6095201d/src/App.tsx",
+      "upstreamSha256": "e1f771136b32c000b6e9e0832aa2c92292cec4325f5addfced743e88c7c08b5a",
+      "sha256": "e1f771136b32c000b6e9e0832aa2c92292cec4325f5addfced743e88c7c08b5a"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Wenzhi-Ding/zupu contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

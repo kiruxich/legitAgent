@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "celo-org-staked-celo-web-app",
+  "repository": "celo-org/staked-celo-web-app",
+  "commit": "394c5d757c9159c2b91d420ad9a58f19adae3db9",
+  "independenceGroup": "celo-org/staked-celo-web-app",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/celo-org/staked-celo-web-app/blob/394c5d757c9159c2b91d420ad9a58f19adae3db9/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "39151bf4269209cbefd99af8080804c42e9b19d167ef57351b3511345d65909b",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/celo-org/staked-celo-web-app/blob/394c5d757c9159c2b91d420ad9a58f19adae3db9/src/pages/terms.tsx",
+      "upstreamSha256": "d248ecb558b79dbeef642e68e658004292cb4832a3907942d3ddfff5993c8a7e",
+      "sha256": "d248ecb558b79dbeef642e68e658004292cb4832a3907942d3ddfff5993c8a7e"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from celo-org/staked-celo-web-app contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

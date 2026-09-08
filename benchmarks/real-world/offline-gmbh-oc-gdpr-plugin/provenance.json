@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "offline-gmbh-oc-gdpr-plugin",
+  "repository": "OFFLINE-GmbH/oc-gdpr-plugin",
+  "commit": "91eb39becc50b32402aee357a4cba6ed873bf4a1",
+  "independenceGroup": "OFFLINE-GmbH/oc-gdpr-plugin",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/OFFLINE-GmbH/oc-gdpr-plugin/blob/91eb39becc50b32402aee357a4cba6ed873bf4a1/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "924525a6762dc52acfcb7046f9f6772a0ed59cf159f4f20916e823484e8db43a",
+  "files": [
+    {
+      "filename": "source.php",
+      "sourceUrl": "https://github.com/OFFLINE-GmbH/oc-gdpr-plugin/blob/91eb39becc50b32402aee357a4cba6ed873bf4a1/Plugin.php",
+      "upstreamSha256": "8b407f47d5d7281236d5947d51bc21677b85aa6b3e3da932fc51a7db227df03f",
+      "sha256": "8b407f47d5d7281236d5947d51bc21677b85aa6b3e3da932fc51a7db227df03f"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from OFFLINE-GmbH/oc-gdpr-plugin contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.php",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

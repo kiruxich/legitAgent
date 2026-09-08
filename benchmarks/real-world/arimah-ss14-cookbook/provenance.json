@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "arimah-ss14-cookbook",
+  "repository": "arimah/ss14-cookbook",
+  "commit": "2d24f78e7bc7f4e456ac3cd31fb66fe3edf6933a",
+  "independenceGroup": "arimah/ss14-cookbook",
+  "license": "AGPL-3.0",
+  "licenseUrl": "https://github.com/arimah/ss14-cookbook/blob/2d24f78e7bc7f4e456ac3cd31fb66fe3edf6933a/LICENSE.txt",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "06b332e1fa559c005a0fc8099741d88beb63d2433548c23931d2c396ca41aa72",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/arimah/ss14-cookbook/blob/2d24f78e7bc7f4e456ac3cd31fb66fe3edf6933a/src/web/privacy.tsx",
+      "upstreamSha256": "c3ceb92b705e5969fc838b3c69ba204701618ecf698d2356e4860a137aeda093",
+      "sha256": "c3ceb92b705e5969fc838b3c69ba204701618ecf698d2356e4860a137aeda093"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from arimah/ss14-cookbook contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

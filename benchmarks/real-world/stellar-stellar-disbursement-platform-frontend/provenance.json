@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "stellar-stellar-disbursement-platform-frontend",
+  "repository": "stellar/stellar-disbursement-platform-frontend",
+  "commit": "e586f33252f65d57d66341d60f983ad88978682b",
+  "independenceGroup": "stellar/stellar-disbursement-platform-frontend",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/stellar/stellar-disbursement-platform-frontend/blob/e586f33252f65d57d66341d60f983ad88978682b/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/stellar/stellar-disbursement-platform-frontend/blob/e586f33252f65d57d66341d60f983ad88978682b/src/types/index.ts",
+      "upstreamSha256": "5e7a6c456074d707e7d6e10ca3312f1fa17ba01a5cbc21101dae33893e2120b3",
+      "sha256": "5e7a6c456074d707e7d6e10ca3312f1fa17ba01a5cbc21101dae33893e2120b3"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from stellar/stellar-disbursement-platform-frontend contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "montevive-openai-privacy-filter",
+  "repository": "montevive/openai-privacy-filter",
+  "commit": "16f2a86ec0ca635e362841f14f33f3512c1771c8",
+  "independenceGroup": "montevive/openai-privacy-filter",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/montevive/openai-privacy-filter/blob/16f2a86ec0ca635e362841f14f33f3512c1771c8/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "ae2d3dd22e801f09f379afc3dc3589994c8a554af36d94bd4e06f3e29c024e56",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/montevive/openai-privacy-filter/blob/16f2a86ec0ca635e362841f14f33f3512c1771c8/src/App.tsx",
+      "upstreamSha256": "e5f152b6b07aa6b9257715f230997b1adb0d0bcb81c4e62762b19ac94ec46773",
+      "sha256": "e5f152b6b07aa6b9257715f230997b1adb0d0bcb81c4e62762b19ac94ec46773"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from montevive/openai-privacy-filter contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

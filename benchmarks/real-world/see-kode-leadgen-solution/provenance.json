@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "see-kode-leadgen-solution",
+  "repository": "see-kode/leadgen-solution",
+  "commit": "4858db9294974b085e305cf09656e8e1799ba977",
+  "independenceGroup": "see-kode/leadgen-solution",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/see-kode/leadgen-solution/blob/4858db9294974b085e305cf09656e8e1799ba977/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "68a2eaf0b3c5ec0ba5ff443cd1ee9ce5958483321f5b7dc28f0633b5de0b6fa1",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/see-kode/leadgen-solution/blob/4858db9294974b085e305cf09656e8e1799ba977/assets/js/cookies.js",
+      "upstreamSha256": "e9be4ebe302062b0c0cc5ce7091dd9a6645d42f22b853d99f093ecea28382d82",
+      "sha256": "e9be4ebe302062b0c0cc5ce7091dd9a6645d42f22b853d99f093ecea28382d82"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from see-kode/leadgen-solution contains the reviewed marker \"accept\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "accept"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

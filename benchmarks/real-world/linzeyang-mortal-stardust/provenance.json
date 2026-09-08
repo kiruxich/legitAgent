@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "linzeyang-mortal-stardust",
+  "repository": "linzeyang/mortal-stardust",
+  "commit": "d4f9ef46fb48dac256c4cfcdb91a8bd4fb8e4dd1",
+  "independenceGroup": "linzeyang/mortal-stardust",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/linzeyang/mortal-stardust/blob/d4f9ef46fb48dac256c4cfcdb91a8bd4fb8e4dd1/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "1f66be9e86df75aa5da0565cc8ec3bd25eddf44f4d0a13a913c750faa64ce61c",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/linzeyang/mortal-stardust/blob/d4f9ef46fb48dac256c4cfcdb91a8bd4fb8e4dd1/app/collect-experience/page.tsx",
+      "upstreamSha256": "cdde96aca9becb299c67c8963246d1ce764c1cfbd935cccbb13a483312dfe500",
+      "sha256": "cdde96aca9becb299c67c8963246d1ce764c1cfbd935cccbb13a483312dfe500"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from linzeyang/mortal-stardust contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

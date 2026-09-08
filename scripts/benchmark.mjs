@@ -12,7 +12,7 @@ const metrics = new Map();
 const frameworkMetrics = new Map();
 const seedMetrics = new Map();
 const seedFrameworkMetrics = new Map();
-const supported = /\.(?:html|jsx|tsx|js|ts|mjs|cjs|vue|svelte|astro)$/i;
+const supported = /\.(?:html|jsx|tsx|js|ts|mjs|cjs|vue|svelte|astro|php|erb|twig)$/i;
 
 function readSources(dir) {
   const result = [];

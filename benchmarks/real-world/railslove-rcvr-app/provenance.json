@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "railslove-rcvr-app",
+  "repository": "railslove/rcvr-app",
+  "commit": "9630a9c8c174336cfd79a700b9252307dcfb5650",
+  "independenceGroup": "railslove/rcvr-app",
+  "license": "AGPL-3.0",
+  "licenseUrl": "https://github.com/railslove/rcvr-app/blob/9630a9c8c174336cfd79a700b9252307dcfb5650/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/railslove/rcvr-app/blob/9630a9c8c174336cfd79a700b9252307dcfb5650/lib/api/areas.ts",
+      "upstreamSha256": "378e5e1cde74ee75bb55e71385bb2e01c3ea08c37b88d396309c8c60562bec87",
+      "sha256": "378e5e1cde74ee75bb55e71385bb2e01c3ea08c37b88d396309c8c60562bec87"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from railslove/rcvr-app contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "cobalt-strike-community-kit",
+  "repository": "Cobalt-Strike/community_kit",
+  "commit": "6f0cf86189fc42396651c0f574ff89fb9f902ee4",
+  "independenceGroup": "Cobalt-Strike/community_kit",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/Cobalt-Strike/community_kit/blob/6f0cf86189fc42396651c0f574ff89fb9f902ee4/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "files": [
+    {
+      "filename": "source.html",
+      "sourceUrl": "https://github.com/Cobalt-Strike/community_kit/blob/6f0cf86189fc42396651c0f574ff89fb9f902ee4/index.html",
+      "upstreamSha256": "f5ff681f216f77c35ef8c904adddf2d1b62d6e9ee1e0a9a6ba1d958aa6b73cdf",
+      "sha256": "f5ff681f216f77c35ef8c904adddf2d1b62d6e9ee1e0a9a6ba1d958aa6b73cdf"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from Cobalt-Strike/community_kit contains the reviewed marker \"Privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.html",
+        "textIncludes": [
+          "Privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "dhjs0000-dhjs0000-github-io",
+  "repository": "dhjs0000/dhjs0000.github.io",
+  "commit": "cfbfb75f6337bf71ee0bc018170032929c35ad32",
+  "independenceGroup": "dhjs0000/dhjs0000.github.io",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://github.com/dhjs0000/dhjs0000.github.io/blob/cfbfb75f6337bf71ee0bc018170032929c35ad32/LICENCE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/dhjs0000/dhjs0000.github.io/blob/cfbfb75f6337bf71ee0bc018170032929c35ad32/cookie-consent.js",
+      "upstreamSha256": "6c37222edb60b86e2bd8c4298d28a306e9e8e6204adb4ee050af73c99b30bf65",
+      "sha256": "6c37222edb60b86e2bd8c4298d28a306e9e8e6204adb4ee050af73c99b30bf65"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from dhjs0000/dhjs0000.github.io contains the reviewed marker \"CookieConsent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "CookieConsent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ryanbr-fingerprint-detector",
+  "repository": "ryanbr/fingerprint-detector",
+  "commit": "4c3194e91acffcd03c9e4653d585f16317ebecc7",
+  "independenceGroup": "ryanbr/fingerprint-detector",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://github.com/ryanbr/fingerprint-detector/blob/4c3194e91acffcd03c9e4653d585f16317ebecc7/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/ryanbr/fingerprint-detector/blob/4c3194e91acffcd03c9e4653d585f16317ebecc7/src/popup.js",
+      "upstreamSha256": "aa5985a5f91b7f01667dcad62a8e3ed8f10013093e9468c8440895474c307be6",
+      "sha256": "aa5985a5f91b7f01667dcad62a8e3ed8f10013093e9468c8440895474c307be6"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ryanbr/fingerprint-detector contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

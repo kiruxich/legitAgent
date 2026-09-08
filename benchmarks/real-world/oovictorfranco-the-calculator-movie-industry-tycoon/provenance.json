@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "oovictorfranco-the-calculator-movie-industry-tycoon",
+  "repository": "ooVictorFranco/the-calculator-movie-industry-tycoon",
+  "commit": "0c26c689eb48f5e48c1f01a5f957893ad4cb663e",
+  "independenceGroup": "ooVictorFranco/the-calculator-movie-industry-tycoon",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ooVictorFranco/the-calculator-movie-industry-tycoon/blob/0c26c689eb48f5e48c1f01a5f957893ad4cb663e/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "41caafb37504a67e52a853c4ed145980b690a420305407aa90f903efa3b0ce5a",
+  "files": [
+    {
+      "filename": "source.tsx",
+      "sourceUrl": "https://github.com/ooVictorFranco/the-calculator-movie-industry-tycoon/blob/0c26c689eb48f5e48c1f01a5f957893ad4cb663e/src/components/Footer.tsx",
+      "upstreamSha256": "fbccdad9c64ef83fbe96531e706794f8b9e7cb7c85815fd5ffd6f6c73c3867bd",
+      "sha256": "fbccdad9c64ef83fbe96531e706794f8b9e7cb7c85815fd5ffd6f6c73c3867bd"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from ooVictorFranco/the-calculator-movie-industry-tycoon contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.tsx",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

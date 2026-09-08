@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "haihaihaihai-1-versa",
+  "repository": "haihaihaihai-1/versa",
+  "commit": "c04ddfb1889e7fcdd36f82138cf59bf26ed849de",
+  "independenceGroup": "haihaihaihai-1/versa",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/haihaihaihai-1/versa/blob/c04ddfb1889e7fcdd36f82138cf59bf26ed849de/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "20f31fbbdf01e82c59bdddb215327b3eeac222ceb77b6939c52b0e6eae96cbe7",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/haihaihaihai-1/versa/blob/c04ddfb1889e7fcdd36f82138cf59bf26ed849de/src/privacy/index.ts",
+      "upstreamSha256": "7b2e09963db719364dd3ad2e4852193e2fd16b6107657394b5da4aff59b7a856",
+      "sha256": "7b2e09963db719364dd3ad2e4852193e2fd16b6107657394b5da4aff59b7a856"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from haihaihaihai-1/versa contains the reviewed marker \"consent\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "consent"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

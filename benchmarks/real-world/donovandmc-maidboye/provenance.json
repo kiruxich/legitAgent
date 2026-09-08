@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "donovandmc-maidboye",
+  "repository": "DonovanDMC/MaidBoye",
+  "commit": "6973be8277bfc623afe990c05247b5feca783cfb",
+  "independenceGroup": "DonovanDMC/MaidBoye",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/DonovanDMC/MaidBoye/blob/6973be8277bfc623afe990c05247b5feca783cfb/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "68a95146bcac963b7fd463bf65ac7667a17594cf35d7ac5fcc826a8d95203bf3",
+  "files": [
+    {
+      "filename": "source.ts",
+      "sourceUrl": "https://github.com/DonovanDMC/MaidBoye/blob/6973be8277bfc623afe990c05247b5feca783cfb/src/config/index.ts",
+      "upstreamSha256": "cf42e4ea8850db8b3a0ddd6e4b855680ab4cb740d9aa2f1a2186168b0c60e977",
+      "sha256": "cf42e4ea8850db8b3a0ddd6e4b855680ab4cb740d9aa2f1a2186168b0c60e977"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from DonovanDMC/MaidBoye contains the reviewed marker \"privacy\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.ts",
+        "textIncludes": [
+          "privacy"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}

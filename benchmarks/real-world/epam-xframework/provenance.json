@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "epam-xframework",
+  "repository": "epam/xframework",
+  "commit": "6b2a1b954dc998274922feaf3a363a47258c7bd5",
+  "independenceGroup": "epam/xframework",
+  "license": "BSD-3-Clause",
+  "licenseUrl": "https://github.com/epam/xframework/blob/6b2a1b954dc998274922feaf3a363a47258c7bd5/LICENSE",
+  "licenseFile": "LICENSE.upstream",
+  "licenseSha256": "6c1dc7e05f663d1da14a5e9514ce2c227a62696bb0158e656d04c190797c6597",
+  "files": [
+    {
+      "filename": "source.js",
+      "sourceUrl": "https://github.com/epam/xframework/blob/6b2a1b954dc998274922feaf3a363a47258c7bd5/js/xf.js",
+      "upstreamSha256": "2d34d55723a9f5848c2e11a3cc2207311f9aca7ab1dbd70aa381a62b74dcaaf3",
+      "sha256": "2d34d55723a9f5848c2e11a3cc2207311f9aca7ab1dbd70aa381a62b74dcaaf3"
+    }
+  ],
+  "review": {
+    "date": "2026-09-08",
+    "method": "Pinned public source inspection and scoped technical annotation; not an independent legal review. Expected labels were defined from the preserved excerpt and checked separately from aggregate findings.",
+    "rationale": "Pinned source excerpt from epam/xframework contains the reviewed marker \"email\". The case checks preservation of that source signal and the empty structural form/tracker result for the excerpt; it does not assert a legal violation or the behavior of the complete application.",
+    "scope": "One sanitized excerpt from the pinned file. The complete repository, dependencies, rendered DOM and browser network behavior are not executed.",
+    "datasetRole": "development-regression / source-excerpt"
+  },
+  "labels": {
+    "rules": {},
+    "checks": [
+      {
+        "file": "source.js",
+        "textIncludes": [
+          "email"
+        ],
+        "forms": [],
+        "trackers": []
+      }
+    ]
+  }
+}
