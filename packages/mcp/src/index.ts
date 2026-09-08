@@ -14,7 +14,7 @@ import {
   handleScanUrl,
 } from './server.js';
 
-const server = new Server({ name: 'legitagent', version: '0.8.0' }, { capabilities: { tools: {} } });
+const server = new Server({ name: 'legitagent', version: '1.1.1' }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [

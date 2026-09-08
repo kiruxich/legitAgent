@@ -30,7 +30,7 @@ jobs:
         run: |
           files="$(git diff --name-only --diff-filter=ACMR "$LEGITAGENT_BASE_SHA" "$LEGITAGENT_HEAD_SHA" | grep -E '\.(html|js|jsx|ts|tsx|mjs|cjs|vue|svelte|astro)$' | paste -sd, - || true)"
           echo "files=$files" >> "$GITHUB_OUTPUT"
-      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v0.8.0
+      - uses: kiruxich/legitAgent/.github/actions/legitagent-scan@v1.1.1
         with:
           root: .
           fail-on-high: true

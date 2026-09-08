@@ -34,7 +34,7 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">v1.1.1 · release candidate · MIT · local-first</p>
+      <p class="eyebrow">v1.1.1 · MIT · local-first</p>
       <h1>Найдите privacy-риски <em>до&nbsp;того, как их найдут пользователи</em></h1>
       <p class="lead">
         Один каталог правил для исходников, живого DOM и CI. legitAgent показывает файл, строку,
@@ -190,7 +190,7 @@ npx @legit-agent/cli@latest scan ./my-site --cache
 npx @legit-agent/cli@latest fix ./my-site
 npx @legit-agent/cli@latest scan-url https://example.com
 npx @legit-agent/cli@latest init-policy --operator "ООО Пример"</code></pre>
-          <p class="panel-note">После публикации v1.1.1 в CI фиксируйте <code>@1.1.1</code>. До релиза используйте локальную сборку или <code>@latest</code>. Baseline, changed-files и confidence threshold блокируют только новые достоверные находки. <code>fix</code> сначала делает dry-run; <code>--write</code> применяйте после проверки preview.</p>
+          <p class="panel-note">В CI фиксируйте версию <code>@1.1.1</code>, а для автоматического получения свежего релиза используйте <code>@latest</code>. Baseline, changed-files и confidence threshold блокируют только новые достоверные находки. <code>fix</code> сначала делает dry-run; <code>--write</code> применяйте после проверки preview.</p>
         </div>
       </div>
     </section>

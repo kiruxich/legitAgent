@@ -175,7 +175,7 @@ User rule для Cursor always-on: скопируйте текст из `[docs/c
 В GitHub Action `fail-on-high=false` допускает только код `1` после успешного создания SARIF. Ошибки конфигурации, выполнения и отсутствующий отчёт продолжают блокировать job.
 
 
-В CI достаточно `npx @legit-agent/cli@0.8.0 scan --json`: ненулевой код — стоп пайплайна. Source-scan без `--review` не запускает второй проход; даже с `--review` сеть не используется в режиме `offline`. Для code scanning скопируйте `[examples/github-scan.yml](examples/github-scan.yml)` в `.github/workflows/legitagent.yml` — он вызывает композитное действие `[.github/actions/legitagent-scan](.github/actions/legitagent-scan/action.yml)` с пином `@v0.8.0`: пишет SARIF, загружает его в GitHub, поддерживает baseline/changed-files/confidence threshold, комментирует PR и создаёт issue при новых находках `high`. Для мониторинга живого сайта после деплоя — `[examples/github-watch.yml](examples/github-watch.yml)` (`scan-url --review --evidence`, опционально Telegram и OpenRouter).
+В CI достаточно `npx @legit-agent/cli@1.1.1 scan --json`: ненулевой код — стоп пайплайна. Source-scan без `--review` не запускает второй проход; даже с `--review` сеть не используется в режиме `offline`. Для code scanning скопируйте `[examples/github-scan.yml](examples/github-scan.yml)` в `.github/workflows/legitagent.yml` — он вызывает композитное действие `[.github/actions/legitagent-scan](.github/actions/legitagent-scan/action.yml)` с пином `@v1.1.1`: пишет SARIF, загружает его в GitHub, поддерживает baseline/changed-files/confidence threshold, комментирует PR и создаёт issue при новых находках `high`. Для мониторинга живого сайта после деплоя — `[examples/github-watch.yml](examples/github-watch.yml)` (`scan-url --review --evidence`, опционально Telegram и OpenRouter).
 
 ---
 
@@ -290,7 +290,7 @@ pnpm release:check
 
 Новая версия: одинаковый `version` в `packages/*/package.json` (core, cli, live, mcp), `pnpm release:check`, коммит в `main`, тег `vX.Y.Z`, `git push origin vX.Y.Z`. Workflow использует commit-SHA pins для сторонних Actions, npm Trusted Publishing с provenance, генерирует SPDX SBOM, создаёт build attestation и прикладывает tarballs/SBOM к GitHub Release.
 
-Для `1.x` release-check дополнительно требует минимум `100` entries с `provenance: "independent-real-world"` в `benchmarks/corpus.json`. Synthetic seeds и их пять мутаций в этот gate не засчитываются. Сейчас в корпусе ровно 100 независимых групп, поэтому количественный gate закрыт; перед публикацией `v1.1.1` остаются version bump, полный CI и ручная проверка release-артефактов.
+Для `1.x` release-check дополнительно требует минимум `100` entries с `provenance: "independent-real-world"` в `benchmarks/corpus.json`. Synthetic seeds и их пять мутаций в этот gate не засчитываются. Сейчас в корпусе ровно 100 независимых групп, поэтому количественный gate закрыт; перед публикацией `v1.1.1` остаются полный CI и ручная проверка release-артефактов.
 
 ---
 
